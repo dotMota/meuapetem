@@ -1,0 +1,11 @@
+<svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="90" height="90" rx="12" fill="#2b334d"/>
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" 
+          font-family="sans-serif" font-weight="bold" font-size="36" fill="#fff" dy="5">
+        bm<tspan fill="#00bfa5">.</tspan>
+    </text>
+    <text x="50%" y="80%" dominant-baseline="middle" text-anchor="middle" 
+          font-family="sans-serif" font-weight="600" font-size="10" fill="#fff" letter-spacing="3">
+        REALTY
+    </text>
+</svg>
