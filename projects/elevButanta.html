@@ -204,18 +204,21 @@
     <footer-section project="ELEV BUTANTÃ" broker="CORRETOR MOTA - CRECI 268.448" root-path=".."></footer-section>
     <floating-actions></floating-actions>
     <contact-popup photo="../media/utils/perfilcrop.png" name="Mota" creci="CRECI 268.448" email="contato@meuapetem.com"
-        phone="11 95301-6045" whatsapp-number="5511953016045"></contact-popup>
+        phone="11 95780-0534" whatsapp-number="5511957800534">
+    </contact-popup>
+
     <lightbox-viewer></lightbox-viewer>
     <cookie-banner></cookie-banner>
     <custom-cursor></custom-cursor>
 
     <script>
-        // --- DADOS DINÂMICOS (Configuração Completa) ---
+        // --- DADOS DINÂMICOS (Mensagens Naturais) ---
         const DATA = {
             resident: {
-                message: "Olá Mota! Tenho interesse em MORAR no Elev Butantã. Gostaria de saber mais sobre as condições de pagamento e agendar uma visita.",
+                // Mensagem focada em desejo e ação
+                message: "Olá! Estou vendo o *Elev Butantã* e tenho interesse em morar. Gostaria de saber mais sobre os valores e agendar uma visita.",
                 colors: {
-                    highlight: '#8c82fc', // Roxo Lilás (Alto Contraste)
+                    highlight: '#8c82fc',
                     bgMain: '#121212',
                     bgDark: '#0a0a0a',
                     textSec: '#D1D1D1'
@@ -262,9 +265,10 @@
                 menuBtn: 'Simular'
             },
             investor: {
-                message: "Olá Mota! Tenho perfil INVESTIDOR. Gostaria de receber a Tabela de Valores e condições do Elev Butantã.",
+                // Mensagem objetiva e profissional
+                message: "Olá! Tenho perfil investidor e me interessei pelo *Elev Butantã*. Poderia me enviar a Tabela de Valores e as condições de pagamento?",
                 colors: {
-                    highlight: '#fcd22c', // Amarelo Ouro
+                    highlight: '#fcd22c',
                     bgMain: '#101010',
                     bgDark: '#1a1a1a',
                     textSec: '#C7C7CC'
@@ -312,10 +316,9 @@
             }
         };
 
-        // --- SISTEMA DE TROCA (LÓGICA) ---
-        let currentPersona = 'resident'; // Padrão inicial
+        // --- SISTEMA DE TROCA (HOT SWAP) ---
+        let currentPersona = 'resident';
 
-        // 1. OUVINTE DE MUDANÇA (Disparado pelo Switcher)
         document.addEventListener('persona-changed', (e) => {
             const mode = e.detail.mode;
             currentPersona = mode;
@@ -323,38 +326,30 @@
             updatePage(mode);
         });
 
-        // 2. ABRIR POPUP COM MENSAGEM CERTA
         function openPopup(e) {
             if (e) e.preventDefault();
-            // Pega a mensagem do perfil atual
             const msg = DATA[currentPersona].message;
-
             window.dispatchEvent(new CustomEvent('open-contact-popup', {
                 detail: { message: msg }
             }));
         }
 
-        // 3. INTERCEPTADOR DE CLIQUES GERAIS
         window.addEventListener('open-contact-popup', (e) => {
-            // Se o evento não trouxe mensagem (clique genérico), usa a do perfil
             if (!e.detail || !e.detail.message) {
                 e.stopImmediatePropagation();
                 openPopup();
             }
         });
 
-        // 4. ATUALIZADOR DA PÁGINA (Troca textos e cores)
         function updatePage(mode) {
             const d = DATA[mode];
             const root = document.documentElement;
 
-            // Cores
             root.style.setProperty('--color-highlight', d.colors.highlight);
             root.style.setProperty('--bg-section-main', d.colors.bgMain);
             root.style.setProperty('--bg-brand-dark', d.colors.bgDark);
             root.style.setProperty('--color-text-secondary', d.colors.textSec);
 
-            // Componentes
             refreshElement('home', d.hero);
             refreshElement('concept', { highlight: d.showcase.highlight, title: d.showcase.title, text: d.showcase.text, 'button-text': d.showcase.btn });
             refreshElement('location', { highlight: d.region.highlight, title: d.region.title, text: d.region.text });
@@ -362,45 +357,35 @@
             refreshElement('review', d.review);
             refreshElement('schedule', { highlight: d.cta.highlight, title: d.cta.title, text: d.cta.text, 'button-text': d.cta.btn });
 
-            // Marquee (Letreiro)
             const marquee = document.getElementById('marquee');
             if (marquee) {
                 marquee.setAttribute('text', d.marquee);
-                // Truque para reiniciar animação: clonar o elemento
                 const newMarquee = marquee.cloneNode(true);
                 marquee.parentNode.replaceChild(newMarquee, marquee);
             }
 
-            // Estatísticas
             d.stats.forEach(stat => {
                 refreshElement(stat.id, { number: stat.n, label: stat.l });
             });
 
-            // Plantas (Atualiza os badges)
             d.plans.forEach(plan => {
                 refreshElement(plan.id, { desc: plan.d, 'extra-label': plan.l, 'extra-val': plan.v });
             });
 
-            // Botão do Menu
             const menuBtn = document.getElementById('menu-cta');
             if (menuBtn) menuBtn.innerText = d.menuBtn;
         }
 
-        // Função Auxiliar para atualizar atributos dos Web Components
         function refreshElement(id, attributes) {
             const oldEl = document.getElementById(id);
             if (!oldEl) return;
-
             for (const [key, value] of Object.entries(attributes)) {
                 oldEl.setAttribute(key, value);
             }
-
-            // Força re-render do componente
             const newEl = oldEl.cloneNode(true);
             oldEl.parentNode.replaceChild(newEl, oldEl);
         }
 
-        // 5. INICIALIZAÇÃO
         window.onload = () => {
             const saved = localStorage.getItem('site-persona') || 'resident';
             currentPersona = saved;

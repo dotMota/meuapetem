@@ -85,8 +85,8 @@
         function openPopup(e, customMsg) {
             if (e) e.preventDefault();
 
-            // Mensagem padrão do Quarten se nenhuma for passada
-            const msg = customMsg || "Olá Mota! Estou interessado no Quarten Ibirapuera. Gostaria de receber o Book Digital e agendar uma visita.";
+            // Mensagem natural para o Quarten
+            const msg = customMsg || "Olá! Fiquei encantado com o *Quarten Ibirapuera*. Gostaria de receber o Book Digital e agendar uma visita para conhecer os detalhes.";
 
             window.dispatchEvent(new CustomEvent('open-contact-popup', {
                 detail: { message: msg }
@@ -209,7 +209,7 @@
     <floating-actions></floating-actions>
 
     <contact-popup photo="../media/utils/perfilcrop.png" name="Mota" creci="CRECI 268.448" email="contato@meuapetem.com"
-        phone="11 95301-6045" whatsapp-number="5511953016045">
+        phone="11 95780-0534" whatsapp-number="5511957800534">
     </contact-popup>
 
     <lightbox-viewer></lightbox-viewer>

@@ -120,13 +120,13 @@ class CtaBanner extends HTMLElement {
             </a>
         </div>
         `;
-
         // Lógica de Interceptação do Clique (Popup)
         const btn = this.shadowRoot.getElementById('ctaBtn');
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+            // Mensagem natural para consultoria geral
             window.dispatchEvent(new CustomEvent('open-contact-popup', {
-                detail: { message: "Olá Mota! Estou navegando no site e gostaria de uma consultoria personalizada para encontrar meu imóvel." }
+                detail: { message: "Olá! Estou navegando no site da MeuApêTem e gostaria de ajuda para encontrar o imóvel ideal para mim." }
             }));
         });
     }
