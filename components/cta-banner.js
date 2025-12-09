@@ -8,17 +8,19 @@ class CtaBanner extends HTMLElement {
         const title = this.getAttribute('title') || 'Precisa de ajuda?';
         const text = this.getAttribute('text') || '';
         const btnText = this.getAttribute('btn-text') || 'Fale Conosco';
-        // Mantemos o atributo link como fallback visual, mas o clique será interceptado
         const link = this.getAttribute('link') || '#';
 
         this.shadowRoot.innerHTML = `
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
 
+            /* RESET IMPORTANTE: Garante que padding não aumente a largura */
+            * { box-sizing: border-box; }
+
             :host {
                 display: block;
                 background-color: var(--highlight-color, #FF6F61);
-                color: #000; /* Contraste preto no coral */
+                color: #000;
                 padding: 4rem 5%;
             }
 
@@ -43,6 +45,7 @@ class CtaBanner extends HTMLElement {
                 margin: 0 0 1rem 0;
                 font-weight: 700;
                 letter-spacing: -0.5px;
+                line-height: 1.2;
             }
 
             p {
@@ -54,7 +57,7 @@ class CtaBanner extends HTMLElement {
                 font-weight: 500;
             }
 
-            /* Botão Estilo "Pílula" Invertida */
+            /* Botão */
             .btn {
                 background: #000;
                 color: #fff;
@@ -68,7 +71,8 @@ class CtaBanner extends HTMLElement {
                 gap: 10px;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
                 white-space: nowrap;
-                cursor: pointer; /* Garante cursor de clique */
+                cursor: pointer;
+                border: none; /* Remove bordas padrão se houver */
             }
 
             .btn:hover {
@@ -76,9 +80,31 @@ class CtaBanner extends HTMLElement {
                 box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             }
 
+            /* --- MOBILE FIX --- */
             @media (max-width: 768px) {
-                .container { flex-direction: column; align-items: flex-start; }
-                .btn { width: 100%; justify-content: center; }
+                :host {
+                    padding: 3rem 5%; /* Reduz altura do banner */
+                }
+
+                .container {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 1.5rem;
+                }
+
+                .content {
+                    min-width: 100%; /* Garante que o texto ocupe a largura */
+                }
+
+                h3 { font-size: 1.6rem; }
+                p { font-size: 1rem; }
+
+                .btn {
+                    width: 100%; /* Ocupa toda a largura disponível */
+                    justify-content: center;
+                    padding: 16px 20px; /* Reduz padding interno para não estourar */
+                    font-size: 0.95rem;
+                }
             }
         </style>
 
@@ -95,13 +121,13 @@ class CtaBanner extends HTMLElement {
         </div>
         `;
 
-        // LÓGICA DE INTERCEPTAÇÃO
+        // Lógica de Interceptação do Clique (Popup)
         const btn = this.shadowRoot.getElementById('ctaBtn');
-
         btn.addEventListener('click', (e) => {
-            e.preventDefault(); // Impede de ir para o href (WhatsApp)
-            // Dispara o evento que o contact.js está ouvindo
-            window.dispatchEvent(new CustomEvent('open-contact-popup'));
+            e.preventDefault();
+            window.dispatchEvent(new CustomEvent('open-contact-popup', {
+                detail: { message: "Olá Mota! Estou navegando no site e gostaria de uma consultoria personalizada para encontrar meu imóvel." }
+            }));
         });
     }
 }

@@ -8,7 +8,7 @@
 
     <meta name="description"
         content="Não somos apenas uma imobiliária. Facilitamos o encontro entre pessoas e os espaços onde suas histórias serão vividas.">
-    <link rel="icon" type="image/png" href="./media/favicon.png">
+    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,6 +50,7 @@
         }
     </style>
 
+    <script src="./components/preloader.js"></script>
     <script src="./components/menu.js" defer></script>
     <script src="./components/hero-brand.js" defer></script>
     <script src="./components/marquee.js" defer></script>
@@ -74,6 +75,9 @@
 </head>
 
 <body>
+
+    <site-preloader></site-preloader>
+
     <site-menu logo="MEUAPÊTEM" image="./media/utils/logo-brand.png">
         <a slot="links" href="#home">Início</a>
         <a slot="links" href="#manifesto">Manifesto</a>

@@ -10,7 +10,7 @@ class MarqueeScroll extends HTMLElement {
         const textContent = this.getAttribute('text') || 'Experience The Rare';
         // Velocidade da animação (duração do ciclo)
         const animationSpeed = this.getAttribute('speed') || '30s';
-        
+
         // Repetimos o texto 4 vezes para garantir que cubra telas grandes (loop visual)
         const repeatedText = (textContent + ' ').repeat(4);
 
@@ -28,7 +28,8 @@ class MarqueeScroll extends HTMLElement {
                     /* --- VARIÁVEIS DE ESTILO (Padrões) --- */
                     --font-family: sans-serif; 
                     --font-size: 8rem;
-                    --stroke-color: rgba(255, 255, 255, 0.15); /* Efeito vazado */
+                    /* ATUALIZADO: Agora usa a cor de destaque do tema */
+                    --stroke-color: var(--highlight-color, #c5a065); 
                 }
 
                 .marquee-container {

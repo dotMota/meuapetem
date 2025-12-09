@@ -1,4 +1,4 @@
-// --- ITEM (CARD) ---
+// --- ITEM (CARD INDIVIDUAL) ---
 class GalleryItem extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); }
 
@@ -67,7 +67,7 @@ class GalleryItem extends HTMLElement {
 customElements.define('gallery-item', GalleryItem);
 
 
-// --- SEÇÃO (CONTAINER) ---
+// --- SEÇÃO (CARROSSEL) ---
 class GallerySection extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); }
 
@@ -81,7 +81,6 @@ class GallerySection extends HTMLElement {
             <style>
                 :host { 
                     display: block; 
-                    /* SEMÂNTICA: Fundo Geral da Seção */
                     background-color: var(--bg-page-body, #050505); 
                     position: relative; width: 100%; overflow: hidden;
                     
@@ -94,7 +93,7 @@ class GallerySection extends HTMLElement {
                 
                 .intro { 
                     flex: 0 0 30%; padding: 0 4%; z-index: 10; 
-                    background: var(--bg-page-body, #050505); /* Mantém consistência */
+                    background: var(--bg-page-body, #050505); 
                     height: 100%; display: flex; flex-direction: column; justify-content: center; 
                     box-shadow: 10px 0 30px rgba(0,0,0,0.5); 
                 }
@@ -119,7 +118,9 @@ class GallerySection extends HTMLElement {
                 .prev { left: 32%; } .next { right: 2%; }
 
                 @media (max-width: 768px) {
-                    .wrapper { flex-direction: column; height: auto; }
+                    /* Ajuste de padding para não cortar o fundo */
+                    .wrapper { flex-direction: column; height: auto; padding-bottom: 6rem; }
+                    
                     .intro { width: 100%; padding: 4rem 2rem; height: auto; border-bottom: 1px solid #222; box-sizing: border-box; }
                     .track-container { width: 100%; height: 60vh; }
                     .track { padding-left: 12.5vw; padding-right: 12.5vw; }
@@ -143,9 +144,6 @@ class GallerySection extends HTMLElement {
     }
 
     initLogic() {
-        // ... (Mesma lógica de antes, mantida para brevidade) ...
-        // Se precisar do bloco de lógica JS completo aqui, avise. 
-        // Ele não mudou em relação ao último que funcionava perfeitamente.
         const slider = this.shadowRoot.getElementById('scrollContainer');
         const btnPrev = this.shadowRoot.getElementById('btnPrev');
         const btnNext = this.shadowRoot.getElementById('btnNext');
@@ -154,6 +152,7 @@ class GallerySection extends HTMLElement {
         let isDown = false, startX, scrollLeft;
         let isDragging = false;
 
+        // Lógica de Arrastar (Drag)
         slider.addEventListener('mousedown', (e) => {
             isDown = true; isDragging = false;
             slider.classList.add('dragging');
@@ -173,6 +172,7 @@ class GallerySection extends HTMLElement {
             slider.scrollLeft = scrollLeft - walk;
         });
 
+        // Clique para abrir Lightbox (se não estiver arrastando)
         slot.addEventListener('click', (e) => {
             if (isDragging) return;
             const item = e.target.closest('gallery-item');
@@ -185,6 +185,7 @@ class GallerySection extends HTMLElement {
             }
         });
 
+        // Navegação por Botões
         const scrollAmount = () => { const f = slot.assignedElements()[0]; return f ? f.offsetWidth + 32 : 0; };
         btnNext.addEventListener('click', () => {
             const max = slider.scrollWidth - slider.clientWidth;
@@ -196,12 +197,14 @@ class GallerySection extends HTMLElement {
             else slider.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
         });
 
+        // Observer para ativar o item central
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) e.target.classList.add('active');
                 else e.target.classList.remove('active');
             });
         }, { root: slider, threshold: 0.6 });
+
         slot.addEventListener('slotchange', () => { slot.assignedElements().forEach(el => obs.observe(el)); });
     }
 }

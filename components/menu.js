@@ -216,7 +216,6 @@ class SiteMenu extends HTMLElement {
         this.cloneLinksForDesktop();
         this.initAutoClick();
 
-        // Inicia o spy com delay para garantir que o DOM esteja pronto
         setTimeout(() => this.initScrollSpy(), 500);
         window.addEventListener('load', () => this.initScrollSpy());
     }
@@ -224,6 +223,7 @@ class SiteMenu extends HTMLElement {
     initLogic() {
         const btn = this.shadowRoot.getElementById('toggleBtn');
         const overlay = this.shadowRoot.getElementById('overlay');
+        const slot = this.shadowRoot.querySelector('slot[name="links"]'); // Pega os links
 
         const toggleMenu = () => {
             this.isOpen = !this.isOpen;
@@ -241,6 +241,15 @@ class SiteMenu extends HTMLElement {
         };
 
         btn.addEventListener('click', toggleMenu);
+
+        // --- CORREÇÃO AQUI: FECHAR AO CLICAR ---
+        slot.addEventListener('click', (e) => {
+            // Se clicar em qualquer link (A) dentro do menu, fecha
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+                if (this.isOpen) toggleMenu();
+            }
+        });
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) this.classList.add('scrolled');
             else this.classList.remove('scrolled');
@@ -262,46 +271,38 @@ class SiteMenu extends HTMLElement {
                 desktopContainer.appendChild(clone);
             });
 
-            // Reinicia o spy quando os links mudam
             this.initScrollSpy();
             this.initAutoClick();
         });
     }
 
-    // --- CORREÇÃO DO SCROLL SPY ---
     initScrollSpy() {
         const slot = this.shadowRoot.querySelector('slot[name="links"]');
         const mobileLinks = slot ? slot.assignedElements() : [];
         const desktopLinks = Array.from(this.shadowRoot.querySelectorAll('.desktop-links a'));
         const allLinks = [...mobileLinks, ...desktopLinks];
 
-        // 1. Identifica quais IDs devemos rastrear (baseado nos links do menu)
         const targetIds = allLinks
             .map(link => link.getAttribute('href'))
             .filter(href => href && href.startsWith('#') && href.length > 1)
-            .map(href => href.substring(1)); // Remove o '#'
+            .map(href => href.substring(1));
 
-        // Limpa ouvinte anterior
         if (this.scrollHandler) window.removeEventListener('scroll', this.scrollHandler);
 
         this.scrollHandler = () => {
             let currentId = '';
 
-            // 2. Procura apenas os elementos que estão no menu
             targetIds.forEach(id => {
                 const section = document.getElementById(id);
                 if (section) {
                     const sectionTop = section.offsetTop;
-                    // Offset de 150px para compensar o header fixo
                     if (window.scrollY >= (sectionTop - 150)) {
                         currentId = id;
                     }
                 }
             });
 
-            // 3. Verificação de fim de página (Footer)
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
-                // Pega o último link válido
                 const lastLink = allLinks.reverse().find(link => {
                     const href = link.getAttribute('href');
                     return href && href.startsWith('#');
@@ -309,7 +310,6 @@ class SiteMenu extends HTMLElement {
                 if (lastLink) currentId = lastLink.getAttribute('href').substring(1);
             }
 
-            // 4. Aplica classe active
             allLinks.forEach(link => {
                 link.classList.remove('active');
                 const href = link.getAttribute('href');
@@ -320,7 +320,7 @@ class SiteMenu extends HTMLElement {
         };
 
         window.addEventListener('scroll', this.scrollHandler);
-        this.scrollHandler(); // Chama imediatamente para marcar o estado inicial
+        this.scrollHandler();
     }
 
     initAutoClick() {

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elev Butantã | Trisul</title>
 
-    <link rel="icon" type="image/png" href="../media/favicon.png">
+    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,14 +16,16 @@
 
     <style>
         :root {
-            /* Padrão Inicial (Morador) */
-            --color-highlight: #FF6F61;
-            --bg-section-main: #1f1616;
-            --bg-brand-dark: #291818;
+            /* Padrão Inicial (Morador - Roxo Ajustado para Contraste) */
+            --color-highlight: #8c82fc;
+
+            /* Fundos Neutros */
+            --bg-page-body: #121212;
+            --bg-section-main: #141414;
+            --bg-brand-dark: #0a0a0a;
             --color-text-secondary: #d6c4c4;
 
-            /* Fixas */
-            --bg-page-body: #121212;
+            /* Tipografia */
             --font-title: 'Space Grotesk', sans-serif;
             --font-text: 'Inter', sans-serif;
 
@@ -45,7 +47,7 @@
             transition: background-color 0.6s ease, color 0.6s ease;
         }
 
-        /* Garante que os botões amarelos/coral tenham contraste */
+        /* Ajuste de contraste para botões quando a cor for Amarela (#fcd22c) */
         cta-section::part(button),
         cta-banner::part(button) {
             color: #000;
@@ -54,6 +56,7 @@
         }
     </style>
 
+    <script src="../components/preloader.js"></script>
     <script src="../components/menu.js" defer></script>
     <script src="../components/hero.js" defer></script>
     <script src="../components/marquee.js" defer></script>
@@ -71,7 +74,9 @@
     <script src="../components/cursor.js" defer></script>
     <script src="../components/cookie.js" defer></script>
     <script src="../components/lightbox.js" defer></script>
+    <script src="../components/video.js" defer></script>
     <script src="../components/persona-switcher.js" defer></script>
+    <script src="../components/team.js" defer></script>
 
     <script>
         function openPopup(e) {
@@ -82,6 +87,7 @@
 </head>
 
 <body>
+    <site-preloader project="ELEV BUTANTÃ"></site-preloader>
 
     <persona-switcher
         modes='[{"key": "resident", "label": "Vou Morar"}, {"key": "investor", "label": "Vou Investir"}]'></persona-switcher>
@@ -90,19 +96,20 @@
         parent-link="../index.html">
         <a slot="links" href="#home">Início</a>
         <a slot="links" href="#concept">O Projeto</a>
+        <a slot="links" href="#video-tour">Vídeo</a>
         <a slot="links" href="#amenities">Lazer</a>
         <a slot="links" href="#location">Localização</a>
         <a slot="links" href="#plans">Plantas</a>
         <a slot="links" href="#schedule" class="auto-trigger" id="menu-cta">Simular</a>
     </site-menu>
 
-    <hero-section id="home" image="../media/ElevButanta/areaLazer.webp" highlight="Seu Primeiro Apê"
+    <hero-section id="home" image="../media/ElevButanta/aereaLazer.webp" highlight="Seu Primeiro Apê"
         title="Liberdade é ter o Metrô na Porta"
         text="Chega de aluguel. More a 4 passos da Estação Butantã com lazer de clube e facilidade de pagamento."
         curator-badge="true"></hero-section>
 
     <marquee-scroll id="marquee" text="MINHA CASA MINHA VIDA — LAZER COMPLETO — METRÔ NA PORTA — "
-        speed="50s"></marquee-scroll>
+        speed="200s"></marquee-scroll>
 
     <stats-section id="stats">
         <stat-item slot="items" class="hover-target" id="stat-1" number="1 min" label="Do Metrô a Pé"></stat-item>
@@ -110,12 +117,16 @@
         <stat-item slot="items" class="hover-target" id="stat-3" number="Varanda" label="Em todas unidades"></stat-item>
     </stats-section>
 
-    <showcase-section id="concept" button-link="#amenities" highlight="Vida Prática" title="Mais Tempo <br>Pra Você"
+    <showcase-section id="concept" button-link="#video-tour" highlight="Vida Prática" title="Mais Tempo <br>Pra Você"
         text="Pare de perder vida no trânsito. Aqui você tem Coworking, Academia e Mercado dentro de casa."
-        button-text="Ver o Lazer">
+        button-text="Assistir ao Filme">
         <img slot="gallery" src="../media/ElevButanta/AcessoMoradores.webp" alt="Fachada Moderna" loading="lazy">
         <img slot="gallery" src="../media/ElevButanta/fachadaAtiva.webp" alt="Vista Ativa" loading="lazy">
     </showcase-section>
+
+    <video-section id="video-tour" src="https://www.youtube.com/watch?v=MWZhACR6E4I"
+        cover="../media/ElevButanta/herovideo.png" title="Vídeo Comercial">
+    </video-section>
 
     <gallery-section id="amenities" subtitle="Seu Clube" title="Extensão da <br>Sua Casa">
         <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/quadra.webp"
@@ -136,8 +147,25 @@
     ]'>
     </region-section>
 
+    <team-section highlight="Autoria" title="Mentes Brilhantes">
 
-    <plans-section id="plans" highlight="Plantas Inteligentes">
+        <team-member slot="members" role="Arquitetura" name="MCAA Arquitetos"
+            text="Inspirada na vitalidade de São Paulo. Uma torre elegante e expressiva que dialoga com a cidade através de uma fachada ativa e pórticos imponentes que refletem o ritmo dinâmico do Butantã."
+            image="../media/utils/MCAA.png">
+        </team-member>
+
+        <team-member slot="members" role="Interiores" name="Skiros Arquitetura"
+            text="Muito mais do que lazer: uma experiência de convivência. Ambientes sofisticados e funcionais, desenhados cuidadosamente para acolher, relaxar e receber amigos em todos os momentos do dia."
+            image="../media/utils/Skiros.png">
+        </team-member>
+
+        <team-member slot="members" role="Paisagismo" name="Núcleo Arquitetura"
+            text="O conceito de paisagismo de convivência. Vegetação nativa e texturas que criam conexões afetivas, oferecendo espaços de respiro e lazer integrados perfeitamente à arquitetura."
+            image="../media/utils/nucleo.jpg">
+        </team-member>
+
+    </team-section>
+    <plans-section id="plans" highlight="Plantas Inteligentes" project="Elev Butantã">
         <plan-item slot="content" name="Studio 25m" title="Studio 25m²" area="25m²" dorms="1 Dorm" vagas="0"
             id="plan-25" desc="O ticket de entrada para sua independência. Varanda integrada." extra-label="Ideal para"
             extra-val="Solteiros">
@@ -162,7 +190,7 @@
         cons="Por estar na frente do metrô, a região é movimentada.">
     </curator-review>
 
-    <cta-section id="schedule" highlight="Facilidade" title="Saia do Aluguel"
+    <cta-section id="schedule" project="Elev Butantã" highlight="Facilidade" title="Saia do Aluguel"
         text="Use seu FGTS na entrada. Condições facilitadas de lançamento e parcelas que cabem no bolso."
         button-text="Simular Financiamento">
     </cta-section>
@@ -182,14 +210,15 @@
     <custom-cursor></custom-cursor>
 
     <script>
+        // --- DADOS DINÂMICOS (Configuração Completa) ---
         const DATA = {
             resident: {
+                message: "Olá Mota! Tenho interesse em MORAR no Elev Butantã. Gostaria de saber mais sobre as condições de pagamento e agendar uma visita.",
                 colors: {
-                    /* --- AQUI ESTÁ A MUDANÇA --- */
-                    highlight: '#FF4D00', // Laranja Vibrante (Energia/Jovem)
-                    bgMain: '#0F0F0F',    // Preto Neutro (Faz a cor "saltar")
-                    bgDark: '#1a1a1a',    // Cinza Chumbo
-                    textSec: '#D1D1D1'    // Texto claro
+                    highlight: '#8c82fc', // Roxo Lilás (Alto Contraste)
+                    bgMain: '#121212',
+                    bgDark: '#0a0a0a',
+                    textSec: '#D1D1D1'
                 },
                 hero: {
                     highlight: 'Seu Primeiro Apê',
@@ -206,7 +235,7 @@
                     highlight: 'Vida Prática',
                     title: 'Mais Tempo <br>Pra Você',
                     text: 'Pare de perder vida no trânsito. Aqui você tem Coworking, Academia e Mercado dentro de casa.',
-                    btn: 'Ver o Lazer'
+                    btn: 'Assistir ao Filme'
                 },
                 region: {
                     highlight: 'Mobilidade',
@@ -233,10 +262,11 @@
                 menuBtn: 'Simular'
             },
             investor: {
+                message: "Olá Mota! Tenho perfil INVESTIDOR. Gostaria de receber a Tabela de Valores e condições do Elev Butantã.",
                 colors: {
-                    highlight: '#FFD700', // Dourado (Mantido)
-                    bgMain: '#121212',    // Preto
-                    bgDark: '#1E1E1E',    // Cinza Escuro
+                    highlight: '#fcd22c', // Amarelo Ouro
+                    bgMain: '#101010',
+                    bgDark: '#1a1a1a',
                     textSec: '#C7C7CC'
                 },
                 hero: {
@@ -244,7 +274,7 @@
                     title: 'Liquidez Absoluta na Zona Oeste',
                     text: 'O ativo imobiliário mais estratégico da região. Na porta do Metrô e a 5 min da USP.'
                 },
-                marquee: 'ALTA LIQUIDEZ — METRÔ NA PORTA — 5 MIN DA USP — VACÂNCIA ZERO — RENTABILIDADE GARANTIDA — ',
+                marquee: 'ALTA LIQUIDEZ — METRÔ NA PORTA — 5 MIN DA USP — VACÂNCIA ZERO — SEGURANÇA PATRIMONIAL — ',
                 stats: [
                     { id: 'stat-1', n: '4 Passos', l: 'Da Estação Butantã' },
                     { id: 'stat-2', n: 'USP', l: 'Demanda Infinita' },
@@ -273,33 +303,58 @@
                     cons: "É um ativo de giro rápido. Não é focado em exclusividade, mas em conveniência e fluxo."
                 },
                 cta: {
-                    highlight: 'Tabela de Investidor',
-                    title: 'Maximize Seu Retorno',
-                    text: 'Acesse a projeção de rentabilidade, vacância estimada e fluxo de pagamento facilitado.',
-                    btn: 'ROI e Rentabilidade'
+                    highlight: 'Oportunidade',
+                    title: 'Potencialize sua Carteira',
+                    text: 'Invista em um ativo real com alta liquidez. Cadastre-se para receber a tabela de lançamento.',
+                    btn: 'Receber Tabela'
                 },
                 menuBtn: 'Saber Mais'
             }
         };
 
-        // --- SISTEMA DE TROCA (HOT SWAP) ---
+        // --- SISTEMA DE TROCA (LÓGICA) ---
+        let currentPersona = 'resident'; // Padrão inicial
+
+        // 1. OUVINTE DE MUDANÇA (Disparado pelo Switcher)
         document.addEventListener('persona-changed', (e) => {
             const mode = e.detail.mode;
-            localStorage.setItem('site-persona', mode); // Salva preferência
+            currentPersona = mode;
+            localStorage.setItem('site-persona', mode);
             updatePage(mode);
         });
 
+        // 2. ABRIR POPUP COM MENSAGEM CERTA
+        function openPopup(e) {
+            if (e) e.preventDefault();
+            // Pega a mensagem do perfil atual
+            const msg = DATA[currentPersona].message;
+
+            window.dispatchEvent(new CustomEvent('open-contact-popup', {
+                detail: { message: msg }
+            }));
+        }
+
+        // 3. INTERCEPTADOR DE CLIQUES GERAIS
+        window.addEventListener('open-contact-popup', (e) => {
+            // Se o evento não trouxe mensagem (clique genérico), usa a do perfil
+            if (!e.detail || !e.detail.message) {
+                e.stopImmediatePropagation();
+                openPopup();
+            }
+        });
+
+        // 4. ATUALIZADOR DA PÁGINA (Troca textos e cores)
         function updatePage(mode) {
             const d = DATA[mode];
             const root = document.documentElement;
 
-            // Atualiza Variáveis CSS
+            // Cores
             root.style.setProperty('--color-highlight', d.colors.highlight);
             root.style.setProperty('--bg-section-main', d.colors.bgMain);
             root.style.setProperty('--bg-brand-dark', d.colors.bgDark);
             root.style.setProperty('--color-text-secondary', d.colors.textSec);
 
-            // Atualiza Componentes (com refresh visual)
+            // Componentes
             refreshElement('home', d.hero);
             refreshElement('concept', { highlight: d.showcase.highlight, title: d.showcase.title, text: d.showcase.text, 'button-text': d.showcase.btn });
             refreshElement('location', { highlight: d.region.highlight, title: d.region.title, text: d.region.text });
@@ -307,28 +362,31 @@
             refreshElement('review', d.review);
             refreshElement('schedule', { highlight: d.cta.highlight, title: d.cta.title, text: d.cta.text, 'button-text': d.cta.btn });
 
-            // Atualiza Elementos Simples
+            // Marquee (Letreiro)
             const marquee = document.getElementById('marquee');
             if (marquee) {
                 marquee.setAttribute('text', d.marquee);
-                // Força reinício da animação clonando
+                // Truque para reiniciar animação: clonar o elemento
                 const newMarquee = marquee.cloneNode(true);
                 marquee.parentNode.replaceChild(newMarquee, marquee);
             }
 
+            // Estatísticas
             d.stats.forEach(stat => {
                 refreshElement(stat.id, { number: stat.n, label: stat.l });
             });
 
+            // Plantas (Atualiza os badges)
             d.plans.forEach(plan => {
                 refreshElement(plan.id, { desc: plan.d, 'extra-label': plan.l, 'extra-val': plan.v });
             });
 
+            // Botão do Menu
             const menuBtn = document.getElementById('menu-cta');
             if (menuBtn) menuBtn.innerText = d.menuBtn;
         }
 
-        // Função para forçar o componente a redesenhar com novos dados
+        // Função Auxiliar para atualizar atributos dos Web Components
         function refreshElement(id, attributes) {
             const oldEl = document.getElementById(id);
             if (!oldEl) return;
@@ -337,13 +395,15 @@
                 oldEl.setAttribute(key, value);
             }
 
+            // Força re-render do componente
             const newEl = oldEl.cloneNode(true);
             oldEl.parentNode.replaceChild(newEl, oldEl);
         }
 
-        // Inicialização
+        // 5. INICIALIZAÇÃO
         window.onload = () => {
             const saved = localStorage.getItem('site-persona') || 'resident';
+            currentPersona = saved;
             updatePage(saved);
         };
     </script>

@@ -9,12 +9,12 @@ class CtaSection extends HTMLElement {
         const title = this.getAttribute('title') || '';
         const text = this.getAttribute('text') || '';
         const btnText = this.getAttribute('button-text') || 'Saiba Mais';
+        const project = this.getAttribute('project') || document.title;
 
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
                     display: block;
-                    /* Fundo: Se o usuário não passar gradiente, usa um cinza padrão */
                     background: var(--bg-gradient, #111);
                     padding: var(--section-padding, 8rem 10%);
                     border-top: var(--border-top, 1px solid #222); 
@@ -38,7 +38,6 @@ class CtaSection extends HTMLElement {
                     line-height: 1.6; max-width: 600px; margin: 0; font-weight: 300; 
                 }
                 
-                /* Botão */
                 .btn {
                     display: inline-block; margin-top: 2rem; padding: 1.2rem 4rem;
                     background: transparent; 
@@ -69,7 +68,20 @@ class CtaSection extends HTMLElement {
         `;
 
         this.shadowRoot.getElementById('actionBtn').onclick = () => {
-            window.dispatchEvent(new CustomEvent('open-contact-popup'));
+            const persona = localStorage.getItem('site-persona');
+            let intentString = '';
+
+            // Lógica Condicional aqui também
+            if (project.includes('Elev')) {
+                if (persona === 'investor') intentString = ' para investimento';
+                else if (persona === 'resident') intentString = ' para moradia';
+            }
+
+            const msg = `Olá! Estou vendo o projeto ${project}${intentString}. Gostaria de ${btnText}.`;
+
+            window.dispatchEvent(new CustomEvent('open-contact-popup', {
+                detail: { message: msg }
+            }));
         };
     }
 }

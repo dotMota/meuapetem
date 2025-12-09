@@ -9,7 +9,7 @@
     <meta name="description"
         content="Um quarteirão inteiro de natureza desenhado para redefinir o privilégio de viver no Ibirapuera.">
 
-    <link rel="icon" type="image/png" href="../media/favicon.png">
+    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,6 +61,7 @@
         }
     </style>
 
+    <script src="../components/preloader.js"></script>
     <script src="../components/menu.js" defer></script>
     <script src="../components/hero.js" defer></script>
     <script src="../components/marquee.js" defer></script>
@@ -81,14 +82,23 @@
     <script src="../components/cursor.js" defer></script>
 
     <script>
-        function openPopup(e) {
+        function openPopup(e, customMsg) {
             if (e) e.preventDefault();
-            window.dispatchEvent(new CustomEvent('open-contact-popup'));
+
+            // Mensagem padrão do Quarten se nenhuma for passada
+            const msg = customMsg || "Olá Mota! Estou interessado no Quarten Ibirapuera. Gostaria de receber o Book Digital e agendar uma visita.";
+
+            window.dispatchEvent(new CustomEvent('open-contact-popup', {
+                detail: { message: msg }
+            }));
         }
     </script>
 </head>
 
 <body>
+
+    <site-preloader project="QUARTEN"></site-preloader>
+
     <site-menu logo="QUARTEN." image="../media/quarten/boulevart.webp" parent-text="MeuApêTem"
         parent-link="../index.html">
         <a slot="links" href="#home">Início</a>
@@ -132,7 +142,7 @@
             text="Santuário de Relaxamento"></gallery-item>
     </gallery-section>
 
-    <plans-section id="plans" highlight="Coleção" title="Residências">
+    <plans-section id="plans" highlight="Coleção" title="Residências" project="Quarten Ibirapuera">
         <plan-item slot="content" name="164m²" title="Apartamento 164m²"
             desc="O equilíbrio perfeito. Terraço gourmet com churrasqueira a carvão." area="164m²" dorms="4 Dorms"
             vagas="2 Vagas" extra-label="Diferencial" extra-val="Churrasq. Carvão">
@@ -156,11 +166,13 @@
 
     <team-section highlight="Curadoria" title="Mentes <br>Brilhantes">
         <team-member slot="members" role="Arquitetura" name="Königsberger Vannucchi"
-            text="Um ícone da arquitetura contemporânea brasileira." image="../media/utils/arquiteto.png"></team-member>
+            text="Um ícone da arquitetura contemporânea brasileira."
+            image="../media/utils/KonigsbergerVannucchi.png"></team-member>
         <team-member slot="members" role="Paisagismo" name="Benedito Abbud"
-            text="Criamos uma verdadeira ilha de biodiversidade." image="../media/utils/paisagismo.jpg"></team-member>
+            text="Criamos uma verdadeira ilha de biodiversidade."
+            image="../media/utils/BenedittoAbudd.jpg"></team-member>
         <team-member slot="members" role="Interiores" name="Chris Silveira" text="Sofisticação em cada detalhe."
-            image="../media/utils/interiores2.png"></team-member>
+            image="../media/utils/ChrisSilveira.png"></team-member>
     </team-section>
 
     <stats-section>
@@ -182,10 +194,9 @@
         pros="A sensação de estar fora de São Paulo é real. O bosque privativo de 6.000m² não é marketing, é um ecossistema próprio que muda a temperatura do ambiente."
         cons="É um produto de nicho. Se você busca agitação na porta de casa, este refúgio pode parecer calmo demais. O valor de condomínio reflete a manutenção da extensa área verde.">
     </curator-review>
-
     <cta-section id="schedule" highlight="Atendimento Exclusivo" title="Agende Sua Visita"
-        text="O luxo de viver aqui começa no atendimento. <br>Agende uma visita privada."
-        button-text="Solicitar Apresentação">
+        text="O luxo de viver aqui começa no atendimento. <br>Agende uma visita privada." button-text="Agendar Visita"
+        project="Quarten Ibirapuera">
     </cta-section>
 
     <trust-section style="--bg-color: var(--bg-brand-dark);">

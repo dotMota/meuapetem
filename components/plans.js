@@ -21,8 +21,6 @@ class PlanItem extends HTMLElement {
             <style>
                 :host {
                     display: none; width: 100%; animation: fadeUp 0.6s ease;
-                    
-                    /* VARIÁVEIS SEMÂNTICAS */
                     --accent: var(--color-highlight, #c5a065);
                     --txt-main: var(--color-text-primary, #fff);
                     --txt-sec: var(--color-text-secondary, #a0a0a0);
@@ -32,25 +30,20 @@ class PlanItem extends HTMLElement {
 
                 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 
-                /* Carrossel */
                 .carousel-box {
                     position: relative; width: 100%; padding-bottom: 75%;
-                    background: var(--bg-card); /* Fundo Escuro */
-                    overflow: hidden; border-radius: 2px;
+                    background: var(--bg-card); overflow: hidden; border-radius: 2px;
                 }
                 .slide-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
                 
                 ::slotted([slot="image"]) {
                     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
                     object-fit: contain; opacity: 0; transition: opacity 0.8s ease;
-                    background: var(--bg-card); display: block;
-                    cursor: zoom-in; /* Lightbox */
+                    background: var(--bg-card); display: block; cursor: zoom-in;
                 }
                 ::slotted(.active-slide) { opacity: 1; z-index: 1; }
 
-                .nav {
-                    position: absolute; bottom: 20px; right: 20px; z-index: 10; display: flex; gap: 10px;
-                }
+                .nav { position: absolute; bottom: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; }
                 button {
                     width: 40px; height: 40px; border-radius: 50%;
                     border: 1px solid var(--accent); color: var(--accent);
@@ -61,18 +54,15 @@ class PlanItem extends HTMLElement {
                 button:hover { background: var(--accent); color: #000; }
 
                 .info-box { color: var(--txt-main); }
-                
                 .tt { font-family: var(--font-title, serif); font-size: 2.2rem; margin: 0 0 1rem 0; color: var(--txt-main); }
                 .desc { font-family: var(--font-text, sans-serif); font-size: 1rem; color: var(--txt-sec); line-height: 1.6; margin-bottom: 2.5rem; display: block; }
 
-                /* Tabela de Detalhes */
                 .specs-grid {
                     display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
                     border-top: 1px solid rgba(255,255,255,0.1); 
                     padding-top: 2rem; margin-bottom: 2.5rem;
                 }
                 .spec-item { display: flex; flex-direction: column; gap: 5px; }
-                
                 .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--txt-sec); font-family: var(--font-text, sans-serif); font-weight: 600; }
                 .val { font-family: var(--font-text, sans-serif); font-size: 1.1rem; color: var(--txt-main); font-weight: 400; }
                 .val.gold { color: var(--accent); font-weight: 600; }
@@ -119,7 +109,30 @@ class PlanItem extends HTMLElement {
         `;
 
         this.initCarousel();
-        this.shadowRoot.getElementById('bookBtn').onclick = () => window.dispatchEvent(new CustomEvent('open-contact-popup'));
+
+        // --- MENSAGEM INTELIGENTE (CONDICIONAL) ---
+        this.shadowRoot.getElementById('bookBtn').onclick = () => {
+            // 1. Nome do Projeto
+            const section = this.closest('plans-section');
+            const project = section ? section.getAttribute('project') : 'deste empreendimento';
+
+            // 2. Perfil (Só adiciona se for Elev)
+            const persona = localStorage.getItem('site-persona');
+            let intentString = '';
+
+            // AQUI ESTÁ A CORREÇÃO: Só aplica o sufixo se o projeto contiver "Elev"
+            if (project.includes('Elev')) {
+                if (persona === 'investor') intentString = ' para investimento';
+                else if (persona === 'resident') intentString = ' para moradia';
+            }
+
+            // 3. Monta a mensagem final
+            const msg = `Olá! Estou vendo o projeto ${project}${intentString}. Gostei da planta ${title} e gostaria de receber o Book Digital.`;
+
+            window.dispatchEvent(new CustomEvent('open-contact-popup', {
+                detail: { message: msg }
+            }));
+        };
     }
 
     initCarousel() {
@@ -159,7 +172,7 @@ class PlanItem extends HTMLElement {
 customElements.define('plan-item', PlanItem);
 
 
-// --- SEÇÃO PRINCIPAL (Abas) ---
+// --- SEÇÃO PRINCIPAL ---
 class PlansSection extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); }
     connectedCallback() { this.render(); this.initTabs(); }
@@ -172,11 +185,8 @@ class PlansSection extends HTMLElement {
             <style>
                 :host {
                     display: block;
-                    /* SEMÂNTICA: Fundo Seção Principal */
                     background-color: var(--bg-section-main, #141414);
                     padding: 6rem 10%;
-                    
-                    /* Variáveis Internas */
                     --accent: var(--color-highlight, #c5a065);
                     --txt-main: var(--color-text-primary, #fff);
                     --txt-sec: var(--color-text-secondary, #666);

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Assets | MeuApêTem</title>
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='90' fill='%23FF6F61'/><text x='50%' y='155' font-family='sans-serif' font-weight='bold' font-size='130' fill='%23fff' text-anchor='middle'>MEU</text><text x='50%' y='290' font-family='sans-serif' font-weight='bold' font-size='150' fill='%23fff' text-anchor='middle' letter-spacing='-3'>APÊ</text><text x='50%' y='415' font-family='sans-serif' font-weight='bold' font-size='130' fill='%23fff' text-anchor='middle'>TEM</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-highlight: #FF6F61;
+            --bg-page: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #F5F5F7;
+            --text-sec: #A1A1AA;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-text: 'Manrope', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-page);
+            background-image: radial-gradient(circle at top center, #1a1a1a 0%, #0a0a0a 60%);
+            font-family: var(--font-text);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+            padding: 8rem 5% 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right bottom, #fff 30%, var(--color-highlight) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        p {
+            color: var(--text-sec);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Separador */
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            color: var(--text-sec);
+            margin: 5rem 0 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Grid */
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Cards */
+        .asset-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+
+        .asset-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-highlight);
+            box-shadow: 0 20px 40px -10px rgba(255, 111, 97, 0.15);
+        }
+
+        /* Área de Preview */
+        .preview-area {
+            background: radial-gradient(circle at center, #2a2a2a 0%, #141414 100%);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        /* Classe para manter proporção quadrada */
+        .square-ratio {
+            aspect-ratio: 1 / 1;
+        }
+
+        /* Classe para retangular */
+        .rect-ratio {
+            aspect-ratio: 2 / 1;
+            min-height: 200px;
+        }
+
+        h3 {
+            font-family: var(--font-title);
+            margin: 0 0 0.5rem 0;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        .specs {
+            font-size: 0.9rem;
+            color: var(--text-sec);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* Botão */
+        .btn-download {
+            background: rgba(255, 111, 97, 0.1);
+            color: var(--color-highlight);
+            border: 1px solid var(--color-highlight);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-family: var(--font-title);
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-download:hover {
+            background: var(--color-highlight);
+            color: #000;
+        }
+
+        /* ESTILOS DOS SVGs */
+        svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-anchor: middle;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+
+    <script src="./components/menu.js" defer></script>
+    <script src="./components/footer.js" defer></script>
+    <script src="./components/cursor.js" defer></script>
+    <script src="./components/contact.js" defer></script>
+</head>
+
+<body>
+
+    <site-menu logo="BRAND." parent-text="MeuApêTem" parent-link="./index.html">
+        <a slot="links" href="./index.html">Voltar</a>
+    </site-menu>
+
+    <main>
+        <header>
+            <p
+                style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; color: var(--color-highlight);">
+                Design System</p>
+            <h1>Brand Assets</h1>
+            <p>Baixe os vetores originais da marca MeuApêTem para garantir a melhor qualidade em todas as aplicações.
+            </p>
+        </header>
+
+        <h2 class="section-title">Perfil WhatsApp (Redondo)</h2>
+        <div class="assets-grid">
+
+            <div class="asset-card">
+                <div class="preview-area square-ratio">
+                    <svg viewBox="0 0 512 512" id="icon-round-coral" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="256" cy="256" r="256" fill="#FF6F61" />
+                        <text x="50%" y="155" class="logo-font" font-size="130" fill="#fff">MEU</text>
+                        <text x="50%" y="290" class="logo-font" font-size="150" fill="#fff"
+                            letter-spacing="-3">APÊ</text>
+                        <text x="50%" y="415" class="logo-font" font-size="130" fill="#fff">TEM</text>
+                    </svg>
+                </div>
+                <h3>Perfil Coral</h3>
+                <span class="specs">Formato circular. Ideal para WhatsApp, Instagram e TikTok.</span>
+                <button class="btn-download"
+                    onclick="downloadSVG('icon-round-coral', 'meuapetem-whatsapp-coral.svg')"><i
+                        class="fas fa-download"></i> Baixar</button>
+            </div>
+
+            <div class="asset-card">
+                <div class="preview-area square-ratio">
+                    <svg viewBox="0 0 512 512" id="icon-round-dark" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="256" cy="256" r="256" fill="#0a0a0a" />
+                        <text x="50%" y="155" class="logo-font" font-size="130" fill="#fff">MEU</text>
+                        <text x="50%" y="290" class="logo-font" font-size="150" fill="#FF6F61"
+                            letter-spacing="-3">APÊ</text>
+                        <text x="50%" y="415" class="logo-font" font-size="130" fill="#fff">TEM</text>
+                    </svg>
+                </div>
+                <h3>Perfil Dark</h3>
+                <span class="specs">Formato circular premium. Ideal para WhatsApp Business.</span>
+                <button class="btn-download" onclick="downloadSVG('icon-round-dark', 'meuapetem-whatsapp-dark.svg')"><i
+                        class="fas fa-download"></i> Baixar</button>
+            </div>
+
+        </div>
+
+        <h2 class="section-title">Símbolo (Quadrado/Favicon)</h2>
+        <div class="assets-grid">
+
+            <div class="asset-card">
+                <div class="preview-area square-ratio">
+                    <svg viewBox="0 0 512 512" id="icon-coral" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="512" height="512" rx="90" fill="#FF6F61" />
+                        <text x="50%" y="155" class="logo-font" font-size="130" fill="#fff">MEU</text>
+                        <text x="50%" y="290" class="logo-font" font-size="150" fill="#fff"
+                            letter-spacing="-3">APÊ</text>
+                        <text x="50%" y="415" class="logo-font" font-size="130" fill="#fff">TEM</text>
+                    </svg>
+                </div>
+                <h3>Ícone Coral (App)</h3>
+                <span class="specs">Canto arredondado. Para Favicon e ícone de aplicativo.</span>
+                <button class="btn-download" onclick="downloadSVG('icon-coral', 'meuapetem-icon-coral.svg')"><i
+                        class="fas fa-download"></i> Baixar</button>
+            </div>
+
+            <div class="asset-card">
+                <div class="preview-area square-ratio">
+                    <svg viewBox="0 0 512 512" id="icon-dark" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="512" height="512" rx="90" fill="#0a0a0a" />
+                        <text x="50%" y="155" class="logo-font" font-size="130" fill="#fff">MEU</text>
+                        <text x="50%" y="290" class="logo-font" font-size="150" fill="#FF6F61"
+                            letter-spacing="-3">APÊ</text>
+                        <text x="50%" y="415" class="logo-font" font-size="130" fill="#fff">TEM</text>
+                    </svg>
+                </div>
+                <h3>Ícone Dark (App)</h3>
+                <span class="specs">Canto arredondado. Versão premium para fundo claro.</span>
+                <button class="btn-download" onclick="downloadSVG('icon-dark', 'meuapetem-icon-dark.svg')"><i
+                        class="fas fa-download"></i> Baixar</button>
+            </div>
+
+        </div>
+
+        <h2 class="section-title">Logotipo (Site & Header)</h2>
+        <div class="assets-grid">
+            <div class="asset-card">
+                <div class="preview-area rect-ratio">
+                    <svg viewBox="0 0 600 120" id="logo-full" xmlns="http://www.w3.org/2000/svg">
+                        <text x="50%" y="90" class="logo-font"
+                            style="font-size: 80px; fill: #fff; letter-spacing: -2px;">
+                            MEU<tspan style="fill: #FF6F61;">APÊ</tspan>TEM
+                        </text>
+                    </svg>
+                </div>
+                <h3>Logotipo Horizontal</h3>
+                <span class="specs">Para cabeçalhos e assinaturas. Fundo transparente.</span>
+                <button class="btn-download" onclick="downloadSVG('logo-full', 'meuapetem-logo-full.svg')"><i
+                        class="fas fa-download"></i> Baixar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer-section brand="MEUAPÊTEM" root-path="."></footer-section>
+    <custom-cursor></custom-cursor>
+    <contact-popup></contact-popup>
+
+    <script>
+        function downloadSVG(svgId, filename) {
+            const svg = document.getElementById(svgId);
+            const serializer = new XMLSerializer();
+            let source = serializer.serializeToString(svg);
+
+            if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+                source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+            }
+            source = source.replace('<svg', '<svg style="font-family: \'Space Grotesk\', Arial Black, sans-serif; font-weight: 700;"');
+            source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+            const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -25,6 +25,11 @@ class FloatingActions extends HTMLElement {
                 .share { background: #333; width: 40px; height: 40px; align-self: center; }
                 .whatsapp { background: #25d366; width: 60px; height: 60px; font-size: 30px; }
                 svg { width: 50%; height: 50%; fill: currentColor; }
+
+                /* --- CORREÇÃO MOBILE: SOBE PARA NÃO ENCOBRIR PERSONA SWITCHER --- */
+                @media (max-width: 768px) {
+                    :host { bottom: 100px; right: 1rem; }
+                }
             </style>
 
             <button class="btn share" id="shareBtn" title="Compartilhar">
@@ -38,10 +43,9 @@ class FloatingActions extends HTMLElement {
 
     addEvents() {
         this.shadowRoot.getElementById('shareBtn').onclick = async () => {
-            try { await navigator.share({ title: document.title, url: window.location.href }); } 
+            try { await navigator.share({ title: document.title, url: window.location.href }); }
             catch { navigator.clipboard.writeText(window.location.href); alert('Link copiado!'); }
         };
-        // Ao clicar no botão flutuante, ele avisa o site para abrir o popup
         this.shadowRoot.getElementById('whatsBtn').onclick = () => {
             window.dispatchEvent(new CustomEvent('open-contact-popup'));
         };
