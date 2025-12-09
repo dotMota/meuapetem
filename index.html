@@ -4,43 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuApêTem | Curadoria Imobiliária</title>
+    <title>MeuApêTem | Redefinindo a Experiência Imobiliária</title>
 
-    <meta name="description" content="Uma vitrine de imóveis com curadoria experiencial. Encontre seu lugar no mundo.">
-
+    <meta name="description"
+        content="Não somos apenas uma imobiliária. Facilitamos o encontro entre pessoas e os espaços onde suas histórias serão vividas.">
     <link rel="icon" type="image/png" href="./media/favicon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Manrope:wght@200;300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@400;500;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- TEMA DA MARCA PRINCIPAL --- */
         :root {
-            /* Identidade Visual da Marca (Pode ser diferente dos prédios) */
-            --color-highlight: #c5a065;
-            /* Dourado/Bege Nobre */
-            --color-text-primary: #e0d6cc;
-            /* Off-white */
-            --color-text-secondary: #a89f96;
-            /* Cinza quente */
+            /* Identidade Visual - Coral Vivo */
+            --color-highlight: #FF6F61;
 
-            --bg-page-body: #050505;
-            --bg-section-main: #0a0a0a;
-            --bg-brand-dark: #121212;
+            /* Paleta Dark */
+            --bg-page-body: #0a0a0a;
+            --bg-section-main: #141414;
+            --color-text-primary: #F5F5F7;
+            --color-text-secondary: #A1A1AA;
 
-            /* Variáveis para Componentes */
-            --font-title: 'Cinzel', serif;
+            /* Tipografia */
+            --font-title: 'Space Grotesk', sans-serif;
             --font-text: 'Manrope', sans-serif;
 
+            /* Variáveis CSS para os Web Components */
             --highlight-color: var(--color-highlight);
-            --text-color: var(--color-text-secondary);
             --bg-color: var(--bg-section-main);
-            --bg-gradient: linear-gradient(to bottom, #050505, #121212);
+            --text-color: var(--color-text-secondary);
         }
 
-        /* Reset */
         body,
         html {
             margin: 0;
@@ -48,199 +45,82 @@
             background-color: var(--bg-page-body);
             font-family: var(--font-text);
             color: var(--color-text-primary);
-            overflow-x: hidden;
             scroll-behavior: smooth;
-        }
-
-        /* --- ESTILOS ESPECÍFICOS DA HOME (GRID DE PROJETOS) --- */
-        .portfolio-section {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-family: var(--font-title);
-            font-size: 2.5rem;
-            color: var(--color-text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .section-header p {
-            color: var(--color-text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        /* Card do Projeto */
-        .project-card {
-            display: block;
-            position: relative;
-            aspect-ratio: 4/5;
-            text-decoration: none;
-            border-radius: 4px;
-            overflow: hidden;
-            background-color: #1a1a1a;
-            transition: transform 0.4s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-            transition: opacity 0.4s, transform 0.6s;
-        }
-
-        .project-card:hover img {
-            opacity: 0.4;
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem;
-            box-sizing: border-box;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-        }
-
-        .card-tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--color-highlight);
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .card-title {
-            font-family: var(--font-title);
-            font-size: 1.8rem;
-            color: #fff;
-            margin: 0;
-        }
-
-        .card-location {
-            color: var(--color-text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* Badge de "Em Breve" */
-        .coming-soon {
-            pointer-events: none;
-            filter: grayscale(1);
-        }
-
-        .coming-soon::after {
-            content: "EM BREVE";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            letter-spacing: 3px;
-            font-family: var(--font-title);
-            font-size: 0.9rem;
-            background: rgba(0, 0, 0, 0.5);
+            overflow-x: hidden;
         }
     </style>
 
     <script src="./components/menu.js" defer></script>
-    <script src="./components/hero.js" defer></script>
+    <script src="./components/hero-brand.js" defer></script>
     <script src="./components/marquee.js" defer></script>
-    <script src="./components/showcase.js" defer></script>
+    <script src="./components/manifesto.js" defer></script>
+    <script src="./components/grid-section.js" defer></script>
+    <script src="./components/project-card.js" defer></script>
+    <script src="./components/cta-banner.js" defer></script>
     <script src="./components/footer.js" defer></script>
     <script src="./components/cursor.js" defer></script>
+
+    <script src="./components/floating.js" defer></script>
+    <script src="./components/contact.js" defer></script>
+    <script src="./components/cookie.js" defer></script>
+
+    <script>
+        function openPopup(e) {
+            if (e) e.preventDefault();
+            window.dispatchEvent(new CustomEvent('open-contact-popup'));
+        }
+    </script>
+
 </head>
 
 <body>
 
-    <site-menu logo="MEUAPÊTEM." image="./media/utils/logo-brand.png" label-menu="Menu" label-close="Fechar">
-        <a slot="links" href="#colecao">Coleção</a>
-        <a slot="links" href="#sobre">Conceito</a>
-        <a slot="links" href="https://instagram.com/seuperfil" target="_blank">Instagram</a>
+    <site-menu logo="MEUAPÊTEM" image="./media/utils/logo-brand.png"> <a slot="links" href="#home">Início</a>
+        <a slot="links" href="#portfolio">Coleção</a>
+        <a slot="links" href="#manifesto">Manifesto</a>
+        <a slot="links" onclick="openPopup(event)">Contato</a>
     </site-menu>
 
-    <hero-section id="home" image="./media/utils/brand-hero.jpg" highlight="Curadoria Imobiliária"
-        subtitle="ALÉM DO METRO QUADRADO" title="O Palco da<br>Sua Vida"
-        text="Selecionamos imóveis que contam histórias. Uma coleção exclusiva de espaços pensados para quem busca mais do que morar.">
-    </hero-section>
+    <hero-brand id="home" title="MeuApêTem"></hero-brand>
 
-    <section id="colecao" class="portfolio-section">
-        <div class="section-header">
-            <h2>Nossa Coleção</h2>
-            <p>Empreendimentos selecionados pela arquitetura, localização e potencial de valorização.</p>
-        </div>
+    <marquee-scroll text="TRANSPARÊNCIA RADICAL — CURADORIA EXPERIENCIAL — EMPATIA ATIVA — AUTENTICIDADE — "
+        speed="120s">
+    </marquee-scroll>
 
-        <div class="projects-grid">
+    <manifesto-section id="manifesto" title="Não somos apenas uma imobiliária.<br>Somos o"
+        highlight="Tradutor dos Seus Sonhos."
+        text="Rejeitamos a frieza do mercado tradicional. Ocupamos o espaço entre a funcionalidade e o desejo.">
+    </manifesto-section>
 
-            <a href="projects/quarten.html" class="project-card">
-                <img src="./media/quarten/hero.jpg" alt="Quarten Ibirapuera">
-                <div class="card-content">
-                    <span class="card-tag">The Rare Collection</span>
-                    <h3 class="card-title">Quarten</h3>
-                    <div class="card-location">📍 Vila Clementino, SP</div>
-                </div>
-            </a>
+    <grid-section id="portfolio" title="Curadoria de Espaços" subtitle="Sua História Começa Aqui" bg-color="#0a0a0a">
 
-            <div class="project-card coming-soon">
-                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80"
-                    alt="Em Breve">
-                <div class="card-content">
-                    <span class="card-tag">Lançamento</span>
-                    <h3 class="card-title">Gran Cipresso</h3>
-                    <div class="card-location">📍 Jardins, SP</div>
-                </div>
-            </div>
+        <project-card title="Quarten Ibirapuera" vibe="Refúgio Urbano" tags="Luz Natural, Silence, Wellness"
+            price="R$ 1.2mi" image="./media/quarten/hero.jpg" link="projects/quarten.html">
+        </project-card>
 
-            <div class="project-card coming-soon">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80"
-                    alt="Em Breve">
-                <div class="card-content">
-                    <span class="card-tag">Futuro</span>
-                    <h3 class="card-title">Aurum House</h3>
-                    <div class="card-location">📍 Itaim Bibi, SP</div>
-                </div>
-            </div>
+        <project-card title="Elev Butantã" vibe="Jovem Profissional" tags="Metrô a pé, Home Office" price="R$ 450 mil"
+            image="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&q=80" link="#">
+        </project-card>
 
-        </div>
-    </section>
+        <project-card title="Side Ipiranga" vibe="Primeiro Apê" tags="Integração, Pet Friendly" price="R$ 580 mil"
+            image="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80" link="#">
+        </project-card>
+    </grid-section>
 
-    <marquee-scroll text="Curadoria — Experiência — Transparência — Tecnologia — " speed="50s"></marquee-scroll>
+    <cta-banner title="Quer algo que não está na lista?"
+        text="Atuamos como consultores pessoais. Conte para a gente o que o seu apê tem que ter."
+        btn-text="Falar com Curador" link="https://wa.me/5511SEUNUMERO">
+    </cta-banner>
 
-    <showcase-section id="sobre" highlight="Filosofia" title="Tecnologia <br>& Humano"
-        text="Acreditamos que a tecnologia deve servir para revelar a verdade, não para escondê-la. Nossa plataforma remove ruídos e conecta você diretamente à essência de cada imóvel."
-        button-text="Fale Conosco" button-link="https://wa.me/5511SEUNUMERO">
-        <img slot="gallery" src="./media/utils/lifestyle1.jpg" alt="Lifestyle">
-        <img slot="gallery" src="./media/utils/lifestyle2.jpg" alt="Atendimento">
-    </showcase-section>
+    <footer-section brand="MEUAPÊTEM" broker="CRECI 268.448" root-path="."> </footer-section>
 
-    <footer-section brand="MEUAPÊTEM" address="São Paulo, SP" broker="CRECI 12345-J"
-        copyright="© 2025 MeuApêTem. Todos os direitos reservados.">
-    </footer-section>
+    <floating-actions></floating-actions>
+
+    <contact-popup photo="./media/utils/perfilcrop.png" name="Seu Nome" creci="CRECI 268.448"
+        email="contato@meuapetem.com" phone="11 99999-9999" whatsapp-number="5511999999999">
+    </contact-popup>
+
+    <cookie-banner></cookie-banner>
 
     <custom-cursor></custom-cursor>
 

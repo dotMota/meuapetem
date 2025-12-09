@@ -65,7 +65,11 @@ class TeamMember extends HTMLElement {
 
                 /* DIREITA: IMAGEM */
                 .img-wrapper {
-                    height: 500px; width: 100%;
+                    width: 100%;
+                    /* --- ALTERAÇÃO AQUI: FORÇA QUADRADO --- */
+                    aspect-ratio: 1 / 1; 
+                    height: auto; /* Remove altura fixa para respeitar a proporção */
+                    /* -------------------------------------- */
                     overflow: hidden; position: relative;
                     border: 1px solid rgba(197, 160, 101, 0.2);
                 }
@@ -87,7 +91,8 @@ class TeamMember extends HTMLElement {
 
                 @media (max-width: 768px) {
                     .slide-grid { grid-template-columns: 1fr; gap: 3rem; }
-                    .img-wrapper { height: 350px; order: -1; }
+                    /* Remove altura fixa no mobile também, mantendo quadrado */
+                    .img-wrapper { order: -1; aspect-ratio: 1 / 1; height: auto; }
                     .info-content { padding-right: 0; }
                 }
             </style>

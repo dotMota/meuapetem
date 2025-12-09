@@ -13,12 +13,11 @@ class VideoSection extends HTMLElement {
             <style>
                 :host {
                     display: block;
-                    /* SEMÂNTICA: Usa a cor de fundo global */
                     background: var(--bg-page-body, #000);
                     
-                    position: relative;
-                    height: 80vh;
-                    overflow: hidden;
+                    /* --- AQUI ESTÁ A MUDANÇA (Margens de Segurança) --- */
+                    padding: 6rem 5%; /* Cria o espaço em volta */
+                    height: auto; /* A altura será definida pelo aspecto do vídeo */
                     
                     /* Variáveis Internas */
                     --accent: var(--color-highlight, #c5a065);
@@ -26,8 +25,21 @@ class VideoSection extends HTMLElement {
                 }
 
                 .wrapper {
-                    width: 100%; height: 100%;
                     position: relative;
+                    width: 100%;
+                    
+                    /* --- CONTAINER "PREMIUM" --- */
+                    max-width: 1200px; /* Não deixa esticar demais em telas grandes */
+                    margin: 0 auto;    /* Centraliza */
+                    aspect-ratio: 16 / 9; /* Garante formato de vídeo (sem faixas pretas) */
+                    
+                    /* Acabamento */
+                    border-radius: 20px;
+                    overflow: hidden; /* Corta o conteúdo arredondado */
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+                    background: #000;
+
                     display: flex; align-items: center; justify-content: center;
                 }
 
@@ -38,15 +50,20 @@ class VideoSection extends HTMLElement {
                     z-index: 1; 
                     transition: opacity 0.5s;
                 }
+                
+                /* Efeito de hover na capa */
+                .poster:hover { transform: scale(1.02); transition: transform 0.6s; }
 
                 /* BOTÃO PLAY */
                 .play-btn {
-                    position: absolute; width: 100px; height: 100px;
-                    border: 2px solid #fff; border-radius: 50%;
+                    position: absolute; width: 90px; height: 90px;
+                    border: 1px solid rgba(255,255,255,0.3); 
+                    border-radius: 50%;
                     display: flex; align-items: center; justify-content: center;
                     cursor: pointer; 
                     z-index: 10;
-                    background: rgba(0,0,0,0.3); backdrop-filter: blur(5px);
+                    background: rgba(0,0,0,0.2); 
+                    backdrop-filter: blur(10px);
                     transition: all 0.4s ease;
                 }
                 .play-btn:hover {
@@ -59,17 +76,18 @@ class VideoSection extends HTMLElement {
 
                 /* TÍTULO */
                 .label {
-                    position: absolute; bottom: 3rem; color: #fff;
+                    position: absolute; bottom: 2rem; color: #fff;
                     font-family: var(--font); 
-                    letter-spacing: 4px; text-transform: uppercase;
+                    letter-spacing: 3px; text-transform: uppercase;
                     font-size: 0.9rem; z-index: 10; pointer-events: none;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
                 }
 
                 /* TELA DO VÍDEO */
                 .video-container {
                     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
                     z-index: 5; 
-                    background: var(--bg-page-body, #000); /* Fundo igual ao da página */
+                    background: #000;
                     
                     opacity: 0; 
                     pointer-events: none;

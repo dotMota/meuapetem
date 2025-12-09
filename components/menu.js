@@ -6,184 +6,218 @@ class SiteMenu extends HTMLElement {
     }
 
     connectedCallback() {
-        this.render();
-        this.initEvents();
-    }
-
-    render() {
-        const logo = this.getAttribute('logo') || 'QUARTEN.';
-        const menuLabel = this.getAttribute('label-menu') || 'Menu';
-        const closeLabel = this.getAttribute('label-close') || 'Fechar';
-        const image = this.getAttribute('image') || 'media/boulevart.webp';
+        const logoText = this.getAttribute('logo') || '';
+        const parentText = this.getAttribute('parent-text') || '';
+        const parentLink = this.getAttribute('parent-link') || '';
+        const image = this.getAttribute('image') || null;
 
         this.shadowRoot.innerHTML = `
-            <style>
-                :host {
-                    display: block;
-                    position: fixed;
-                    top: 0; left: 0; width: 100%;
-                    z-index: 9999; /* Z-Index altíssimo para garantir que fique sobre tudo */
-                    
-                    /* Efeito de inversão de cor (apenas quando fechado) */
-                    mix-blend-mode: difference;
-                    color: #fff;
-                    font-family: sans-serif;
-                    --gold: #c5a065;
-                }
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
 
-                /* CORREÇÃO DO BUG: Quando rola OU quando abre, desliga o blend mode */
-                :host(.scrolled),
-                :host(.menu-open) {
-                    mix-blend-mode: normal !important;
-                }
+            * { box-sizing: border-box; margin: 0; padding: 0; }
 
-                /* HEADER (Barra Fixa) */
-                .header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 2rem 3rem;
-                    transition: all 0.4s ease;
-                }
+            :host {
+                position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+                height: 90px;
+                display: block;
+            }
 
-                /* Quando rola a página */
-                :host(.scrolled) .header {
-                    padding: 1.2rem 3rem;
-                    background: rgba(20, 10, 15, 0.95);
-                    backdrop-filter: blur(10px);
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-                }
+            /* --- FUNDO DA BARRA (COR DINÂMICA) --- */
+            .nav-bg {
+                position: absolute; inset: 0;
+                background: transparent;
+                backdrop-filter: blur(0px);
+                border-bottom: 1px solid transparent;
+                transition: all 0.4s ease;
+                z-index: 0;
+            }
 
-                /* Quando o menu está aberto, o header fica transparente para integrar com o overlay */
-                :host(.menu-open) .header {
-                    background: transparent;
-                    border-bottom: none;
-                    box-shadow: none;
-                }
+            :host(.scrolled) .nav-bg {
+                /* AQUI ESTÁ A CORREÇÃO: Usa a variável da marca (Vinho ou Preto) */
+                background: var(--bg-brand-dark, #050505);
+                opacity: 0.95; /* Leve transparência */
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
 
-                .logo {
-                    font-family: serif; font-weight: 700; letter-spacing: 2px;
-                    font-size: 1.2rem; text-decoration: none; color: #fff;
-                    text-transform: uppercase; cursor: pointer;
-                }
+            .nav-container {
+                position: relative; z-index: 1;
+                width: 100%; height: 100%; padding: 0 5%;
+                display: flex; justify-content: space-between; align-items: center;
+                max-width: 100vw;
+            }
 
-                .menu-btn {
-                    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
-                    cursor: pointer; color: #fff; background: none; border: none;
-                    font-family: sans-serif; padding: 10px;
-                }
+            /* Branding */
+            .brand-group { display: flex; align-items: center; gap: 15px; }
 
-                /* OVERLAY (Menu Aberto) */
-                .overlay {
-                    position: fixed;
-                    top: 0; left: 0;
-                    width: 100%; height: 100vh;
-                    background: #1a0b12; /* Fundo Sólido */
-                    z-index: -1; /* Fica atrás do header (que está dentro do host) */
-                    
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    
-                    opacity: 0; visibility: hidden;
-                    transition: opacity 0.5s ease, visibility 0.5s ease;
-                }
+            .brand-main {
+                font-family: var(--font-title, serif);
+                font-size: 1.4rem; font-weight: 700; color: #fff;
+                text-decoration: none; letter-spacing: 1px; white-space: nowrap;
+            }
 
-                .overlay.open { opacity: 1; visibility: visible; }
+            .divider { font-size: 1.4rem; color: rgba(255,255,255,0.3); font-weight: 300; }
 
-                /* Navegação */
-                .nav-col {
-                    display: flex; flex-direction: column; justify-content: center;
-                    padding-left: 10vw; position: relative;
-                }
+            .brand-parent {
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: 1.1rem; font-weight: 700; 
+                color: var(--highlight-color, #FF6F61);
+                text-decoration: none; transition: opacity 0.3s; white-space: nowrap;
+            }
+            .brand-parent:hover { opacity: 0.8; }
 
-                .close-btn {
-                    position: absolute; top: 2rem; right: 4rem;
-                    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
-                    cursor: pointer; color: #fff; background: none; border: none; z-index: 10;
-                }
+            /* Botão Menu */
+            .menu-btn {
+                background: transparent;
+                border: 1px solid rgba(255,255,255,0.3);
+                color: #fff;
+                padding: 10px 25px;
+                border-radius: 50px;
+                font-family: var(--font-text, sans-serif);
+                font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
+                cursor: pointer; transition: all 0.3s ease; font-weight: 600;
+            }
+            .menu-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
-                /* Imagem Lateral */
-                .visual-col {
-                    position: relative; height: 100%; overflow: hidden;
-                    border-left: 1px solid rgba(255, 255, 255, 0.05);
-                }
-                .menu-img {
-                    width: 100%; height: 100%; object-fit: cover;
-                    opacity: 0; transform: scale(1.1);
-                    transition: opacity 1s ease, transform 1.5s ease;
-                }
-                .overlay.open .menu-img { opacity: 1; transform: scale(1); }
+            /* --- OVERLAY (MENU ABERTO) --- */
+            .overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+                /* Fundo também usa a cor da marca */
+                background: var(--bg-brand-dark, #050505);
+                z-index: -1;
+                padding-top: 90px;
+                
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                
+                opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity 0.4s ease, visibility 0.4s;
+                
+                overflow-x: hidden;
+                overflow-y: auto; /* Permite rolar se necessário */
+                
+                /* Esconde a barra de rolagem visualmente, mas mantém a função */
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none;  /* IE/Edge */
+            }
+            .overlay::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
 
-                /* Links */
-                ::slotted(a) {
-                    font-family: serif; font-size: clamp(2rem, 3.5vw, 4rem);
-                    color: rgba(255, 255, 255, 0.3); text-decoration: none;
-                    transition: color 0.4s, transform 0.3s; cursor: pointer;
-                    display: block; margin-bottom: 1.5rem;
-                }
-                ::slotted(a:hover) { color: #fff; transform: translateX(10px); }
+            .overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
 
-                @media (max-width: 768px) {
-                    .header { padding: 1.5rem; }
-                    .overlay { grid-template-columns: 1fr; }
-                    .visual-col { display: none; }
-                    .nav-col { padding-left: 2rem; align-items: flex-start; }
-                    .close-btn { right: 1.5rem; top: 1.5rem; }
-                }
-            </style>
+            /* Conteúdo */
+            .menu-content {
+                display: flex; flex-direction: column; 
+                justify-content: center; align-items: flex-start;
+                padding-left: 10%; width: 100%;
+                transform: translateY(20px); transition: transform 0.5s ease;
+            }
+            .overlay.active .menu-content { transform: translateY(0); }
 
-            <header class="header">
-                <a class="logo" href="#home">${logo}</a>
-                <button class="menu-btn" id="openBtn">${menuLabel}</button>
-            </header>
+            /* Imagem */
+            .menu-image-wrapper {
+                height: 100%; width: 100%;
+                position: relative; overflow: hidden;
+                border-left: 1px solid rgba(255,255,255,0.1);
+                transform: translateX(50px); opacity: 0;
+                transition: all 0.6s ease 0.1s;
+            }
+            .overlay.active .menu-image-wrapper { transform: translateX(0); opacity: 1; }
 
-            <div class="overlay" id="menuOverlay">
-                <div class="nav-col">
-                    <button class="close-btn" id="closeBtn">${closeLabel}</button>
-                    <nav id="navLinks"><slot name="links"></slot></nav>
-                </div>
-                <div class="visual-col">
-                    <img src="${image}" class="menu-img" alt="Menu Decor">
-                </div>
+            .menu-img-full {
+                width: 100%; height: 100%; object-fit: cover;
+                filter: brightness(0.6) contrast(1.1);
+            }
+
+            /* Links */
+            .back-link {
+                display: inline-flex; align-items: center; gap: 10px;
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: 1rem; color: var(--highlight-color, #FF6F61);
+                text-decoration: none; margin-bottom: 2rem;
+                padding: 8px 20px; border: 1px solid currentColor; border-radius: 50px;
+                transition: all 0.3s;
+            }
+            .back-link:hover { background: var(--highlight-color); color: #000; }
+
+            ::slotted(a) {
+                font-family: var(--font-title); font-size: 3rem; color: rgba(255,255,255,0.4);
+                text-decoration: none; margin: 0; transition: color 0.3s, transform 0.3s;
+                display: block; line-height: 1.2;
+            }
+            ::slotted(a:hover) { color: #fff; transform: translateX(10px); }
+
+            @media (max-width: 900px) {
+                .overlay { grid-template-columns: 1fr; }
+                .menu-image-wrapper { display: none; }
+                .menu-content { align-items: center; padding-left: 0; padding-bottom: 50px; }
+                ::slotted(a) { font-size: 2rem; text-align: center; }
+                .brand-parent, .divider { display: none; }
+            }
+        </style>
+
+        <div class="nav-bg"></div>
+        
+        <div class="nav-container">
+            <div class="brand-group">
+                <a href="#" class="brand-main">${logoText}</a>
+                ${parentText ? `
+                    <span class="divider">/</span>
+                    <a href="${parentLink}" class="brand-parent">${parentText}</a>
+                ` : ''}
             </div>
-        `;
-    }
+            <button class="menu-btn" id="toggleBtn">Menu</button>
+        </div>
 
-    initEvents() {
-        const overlay = this.shadowRoot.getElementById('menuOverlay');
-        const openBtn = this.shadowRoot.getElementById('openBtn');
-        const closeBtn = this.shadowRoot.getElementById('closeBtn');
-        const linksSlot = this.shadowRoot.querySelector('slot[name="links"]');
+        <div class="overlay" id="overlay">
+            <div class="menu-content">
+                ${parentLink ? `<a href="${parentLink}" class="back-link">← Voltar para Coleção</a>` : ''}
+                <slot name="links"></slot>
+            </div>
+            <div class="menu-image-wrapper">
+                ${image ? `<img src="${image}" class="menu-img-full" alt="Menu Visual">` : ''}
+            </div>
+        </div>
+        `;
+
+        const btn = this.shadowRoot.getElementById('toggleBtn');
+        const overlay = this.shadowRoot.getElementById('overlay');
 
         const toggleMenu = () => {
             this.isOpen = !this.isOpen;
-            
             if (this.isOpen) {
-                overlay.classList.add('open');
-                this.classList.add('menu-open'); // Adiciona classe no PAI para desligar o blend-mode
+                overlay.classList.add('active');
+                btn.textContent = 'Fechar';
+                btn.style.background = '#fff';
+                btn.style.color = '#000';
+
+                // Trava Rolagem
+                document.documentElement.style.overflow = 'hidden';
                 document.body.style.overflow = 'hidden';
             } else {
-                overlay.classList.remove('open');
-                this.classList.remove('menu-open'); // Remove classe
+                overlay.classList.remove('active');
+                btn.textContent = 'Menu';
+                btn.style.background = '';
+                btn.style.color = '';
+
+                // Libera Rolagem
+                document.documentElement.style.overflow = '';
                 document.body.style.overflow = '';
             }
         };
 
-        openBtn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
+        btn.addEventListener('click', toggleMenu);
 
-        // Fecha ao clicar num link
-        linksSlot.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') toggleMenu();
+        this.shadowRoot.querySelector('slot').assignedElements().forEach(link => {
+            link.addEventListener('click', () => {
+                if (this.isOpen) toggleMenu();
+            });
         });
 
-        // Scroll Effect
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) this.classList.add('scrolled');
+            if (window.scrollY > 20) this.classList.add('scrolled');
             else this.classList.remove('scrolled');
         });
     }
 }
-
 customElements.define('site-menu', SiteMenu);

@@ -4,51 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quarten Ibirapuera | The Rare Collection</title>
 
+    <title>Quarten Ibirapuera | The Rare Collection</title>
     <meta name="description"
         content="Um quarteirão inteiro de natureza desenhado para redefinir o privilégio de viver no Ibirapuera.">
-    <meta name="robots" content="index, follow">
 
     <link rel="icon" type="image/png" href="../media/favicon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Manrope:wght@200;300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Manrope:wght@200;300;400;500&family=Space+Grotesk:wght@400;500&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- CONFIGURAÇÃO DO TEMA (Váriaveis) --- */
+        /* --- TEMA ESPECÍFICO DO PROJETO (GOLD/WINE) --- */
+        /* Mantemos a identidade visual do produto, mas usamos a estrutura da marca */
         :root {
-            /* Paleta de Cores do Projeto */
+            /* Cores do Quarten (Luxo) */
             --color-highlight: #c5a065;
-            /* Dourado Principal */
+            /* Dourado Nobre */
             --color-text-primary: #e0d6cc;
-            /* Texto Claro */
+            /* Off-white */
             --color-text-secondary: #a89f96;
-            /* Texto Secundário */
+            /* Bege Escuro */
 
             /* Fundos */
             --bg-page-body: #050505;
-            /* Fundo da Página */
             --bg-section-main: #0f0f0f;
-            /* Fundo de Seções */
             --bg-brand-dark: #1a0b12;
-            /* Tom Vinho Escuro */
+            /* Toque Vinho Profundo */
             --bg-cta-gradient: linear-gradient(to bottom, #0f0f0f, #261019);
 
-            /* Mapeamento para os Componentes (Não alterar os nomes à esquerda) */
+            /* Tipografia */
             --font-title: 'Cinzel', serif;
+            /* Identidade do Prédio */
             --font-text: 'Manrope', sans-serif;
 
+            /* --- MAPEAMENTO PARA COMPONENTES --- */
             --highlight-color: var(--color-highlight);
-            --text-color: var(--color-text-secondary);
             --bg-color: var(--bg-section-main);
-            --stroke-color: rgba(197, 160, 101, 0.2);
+            --text-color: var(--color-text-secondary);
             --bg-gradient: var(--bg-cta-gradient);
         }
 
-        /* Reset Básico */
         body,
         html {
             margin: 0;
@@ -74,9 +74,9 @@
     <script src="../components/cta.js" defer></script>
     <script src="../components/trust.js" defer></script>
     <script src="../components/footer.js" defer></script>
+    <script src="../components/curator-review.js" defer></script>
     <script src="../components/floating.js" defer></script>
     <script src="../components/contact.js" defer></script>
-    <script src="../components/lightbox.js" defer></script>
     <script src="../components/cookie.js" defer></script>
     <script src="../components/cursor.js" defer></script>
 
@@ -90,18 +90,17 @@
 
 <body>
 
-    <site-menu logo="QUARTEN." image="../media/quarten/boulevart.webp" label-menu="Menu" label-close="Close">
-        <a slot="links" href="#home">The Rare</a>
-        <a slot="links" href="#legacy">O Legado</a>
-        <a slot="links" href="#video-tour">Experience</a>
-        <a slot="links" href="#resort">Private Resort</a>
-        <a slot="links" href="#plans">Residências</a>
-        <a slot="links" href="#location">O Endereço</a>
-        <a slot="links" onclick="openPopup(event)">Atendimento</a>
+    <site-menu logo="QUARTEN." image="../media/quarten/boulevart.webp" parent-text="MeuApêTem"
+        parent-link="../index.html">
+
+        <a slot="links" href="#home">O Projeto</a>
+        <a slot="links" href="#plans">Plantas</a>
+        <a slot="links" href="#location">Endereço</a>
+        <a slot="links" onclick="openPopup(event)">Agendar Visita</a>
     </site-menu>
 
     <hero-section id="home" image="../media/quarten/hero.jpg" highlight="The Rare Collection"
-        subtitle="CONCRETO E NATUREZA." title="Quarten"
+        subtitle="CONCRETO E NATUREZA." title="Quarten" curator-badge="true"
         text="Um quarteirão inteiro de natureza desenhado para redefinir o privilégio de viver no Ibirapuera.">
     </hero-section>
 
@@ -173,25 +172,30 @@
         title="O Endereço" text="No epicentro do que realmente importa. <br>O Ibirapuera aos seus pés.">
     </region-section>
 
+    <curator-review curator="Mota"
+        phrases='["Uma Floresta Particular", "Silêncio em SP", "Design de Autor", "Alma de Casa"]'
+        pros="A sensação de estar fora de São Paulo é real. O bosque privativo de 6.000m² não é marketing, é um ecossistema próprio que muda a temperatura do ambiente."
+        cons="É um produto de nicho. Se você busca agitação na porta de casa, este refúgio pode parecer calmo demais. O valor de condomínio reflete a manutenção da extensa área verde.">
+    </curator-review>
+
     <cta-section highlight="Atendimento Exclusivo" title="Agende Sua Visita"
         text="O luxo de viver aqui começa no atendimento. <br>Agende uma visita privada."
         button-text="Solicitar Apresentação">
     </cta-section>
 
-    <trust-section style="--bg-color: var(--bg-brand-darker);">
+    <trust-section style="--bg-color: var(--bg-brand-dark);">
         <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
         <trust-item slot="items" title="Vendas" img="../media/utils/bm.svg" alt="BM Realty"></trust-item>
     </trust-section>
 
-    <footer-section style="--bg-color: var(--bg-brand-darker);" brand="QUARTEN"
-        address="Av. Dr. Altino Arantes, 1297 - Vila Clementino - SP" broker="CORRETOR MOTA - CRECI 315675"
-        copyright="© 2024 Quarten Ibirapuera. Todos os direitos reservados.">
+    <footer-section project="QUARTEN" broker="CORRETOR MOTA - CRECI 268.448" root-path="..">
     </footer-section>
-
     <floating-actions></floating-actions>
-    <contact-popup photo="../media/utils/perfilcrop.png" name="Mota" creci="Trisul Vendas - CRECI 315675"
-        email="contato@exemplo.com" phone="11 95301-6045" whatsapp-number="5511953016045">
+
+    <contact-popup photo="../media/utils/perfilcrop.png" name="Mota" creci="CRECI 268.448" email="contato@meuapetem.com"
+        phone="11 95301-6045" whatsapp-number="5511953016045">
     </contact-popup>
+
     <lightbox-viewer></lightbox-viewer>
     <cookie-banner></cookie-banner>
     <custom-cursor></custom-cursor>
