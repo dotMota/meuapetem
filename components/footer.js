@@ -7,7 +7,8 @@ class FooterSection extends HTMLElement {
     connectedCallback() {
         const parentBrand = 'MeuApêTem';
         const project = this.getAttribute('project') || '';
-        const creci = this.getAttribute('broker') || 'CRECI 268.448';
+        // CRECI CENTRALIZADO AQUI
+        const creci = this.getAttribute('broker') || 'CRECI 315675';
         const rootPath = this.getAttribute('root-path') || '.';
 
         this.shadowRoot.innerHTML = `

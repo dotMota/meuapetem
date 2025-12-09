@@ -1,43 +1,62 @@
 class ContactPopup extends HTMLElement {
-    constructor() { super(); this.attachShadow({ mode: 'open' }); this.currentMessage = ''; }
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.masterNumber = "5511957800534"; // Número mestre
+        this.currentMessage = '';
+    }
 
     connectedCallback() {
         this.render();
         this.addEvents();
 
-        // OUVINTE ATUALIZADO: Agora aceita "detail" com a mensagem
         window.addEventListener('open-contact-popup', (e) => {
-            // Se vier mensagem personalizada, usa. Se não, usa padrão.
-            this.currentMessage = e.detail && e.detail.message
-                ? e.detail.message
-                : "Olá, visitei o site MeuApêTem e gostaria de mais informações.";
-
-            this.updateLinks(); // Atualiza os links antes de abrir
+            const data = e.detail || {};
+            this.currentMessage = this.generateMessage(data);
+            this.updateLinks();
             this.open();
         });
+    }
+
+    generateMessage(data) {
+        if (data.message) return data.message;
+
+        const persona = localStorage.getItem('site-persona');
+        const project = data.project || 'MeuApêTem';
+
+        let profileText = "";
+        if (project.toLowerCase().includes("elev")) {
+            profileText = persona === 'investor' ? " para investimento" : " para moradia";
+        }
+
+        switch (data.type) {
+            case 'plan':
+                return `Olá! Estou vendo o projeto *${project}*${profileText}. Gostei da planta *${data.title}* e gostaria de receber o Book Digital.`;
+            case 'cta':
+                return `Olá! Estou vendo o projeto *${project}*${profileText}. Gostaria de ${data.action || 'mais informações'}.`;
+            case 'consultancy':
+                return "Olá! Estou navegando no site MeuApêTem e gostaria de uma consultoria para encontrar o imóvel ideal.";
+            default:
+                return "Olá! Gostaria de saber mais sobre os imóveis da MeuApêTem.";
+        }
     }
 
     open() { this.shadowRoot.getElementById('overlay').classList.add('active'); document.body.style.overflow = 'hidden'; this.resetView(); }
     close() { this.shadowRoot.getElementById('overlay').classList.remove('active'); document.body.style.overflow = ''; }
 
-    // NOVA FUNÇÃO: Atualiza os links do WhatsApp com a mensagem dinâmica
     updateLinks() {
-        const waNumber = this.getAttribute('whatsapp-number') || '';
         const encodedMsg = encodeURIComponent(this.currentMessage);
-        const fullUrl = `https://wa.me/${waNumber}?text=${encodedMsg}`;
+        const fullUrl = `https://wa.me/${this.masterNumber}?text=${encodedMsg}`;
 
-        // Atualiza botão mobile/desktop
         const btnWa = this.shadowRoot.getElementById('triggerWa');
         if (btnWa) btnWa.onclick = () => {
             if (window.innerWidth <= 768) { window.open(fullUrl, '_blank'); }
             else { this.toggleQrView(); }
         };
 
-        // Atualiza link do QR Code (Web)
         const linkWeb = this.shadowRoot.getElementById('linkWeb');
         if (linkWeb) linkWeb.href = fullUrl;
 
-        // Atualiza a imagem do QR Code
         const qrImg = this.shadowRoot.getElementById('qrImg');
         if (qrImg) qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${fullUrl}`;
     }
@@ -46,11 +65,13 @@ class ContactPopup extends HTMLElement {
     resetView() { this.shadowRoot.getElementById('actionsContainer').classList.remove('show-qr'); }
 
     render() {
-        const photo = this.getAttribute('photo') || '';
-        const name = this.getAttribute('name') || 'Corretor';
-        const creci = this.getAttribute('creci') || '';
-        const email = this.getAttribute('email') || '';
-        const phone = this.getAttribute('phone') || '';
+        // --- DADOS PADRÃO CENTRALIZADOS AQUI ---
+        // Se o HTML não tiver atributo, usa estes valores:
+        const photo = this.getAttribute('photo') || '../media/utils/logo-perfil.svg'; // Caminho relativo padrão
+        const name = this.getAttribute('name') || 'MeuApêTem';
+        const creci = this.getAttribute('creci') || 'CRECI 315675'; // SEU NOVO CRECI
+        const email = this.getAttribute('email') || 'meuapetem@gmail.com';
+        const phone = this.getAttribute('phone') || '11 95780-0534';
         const phoneClean = phone.replace(/\D/g, '');
 
         this.shadowRoot.innerHTML = `
