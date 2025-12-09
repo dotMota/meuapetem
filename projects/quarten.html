@@ -81,18 +81,6 @@
     <script src="../components/cookie.js" defer></script>
     <script src="../components/cursor.js" defer></script>
 
-    <script>
-        function openPopup(e, customMsg) {
-            if (e) e.preventDefault();
-
-            // Mensagem natural para o Quarten
-            const msg = customMsg || "Olá! Fiquei encantado com o *Quarten Ibirapuera*. Gostaria de receber o Book Digital e agendar uma visita para conhecer os detalhes.";
-
-            window.dispatchEvent(new CustomEvent('open-contact-popup', {
-                detail: { message: msg }
-            }));
-        }
-    </script>
 </head>
 
 <body>

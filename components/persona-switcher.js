@@ -2,133 +2,190 @@ class PersonaSwitcher extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        console.log('🔧 Persona Switcher: Iniciado!'); // Debug
+        this.pageData = null; // Armazena os dados do projeto
     }
 
     connectedCallback() {
-        // Tenta ler os modos, se der erro no JSON, usa o padrão
-        let modesData;
-        try {
-            const rawModes = this.getAttribute('modes');
-            if (rawModes) modesData = JSON.parse(rawModes);
-        } catch (e) {
-            console.error('Erro ao ler atributo "modes":', e);
-        }
-
-        // Fallback (Padrão se nada for passado)
-        this.modes = modesData || [
-            { key: 'resident', label: 'Vou Morar' },
-            { key: 'investor', label: 'Vou Investir' }
-        ];
-
-        this.current = localStorage.getItem('site-persona') || this.modes[0].key;
         this.render();
-
-        // Pequeno delay para garantir que a página ouça o evento
-        setTimeout(() => this.dispatchChange(this.current), 100);
+        this.initLogic();
     }
 
-    render() {
-        this.shadowRoot.innerHTML = `
-            <style>
-                :host {
-                    position: fixed;
-                    /* Posição segura para Desktop */
-                    top: 120px; 
-                    right: 20px; 
-                    z-index: 10001; /* Z-Index altíssimo para ficar acima do Menu */
-                    font-family: sans-serif;
-                    display: block; /* Garante que o elemento tenha corpo */
-                }
+    // --- MÉTODO PÚBLICO: Recebe os dados do HTML ---
+    setProjectData(data) {
+        this.pageData = data;
 
-                .switcher-container {
-                    background: rgba(10, 10, 10, 0.95); /* Fundo mais sólido */
-                    backdrop-filter: blur(12px);
-                    padding: 5px;
-                    border-radius: 50px;
-                    border: 1px solid rgba(255,255,255,0.2);
-                    display: flex;
-                    gap: 5px;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-                    transition: transform 0.3s ease;
-                }
-                
-                :host(:hover) .switcher-container { transform: scale(1.02); }
+        // Carrega o estado salvo ou usa o padrão
+        const saved = localStorage.getItem('site-persona') || 'resident';
+        this.switchPersona(saved);
+    }
 
-                button {
-                    background: transparent;
-                    border: none;
-                    color: #999;
-                    padding: 10px 20px;
-                    border-radius: 40px;
-                    cursor: pointer;
-                    font-weight: 700;
-                    font-size: 0.75rem;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    transition: all 0.3s ease;
-                    white-space: nowrap;
-                }
+    switchPersona(mode) {
+        // 1. Salva preferência
+        localStorage.setItem('site-persona', mode);
 
-                button:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        // 2. Atualiza visual dos botões
+        this.shadowRoot.querySelectorAll('.btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.mode === mode);
+        });
 
-                /* Botão Ativo */
-                button.active {
-                    color: #000;
-                    background: var(--highlight-color, #FFD700); /* Amarelo Padrão */
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-                }
+        // 3. Dispara evento (para quem mais estiver ouvindo, ex: Analytics)
+        window.dispatchEvent(new CustomEvent('persona-changed', { detail: { mode } }));
 
-                /* Mobile: Fica embaixo */
-                @media(max-width: 768px) {
-                    :host { 
-                        top: auto; 
-                        bottom: 30px; 
-                        right: 50%; 
-                        transform: translateX(50%); 
-                        width: max-content; 
-                    }
-                    .switcher-container { padding: 4px; }
-                    button { padding: 12px 24px; font-size: 0.7rem; }
-                }
-            </style>
+        // 4. ATUALIZA A PÁGINA (A Mágica acontece aqui)
+        if (this.pageData && this.pageData[mode]) {
+            this.updatePageContent(this.pageData[mode]);
+        }
+    }
 
-            <div class="switcher-container">
-                ${this.modes.map(mode => `
-                    <button 
-                        class="${mode.key === this.current ? 'active' : ''}" 
-                        id="btn-${mode.key}"
-                    >
-                        ${mode.label}
-                    </button>
-                `).join('')}
-            </div>
-        `;
+    updatePageContent(d) {
+        const root = document.documentElement;
 
-        this.modes.forEach(mode => {
-            const btn = this.shadowRoot.getElementById(`btn-${mode.key}`);
-            if (btn) btn.addEventListener('click', () => this.switchMode(mode.key));
+        // A. Atualiza Cores (CSS Variables)
+        if (d.colors) {
+            root.style.setProperty('--color-highlight', d.colors.highlight);
+            root.style.setProperty('--bg-section-main', d.colors.bgMain);
+            root.style.setProperty('--bg-brand-dark', d.colors.bgDark);
+            root.style.setProperty('--color-text-secondary', d.colors.textSec);
+        }
+
+        // B. Atualiza Componentes (Hero, Showcase, etc)
+        this.refreshElement('home', d.hero);
+
+        if (d.showcase) {
+            this.refreshElement('concept', {
+                highlight: d.showcase.highlight,
+                title: d.showcase.title,
+                text: d.showcase.text,
+                'button-text': d.showcase.btn
+            });
+        }
+
+        if (d.region) {
+            this.refreshElement('location', {
+                highlight: d.region.highlight,
+                title: d.region.title,
+                text: d.region.text
+            });
+        }
+
+        if (d.amenities) {
+            this.refreshElement('amenities', {
+                subtitle: d.amenities.subtitle,
+                title: d.amenities.title
+            });
+        }
+
+        if (d.review) this.refreshElement('review', d.review);
+
+        if (d.cta) {
+            this.refreshElement('schedule', {
+                highlight: d.cta.highlight,
+                title: d.cta.title,
+                text: d.cta.text,
+                'button-text': d.cta.btn
+            });
+        }
+
+        // C. Marquee (Requer reinício da animação)
+        const marquee = document.getElementById('marquee');
+        if (marquee && d.marquee) {
+            marquee.setAttribute('text', d.marquee);
+            // Truque para reiniciar CSS animation
+            const newMarquee = marquee.cloneNode(true);
+            marquee.parentNode.replaceChild(newMarquee, marquee);
+        }
+
+        // D. Stats (Lista)
+        if (d.stats) {
+            d.stats.forEach(stat => this.refreshElement(stat.id, { number: stat.n, label: stat.l }));
+        }
+
+        // E. Plantas (Lista)
+        if (d.plans) {
+            d.plans.forEach(plan => {
+                this.refreshElement(plan.id, {
+                    desc: plan.d,
+                    'extra-label': plan.l,
+                    'extra-val': plan.v
+                });
+            });
+        }
+
+        // F. Botão do Menu
+        const menuBtn = document.getElementById('menu-cta');
+        if (menuBtn && d.menuBtn) menuBtn.innerText = d.menuBtn;
+    }
+
+    // Utilitário para atualizar Web Components sem recriar se não precisar
+    refreshElement(id, attributes) {
+        const oldEl = document.getElementById(id);
+        if (!oldEl) return;
+
+        // Atualiza atributos
+        for (const [key, value] of Object.entries(attributes)) {
+            oldEl.setAttribute(key, value);
+        }
+
+        // Força re-render clonando o nó (necessário para alguns componentes redesenharem)
+        const newEl = oldEl.cloneNode(true);
+        oldEl.parentNode.replaceChild(newEl, oldEl);
+    }
+
+    initLogic() {
+        const btns = this.shadowRoot.querySelectorAll('.btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.switchPersona(btn.dataset.mode);
+            });
         });
     }
 
-    switchMode(key) {
-        this.current = key;
-        localStorage.setItem('site-persona', key);
+    render() {
+        // Pega a configuração dos botões do atributo HTML ou usa padrão
+        const modes = JSON.parse(this.getAttribute('modes') || '[{"key":"resident","label":"Morar"},{"key":"investor","label":"Investir"}]');
 
-        this.shadowRoot.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-        const activeBtn = this.shadowRoot.getElementById(`btn-${key}`);
-        if (activeBtn) activeBtn.classList.add('active');
+        const buttonsHtml = modes.map(m =>
+            `<button class="btn" data-mode="${m.key}">${m.label}</button>`
+        ).join('');
 
-        this.dispatchChange(key);
-    }
+        this.shadowRoot.innerHTML = `
+            <style>
+                :host {
+                    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+                    z-index: 9990;
+                    background: rgba(20, 20, 20, 0.9);
+                    backdrop-filter: blur(10px);
+                    padding: 5px;
+                    border-radius: 50px;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    display: flex; gap: 0;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                }
+                .btn {
+                    background: transparent; border: none;
+                    color: #888;
+                    font-family: var(--font-text, sans-serif);
+                    font-size: 0.85rem; font-weight: 600;
+                    padding: 12px 24px;
+                    border-radius: 40px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    white-space: nowrap;
+                }
+                .btn.active {
+                    background: var(--color-highlight, #fff);
+                    color: #000;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                }
+                .btn:hover:not(.active) { color: #fff; }
 
-    dispatchChange(key) {
-        // Dispara evento para a página ouvir
-        this.dispatchEvent(new CustomEvent('persona-changed', {
-            detail: { mode: key },
-            bubbles: true,
-            composed: true
-        }));
+                @media (max-width: 768px) {
+                    :host { bottom: 1.5rem; width: auto; max-width: 90%; }
+                    .btn { padding: 10px 20px; font-size: 0.8rem; }
+                }
+            </style>
+            ${buttonsHtml}
+        `;
     }
 }
 customElements.define('persona-switcher', PersonaSwitcher);
