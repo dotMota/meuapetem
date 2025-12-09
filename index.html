@@ -74,11 +74,11 @@
 </head>
 
 <body>
-
-    <site-menu logo="MEUAPÊTEM" image="./media/utils/logo-brand.png"> <a slot="links" href="#home">Início</a>
-        <a slot="links" href="#portfolio">Coleção</a>
+    <site-menu logo="MEUAPÊTEM" image="./media/utils/logo-brand.png">
+        <a slot="links" href="#home">Início</a>
         <a slot="links" href="#manifesto">Manifesto</a>
-        <a slot="links" onclick="openPopup(event)">Contato</a>
+        <a slot="links" href="#portfolio">Coleção</a>
+        <a slot="links" href="#schedule" class="auto-trigger">Falar com Curador</a>
     </site-menu>
 
     <hero-brand id="home" title="MeuApêTem"></hero-brand>
@@ -94,22 +94,22 @@
 
     <grid-section id="portfolio" title="Curadoria de Espaços" subtitle="Sua História Começa Aqui" bg-color="#0a0a0a">
 
-        <project-card title="Quarten Ibirapuera" vibe="Refúgio Urbano" tags="Luz Natural, Silence, Wellness"
-            price="R$ 1.2mi" image="./media/quarten/hero.jpg" link="projects/quarten.html">
+        <project-card title="Quarten Ibirapuera" vibe="Refúgio Urbano" tags="Luz Natural, Silence, Wellness" price=""
+            image=" ./media/quarten/boulevart.webp" link="projects/quarten.html">
         </project-card>
 
-        <project-card title="Elev Butantã" vibe="Jovem Profissional" tags="Metrô a pé, Home Office" price="R$ 450 mil"
-            image="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&q=80" link="#">
+        <project-card title="Elev Butantã" vibe="Jovem Profissional" tags="Metrô a pé, Home Office" price=""
+            image="../media/ElevButanta/areaLazer.webp" link="projects/elevButanta.html">
         </project-card>
 
-        <project-card title="Side Ipiranga" vibe="Primeiro Apê" tags="Integração, Pet Friendly" price="R$ 580 mil"
+        <project-card title="Side Ipiranga" vibe="Primeiro Apê" tags="Integração, Pet Friendly" price=""
             image="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80" link="#">
         </project-card>
     </grid-section>
 
-    <cta-banner title="Quer algo que não está na lista?"
+    <cta-banner id="schedule" title="Quer algo que não está na lista?"
         text="Atuamos como consultores pessoais. Conte para a gente o que o seu apê tem que ter."
-        btn-text="Falar com Curador" link="https://wa.me/5511SEUNUMERO">
+        btn-text="Falar com Curador" link="#">
     </cta-banner>
 
     <footer-section brand="MEUAPÊTEM" broker="CRECI 268.448" root-path="."> </footer-section>

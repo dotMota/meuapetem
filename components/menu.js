@@ -3,6 +3,7 @@ class SiteMenu extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.isOpen = false;
+        this.scrollHandler = null;
     }
 
     connectedCallback() {
@@ -23,7 +24,6 @@ class SiteMenu extends HTMLElement {
                 display: block;
             }
 
-            /* --- FUNDO DA BARRA (COR DINÂMICA) --- */
             .nav-bg {
                 position: absolute; inset: 0;
                 background: transparent;
@@ -34,9 +34,8 @@ class SiteMenu extends HTMLElement {
             }
 
             :host(.scrolled) .nav-bg {
-                /* AQUI ESTÁ A CORREÇÃO: Usa a variável da marca (Vinho ou Preto) */
                 background: var(--bg-brand-dark, #050505);
-                opacity: 0.95; /* Leve transparência */
+                opacity: 0.95; 
                 backdrop-filter: blur(10px);
                 border-bottom: 1px solid rgba(255,255,255,0.1);
             }
@@ -48,7 +47,6 @@ class SiteMenu extends HTMLElement {
                 max-width: 100vw;
             }
 
-            /* Branding */
             .brand-group { display: flex; align-items: center; gap: 15px; }
 
             .brand-main {
@@ -67,7 +65,44 @@ class SiteMenu extends HTMLElement {
             }
             .brand-parent:hover { opacity: 0.8; }
 
-            /* Botão Menu */
+            .desktop-links {
+                display: none;
+                gap: 2rem;
+                align-items: center;
+            }
+            
+            .desktop-links a {
+                color: rgba(255,255,255,0.7);
+                text-decoration: none;
+                font-family: var(--font-text, sans-serif);
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                position: relative;
+                padding: 5px 0;
+            }
+            
+            .desktop-links a:hover {
+                color: var(--highlight-color, #fff);
+                transform: translateY(-2px);
+            }
+
+            .desktop-links a.active {
+                color: var(--highlight-color, #FF6F61);
+                font-weight: 700;
+            }
+            
+            .desktop-links a::after {
+                content: ''; position: absolute; bottom: 0; left: 0; 
+                width: 0%; height: 2px; 
+                background: var(--highlight-color, #FF6F61);
+                transition: width 0.3s ease;
+            }
+            .desktop-links a.active::after { width: 100%; }
+
             .menu-btn {
                 background: transparent;
                 border: 1px solid rgba(255,255,255,0.3);
@@ -77,35 +112,26 @@ class SiteMenu extends HTMLElement {
                 font-family: var(--font-text, sans-serif);
                 font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
                 cursor: pointer; transition: all 0.3s ease; font-weight: 600;
+                display: block;
             }
             .menu-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
-            /* --- OVERLAY (MENU ABERTO) --- */
+            @media (min-width: 1024px) {
+                .menu-btn { display: none; }
+                .desktop-links { display: flex; }
+            }
+
             .overlay {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-                /* Fundo também usa a cor da marca */
                 background: var(--bg-brand-dark, #050505);
-                z-index: -1;
-                padding-top: 90px;
-                
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                
+                z-index: -1; padding-top: 90px;
+                display: grid; grid-template-columns: 1fr 1fr;
                 opacity: 0; visibility: hidden; pointer-events: none;
                 transition: opacity 0.4s ease, visibility 0.4s;
-                
-                overflow-x: hidden;
-                overflow-y: auto; /* Permite rolar se necessário */
-                
-                /* Esconde a barra de rolagem visualmente, mas mantém a função */
-                scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none;  /* IE/Edge */
+                overflow-x: hidden; overflow-y: auto;
             }
-            .overlay::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
-
             .overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
 
-            /* Conteúdo */
             .menu-content {
                 display: flex; flex-direction: column; 
                 justify-content: center; align-items: flex-start;
@@ -114,7 +140,6 @@ class SiteMenu extends HTMLElement {
             }
             .overlay.active .menu-content { transform: translateY(0); }
 
-            /* Imagem */
             .menu-image-wrapper {
                 height: 100%; width: 100%;
                 position: relative; overflow: hidden;
@@ -129,7 +154,18 @@ class SiteMenu extends HTMLElement {
                 filter: brightness(0.6) contrast(1.1);
             }
 
-            /* Links */
+            ::slotted(a) {
+                font-family: var(--font-title, serif); font-size: 3rem; color: rgba(255,255,255,0.4);
+                text-decoration: none; margin: 0; transition: color 0.3s, transform 0.3s;
+                display: block; line-height: 1.2;
+            }
+            
+            ::slotted(a.active) {
+                color: var(--highlight-color, #FF6F61) !important;
+                padding-left: 20px; border-left: 2px solid var(--highlight-color, #FF6F61);
+            }
+            ::slotted(a:hover) { color: #fff; transform: translateX(10px); }
+            
             .back-link {
                 display: inline-flex; align-items: center; gap: 10px;
                 font-family: 'Space Grotesk', sans-serif;
@@ -138,20 +174,13 @@ class SiteMenu extends HTMLElement {
                 padding: 8px 20px; border: 1px solid currentColor; border-radius: 50px;
                 transition: all 0.3s;
             }
-            .back-link:hover { background: var(--highlight-color); color: #000; }
-
-            ::slotted(a) {
-                font-family: var(--font-title); font-size: 3rem; color: rgba(255,255,255,0.4);
-                text-decoration: none; margin: 0; transition: color 0.3s, transform 0.3s;
-                display: block; line-height: 1.2;
-            }
-            ::slotted(a:hover) { color: #fff; transform: translateX(10px); }
 
             @media (max-width: 900px) {
                 .overlay { grid-template-columns: 1fr; }
                 .menu-image-wrapper { display: none; }
                 .menu-content { align-items: center; padding-left: 0; padding-bottom: 50px; }
                 ::slotted(a) { font-size: 2rem; text-align: center; }
+                ::slotted(a.active) { padding-left: 0; border-left: none; color: #fff !important; opacity: 1; }
                 .brand-parent, .divider { display: none; }
             }
         </style>
@@ -166,6 +195,9 @@ class SiteMenu extends HTMLElement {
                     <a href="${parentLink}" class="brand-parent">${parentText}</a>
                 ` : ''}
             </div>
+
+            <div class="desktop-links" id="desktopNav"></div>
+
             <button class="menu-btn" id="toggleBtn">Menu</button>
         </div>
 
@@ -180,6 +212,16 @@ class SiteMenu extends HTMLElement {
         </div>
         `;
 
+        this.initLogic();
+        this.cloneLinksForDesktop();
+        this.initAutoClick();
+
+        // Inicia o spy com delay para garantir que o DOM esteja pronto
+        setTimeout(() => this.initScrollSpy(), 500);
+        window.addEventListener('load', () => this.initScrollSpy());
+    }
+
+    initLogic() {
         const btn = this.shadowRoot.getElementById('toggleBtn');
         const overlay = this.shadowRoot.getElementById('overlay');
 
@@ -188,36 +230,118 @@ class SiteMenu extends HTMLElement {
             if (this.isOpen) {
                 overlay.classList.add('active');
                 btn.textContent = 'Fechar';
-                btn.style.background = '#fff';
-                btn.style.color = '#000';
-
-                // Trava Rolagem
-                document.documentElement.style.overflow = 'hidden';
-                document.body.style.overflow = 'hidden';
+                btn.style.background = '#fff'; btn.style.color = '#000';
+                document.documentElement.style.overflow = 'hidden'; document.body.style.overflow = 'hidden';
             } else {
                 overlay.classList.remove('active');
                 btn.textContent = 'Menu';
-                btn.style.background = '';
-                btn.style.color = '';
-
-                // Libera Rolagem
-                document.documentElement.style.overflow = '';
-                document.body.style.overflow = '';
+                btn.style.background = ''; btn.style.color = '';
+                document.documentElement.style.overflow = ''; document.body.style.overflow = '';
             }
         };
 
         btn.addEventListener('click', toggleMenu);
-
-        this.shadowRoot.querySelector('slot').assignedElements().forEach(link => {
-            link.addEventListener('click', () => {
-                if (this.isOpen) toggleMenu();
-            });
-        });
-
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) this.classList.add('scrolled');
             else this.classList.remove('scrolled');
         });
+    }
+
+    cloneLinksForDesktop() {
+        const slot = this.shadowRoot.querySelector('slot[name="links"]');
+        const desktopContainer = this.shadowRoot.getElementById('desktopNav');
+
+        slot.addEventListener('slotchange', () => {
+            const nodes = slot.assignedElements();
+            desktopContainer.innerHTML = '';
+
+            nodes.forEach(node => {
+                const clone = node.cloneNode(true);
+                clone.removeAttribute('slot');
+                if (node.hasAttribute('onclick')) clone.onclick = node.onclick;
+                desktopContainer.appendChild(clone);
+            });
+
+            // Reinicia o spy quando os links mudam
+            this.initScrollSpy();
+            this.initAutoClick();
+        });
+    }
+
+    // --- CORREÇÃO DO SCROLL SPY ---
+    initScrollSpy() {
+        const slot = this.shadowRoot.querySelector('slot[name="links"]');
+        const mobileLinks = slot ? slot.assignedElements() : [];
+        const desktopLinks = Array.from(this.shadowRoot.querySelectorAll('.desktop-links a'));
+        const allLinks = [...mobileLinks, ...desktopLinks];
+
+        // 1. Identifica quais IDs devemos rastrear (baseado nos links do menu)
+        const targetIds = allLinks
+            .map(link => link.getAttribute('href'))
+            .filter(href => href && href.startsWith('#') && href.length > 1)
+            .map(href => href.substring(1)); // Remove o '#'
+
+        // Limpa ouvinte anterior
+        if (this.scrollHandler) window.removeEventListener('scroll', this.scrollHandler);
+
+        this.scrollHandler = () => {
+            let currentId = '';
+
+            // 2. Procura apenas os elementos que estão no menu
+            targetIds.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    // Offset de 150px para compensar o header fixo
+                    if (window.scrollY >= (sectionTop - 150)) {
+                        currentId = id;
+                    }
+                }
+            });
+
+            // 3. Verificação de fim de página (Footer)
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+                // Pega o último link válido
+                const lastLink = allLinks.reverse().find(link => {
+                    const href = link.getAttribute('href');
+                    return href && href.startsWith('#');
+                });
+                if (lastLink) currentId = lastLink.getAttribute('href').substring(1);
+            }
+
+            // 4. Aplica classe active
+            allLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href === '#' + currentId) {
+                    link.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', this.scrollHandler);
+        this.scrollHandler(); // Chama imediatamente para marcar o estado inicial
+    }
+
+    initAutoClick() {
+        setTimeout(() => {
+            const links = [...this.shadowRoot.querySelectorAll('.desktop-links a'), ...this.shadowRoot.querySelector('slot[name="links"]').assignedElements()];
+            links.forEach(link => {
+                if (link.getAttribute('href') === '#schedule') {
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        const target = document.getElementById('schedule');
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                            setTimeout(() => {
+                                const btn = target.shadowRoot.querySelector('button, .btn, #actionBtn, #ctaBtn');
+                                if (btn) btn.click();
+                            }, 1000);
+                        }
+                    };
+                }
+            });
+        }, 500);
     }
 }
 customElements.define('site-menu', SiteMenu);

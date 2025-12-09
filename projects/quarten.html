@@ -89,14 +89,15 @@
 </head>
 
 <body>
-
     <site-menu logo="QUARTEN." image="../media/quarten/boulevart.webp" parent-text="MeuApêTem"
         parent-link="../index.html">
-
-        <a slot="links" href="#home">O Projeto</a>
+        <a slot="links" href="#home">Início</a>
+        <a slot="links" href="#legacy">O Projeto</a>
+        <a slot="links" href="#video-tour">Filme</a>
+        <a slot="links" href="#resort">Lazer</a>
         <a slot="links" href="#plans">Plantas</a>
         <a slot="links" href="#location">Endereço</a>
-        <a slot="links" onclick="openPopup(event)">Agendar Visita</a>
+        <a slot="links" href="#schedule" class="auto-trigger">Agendar Visita</a>
     </site-menu>
 
     <hero-section id="home" image="../media/quarten/hero.jpg" highlight="The Rare Collection"
@@ -167,25 +168,29 @@
         <stat-item slot="items" class="hover-target" number="8 min" label="Do Pq. Ibirapuera"></stat-item>
         <stat-item slot="items" class="hover-target" number="395m²" label="Residências Suspensas"></stat-item>
     </stats-section>
-
-    <region-section id="location" image="../media/quarten/regiao.webp" highlight="Localização Privilegiada"
-        title="O Endereço" text="No epicentro do que realmente importa. <br>O Ibirapuera aos seus pés.">
+    <region-section id="location" image="../media/quarten/regiao.webp" highlight="Vila Clementino" title="O Endereço"
+        text="Av. Dr. Altino Arantes, 1297.<br>Entre o Ibirapuera e a vibração urbana." lat="-23.6067" lng="-46.6450"
+        zoom="15" pois='[
+            {"title": "Parque Ibirapuera", "loc": [-23.5874, -46.6576]}, 
+            {"title": "Shopping Santa Cruz", "loc": [-23.5990, -46.6369]}, 
+            {"title": "Metrô AACD-Servidor", "loc": [-23.5977, -46.6522]},
+            {"title": "Hospital São Paulo", "loc": [-23.5956, -46.6433]}
+        ]'>
     </region-section>
-
     <curator-review curator="Mota"
-        phrases='["Uma Floresta Particular", "Silêncio em SP", "Design de Autor", "Alma de Casa"]'
+        phrases='["Um Bosque Particular", "Paz em SP", "Uma ilha de Natureza", "Alma de Casa"]'
         pros="A sensação de estar fora de São Paulo é real. O bosque privativo de 6.000m² não é marketing, é um ecossistema próprio que muda a temperatura do ambiente."
         cons="É um produto de nicho. Se você busca agitação na porta de casa, este refúgio pode parecer calmo demais. O valor de condomínio reflete a manutenção da extensa área verde.">
     </curator-review>
 
-    <cta-section highlight="Atendimento Exclusivo" title="Agende Sua Visita"
+    <cta-section id="schedule" highlight="Atendimento Exclusivo" title="Agende Sua Visita"
         text="O luxo de viver aqui começa no atendimento. <br>Agende uma visita privada."
         button-text="Solicitar Apresentação">
     </cta-section>
 
     <trust-section style="--bg-color: var(--bg-brand-dark);">
         <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
-        <trust-item slot="items" title="Vendas" img="../media/utils/bm.svg" alt="BM Realty"></trust-item>
+        <trust-item slot="items" title="Financiamento" img="../media/utils/bm.svg" alt="BM Realty"></trust-item>
     </trust-section>
 
     <footer-section project="QUARTEN" broker="CORRETOR MOTA - CRECI 268.448" root-path="..">

@@ -56,7 +56,7 @@ class ProjectCard extends HTMLElement {
             .price { position: absolute; top: 20px; right: 20px; background: #000; color: #fff; padding: 8px 15px; border-radius: 8px; font-weight: 600; }
         </style>
 
-        <img class="bg" src="${image}">
+        <img class="bg" loading="lazy" src="${image}">
         <div class="overlay"></div>
         <div class="price">${price}</div>
         

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elev Butantã | Trisul</title>
+
+    <link rel="icon" type="image/png" href="../media/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Padrão Inicial (Morador) */
+            --color-highlight: #FF6F61;
+            --bg-section-main: #1f1616;
+            --bg-brand-dark: #291818;
+            --color-text-secondary: #d6c4c4;
+
+            /* Fixas */
+            --bg-page-body: #121212;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-text: 'Inter', sans-serif;
+
+            /* Mapeamento */
+            --highlight-color: var(--color-highlight);
+            --bg-color: var(--bg-section-main);
+            --text-color: var(--color-text-secondary);
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-page-body);
+            font-family: var(--font-text);
+            color: #F5F5F7;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            transition: background-color 0.6s ease, color 0.6s ease;
+        }
+
+        /* Garante que os botões amarelos/coral tenham contraste */
+        cta-section::part(button),
+        cta-banner::part(button) {
+            color: #000;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+    </style>
+
+    <script src="../components/menu.js" defer></script>
+    <script src="../components/hero.js" defer></script>
+    <script src="../components/marquee.js" defer></script>
+    <script src="../components/showcase.js" defer></script>
+    <script src="../components/gallery.js" defer></script>
+    <script src="../components/plans.js" defer></script>
+    <script src="../components/stats.js" defer></script>
+    <script src="../components/region.js" defer></script>
+    <script src="../components/cta.js" defer></script>
+    <script src="../components/trust.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+    <script src="../components/curator-review.js" defer></script>
+    <script src="../components/floating.js" defer></script>
+    <script src="../components/contact.js" defer></script>
+    <script src="../components/cursor.js" defer></script>
+    <script src="../components/cookie.js" defer></script>
+    <script src="../components/lightbox.js" defer></script>
+    <script src="../components/persona-switcher.js" defer></script>
+
+    <script>
+        function openPopup(e) {
+            if (e) e.preventDefault();
+            window.dispatchEvent(new CustomEvent('open-contact-popup'));
+        }
+    </script>
+</head>
+
+<body>
+
+    <persona-switcher
+        modes='[{"key": "resident", "label": "Vou Morar"}, {"key": "investor", "label": "Vou Investir"}]'></persona-switcher>
+
+    <site-menu id="main-menu" logo="ELEV." image="../media/ElevButanta/lobby.webp" parent-text="MeuApêTem"
+        parent-link="../index.html">
+        <a slot="links" href="#home">Início</a>
+        <a slot="links" href="#concept">O Projeto</a>
+        <a slot="links" href="#amenities">Lazer</a>
+        <a slot="links" href="#location">Localização</a>
+        <a slot="links" href="#plans">Plantas</a>
+        <a slot="links" href="#schedule" class="auto-trigger" id="menu-cta">Simular</a>
+    </site-menu>
+
+    <hero-section id="home" image="../media/ElevButanta/areaLazer.webp" highlight="Seu Primeiro Apê"
+        title="Liberdade é ter o Metrô na Porta"
+        text="Chega de aluguel. More a 4 passos da Estação Butantã com lazer de clube e facilidade de pagamento."
+        curator-badge="true"></hero-section>
+
+    <marquee-scroll id="marquee" text="MINHA CASA MINHA VIDA — LAZER COMPLETO — METRÔ NA PORTA — "
+        speed="50s"></marquee-scroll>
+
+    <stats-section id="stats">
+        <stat-item slot="items" class="hover-target" id="stat-1" number="1 min" label="Do Metrô a Pé"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-2" number="Lazer" label="Clube Completo"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-3" number="Varanda" label="Em todas unidades"></stat-item>
+    </stats-section>
+
+    <showcase-section id="concept" button-link="#amenities" highlight="Vida Prática" title="Mais Tempo <br>Pra Você"
+        text="Pare de perder vida no trânsito. Aqui você tem Coworking, Academia e Mercado dentro de casa."
+        button-text="Ver o Lazer">
+        <img slot="gallery" src="../media/ElevButanta/AcessoMoradores.webp" alt="Fachada Moderna" loading="lazy">
+        <img slot="gallery" src="../media/ElevButanta/fachadaAtiva.webp" alt="Vista Ativa" loading="lazy">
+    </showcase-section>
+
+    <gallery-section id="amenities" subtitle="Seu Clube" title="Extensão da <br>Sua Casa">
+        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/quadra.webp"
+            title="Quadra Recreativa" text="Qualidade de vida"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/fitness.webp" title="Fitness"
+            text="Treino Profissional"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/psicina.webp" title="Piscina"
+            text="Para os dias quentes"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/playground.webp" title="Playground"
+            text="Para os pequenos"></gallery-item>
+    </gallery-section>
+
+    <region-section id="location" image="../media/ElevButanta/FachadaMetro.webp" lat="-23.5720" lng="-46.7080" zoom="16"
+        pois='[
+        {"title": "Metrô Butantã", "loc": [-23.5718, -46.7080]}, 
+        {"title": "USP (P1)", "loc": [-23.5680, -46.7150]}, 
+        {"title": "Shopping Eldorado", "loc": [-23.5730, -46.6960]}
+    ]'>
+    </region-section>
+
+
+    <plans-section id="plans" highlight="Plantas Inteligentes">
+        <plan-item slot="content" name="Studio 25m" title="Studio 25m²" area="25m²" dorms="1 Dorm" vagas="0"
+            id="plan-25" desc="O ticket de entrada para sua independência. Varanda integrada." extra-label="Ideal para"
+            extra-val="Solteiros">
+            <img slot="image" src="../media/ElevButanta/planta25m.webp" loading="lazy">
+        </plan-item>
+
+        <plan-item slot="content" name="Apto 34m" title="Apto 34m²" area="34m²" dorms="2 Dorms" vagas="0" id="plan-34"
+            desc="Dois dormitórios na medida certa para começar a vida a dois." extra-label="Diferencial"
+            extra-val="Varanda">
+            <img slot="image" src="../media/ElevButanta/planta34m.webp" loading="lazy">
+        </plan-item>
+
+        <plan-item slot="content" name="Suíte 38m" title="Apto 38m² (Suíte)" area="38m²" dorms="2 Dorms" vagas="0"
+            id="plan-38" desc="Mais conforto com Suíte. O espaço que sua família merece." extra-label="Destaque"
+            extra-val="Suíte + Varanda">
+            <img slot="image" src="../media/ElevButanta/planta38m.webp" loading="lazy">
+        </plan-item>
+    </plans-section>
+
+    <curator-review id="review" curator="Mota" phrases='["Meu Canto", "Liberdade", "Sem Aluguel"]'
+        pros="A planta de 38m² com suíte é um achado na região."
+        cons="Por estar na frente do metrô, a região é movimentada.">
+    </curator-review>
+
+    <cta-section id="schedule" highlight="Facilidade" title="Saia do Aluguel"
+        text="Use seu FGTS na entrada. Condições facilitadas de lançamento e parcelas que cabem no bolso."
+        button-text="Simular Financiamento">
+    </cta-section>
+
+    <trust-section style="--bg-color: var(--bg-brand-dark);">
+        <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
+        <trust-item slot="items" title="Financiamento" img="../media/utils/caixa.svg"
+            alt="Caixa Econômica Federal"></trust-item>
+    </trust-section>
+
+    <footer-section project="ELEV BUTANTÃ" broker="CORRETOR MOTA - CRECI 268.448" root-path=".."></footer-section>
+    <floating-actions></floating-actions>
+    <contact-popup photo="../media/utils/perfilcrop.png" name="Mota" creci="CRECI 268.448" email="contato@meuapetem.com"
+        phone="11 95301-6045" whatsapp-number="5511953016045"></contact-popup>
+    <lightbox-viewer></lightbox-viewer>
+    <cookie-banner></cookie-banner>
+    <custom-cursor></custom-cursor>
+
+    <script>
+        const DATA = {
+            resident: {
+                colors: {
+                    /* --- AQUI ESTÁ A MUDANÇA --- */
+                    highlight: '#FF4D00', // Laranja Vibrante (Energia/Jovem)
+                    bgMain: '#0F0F0F',    // Preto Neutro (Faz a cor "saltar")
+                    bgDark: '#1a1a1a',    // Cinza Chumbo
+                    textSec: '#D1D1D1'    // Texto claro
+                },
+                hero: {
+                    highlight: 'Seu Primeiro Apê',
+                    title: 'Liberdade é ter o Metrô na Porta',
+                    text: 'Chega de aluguel. More a 4 passos da Estação Butantã com lazer de clube e facilidade de pagamento.'
+                },
+                marquee: 'MINHA CASA MINHA VIDA — LAZER COMPLETO — METRÔ NA PORTA — VARANDA EM TODAS AS UNIDADES — ',
+                stats: [
+                    { id: 'stat-1', n: '1 min', l: 'Do Metrô a Pé' },
+                    { id: 'stat-2', n: 'Lazer', l: 'Clube Completo' },
+                    { id: 'stat-3', n: 'Varanda', l: 'Em todas unidades' }
+                ],
+                showcase: {
+                    highlight: 'Vida Prática',
+                    title: 'Mais Tempo <br>Pra Você',
+                    text: 'Pare de perder vida no trânsito. Aqui você tem Coworking, Academia e Mercado dentro de casa.',
+                    btn: 'Ver o Lazer'
+                },
+                region: {
+                    highlight: 'Mobilidade',
+                    title: 'Tudo Perto',
+                    text: 'Vá a pé para o mercado, farmácia e metrô. O Butantã é o bairro que mais cresce em SP.'
+                },
+                amenities: { subtitle: 'Seu Clube', title: 'Extensão da <br>Sua Casa' },
+                plans: [
+                    { id: 'plan-25', d: 'O ticket de entrada para sua independência. Varanda integrada.', l: 'Ideal para', v: 'Solteiros' },
+                    { id: 'plan-34', d: 'Dois dormitórios na medida certa para começar a vida a dois.', l: 'Diferencial', v: 'Varanda' },
+                    { id: 'plan-38', d: 'Mais conforto com Suíte. O espaço que sua família merece.', l: 'Destaque', v: 'Suite + Varanda' }
+                ],
+                review: {
+                    phrases: '["Meu Canto", "Liberdade", "Mobilidade", "Vida Nova"]',
+                    pros: "A planta de 38m² com suíte é um achado na região. A varanda em todas as unidades dá uma sensação de amplitude rara em compactos.",
+                    cons: "Por estar na frente do metrô, a região é movimentada. Se busca silêncio absoluto de campo, aqui a vibração é urbana."
+                },
+                cta: {
+                    highlight: 'Facilidade',
+                    title: 'Saia do Aluguel',
+                    text: 'Use seu FGTS na entrada. Condições facilitadas de lançamento e parcelas que cabem no bolso.',
+                    btn: 'Simular Financiamento'
+                },
+                menuBtn: 'Simular'
+            },
+            investor: {
+                colors: {
+                    highlight: '#FFD700', // Dourado (Mantido)
+                    bgMain: '#121212',    // Preto
+                    bgDark: '#1E1E1E',    // Cinza Escuro
+                    textSec: '#C7C7CC'
+                },
+                hero: {
+                    highlight: 'Oportunidade de Investimento',
+                    title: 'Liquidez Absoluta na Zona Oeste',
+                    text: 'O ativo imobiliário mais estratégico da região. Na porta do Metrô e a 5 min da USP.'
+                },
+                marquee: 'ALTA LIQUIDEZ — METRÔ NA PORTA — 5 MIN DA USP — VACÂNCIA ZERO — RENTABILIDADE GARANTIDA — ',
+                stats: [
+                    { id: 'stat-1', n: '4 Passos', l: 'Da Estação Butantã' },
+                    { id: 'stat-2', n: 'USP', l: 'Demanda Infinita' },
+                    { id: 'stat-3', n: 'ALTO', l: 'Potencial de Valorização' }
+                ],
+                showcase: {
+                    highlight: 'O Produto',
+                    title: 'Máquina de <br>Locação',
+                    text: 'Projetado para o investidor. Áreas comuns entregues equipadas, otimizando o setup para locação imediata (Long Stay ou Airbnb).',
+                    btn: 'Ver Diferenciais'
+                },
+                region: {
+                    highlight: 'Localização Estratégica',
+                    title: 'O Epicentro',
+                    text: 'Conecte seu inquilino à Faria Lima em 8 minutos. Valorização garantida pela infraestrutura consolidada.'
+                },
+                amenities: { subtitle: 'Facilidades', title: 'Ecossistema <br>Smart Living' },
+                plans: [
+                    { id: 'plan-25', d: 'O ativo perfeito para Airbnb e estudantes da USP. Baixo custo de condomínio.', l: 'Foco', v: 'Rentabilidade' },
+                    { id: 'plan-34', d: 'Excelente para share-living (estudantes dividindo) ou pequenas famílias.', l: 'Yield', v: 'Estabilidade' },
+                    { id: 'plan-38', d: 'Maior valor agregado na locação devido à suíte. Atrai público executivo.', l: 'Perfil', v: 'Executivo' }
+                ],
+                review: {
+                    phrases: '["Alta Liquidez", "Asset Real", "Renda Passiva", "Smart Money"]',
+                    pros: "Localização 'Platinum'. Estar na porta da Linha Amarela garante vacância mínima histórica. O produto é formatado para o público da região (USP/Faria Lima).",
+                    cons: "É um ativo de giro rápido. Não é focado em exclusividade, mas em conveniência e fluxo."
+                },
+                cta: {
+                    highlight: 'Tabela de Investidor',
+                    title: 'Maximize Seu Retorno',
+                    text: 'Acesse a projeção de rentabilidade, vacância estimada e fluxo de pagamento facilitado.',
+                    btn: 'ROI e Rentabilidade'
+                },
+                menuBtn: 'Saber Mais'
+            }
+        };
+
+        // --- SISTEMA DE TROCA (HOT SWAP) ---
+        document.addEventListener('persona-changed', (e) => {
+            const mode = e.detail.mode;
+            localStorage.setItem('site-persona', mode); // Salva preferência
+            updatePage(mode);
+        });
+
+        function updatePage(mode) {
+            const d = DATA[mode];
+            const root = document.documentElement;
+
+            // Atualiza Variáveis CSS
+            root.style.setProperty('--color-highlight', d.colors.highlight);
+            root.style.setProperty('--bg-section-main', d.colors.bgMain);
+            root.style.setProperty('--bg-brand-dark', d.colors.bgDark);
+            root.style.setProperty('--color-text-secondary', d.colors.textSec);
+
+            // Atualiza Componentes (com refresh visual)
+            refreshElement('home', d.hero);
+            refreshElement('concept', { highlight: d.showcase.highlight, title: d.showcase.title, text: d.showcase.text, 'button-text': d.showcase.btn });
+            refreshElement('location', { highlight: d.region.highlight, title: d.region.title, text: d.region.text });
+            refreshElement('amenities', { subtitle: d.amenities.subtitle, title: d.amenities.title });
+            refreshElement('review', d.review);
+            refreshElement('schedule', { highlight: d.cta.highlight, title: d.cta.title, text: d.cta.text, 'button-text': d.cta.btn });
+
+            // Atualiza Elementos Simples
+            const marquee = document.getElementById('marquee');
+            if (marquee) {
+                marquee.setAttribute('text', d.marquee);
+                // Força reinício da animação clonando
+                const newMarquee = marquee.cloneNode(true);
+                marquee.parentNode.replaceChild(newMarquee, marquee);
+            }
+
+            d.stats.forEach(stat => {
+                refreshElement(stat.id, { number: stat.n, label: stat.l });
+            });
+
+            d.plans.forEach(plan => {
+                refreshElement(plan.id, { desc: plan.d, 'extra-label': plan.l, 'extra-val': plan.v });
+            });
+
+            const menuBtn = document.getElementById('menu-cta');
+            if (menuBtn) menuBtn.innerText = d.menuBtn;
+        }
+
+        // Função para forçar o componente a redesenhar com novos dados
+        function refreshElement(id, attributes) {
+            const oldEl = document.getElementById(id);
+            if (!oldEl) return;
+
+            for (const [key, value] of Object.entries(attributes)) {
+                oldEl.setAttribute(key, value);
+            }
+
+            const newEl = oldEl.cloneNode(true);
+            oldEl.parentNode.replaceChild(newEl, oldEl);
+        }
+
+        // Inicialização
+        window.onload = () => {
+            const saved = localStorage.getItem('site-persona') || 'resident';
+            updatePage(saved);
+        };
+    </script>
+</body>
+
+</html>

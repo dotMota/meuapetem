@@ -9,6 +9,7 @@ class HeroSection extends HTMLElement {
         const title = this.getAttribute('title') || '';
         const text = this.getAttribute('text') || '';
         const highlight = this.getAttribute('highlight') || '';
+        const subtitle = this.getAttribute('subtitle') || '';
         const showBadge = this.getAttribute('curator-badge') === 'true';
 
         this.shadowRoot.innerHTML = `
@@ -17,14 +18,17 @@ class HeroSection extends HTMLElement {
             
             .hero-bg {
                 position: absolute; inset: 0; width: 100%; height: 100%;
-                object-fit: cover; z-index: 0;
+                object-fit: cover; 
+                /* --- AJUSTE SOLICITADO: FOCA NA BASE DA IMAGEM --- */
+                object-position: bottom center;
+                z-index: 0;
                 transition: transform 10s ease;
             }
             :host(:hover) .hero-bg { transform: scale(1.05); }
 
             .overlay {
                 position: absolute; inset: 0;
-                background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+                background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%);
                 z-index: 1;
             }
 
@@ -35,18 +39,25 @@ class HeroSection extends HTMLElement {
                 max-width: 1200px; margin: 0 auto;
             }
 
+            .subtitle {
+                display: block; font-family: var(--font-text, sans-serif);
+                color: rgba(255,255,255,0.8); font-size: 0.9rem; letter-spacing: 2px;
+                text-transform: uppercase; margin-bottom: 1rem;
+                animation: fadeUp 0.8s ease forwards;
+            }
+
             .highlight {
                 color: var(--highlight-color, #c5a065);
                 font-family: var(--font-text, sans-serif);
                 font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
-                font-size: 0.85rem; margin-bottom: 1rem; display: block;
+                font-size: 0.85rem; margin-bottom: 0.5rem; display: block;
                 animation: fadeUp 0.8s ease forwards;
             }
 
             h1 {
                 font-family: var(--font-title, serif);
                 font-size: clamp(3rem, 6vw, 5.5rem);
-                color: #fff; line-height: 1; margin: 0 0 1.5rem 0;
+                color: #fff; line-height: 1.1; margin: 0 0 1.5rem 0;
                 opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
             }
 
@@ -58,59 +69,31 @@ class HeroSection extends HTMLElement {
                 opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
             }
 
-            /* --- SELO DE CURADORIA (High Visibility) --- */
             .curator-seal {
-                position: absolute;
-                bottom: 50px; right: 5%; /* Posição inferior direita */
-                z-index: 3;
-                
-                /* Estilo Glassmorphism (Cartão de Vidro) */
-                background: rgba(20, 20, 20, 0.6);
-                backdrop-filter: blur(12px);
+                position: absolute; bottom: 50px; right: 5%; z-index: 3;
+                background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(12px);
                 border: 1px solid rgba(255, 255, 255, 0.15);
-                padding: 15px 25px;
-                border-radius: 12px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-
+                padding: 15px 25px; border-radius: 12px;
                 display: flex; align-items: center; gap: 15px;
-                opacity: 0; animation: fadeIn 1s ease 1s forwards;
-                transform: translateY(20px);
+                opacity: 0; animation: fadeIn 1s ease 1s forwards; transform: translateY(20px);
             }
 
-            /* Animação de entrada do selo */
-            @keyframes fadeIn { 
-                to { opacity: 1; transform: translateY(0); } 
-            }
+            @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
             .seal-text { text-align: right; }
-            .seal-label { 
-                display: block;
-                font-family: 'Manrope', sans-serif; 
-                font-size: 0.65rem; color: #ccc; 
-                text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2px;
-            }
-            .seal-brand { 
-                font-family: 'Space Grotesk', sans-serif; 
-                font-size: 1.4rem; color: #fff; font-weight: 700;
-                line-height: 1;
-            }
-            .seal-brand strong { color: #FF6F61; } /* Coral */
+            .seal-label { display: block; font-family: sans-serif; font-size: 0.65rem; color: #ccc; text-transform: uppercase; letter-spacing: 2px; }
+            .seal-brand { font-family: sans-serif; font-size: 1.4rem; color: #fff; font-weight: 700; line-height: 1; }
+            .seal-brand strong { color: var(--highlight-color); }
 
             .seal-icon {
-                width: 40px; height: 40px;
-                background: rgba(255,255,255,0.1);
-                border-radius: 50%;
-                display: flex; align-items: center; justify-content: center;
-                color: #FF6F61;
+                width: 40px; height: 40px; background: rgba(255,255,255,0.1);
+                border-radius: 50%; display: flex; align-items: center; justify-content: center;
+                color: var(--highlight-color);
             }
 
-            @keyframes fadeUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
             
             @media(max-width: 768px) {
-                /* No mobile, ajusta para não cobrir o texto */
                 .curator-seal { bottom: 20px; right: 20px; padding: 10px 15px; }
                 .seal-brand { font-size: 1rem; }
             }
@@ -121,6 +104,7 @@ class HeroSection extends HTMLElement {
         
         <div class="content">
             ${highlight ? `<span class="highlight">${highlight}</span>` : ''}
+            ${subtitle ? `<span class="subtitle">${subtitle}</span>` : ''}
             <h1>${title}</h1>
             <p>${text}</p>
             <slot name="cta"></slot>
