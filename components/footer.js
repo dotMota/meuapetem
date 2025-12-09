@@ -16,11 +16,7 @@ class FooterSection extends HTMLElement {
 
             :host {
                 display: block;
-                /* --- CORREÇÃO AQUI --- */
-                /* Usa a variável definida no :root do HTML (Vinho ou Preto) */
                 background-color: var(--bg-brand-dark, #050505); 
-                /* --------------------- */
-                
                 color: #a1a1aa;
                 padding: 5rem 5% 2rem;
                 font-family: var(--font-text, sans-serif);
@@ -35,33 +31,14 @@ class FooterSection extends HTMLElement {
                 margin: 0 auto 4rem;
             }
 
-            /* LOGO COMPOSTO NO FOOTER */
             .brand-area h2 {
                 margin: 0 0 1rem 0;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                flex-wrap: wrap;
+                display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
             }
 
-            .brand-parent {
-                font-family: 'Space Grotesk', sans-serif;
-                font-size: 1.5rem;
-                font-weight: 700;
-                color: #fff;
-            }
-            
-            .brand-divider {
-                font-size: 1.5rem;
-                color: rgba(255,255,255,0.3);
-                font-weight: 300;
-            }
-
-            .brand-project {
-                font-family: var(--font-title, serif);
-                font-size: 1.5rem;
-                color: var(--highlight-color, #c5a065);
-            }
+            .brand-parent { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+            .brand-divider { font-size: 1.5rem; color: rgba(255,255,255,0.3); font-weight: 300; }
+            .brand-project { font-family: var(--font-title, serif); font-size: 1.5rem; color: var(--highlight-color, #c5a065); }
 
             h4 { color: #fff; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
             ul { list-style: none; padding: 0; }
@@ -105,14 +82,14 @@ class FooterSection extends HTMLElement {
                 <h4>Suporte</h4>
                 <ul>
                     <li><a href="#" class="contact-trigger">Fale Conosco</a></li>
-                    <li><a href="#">Privacidade</a></li>
+                    <li><a href="${rootPath}/politica.html">Privacidade</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4>Social</h4>
                 <ul>
-                    <li><a href="#">Instagram</a></li>
+                    <li><a href="https://instagram.com/meuapetem" target="_blank">@meuapetem</a></li>
                     <li><a href="#">LinkedIn</a></li>
                 </ul>
             </div>
