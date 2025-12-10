@@ -7,8 +7,8 @@ class FooterSection extends HTMLElement {
     connectedCallback() {
         const parentBrand = 'MeuApêTem';
         const project = this.getAttribute('project') || '';
-        // CRECI CENTRALIZADO AQUI
         const creci = this.getAttribute('broker') || 'CRECI 315675';
+        // Define o caminho da raiz para os links funcionarem em qualquer pasta
         const rootPath = this.getAttribute('root-path') || '.';
 
         this.shadowRoot.innerHTML = `
@@ -83,7 +83,7 @@ class FooterSection extends HTMLElement {
                 <h4>Suporte</h4>
                 <ul>
                     <li><a href="#" class="contact-trigger">Fale Conosco</a></li>
-                    <li><a href="${rootPath}/politica.html">Privacidade</a></li>
+                    <li><a href="${rootPath}/politica.html">Transparência</a></li>
                 </ul>
             </div>
 

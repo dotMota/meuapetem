@@ -8,10 +8,14 @@ class CookieBanner extends HTMLElement {
         // Se já aceitou, nem renderiza
         if (localStorage.getItem('cookies-accepted')) return;
 
-        this.render();
+        // Lógica automática para corrigir o link se estiver dentro de "projects/"
+        const isInSubfolder = window.location.pathname.includes('/projects/');
+        const linkPath = isInSubfolder ? '../politica.html' : './politica.html';
+
+        this.render(linkPath);
     }
 
-    render() {
+    render(linkPath) {
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -31,10 +35,19 @@ class CookieBanner extends HTMLElement {
                     animation: slideUp 0.5s ease-out;
                 }
                 .text { color: #ccc; font-size: 0.85rem; line-height: 1.5; margin: 0; }
+                
+                /* Estilo do Link no Texto */
+                .text a {
+                    color: var(--color-highlight, #c5a065);
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+                .text a:hover { color: #fff; }
+
                 .actions { display: flex; gap: 1rem; align-items: center; }
                 
                 .btn-accept {
-                    background: #c5a065; color: #000; border: none;
+                    background: var(--color-highlight, #c5a065); color: #000; border: none;
                     padding: 0.8rem 2rem; text-transform: uppercase; font-size: 0.75rem;
                     font-weight: bold; letter-spacing: 1px; cursor: pointer;
                     transition: 0.3s; flex: 1;
@@ -55,7 +68,8 @@ class CookieBanner extends HTMLElement {
 
             <div class="banner" id="banner">
                 <p class="text">
-                    Utilizamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa política de privacidade.
+                    Utilizamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa 
+                    <a href="${linkPath}">política de transparência</a>.
                 </p>
                 <div class="actions">
                     <button class="btn-close" id="deny">Fechar</button>

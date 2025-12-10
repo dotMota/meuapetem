@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparência | MeuApêTem</title>
+    <meta name="robots" content="noindex">
+
+    <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --color-highlight: #FF6F61;
+            --bg-page: #0a0a0a;
+            --text-main: #F5F5F7;
+            --text-sec: #A1A1AA;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-text: 'Manrope', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-page);
+            font-family: var(--font-text);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 5% 6rem;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            color: var(--color-highlight);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        p,
+        li {
+            color: var(--text-sec);
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        a {
+            color: var(--color-highlight);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+    </style>
+
+    <script src="./components/menu.js" defer></script>
+    <script src="./components/footer.js" defer></script>
+    <script src="./components/cursor.js" defer></script>
+    <script src="./components/contact.js" defer></script>
+</head>
+
+<body>
+
+    <site-menu logo="TRANSPARÊNCIA." parent-text="MeuApêTem" parent-link="./index.html">
+        <a slot="links" href="./index.html">Voltar</a>
+    </site-menu>
+
+    <div class="container">
+        <h1>Política de Transparência</h1>
+
+        <p>No <strong>MeuApêTem</strong>, acreditamos na transparência radical. Diferente do mercado tradicional, nossa
+            abordagem em relação aos seus dados é simples e direta.</p>
+
+        <div class="box">
+            <p style="margin:0; color: #fff;"><strong>Resumo:</strong> Este site não possui banco de dados. Nós não
+                armazenamos seu nome, e-mail ou telefone em nossos servidores.</p>
+        </div>
+
+        <h2>1. Como funciona o contato?</h2>
+        <p>Toda a comunicação é <strong>ativa</strong> e iniciada por você. Ao clicar nos botões de "WhatsApp" ou
+            "E-mail", você é redirecionado para o seu próprio aplicativo. A conversa acontece diretamente entre você e o
+            corretor, sem intermediários e sem formulários de captura ocultos.</p>
+
+        <h2>2. Cookies e Preferências</h2>
+        <p>Este site utiliza o armazenamento local do seu navegador (Local Storage) apenas para melhorar sua experiência
+            de navegação:</p>
+        <ul>
+            <li><strong>Perfil de Interesse:</strong> Se você seleciona "Vou Morar" ou "Vou Investir", o site lembra
+                dessa escolha para mostrar o conteúdo mais relevante (textos e cores) enquanto você navega.</li>
+            <li><strong>Aviso de Cookies:</strong> Para lembrar que você já fechou o aviso de cookies e não mostrá-lo
+                novamente.</li>
+        </ul>
+        <p>Esses dados ficam salvos apenas no <strong>seu dispositivo</strong> e não temos acesso a eles.</p>
+
+        <h2>3. Serviços de Terceiros</h2>
+        <p>Utilizamos ferramentas externas para funcionamento do site (como Google Maps para localização). Ao interagir
+            com esses mapas, as políticas de privacidade do Google podem ser aplicáveis.</p>
+
+        <h2>4. Contato</h2>
+        <p>Se tiver qualquer dúvida sobre como operamos, chame diretamente no WhatsApp oficial disponível no site.</p>
+    </div>
+
+    <footer-section brand="MEUAPÊTEM" root-path="."></footer-section>
+    <custom-cursor></custom-cursor>
+    <contact-popup></contact-popup>
+
+</body>
+
+</html>
