@@ -4,16 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:image" content="../media/granoscar/Praça Central com Espelho D'água.webp">
-    <meta name="product-category" content="rare">
-    <meta name="product-vibe" content="Ícone do Ibirapuera">
-    <meta name="product-tags" content="Perkins&Will, Hanazaki">
 
     <title>Granoscar Ibirapuera | Trisul</title>
     <meta name="description"
-        content="A evolução de um ícone no Ibirapuera. Apartamentos de 370m² a 654m² com arquitetura de Perkins&Will e paisagismo Hanazaki.">
+        content="A evolução de um ícone no Ibirapuera. Apartamentos de 370m² a 654m² com Tênis Coberta e paisagismo Hanazaki.">
 
     <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
+
+    <meta property="og:image" content="../media/Granoscar_Ibirapuera/fachadas/granoscar_ibirapuera.webp">
+    <meta name="product-category" content="rare">
+    <meta name="product-vibe" content="Ícone do Ibirapuera">
+    <meta name="product-tags" content="Perkins&Will, Hanazaki">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
     <script>
@@ -31,15 +32,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- TEMA GRANOSCAR (Sofisticação & Movimento) --- */
+        /* --- TEMA GRANOSCAR (Natureza & Luxo) --- */
         :root {
-            /* Identidade Visual do Book: Tons sóbrios e elegantes */
+            /* Identidade Visual */
             --color-highlight: #c5a065;
-            /* Dourado Clássico */
             --color-text-primary: #e8e8e3;
-            /* Off-white */
             --color-text-secondary: #9ca3af;
-            /* Cinza Pedra */
 
             /* Fundos */
             --bg-page-body: #0c0c0c;
@@ -49,7 +47,6 @@
 
             /* Tipografia */
             --font-title: 'Cinzel', serif;
-            /* Fonte do Logo Granoscar */
             --font-text: 'Manrope', sans-serif;
 
             /* Mapeamento */
@@ -59,7 +56,6 @@
             --bg-gradient: var(--bg-cta-gradient);
         }
 
-        /* Botão Estilo "Ghost" (Elegante) */
         cta-section::part(button) {
             background: transparent;
             border: 1px solid var(--highlight-color);
@@ -107,7 +103,7 @@
     <script src="../components/cursor.js" defer></script>
     <script src="../components/lightbox.js" defer></script>
     <script src="../components/project-card.js" defer></script>
-    <script src="../components/related.js" defer></script>
+    <script src="../components/page-scanner.js" defer></script>
 
 </head>
 
@@ -119,122 +115,118 @@
         <a slot="links" href="#home">Início</a>
         <a slot="links" href="#concept">Conceito</a>
         <a slot="links" href="#video-tour">Vídeo</a>
-        <a slot="links" href="#plans">Plantas</a>
         <a slot="links" href="#amenities">Private Resort</a>
+        <a slot="links" href="#plans">Plantas</a>
         <a slot="links" href="#location">Localização</a>
         <a slot="links" href="#schedule" class="auto-trigger">Agendar</a>
     </site-menu>
 
-    <hero-section id="home" image="../media/granoscar/Praça Central com Espelho D'água.webp" highlight="Ibirapuera"
-        subtitle="Inspirado por Movimento" title="A Evolução de um Ícone" curator-badge="true"
+    <hero-section id="home" image="../media/Granoscar_Ibirapuera/area_comum/praca_central_com_espelho_d_agua.webp"
+        highlight="Ibirapuera" subtitle="Inspirado por Movimento" title="O Movimento que <br>Dá Forma à Vida"
+        curator-badge="true"
         text="Na natureza, nada é estático. Uma obra capaz de ressignificar o habitar, projetada para ir além.">
     </hero-section>
 
-    <marquee-scroll
-        text="O VENTO PERCORRE — A LUZ ATRAVESSA — O TEMPO TRANSFORMA — É O MOVIMENTO QUE DÁ FORMA À VIDA — "
-        speed="60s"></marquee-scroll>
+    <marquee-scroll text="NA NATUREZA NADA É ESTÁTICO — O VENTO PERCORRE — A LUZ ATRAVESSA — O TEMPO TRANSFORMA — "
+        speed="70s"></marquee-scroll>
 
     <stats-section>
         <stat-item slot="items" class="hover-target" number="6.289 m²" label="Terreno Exclusivo"></stat-item>
         <stat-item slot="items" class="hover-target" number="21" label="Pavimentos"></stat-item>
-        <stat-item slot="items" class="hover-target" number="Tênis" label="Quadra Coberta de Saibro"></stat-item>
+        <stat-item slot="items" class="hover-target" number="Saibro" label="Quadra de Tênis Coberta"></stat-item>
     </stats-section>
 
     <showcase-section id="concept" highlight="Arquitetura Viva" title="Modernismo <br>Contemporâneo"
-        text="Uma releitura do modernismo brasileiro por Perkins&Will. Pilotis, fluidez e aberturas generosas que traduzem a ideia de um edifício vivo."
+        text="Uma releitura do modernismo brasileiro por Perkins&Will. As aberturas generosas são invadidas por luz natural."
         button-text="Ver Lazer" button-link="#amenities">
-        <img slot="gallery" src="../media/granoscar/Embasamento.webp" alt="Embasamento com Pilotis">
-        <img slot="gallery" src="../media/granoscar/Acesso.webp" alt="Port Cochère">
-        <img slot="gallery" src="../media/granoscar/Detalhe Fachada.webp" alt="Perfeito em todos os ângulos">
+        <img slot="gallery" src="../media/Granoscar_Ibirapuera/fachadas/embasamento.webp" alt="Embasamento">
+        <img slot="gallery" src="../media/Granoscar_Ibirapuera/area_comum/acesso.webp" alt="Acesso Principal">
+        <img slot="gallery" src="../media/Granoscar_Ibirapuera/fachadas/detalhe_fachada.webp" alt="Detalhe Fachada">
+        <img slot="gallery" src="../media/Granoscar_Ibirapuera/fachadas/granoscar_ibirapuera.webp" alt="Fachada Geral">
     </showcase-section>
 
-    <video-section id=" video-tour" src="https://www.youtube.com/watch?v=HKxHnNq1Gis"
-        cover="../media/granoscar/Embasamento Avenida Indianópolis.webp" title="Granoscar - O Conceito">
+    <video-section id="video-tour" src="https://www.youtube.com/watch?v=HKxHnNq1Gis"
+        cover="../media/Granoscar_Ibirapuera/fachadas/embasamento_avenida_indianopolis.webp"
+        title="Granoscar - O Conceito">
     </video-section>
-
-    <plans-section id="plans" highlight="Tipologias" title="Plantas" project="Granoscar">
-
-        <plan-item slot="content" name="412m²" title="Apartamento 412m²"
-            desc="4 Suítes com Office Dedicado. Amplitude e ventilação cruzada." area="412m²" dorms="4 Suítes"
-            vagas="4 Vagas" extra-label="Destaque" extra-val="Office 17m²">
-            <img slot="image" src="../media/granoscar/Living Decorado (3 Suítes) - 412m².webp">
-        </plan-item>
-
-        <plan-item slot="content" name="370m²" title="Apartamento 370m²"
-            desc="4 Suítes. O equilíbrio perfeito entre área social e íntima com Hall Privativo." area="370m²"
-            dorms="4 Suítes" vagas="4 Vagas" extra-label="Exclusividade" extra-val="Hall Privativo">
-            <img slot="image" src="../media/granoscar/Living Ampliado de 353m².webp">
-        </plan-item>
-
-        <plan-item slot="content" name="Casa Suspensa" title="Duplex 654m²"
-            desc="O ápice do viver vertical. Piscina privativa, terraço gourmet e vista para o horizonte verde."
-            area="654m²" dorms="4 Suítes" vagas="6 Vagas" extra-label="Ícone" extra-val="Piscina Privativa">
-            <img slot="image" src="../media/granoscar/Living da Casa Suspensa.webp">
-            <img slot="image" src="../media/granoscar/Voo Casa Supensa.webp">
-        </plan-item>
-
-    </plans-section>
 
     <gallery-section id="amenities" subtitle="Private Resort" title="Bem-estar <br>em Movimento">
 
         <gallery-item slot="items" class="hover-target"
-            image="../media/granoscar/Quadra de Tênis Coberta de Saibro.webp" title="Tênis Coberta"
-            text="Saibro Oficial"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Tênis Lounge.webp"
-            title="Tênis Lounge" text="Apoio Quadra"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Tênis Lounge2.webp"
-            title="Bar do Tênis" text="Convivência"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Quadra Recreativa.webp"
-            title="Quadra Poliesportiva" text="Esportes Coletivos"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Jardim Tênis Lounge.webp"
-            title="Jardim Lounge" text="Área Externa"></gallery-item>
+            image="../media/Granoscar_Ibirapuera/area_comum/quadra_de_tenis_coberta_de_saibro.webp"
+            title="Tênis Coberta" text="Saibro Oficial"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/tenis_lounge.webp" title="Tênis Lounge"
+            text="Apoio Quadra"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/jardim_tenis_lounge.webp" title="Jardim Lounge"
+            text="Área Externa"></gallery-item>
 
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Piscina Descoberta com Solário.webp"
-            title="Piscina Externa" text="Oásis Urbano"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Piscina Coberta com Raia de 25m.webp"
-            title="Raia 25m" text="Piscina Climatizada"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Piscina Coberta e Banheira.webp"
-            title="Relax Pool" text="Hidroterapia"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Pool Bar.webp" title="Pool Bar"
-            text="Serviço de Resort"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Pool Bar2.webp" title="Lounge Piscina"
-            text="Área de Estar"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Sala de Massagem.webp"
-            title="Massagem" text="Spa Privativo"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Shower Therapy.webp"
-            title="Shower Therapy" text="Experiência Sensorial"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Beauty Care.webp" title="Beauty Care"
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/piscina_descoberta_com_solario.webp" title="Piscina Externa"
+            text="Oásis Urbano"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/piscina_coberta_com_raia_de_25m.webp" title="Raia Coberta"
+            text="25m Climatizada"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/piscina_coberta_e_banheira.webp" title="Relax Pool"
+            text="Hidroterapia"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Granoscar_Ibirapuera/area_comum/pool_bar.webp"
+            title="Pool Bar" text="Serviço Exclusivo"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Granoscar_Ibirapuera/area_comum/fitness.webp"
+            title="Fitness Center" text="Alta Performance"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Granoscar_Ibirapuera/area_comum/pilates.webp"
+            title="Studio Pilates" text="Equipamentos Completos"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/sala_multiuso.webp" title="Sala Multiuso"
+            text="Yoga e Funcional"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/beauty_care.webp" title="Beauty Care"
             text="Salão de Beleza"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/sala_de_massagem.webp" title="Massagem"
+            text="Spa Privativo"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/shower_therapy.webp" title="Shower Therapy"
+            text="Experiência Sensorial"></gallery-item>
 
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Fitness.webp" title="Fitness Center"
-            text="Technogym"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Fitness2.webp" title="Área Cardio"
-            text="Vista para o Jardim"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Pilates.webp" title="Studio Pilates"
-            text="Equipamentos Completos"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Sala Multiuso.webp"
-            title="Sala Multiuso" text="Yoga e Funcional"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Granoscar_Ibirapuera/area_comum/piano_bar.webp"
+            title="Piano Bar" text="Sofisticação"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/libreria_com_sala_de_reuniao.webp" title="Libreria"
+            text="Coworking & Leitura"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/lobby_com_concierge.webp" title="Lobby"
+            text="Com Concierge"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/hall_galeria.webp" title="Hall Galeria"
+            text="Arte e Design"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/praca_central_com_espelho_d_agua.webp" title="Praça Central"
+            text="Espelho D'água"></gallery-item>
 
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Piano Bar.webp" title="Piano Bar"
-            text="Sofisticação"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Piano Bar2.webp" title="Lounge Bar"
-            text="Encontros"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Praça Central com Espelho D'água.webp"
-            title="Praça Central" text="Espelho D'água"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Libreria com Sala de Reunião.webp"
-            title="Libreria" text="Coworking & Leitura"></gallery-item>
-
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Brinquedoteca.webp"
-            title="Brinquedoteca" text="Lúdico"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Playground.webp" title="Playground"
-            text="Ar Livre"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Espaço Teen.webp" title="Espaço Teen"
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/brinquedoteca.webp" title="Brinquedoteca"
+            text="Lúdico"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/gourmet_kids.webp" title="Gourmet Kids"
+            text="Festas Infantis"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Granoscar_Ibirapuera/area_comum/playground.webp"
+            title="Playground" text="Ar Livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/espaco_teen.webp" title="Espaço Teen"
             text="Jogos e Convivência"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/quadra_recreativa.webp" title="Quadra Poliesportiva"
+            text="Esportes Coletivos"></gallery-item>
 
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Office.webp" title="Office"
-            text="Trabalho Remoto"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/granoscar/Vaga de Visitantes.webp"
-            title="Port Cochère" text="Recepção"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Granoscar_Ibirapuera/area_comum/vaga_de_visitantes.webp" title="Port Cochère"
+            text="Recepção"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Granoscar_Ibirapuera/area_comum/acesso.webp"
+            title="Acesso" text="Segurança e Design"></gallery-item>
+
     </gallery-section>
 
     <team-section id="team" highlight="Curadoria" title="Mentes <br>Brilhantes">
@@ -249,7 +241,35 @@
             image="../media/utils/Anastassiadis.jpg"></team-member>
     </team-section>
 
-    <region-section id="location" image="../media/granoscar/Embasamento Avenida Indianópolis.webp"
+    <curator-review curator="Mota" phrases='["Raridade", "Tênis Coberta", "Arquitetura Viva", "Hanazaki"]'
+        pros="A quadra de tênis de saibro coberta é um item de colecionador nesta região. O paisagismo de Hanazaki cria um microclima único."
+        cons="É um produto de altíssimo padrão com poucas unidades, garantindo exclusividade absoluta.">
+    </curator-review>
+
+    <plans-section id="plans" highlight="Tipologias" title="Residências" project="Granoscar">
+
+        <plan-item slot="content" name="412m²" title="Apartamento 412m²"
+            desc="4 Suítes com Office Dedicado. A grandiosidade do living conecta interior e exterior." area="412m²"
+            dorms="4 Suítes" vagas="4 Vagas" extra-label="Destaque" extra-val="Office Dedicado">
+            <img slot="image" src="../media/Granoscar_Ibirapuera/Plantas/4_suites_412m.webp">
+        </plan-item>
+
+        <plan-item slot="content" name="370m²" title="Apartamento 370m²"
+            desc="Planta sofisticada com 4 suítes e ventilação cruzada." area="370m²" dorms="4 Suítes" vagas="4 Vagas"
+            extra-label="Exclusividade" extra-val="Living Ampliado">
+            <img slot="image" src="../media/Granoscar_Ibirapuera/Plantas/4_suites_370m.webp">
+        </plan-item>
+
+        <plan-item slot="content" name="654m²" title="Casa Suspensa"
+            desc="Duplex espetacular. O ápice do viver vertical com piscina privativa." area="654m²" dorms="4 Suítes"
+            vagas="6 Vagas" extra-label="Ícone" extra-val="Piscina Privativa">
+            <img slot="image" src="../media/Granoscar_Ibirapuera/Plantas/duplex_planta_inferior_654m.webp">
+            <img slot="image" src="../media/Granoscar_Ibirapuera/Plantas/duplex_planta_superior_654m.webp">
+        </plan-item>
+
+    </plans-section>
+
+    <region-section id="location" image="../media/Granoscar_Ibirapuera/fachadas/embasamento_avenida_indianopolis.webp"
         highlight="Alameda dos Anapurus, 410" title="O Corredor do Ibirapuera"
         text="Um estilo de vida singular onde conveniência e elegância caminham lado a lado. A 6 minutos do Parque Ibirapuera."
         lat="-23.5985" lng="-46.6620" zoom="16" pois='[
@@ -258,11 +278,6 @@
             {"title": "Shopping JK", "loc": [-23.5920, -46.6850]}
         ]'>
     </region-section>
-
-    <curator-review curator="Mota" phrases='["Raridade", "Tênis Coberta", "Arquitetura Viva", "Hanazaki"]'
-        pros="A quadra de tênis de saibro coberta é um item de colecionador nesta região. O paisagismo de Hanazaki cria um microclima único."
-        cons="É um produto de altíssimo padrão com poucas unidades, garantindo exclusividade absoluta.">
-    </curator-review>
 
     <cta-section id="schedule" highlight="Atendimento Private" title="A Experiência de Sentir-se Hóspede"
         text="Conheça os detalhes deste projeto icônico e a carta de serviços exclusiva em um atendimento personalizado."
@@ -274,9 +289,8 @@
     </trust-section>
 
     <page-scanner category="rare"></page-scanner>
-    <related-products current="granoscar" category="rare"></related-products>
 
-    <footer-section project="GRANOSCAR" broker="CORRETOR MOTA - CRECI 268.448" root-path=".."></footer-section>
+    <footer-section project="GRANOSCAR" broker="CORRETOR MOTA - CRECI 315675" root-path=".."></footer-section>
 
     <floating-actions></floating-actions>
     <contact-popup></contact-popup>

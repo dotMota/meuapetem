@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:image" content="../media/ElevButanta/aereaLazer.webp">
+    <title>Elev Butantã | Trisul</title>
+    <meta name="description"
+        content="Um passo muda tudo. More em frente à Estação Butantã. Apartamentos de 25m² a 38m² com lazer de clube e fácil acesso à USP.">
+
+    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
+
+    <meta property="og:image" content="../media/Elev_Butant/fachadas/elev_butanta.webp">
     <meta name="product-category" content="smart">
     <meta name="product-vibe" content="Metrô na Porta">
     <meta name="product-tags" content="4 Passos do Metrô, USP">
-
-    <title>Elev Butantã | Trisul</title>
-    <meta name="description"
-        content="Um passo muda tudo. More em frente à Estação Butantã. Apartamentos de 1 e 2 dorms com lazer de clube.">
-
-    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
     <script>
@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- TEMA ELEV BUTANTÃ (Yellow Line) --- */
+        /* --- TEMA ELEV BUTANTÃ (Yellow Line & Urban) --- */
         :root {
             /* Identidade Visual Amarela (Linha 4) */
             --color-highlight: #fcd22c;
@@ -105,7 +105,7 @@
     <script src="../components/lightbox.js" defer></script>
     <script src="../components/persona-switcher.js" defer></script>
     <script src="../components/project-card.js" defer></script>
-    <script src="../components/related.js" defer></script>
+    <script src="../components/page-scanner.js" defer></script>
 
 </head>
 
@@ -121,12 +121,12 @@
         <a slot="links" href="#concept">O Projeto</a>
         <a slot="links" href="#video-tour">Vídeo</a>
         <a slot="links" href="#amenities">Lazer</a>
-        <a slot="links" href="#location">Localização</a>
         <a slot="links" href="#plans">Plantas</a>
+        <a slot="links" href="#location">Localização</a>
         <a slot="links" href="#schedule" class="auto-trigger" id="menu-cta">Simular</a>
     </site-menu>
 
-    <hero-section id="home" image="../media/ElevButanta/aereaLazer.webp" highlight="Minha Casa Minha Vida"
+    <hero-section id="home" image="../media/Elev_Butant/area_comum/voo_piscinas.webp" highlight="Minha Casa Minha Vida"
         subtitle="O Futuro é Agora" title="Um Passo Muda Tudo" curator-badge="true"
         text="A apenas 4 passos da Estação Butantã. Conecte-se com a cidade e conquiste sua independência.">
         <a href="#schedule" slot="cta" id="hero-cta-btn"
@@ -134,73 +134,114 @@
             sem Entrada*</a>
     </hero-section>
 
-    <marquee-scroll id="marquee"
-        text="METRÔ NA PORTA — 5 MIN DA USP — LAZER NO ROOFTOP — VARANDA EM TODAS AS UNIDADES — "
+    <marquee-scroll id="marquee" text="METRÔ NA PORTA — 5 MIN DA USP — LAZER DE CLUBE — VARANDA EM TODAS AS UNIDADES — "
         speed="60s"></marquee-scroll>
 
     <stats-section id="stats">
         <stat-item slot="items" class="hover-target" id="stat-1" number="10 seg"
             label="Do Metrô (Linha Amarela)"></stat-item>
         <stat-item slot="items" class="hover-target" id="stat-2" number="USP" label="5 Minutos"></stat-item>
-        <stat-item slot="items" class="hover-target" id="stat-3" number="Rooftop" label="Lazer nas Alturas"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-3" number="Lazer" label="Clube Completo"></stat-item>
     </stats-section>
 
     <showcase-section id="concept" highlight="Arquitetura" title="Trajeto & <br>Conexão"
         text="Uma torre moderna na esquina mais desejada da região. Fachada ativa que traz vida e conveniência para o seu dia a dia."
         button-text="Ver Lazer" button-link="#amenities">
-        <img slot="gallery" src="../media/ElevButanta/fachadaAtiva.webp" alt="Fachada Ativa" loading="lazy">
-        <img slot="gallery" src="../media/ElevButanta/AcessoMoradores.webp" alt="Entrada Exclusiva" loading="lazy">
-        <img slot="gallery" src="../media/ElevButanta/lobby.webp" alt="Lobby Design" loading="lazy">
+        <img slot="gallery" src="../media/Elev_Butant/fachadas/embasamento.webp" alt="Fachada Ativa">
+        <img slot="gallery" src="../media/Elev_Butant/fachadas/acesso.webp" alt="Acesso Exclusivo">
+        <img slot="gallery" src="../media/Elev_Butant/area_comum/hall_de_acesso.webp" alt="Hall Design">
+        <img slot="gallery" src="../media/Elev_Butant/fachadas/fachada.webp" alt="Em frente ao Metrô">
     </showcase-section>
 
     <video-section id="video-tour" src="https://www.youtube.com/watch?v=MWZhACR6E4I"
-        cover="../media/ElevButanta/herovideo.png" title="Um Passo Muda Tudo">
+        cover="../media/Elev_Butant/fachadas/elev_butanta.webp" title="Um Passo Muda Tudo">
     </video-section>
 
     <gallery-section id="amenities" subtitle="Seu Clube" title="Viva em <br>Movimento">
-        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/psicina.webp" title="Piscina Adulto"
-            text="Com Deck Molhado"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/aereaLazer.webp" title="Rooftop"
-            text="Vista Panorâmica"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/fitness.webp" title="Fitness"
-            text="Treino com Vista"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/quadra.webp" title="Quadra"
-            text="Recreativa Gramada"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/ElevButanta/areaLazer.webp" title="Solarium"
-            text="Espaço de Relaxamento"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/piscina.webp"
+            title="Piscina Adulto" text="Com Deck Molhado"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/voo_piscinas.webp"
+            title="Vista Aérea" text="Complexo Aquático"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/fitness.webp"
+            title="Fitness" text="Academia Completa"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/quadra_recreativa.webp"
+            title="Quadra Recreativa" text="Esportes"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Butant/area_comum/quadra_recreativa_e_playground.webp" title="Quadra & Play"
+            text="Integração do Lazer"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/salao_de_festas.webp"
+            title="Salão de Festas" text="Para seus eventos"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Butant/area_comum/churrasqueira_e_lounge_lareira.webp" title="Lounge & Grill"
+            text="Espaço de Convivência"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/churrasqueira.webp"
+            title="Churrasqueira" text="Espaço Gourmet"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/salao_de_jogos.webp"
+            title="Salão de Jogos" text="Diversão Garantida"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/sports_bar.webp"
+            title="Sports Bar" text="Happy Hour"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/playground.webp"
+            title="Playground" text="Ao Ar Livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/brinquedoteca.webp"
+            title="Brinquedoteca" text="Espaço Kids"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/pet_place.webp"
+            title="Pet Place" text="Agility para Pets"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/pet_care.webp"
+            title="Pet Care" text="Banho e Tosa"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/espaco_zen.webp"
+            title="Espaço Zen" text="Relaxamento"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/sala_de_massagem.webp"
+            title="Sala de Massagem" text="Bem-Estar"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/mini_mercado.webp"
+            title="Mini Mercado" text="Conveniência 24h"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/delivery.webp"
+            title="Delivery" text="Área de Entregas"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Butant/area_comum/coworking_e_lavanderia_coletiva.webp" title="Coworking & Lavanderia"
+            text="Praticidade"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/lavanderia.webp"
+            title="Lavanderia" text="Omo Compartilhada"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Butant/area_comum/sala_de_reuniao_privativa.webp" title="Sala de Reunião"
+            text="Privativa"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/bicicletario.webp"
+            title="Bicicletário" text="Mobilidade"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Butant/area_comum/hall_de_acesso.webp"
+            title="Hall Social" text="Design Contemporâneo"></gallery-item>
+
     </gallery-section>
+
+    <curator-review id="review" curator="Mota" phrases='["Mobilidade Total", "Jovem", "Rentável", "Smart Living"]'
+        pros="Não existe 'perto do metrô', aqui é 'no metrô'. Para quem estuda na USP ou trabalha na Faria Lima, é imbatível."
+        cons="O fluxo intenso da Av. Vital Brasil exige janelas fechadas nos andares baixos, mas a acústica do projeto prevê isso.">
+    </curator-review>
 
     <plans-section id="plans" highlight="Plantas Inteligentes" title="Plantas" project="Elev Butantã">
 
         <plan-item slot="content" name="38m²" title="2 Dorms (Suíte)"
             desc="A melhor planta da categoria. Suíte master, varanda e ventilação natural nos banhos." area="38m²"
             dorms="2 Dorms" vagas="" extra-label="Destaque" extra-val="Suíte">
-            <img slot="image" src="../media/ElevButanta/planta38m.webp" loading="lazy">
+            <img slot="image" src="../media/Elev_Butant/Plantas/02_dorms_c_suite_38m.webp">
         </plan-item>
 
         <plan-item slot="content" name="34m²" title="2 Dorms (Varanda)"
             desc="Dois dormitórios na medida certa para começar a vida ou dividir com amigos." area="34m²"
             dorms="2 Dorms" vagas="" extra-label="Smart" extra-val="Layout Otimizado">
-            <img slot="image" src="../media/ElevButanta/planta34m.webp" loading="lazy">
+            <img slot="image" src="../media/Elev_Butant/Plantas/02_dorms_34m.webp">
         </plan-item>
 
         <plan-item slot="content" name="25m²" title="Studio"
             desc="O ativo perfeito para locação ou sua primeira independência." area="25m²" dorms="1 Dorm" vagas=""
             extra-label="Rentabilidade" extra-val="Compacto">
-            <img slot="image" src="../media/ElevButanta/planta25m.webp" loading="lazy">
+            <img slot="image" src="../media/Elev_Butant/Plantas/01_dorm_25m.webp">
         </plan-item>
 
     </plans-section>
-
-    <region-section id="location" image="../media/ElevButanta/FachadaMetro.webp" highlight="Localização Premium"
-        title="O Epicentro da Zona Oeste"
-        text="Av. Vital Brasil, 329. Literalmente em frente ao Metrô Butantã. Vizinho da USP, Jockey Club e Shopping Eldorado."
-        lat="-23.5718" lng="-46.7080" zoom="16" pois='[
-            {"title": "Metrô Butantã", "loc": [-23.5718, -46.7080]}, 
-            {"title": "USP (P1)", "loc": [-23.5680, -46.7150]}, 
-            {"title": "Shopping Eldorado", "loc": [-23.5730, -46.6960]}
-        ]'>
-    </region-section>
 
     <team-section highlight="Assinatura" title="Quem Faz">
         <team-member slot="members" role="Arquitetura" name="MCAA Arquitetos"
@@ -214,10 +255,15 @@
             image="../media/utils/Skiros.png"></team-member>
     </team-section>
 
-    <curator-review id="review" curator="Mota" phrases='["Mobilidade Total", "Jovem", "Rentável", "Smart Living"]'
-        pros="Não existe 'perto do metrô', aqui é 'no metrô'. Para quem estuda na USP ou trabalha na Faria Lima, é imbatível."
-        cons="O fluxo intenso da Av. Vital Brasil exige janelas fechadas nos andares baixos, mas a acústica do projeto prevê isso.">
-    </curator-review>
+    <region-section id="location" image="../media/Elev_Butant/fachadas/elev_butanta.webp"
+        highlight="Localização Premium" title="O Epicentro da Zona Oeste"
+        text="Av. Vital Brasil, 329. Literalmente em frente ao Metrô Butantã. Vizinho da USP, Jockey Club e Shopping Eldorado."
+        lat="-23.5718" lng="-46.7080" zoom="16" pois='[
+            {"title": "Metrô Butantã", "loc": [-23.5718, -46.7080]}, 
+            {"title": "USP (P1)", "loc": [-23.5680, -46.7150]}, 
+            {"title": "Shopping Eldorado", "loc": [-23.5730, -46.6960]}
+        ]'>
+    </region-section>
 
     <cta-section id="schedule" highlight="Últimas Unidades" title="Mude de Vida"
         text="Condições facilitadas de lançamento. Compre sem entrada e com escritura grátis."
@@ -228,8 +274,6 @@
         <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
         <trust-item slot="items" title="Financiamento" img="../media/utils/caixa.svg" alt="Caixa"></trust-item>
     </trust-section>
-
-    <related-products current="elev-sacoma" category="smart"></related-products>
 
     <page-scanner category="smart"></page-scanner>
 

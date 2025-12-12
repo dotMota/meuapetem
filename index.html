@@ -59,13 +59,13 @@
         }
 
         /* Ajuste fino para os botões do Hero ficarem distintos */
-        hero-brand a.btn-primary {
+        hero-brand::part(btn-primary) {
             background-color: #fff !important;
             color: #000 !important;
             border-color: #fff !important;
         }
 
-        hero-brand a.btn-secondary {
+        hero-brand::part(btn-secondary) {
             border-color: var(--highlight-color) !important;
             color: var(--highlight-color) !important;
         }
@@ -76,12 +76,11 @@
     <script src="./components/hero-brand.js" defer></script>
     <script src="./components/marquee.js" defer></script>
     <script src="./components/manifesto.js" defer></script>
-    <script src="./components/grid-section.js" defer></script>
     <script src="./components/project-card.js" defer></script>
+    <script src="./components/page-scanner.js" defer></script>
     <script src="./components/cta-banner.js" defer></script>
     <script src="./components/footer.js" defer></script>
     <script src="./components/cursor.js" defer></script>
-
     <script src="./components/floating.js" defer></script>
     <script src="./components/contact.js" defer></script>
     <script src="./components/cookie.js" defer></script>
@@ -99,8 +98,7 @@
         <a slot="links" href="#schedule" class="auto-trigger">Falar com Consultor</a>
     </site-menu>
 
-    <hero-brand id="home" title="MeuApêTem">
-    </hero-brand>
+    <hero-brand id="home" title="MeuApêTem"></hero-brand>
 
     <marquee-scroll text="CURADORIA EXPERIENCIAL — DO PRIMEIRO APÊ AO ALTO PADRÃO — TRANSPARÊNCIA RADICAL — "
         speed="100s">
@@ -110,31 +108,11 @@
         text="Seja para conquistar sua independência ou encontrar sua raridade. Facilitamos o encontro entre você e o seu próximo passo.">
     </manifesto-section>
 
-    <grid-section id="rare-collection" title="The Rare Collection" subtitle="Lifestyle Boutique" bg-color="#0a0a0a">
-
-        <project-card title="Quarten Ibirapuera" vibe="Refúgio Urbano" tags="Bosque Privativo, Wellness"
-            price="Alto Padrão" image="./media/quarten/hero.jpg" link="projects/quarten.html">
-        </project-card>
-
-        <project-card title="Granoscar" vibe="Ícone do Ibirapuera" tags="Perkins&Will, Hanazaki" price="Lançamento"
-            image="./media/granoscar/fachada.webp" link="projects/granoscar.html">
-        </project-card>
-
-    </grid-section>
+    <page-scanner id="rare-collection" category="rare"></page-scanner>
 
     <div style="height: 1px; background: rgba(255,255,255,0.1); width: 90%; margin: 0 auto;"></div>
 
-    <grid-section id="smart-living" title="Smart Living" subtitle="Sua Conquista Agora" bg-color="#141414">
-
-        <project-card title="Elev Butantã" vibe="Metrô na Porta" tags="4 Passos do Metrô, USP" price="MCMV"
-            image="./media/ElevButanta/aereaLazer.webp" link="projects/elevButanta.html">
-        </project-card>
-
-        <project-card title="Elev Park Sacomã" vibe="Sucesso de Vendas" tags="Escritura Grátis, Sem Entrada"
-            price="Oportunidade" image="./media/elev-sacoma/fachada.webp" link="projects/elevSacoma.html">
-        </project-card>
-
-    </grid-section>
+    <page-scanner id="smart-living" category="smart"></page-scanner>
 
     <cta-banner id="schedule" title="Ainda não encontrou o seu?"
         text="Temos acesso a lançamentos Off-Market e condições exclusivas que não estão no site."
@@ -153,39 +131,10 @@
 
     <script>
         window.addEventListener('load', () => {
-            // Personaliza os botões dos Cards de Alto Padrão
-            const rareCards = document.querySelectorAll('#rare-collection project-card');
-            rareCards.forEach(card => {
-                const btn = card.shadowRoot.querySelector('.cta-btn');
-                if (btn) {
-                    btn.innerText = "Experience The Rare";
-                    btn.style.border = "1px solid #c5a065";
-                    btn.style.background = "transparent";
-                    btn.style.color = "#c5a065";
-                }
-            });
-
-            // Personaliza os botões dos Cards Econômicos (Foco em Ação/Facilidade)
-            const smartCards = document.querySelectorAll('#smart-living project-card');
-            smartCards.forEach(card => {
-                const btn = card.shadowRoot.querySelector('.cta-btn');
-                if (btn) {
-                    // Texto condicional
-                    if (card.getAttribute('title').includes('Sacomã')) {
-                        btn.innerText = "Compre sem Entrada";
-                    } else {
-                        btn.innerText = "Um Passo Muda Tudo";
-                    }
-                    // Estilo mais vibrante
-                    btn.style.background = "#fff";
-                    btn.style.color = "#000";
-                    btn.style.fontWeight = "800";
-                }
-            });
-
             // Ajusta o Hero Button Secundário para levar ao Smart Living
             const hero = document.querySelector('hero-brand');
             if (hero) {
+                // Acessa o Shadow DOM do componente Hero
                 const btnSec = hero.shadowRoot.querySelector('.btn-secondary');
                 if (btnSec) {
                     btnSec.innerText = "Quero Sair do Aluguel";

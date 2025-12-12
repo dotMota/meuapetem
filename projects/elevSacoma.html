@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:image" content="../media/elev-sacoma/fachada.webp">
-    <meta name="product-category" content="smart">
-    <meta name="product-vibe" content="Sucesso de Vendas">
-    <meta name="product-tags" content="Escritura Grátis, Sem Entrada">
-
     <title>Elev Park Sacomã | Trisul</title>
     <meta name="description"
-        content="More a 3 minutos do Metrô Sacomã. Lazer de clube completo, escritura grátis e condições facilitadas.">
+        content="Breve Lançamento no Sacomã. Apartamentos de 25m² a 37m² com lazer de clube e parque privativo. A 3 min do Metrô.">
 
     <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
+
+    <meta property="og:image" content="../media/Elev-Park-Sacom/area_comum/voo.webp">
+    <meta name="product-category" content="smart">
+    <meta name="product-vibe" content="Parque Privativo">
+    <meta name="product-tags" content="Sacomã, Metrô, Lazer de Clube">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
     <script>
@@ -27,30 +27,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Manrope:wght@200;300;400;500&family=Space+Grotesk:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- TEMA ELEV PARK SACOMÃ --- */
+        /* --- TEMA ELEV PARK SACOMÃ (Verde/Teal e Azul) --- */
         :root {
-            /* Cores Vibrantes (Baseado no PDF) */
-            --color-highlight: #2cd493;
-            /* Verde Elev [cite: 33] */
-            --color-text-primary: #f0f0f0;
-            --color-text-secondary: #b0b0b0;
+            /* Gradiente inspirado na capa do PDF (Verde/Azul) */
+            --color-highlight: #00c4b4;
+            /* Verde Água Vibrante */
+            --color-investor: #0056b3;
+            /* Azul Institucional */
+
+            --color-text-primary: #f5f5f7;
+            --color-text-secondary: #a1a1aa;
 
             /* Fundos */
             --bg-page-body: #0d1117;
-            --bg-section-main: #12161c;
-            --bg-brand-dark: #080a0f;
-            --bg-cta-gradient: linear-gradient(135deg, #0d1117 0%, #1a2e26 100%);
+            --bg-section-main: #161b22;
+            --bg-brand-dark: #010409;
+            --bg-cta-gradient: linear-gradient(135deg, #0d1117 0%, #002e29 100%);
 
             /* Tipografia */
             --font-title: 'Space Grotesk', sans-serif;
-            --font-text: 'Manrope', sans-serif;
+            --font-text: 'Inter', sans-serif;
 
-            /* Mapeamento */
+            /* Mapeamento Padrão */
             --highlight-color: var(--color-highlight);
             --bg-color: var(--bg-section-main);
             --text-color: var(--color-text-secondary);
@@ -59,17 +62,17 @@
 
         /* Botão CTA Personalizado */
         cta-section::part(button) {
-            background: #fff;
+            background: var(--color-highlight);
             color: #000;
             font-weight: 800;
-            letter-spacing: 1px;
-            border: 2px solid #fff;
+            letter-spacing: 0.5px;
+            border: none;
         }
 
         cta-section::part(button):hover {
-            background: var(--color-highlight);
-            border-color: var(--color-highlight);
-            color: #fff;
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 15px var(--color-highlight);
         }
 
         body,
@@ -106,7 +109,7 @@
     <script src="../components/lightbox.js" defer></script>
     <script src="../components/persona-switcher.js" defer></script>
     <script src="../components/project-card.js" defer></script>
-    <script src="../components/related.js" defer></script>
+    <script src="../components/page-scanner.js" defer></script>
 
 </head>
 
@@ -117,121 +120,166 @@
     <persona-switcher modes='[{"key": "resident", "label": "Vou Morar"}, {"key": "investor", "label": "Vou Investir"}]'>
     </persona-switcher>
 
-    <site-menu logo="ELEV PARK" parent-text="MeuApêTem" parent-link="../index.html">
+    <site-menu logo="ELEV." parent-text="MeuApêTem" parent-link="../index.html">
         <a slot="links" href="#home">Início</a>
         <a slot="links" href="#concept">O Projeto</a>
-        <a slot="links" href="#video-tour">Tour</a>
-        <a slot="links" href="#amenities">Lazer</a>
-        <a slot="links" href="#location">Mapa</a>
+        <a slot="links" href="#amenities">Lazer de Clube</a>
+        <a slot="links" href="#location">Localização</a>
         <a slot="links" href="#plans">Plantas</a>
         <a slot="links" href="#schedule" class="auto-trigger" id="menu-cta">Simular</a>
     </site-menu>
 
-    <hero-section id="home" image="../media/elev-sacoma/hero.jpg" highlight="Minha Casa Minha Vida"
-        subtitle="Sucesso de Vendas" title="Chegou a hora de dar vida aos seus sonhos" curator-badge="true"
-        text="A apenas 3 minutos a pé da Estação Sacomã. Um projeto grandioso que alinha conquistas pessoais e qualidade de vida.">
+    <hero-section id="home" image="../media/Elev-Park-Sacom/area_comum/voo.webp" highlight="Minha Casa Minha Vida"
+        subtitle="Elev Park Sacomã" title="Sua Vida Agora" curator-badge="true"
+        text="Um projeto grandioso com parque privativo, a apenas 3 minutos a pé da Estação Sacomã.">
         <a href="#schedule" slot="cta" id="hero-cta-btn"
-            style="display:inline-block; margin-top:20px; padding:15px 30px; background:var(--color-highlight); color:#000; font-weight:bold; border-radius:50px; text-decoration:none; text-transform:uppercase; font-size:0.9rem;">Compre
-            sem Entrada*</a>
+            style="display:inline-block; margin-top:20px; padding:15px 30px; background:var(--color-highlight); color:#000; font-weight:bold; border-radius:50px; text-decoration:none; text-transform:uppercase; font-size:0.9rem;">
+            Compre sem Entrada*
+        </a>
     </hero-section>
 
-    <marquee-scroll id="marquee" text="ESCRITURA GRÁTIS — UTILIZE SEU FGTS — COMPRE SEM ENTRADA — 3 MIN DO METRÔ — "
-        speed="70s"></marquee-scroll>
+    <marquee-scroll id="marquee" text="LAZER DE CLUBE — PARQUE PRIVATIVO — 3 MIN DO METRÔ SACOMÃ — ESCRITURA GRÁTIS — "
+        speed="60s"></marquee-scroll>
 
     <stats-section id="stats">
-        <stat-item slot="items" class="hover-target" id="stat-1" number="3 min" label="Do Metrô a pé"></stat-item>
-        <stat-item slot="items" class="hover-target" id="stat-2" number="+10 mil m²"
-            label="Qualidade Construtiva"></stat-item>
-        <stat-item slot="items" class="hover-target" id="stat-3" number="Lazer" label="Clube Completo"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-1" number="3 min"
+            label="A pé do Metrô Sacomã"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-2" number="Clube" label="Lazer Completo"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-3" number="Parque" label="Privativo"></stat-item>
     </stats-section>
 
-    <showcase-section id="concept" highlight="Conceito" title="Uma Nova Visão <br>do Morar Bem"
-        text="Um condomínio voltado para a família, com o lazer como seu grande protagonista e áreas verdes exclusivas com uma praça central."
-        button-text="Ver Lazer" button-link="#amenities">
-        <img slot="gallery" src="../media/elev-sacoma/fachada.webp" alt="Fachada Imponente" loading="lazy">
-        <img slot="gallery" src="../media/elev-sacoma/boulevard.webp" alt="Boulevard Central" loading="lazy">
-        <img slot="gallery" src="../media/elev-sacoma/portaria.webp" alt="Acesso Seguro" loading="lazy">
+    <showcase-section id="concept" highlight="Conceito" title="Grandeza & <br>Inovação"
+        text="Após o sucesso absoluto da primeira fase, apresentamos um projeto que alia a racionalidade do espaço de morar com um paisagismo vibrante."
+        button-text="Ver Plantas" button-link="#plans">
+        <img slot="gallery" src="../media/Elev-Park-Sacom/fachadas/elev_park_sacoma_ii.webp" alt="Fachada Geral">
+        <img slot="gallery" src="../media/Elev-Park-Sacom/area_comum/boulevard.webp" alt="Boulevard">
+        <img slot="gallery" src="../media/Elev-Park-Sacom/fachadas/embasamento.webp" alt="Embasamento">
+        <img slot="gallery" src="../media/Elev-Park-Sacom/area_comum/voo.webp" alt="Voo Geral">
     </showcase-section>
 
-    <video-section id="video-tour" src="https://www.youtube.com/watch?v=d387koBqZjY"
-        cover="../media/elev-sacoma/hero-video.jpg" title="Conceito Elev Park">
+    <video-section id="video-tour" src="https://www.youtube.com/watch?v=SEU_ID_AQUI"
+        cover="../media/Elev-Park-Sacom/area_comum/voo.webp" title="Tour Elev Park Sacomã">
     </video-section>
 
-    <gallery-section id="amenities" subtitle="Seu Clube" title="Momentos <br>Extraordinários">
-        <gallery-item slot="items" class="hover-target" image="../media/elev-sacoma/piscina.webp"
-            title="Complexo Aquático" text="Adulto e Infantil"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/elev-sacoma/quadra-areia.webp"
-            title="Quadra de Areia" text="Esportes ao ar livre"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/elev-sacoma/fitness.webp"
-            title="Fitness Completo" text="Interno e Externo"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/elev-sacoma/sports-bar.webp" title="Sports Bar"
-            text="Para reunir a torcida"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/elev-sacoma/mini-mercado.webp"
-            title="Mini Mercado" text="Conveniência 24h"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/elev-sacoma/pet-place.webp"
-            title="Spa & Pet Place" text="Cuidado para seu pet"></gallery-item>
+    <gallery-section id="amenities" subtitle="Seu Clube" title="Viva em <br>Movimento">
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/piscina_adulto.webp"
+            title="Piscina Adulto" text="Raia de 25m e Deck Molhado"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/piscina.webp"
+            title="Complexo Aquático" text="Com Piscina Infantil"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/praca_central_com_espelho_d_agua.webp" title="Praça Central"
+            text="Com Espelho D'água"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/quadra_de_areia.webp"
+            title="Quadra de Areia" text="Beach Tennis e Vôlei"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/fitness_externo.webp"
+            title="Fitness Externo" text="Treino ao Ar Livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/fitness_torre_d.webp"
+            title="Academia" text="Equipamentos Modernos"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/churrasqueira.webp"
+            title="Churrasqueira" text="Com Forno de Pizza"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/salao_de_festas_torre_b.webp" title="Salão de Festas"
+            text="Torre Orvalho"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/espaco_gourmet_torre_c.webp" title="Espaço Gourmet"
+            text="Torre Maré"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/salao_de_jogos_torre_c.webp" title="Salão de Jogos"
+            text="Diversão para todos"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/lounge_lareira.webp"
+            title="Lounge Lareira" text="Convivência"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/playground.webp"
+            title="Playground" text="Ao Ar Livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/brinquedoteca_torre_a.webp" title="Brinquedoteca"
+            text="Espaço Kids"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/espaco_pet.webp"
+            title="Espaço Pet" text="Com Agility"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/spa_pet_torre_d.webp"
+            title="Spa Pet" text="Cuidado para seu amigo"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/mini_mercado_torre_b.webp" title="Mini Mercado"
+            text="Praticidade 24h"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/delivery.webp"
+            title="Delivery" text="Área para Entregas"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/lavanderia_torre_d.webp" title="Lavanderia"
+            text="Parceria OMO"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/bicicletario_torre_d.webp" title="Bicicletário"
+            text="Com Oficina"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev-Park-Sacom/area_comum/atelie_torre_b.webp"
+            title="Ateliê" text="Espaço Criativo"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev-Park-Sacom/area_comum/espaco_beleza_torre_b.webp" title="Espaço Beleza"
+            text="Bem-estar"></gallery-item>
+
     </gallery-section>
 
-    <plans-section id="plans" highlight="Tipologias" title="Plantas" project="Elev Park Sacomã">
+    <plans-section id="plans" highlight="Plantas Inteligentes" title="Plantas" project="Elev Park Sacomã II">
 
         <plan-item slot="content" name="37m²" title="2 Dorms (Suíte)"
-            desc="A planta mais desejada. 2 Dormitórios, sendo 1 suíte, com varanda integrada." area="37m²"
-            dorms="2 Dorms" vagas="" extra-label="Diferencial" extra-val="Suíte + Varanda">
-            <img slot="image" src="../media/elev-sacoma/planta-37-decorado.webp">
-            <img slot="image" src="../media/elev-sacoma/planta-37.webp">
+            desc="Planta com suíte master, varanda e ventilação natural nos banhos." area="37m²" dorms="2 Dorms"
+            vagas="" extra-label="Destaque" extra-val="Suíte + Varanda">
+            <img slot="image" src="../media/Elev-Park-Sacom/Plantas/2_dorms_1_suite_varanda_37m.webp">
         </plan-item>
 
         <plan-item slot="content" name="34m²" title="2 Dorms (Varanda)"
-            desc="Planta inteligente com 2 dormitórios e varanda. Ideal para pequenas famílias." area="34m²"
-            dorms="2 Dorms" vagas="" extra-label="Conforto" extra-val="Varanda">
-            <img slot="image" src="../media/elev-sacoma/planta-34.webp">
+            desc="Dois dormitórios com living integrado à varanda." area="34m²" dorms="2 Dorms" vagas=""
+            extra-label="Smart" extra-val="Com Varanda">
+            <img slot="image" src="../media/Elev-Park-Sacom/Plantas/2_dorms_varanda_34m.webp">
         </plan-item>
 
         <plan-item slot="content" name="32m²" title="2 Dorms"
-            desc="O melhor custo-benefício. 2 dormitórios com layout otimizado." area="32m²" dorms="2 Dorms" vagas=""
-            extra-label="Valor" extra-val="Entrada Facilitada">
-            <img slot="image" src="../media/elev-sacoma/planta-32.webp">
+            desc="Planta otimizada com 2 dormitórios (sem varanda). Excelente custo-benefício." area="32m²"
+            dorms="2 Dorms" vagas="" extra-label="Econômico" extra-val="Sem Varanda">
+            <img slot="image" src="../media/Elev-Park-Sacom/Plantas/2_dorms_32m.webp">
         </plan-item>
 
         <plan-item slot="content" name="25m²" title="1 Dorm"
-            desc="Sua independência começa aqui. 1 dormitório com varanda." area="25m²" dorms="1 Dorm" vagas=""
-            extra-label="Smart" extra-val="Varanda">
-            <img slot="image" src="../media/elev-sacoma/planta-25.webp">
+            desc="Opção compacta com suíte e varanda. Ideal para morar só ou investir." area="25m²" dorms="1 Dorm"
+            vagas="" extra-label="Rentabilidade" extra-val="Suíte + Varanda">
+            <img slot="image" src="../media/Elev-Park-Sacom/Plantas/1_dorm_com_varanda_25m.webp">
         </plan-item>
 
     </plans-section>
 
-    <region-section id="location" image="../media/elev-sacoma/regiao.webp" highlight="Mobilidade"
-        title="Conectado a Tudo"
-        text="Rua Malvina Ferrara Samarone, 270. A 3 minutos a pé do Terminal Sacomã e fácil acesso à Via Anchieta e Av. dos Bandeirantes."
-        lat="-23.6015" lng="-46.6025" zoom="16" pois='[
-            {"title": "Metrô Sacomã", "loc": [-23.6020, -46.6030]}, 
-            {"title": "Museu Ipiranga", "loc": [-23.5855, -46.6090]}, 
-            {"title": "Shopping Plaza Sul", "loc": [-23.6160, -46.6280]}
+    <region-section id="location" image="../media/Elev-Park-Sacom/fachadas/elev_park_sacoma_ii.webp" highlight="Sacomã"
+        title="Mobilidade Total"
+        text="Rua Malvina Ferrara Samarone, 270. A 3 minutos a pé da Estação Sacomã (Linha Verde). Fácil acesso à Anchieta e Av. Tancredo Neves."
+        lat="-23.6025" lng="-46.6025" zoom="16" pois='[
+            {"title": "Metrô Sacomã", "loc": [-23.6020, -46.6020]}, 
+            {"title": "Parque da Independência", "loc": [-23.5890, -46.6090]},
+            {"title": "Aquário de SP", "loc": [-23.5930, -46.6130]}
         ]'>
     </region-section>
 
     <team-section highlight="Assinatura" title="Quem Faz">
         <team-member slot="members" role="Arquitetura" name="Renato Bianconi"
-            text="Um projeto que se destaca pela urbanidade, racionalidade e integração com o bairro."
-            image="../media/utils/bianconi.jpg"></team-member>
+            text="Racionalidade do espaço de morar, integrado à estrutura urbana."
+            image="../media/utils/MCAA.png"></team-member>
         <team-member slot="members" role="Paisagismo" name="Núcleo Arquitetura"
-            text="Paisagismo vibrante e funcional, criando conexões entre o morador e a natureza."
+            text="Paisagismo vibrante que cria conexões entre o morador e a natureza."
             image="../media/utils/nucleo.jpg"></team-member>
         <team-member slot="members" role="Interiores" name="Skiros"
-            text="Estética e funcionalidade em harmonia para um dia a dia prático e moderno."
+            text="Estética e funcionalidade com decoração contemporânea."
             image="../media/utils/Skiros.png"></team-member>
     </team-section>
 
     <curator-review id="review" curator="Mota"
-        phrases='["Primeiro Apê", "Lazer de Clube", "Mobilidade", "Oportunidade"]'
-        pros="Localização estratégica na porta do metrô e com acesso rápido ao ABC e Centro. A área de lazer é realmente completa, com Quadra de Areia."
-        cons="A alta densidade de torres exige uma gestão de condomínio eficiente, mas dilui o custo mensal.">
+        phrases='["Lazer de Clube", "Parque Privativo", "Metrô na Porta", "Smart Living"]'
+        pros="O grande diferencial é o Parque Privativo dentro do condomínio e a proximidade real (3 min) do Metrô Sacomã."
+        cons="Unidades de 32m² não possuem varanda, sendo uma opção mais focada em preço de entrada.">
     </curator-review>
 
-    <cta-section id="schedule" highlight="Condição Exclusiva" title="Saia do Aluguel"
-        text="Utilize seu FGTS na entrada. Entrada parcelada e Escritura Grátis por tempo limitado."
-        button-text="Simular Financiamento" project="Elev Park Sacomã">
+    <cta-section id="schedule" highlight="Últimas Unidades" title="Mude de Vida"
+        text="Condições facilitadas do Minha Casa Minha Vida. Escritura Grátis." button-text="Simular Agora"
+        project="Elev Park Sacomã II">
     </cta-section>
 
     <trust-section style="--bg-color: var(--bg-brand-dark);">
@@ -241,9 +289,7 @@
 
     <page-scanner category="smart"></page-scanner>
 
-    <related-products current="elev-butanta" category="smart"></related-products>
-
-    <footer-section project="ELEV PARK SACOMÃ" broker="CORRETOR MOTA - CRECI 268.448" root-path=".."></footer-section>
+    <footer-section project="ELEV PARK SACOMÃ II" broker="CORRETOR MOTA - CRECI 315675" root-path=".."></footer-section>
 
     <floating-actions></floating-actions>
     <contact-popup></contact-popup>
@@ -254,61 +300,63 @@
     <script>
         const PROJECT_DATA = {
             resident: {
-                colors: { highlight: '#2cd493', bgMain: '#12161c', bgDark: '#080a0f', textSec: '#b0b0b0' },
+                colors: { highlight: '#00c4b4', bgMain: '#161b22', bgDark: '#010409', textSec: '#a1a1aa' },
                 hero: {
                     highlight: 'Minha Casa Minha Vida',
-                    title: 'Chegou a hora de dar vida aos seus sonhos',
-                    text: 'A apenas 3 minutos a pé da Estação Sacomã. Saia do aluguel com facilidade.'
+                    title: 'Sua Vida Agora',
+                    text: 'Um projeto grandioso com parque privativo, a apenas 3 minutos a pé da Estação Sacomã.'
                 },
-                marquee: 'ESCRITURA GRÁTIS — UTILIZE SEU FGTS — COMPRE SEM ENTRADA — 3 MIN DO METRÔ — ',
-                stats: [{ id: 'stat-1', n: '3 min', l: 'Do Metrô a pé' }, { id: 'stat-2', n: 'Lazer', l: 'Clube Completo' }, { id: 'stat-3', n: 'Grátis', l: 'Escritura' }],
+                marquee: 'ESCRITURA GRÁTIS — UTILIZE SEU FGTS — PARQUE PRIVATIVO — 3 MIN DO METRÔ — ',
+                stats: [{ id: 'stat-1', n: '3 min', l: 'Do Metrô' }, { id: 'stat-2', n: 'Clube', l: 'Lazer Completo' }, { id: 'stat-3', n: 'Grátis', l: 'Escritura' }],
                 cta: {
-                    highlight: 'Condição Exclusiva',
+                    highlight: 'Facilidade',
                     title: 'Saia do Aluguel',
-                    text: 'Utilize seu FGTS na entrada. Entrada parcelada e Escritura Grátis por tempo limitado.',
+                    text: 'Compre sem entrada*. Utilize seu FGTS e conquiste seu apê no Sacomã.',
                     btn: 'Simular Financiamento'
                 },
                 review: {
-                    phrases: '["Primeiro Apê", "Lazer de Clube", "Mobilidade", "Oportunidade"]',
-                    pros: "Localização estratégica na porta do metrô. Escritura Grátis facilita muito a aquisição.",
-                    cons: "Unidades muito disputadas devido às condições do MCMV."
+                    phrases: '["Segurança", "Lazer", "Metrô", "Família"]',
+                    pros: "A planta de 37m² com suíte é rara na região. O lazer é realmente de clube.",
+                    cons: "Região movimentada, ideal para quem usa transporte público."
                 },
                 menuBtn: 'Simular'
             },
             investor: {
-                colors: { highlight: '#00b8d4', bgMain: '#0a1014', bgDark: '#05080a', textSec: '#a0c0d0' },
+                colors: { highlight: '#0056b3', bgMain: '#0a1014', bgDark: '#05080a', textSec: '#a0c0d0' },
                 hero: {
-                    highlight: 'Alto Potencial de Valorização',
-                    title: 'Invista no Eixo de Crescimento da Zona Sul',
-                    text: 'Localização estratégica ao lado do Metrô Sacomã e Via Anchieta. Alta demanda de locação e liquidez.'
+                    highlight: 'Oportunidade no Sacomã',
+                    title: 'Alto Potencial',
+                    text: 'Região em valorização e alta demanda de locação. Vacância reduzida pela proximidade do Metrô.'
                 },
-                marquee: 'ALTO POTENCIAL DE VALORIZAÇÃO — BAIXA VACÂNCIA — 3 MIN DO METRÔ — ALTA LIQUIDEZ — ',
-                stats: [{ id: 'stat-1', n: '3 min', l: 'Do Metrô (Liquidez)' }, { id: 'stat-2', n: 'Baixo', l: 'Custo de Condomínio' }, { id: 'stat-3', n: 'Alto', l: 'Potencial de Valorização' }],
+                marquee: 'ALTA DEMANDA DE LOCAÇÃO — REGIÃO EM CRESCIMENTO — YIELD ELEVADO — ',
+                stats: [{ id: 'stat-1', n: 'Sacomã', l: 'Alto Potencial' }, { id: 'stat-2', n: 'Demanda', l: 'Constante' }, { id: 'stat-3', n: 'Liquidez', l: 'Imediata' }],
                 cta: {
-                    highlight: 'Oportunidade de Investimento',
-                    title: 'Maximize seu Retorno',
-                    text: 'Ativo imobiliário com alta liquidez, ticket acessível e segurança patrimonial.',
-                    btn: 'Baixar Estudo de Rentabilidade'
+                    highlight: 'Investimento Seguro',
+                    title: 'Rentabilidade',
+                    text: 'Ativo perfeito para locação ou valorização patrimonial. Consulte a tabela.',
+                    btn: 'Baixar Estudo'
                 },
                 review: {
-                    phrases: '["Alta Liquidez", "Rentabilidade", "Segurança", "Valorização"]',
-                    pros: "A proximidade com o Metrô e a Via Anchieta garante vacância mínima e valorização constante.",
-                    cons: "É um ativo de giro rápido, ideal para compor carteira de renda passiva."
+                    phrases: '["Valorização", "Rentabilidade", "Ticket Baixo", "Liquidez"]',
+                    pros: "O preço por m² no lançamento oferece margem. A 3 min do metrô garante aluguel rápido.",
+                    cons: "Foco em valorização a médio prazo com a revitalização do bairro."
                 },
-                menuBtn: 'Consultar'
+                menuBtn: 'Tabela'
             }
         };
 
-        // Lógica para alterar o botão do Hero quando a persona muda
         window.addEventListener('persona-changed', (e) => {
             const mode = e.detail.mode;
             const heroBtn = document.getElementById('hero-cta-btn');
 
             if (mode === 'investor') {
-                heroBtn.innerText = "Baixar Tabela";
-                // Remove o destaque de "Sem Entrada" para investidor
+                heroBtn.innerText = "Receber Tabela";
+                heroBtn.style.backgroundColor = PROJECT_DATA.investor.colors.highlight;
+                heroBtn.style.color = "#fff";
             } else {
                 heroBtn.innerText = "Compre sem Entrada*";
+                heroBtn.style.backgroundColor = PROJECT_DATA.resident.colors.highlight;
+                heroBtn.style.color = "#000";
             }
         });
 
