@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuApêTem | Redefinindo a Experiência Imobiliária</title>
+    <title>MeuApêTem | Curadoria Imobiliária Inteligente</title>
 
-
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -16,19 +14,10 @@
 
         gtag('config', 'AW-17794513059');
     </script>
-    <!-- Event snippet for Contato conversion page -->
-    <script>
-        gtag('event', 'conversion', {
-            'send_to': 'AW-17794513059/F6EPCJDXos8bEKPxiqVC',
-            'value': 1.0,
-            'currency': 'BRL'
-        });
-    </script>
-    <!-- Google tag (gtag.js) -->
 
     <meta name="description"
-        content="Não somos apenas uma imobiliária. Facilitamos o encontro entre pessoas e os espaços onde suas histórias serão vividas.">
-    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
+        content="Da conquista do primeiro apê à coleção de raridades. Encontre o imóvel que combina com seu momento de vida.">
+    <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,6 +57,18 @@
             scroll-behavior: smooth;
             overflow-x: hidden;
         }
+
+        /* Ajuste fino para os botões do Hero ficarem distintos */
+        hero-brand::part(btn-primary) {
+            background-color: #fff !important;
+            color: #000 !important;
+            border-color: #fff !important;
+        }
+
+        hero-brand::part(btn-secondary) {
+            border-color: var(--highlight-color) !important;
+            color: var(--highlight-color) !important;
+        }
     </style>
 
     <script src="./components/preloader.js"></script>
@@ -75,12 +76,11 @@
     <script src="./components/hero-brand.js" defer></script>
     <script src="./components/marquee.js" defer></script>
     <script src="./components/manifesto.js" defer></script>
-    <script src="./components/grid-section.js" defer></script>
     <script src="./components/project-card.js" defer></script>
+    <script src="./components/page-scanner.js" defer></script>
     <script src="./components/cta-banner.js" defer></script>
     <script src="./components/footer.js" defer></script>
     <script src="./components/cursor.js" defer></script>
-
     <script src="./components/floating.js" defer></script>
     <script src="./components/contact.js" defer></script>
     <script src="./components/cookie.js" defer></script>
@@ -93,37 +93,30 @@
 
     <site-menu logo="MEUAPÊTEM" image="./media/utils/logo-brand.png">
         <a slot="links" href="#home">Início</a>
-        <a slot="links" href="#manifesto">Manifesto</a>
-        <a slot="links" href="#portfolio">Coleção</a>
-        <a slot="links" href="#schedule" class="auto-trigger">Falar com Curador</a>
+        <a slot="links" href="#rare-collection">Alto Padrão</a>
+        <a slot="links" href="#smart-living">Econômicos</a>
+        <a slot="links" href="#schedule" class="auto-trigger">Falar com Consultor</a>
     </site-menu>
 
     <hero-brand id="home" title="MeuApêTem"></hero-brand>
 
-    <marquee-scroll text="TRANSPARÊNCIA RADICAL — CURADORIA EXPERIENCIAL — EMPATIA ATIVA — AUTENTICIDADE — "
-        speed="120s">
+    <marquee-scroll text="CURADORIA EXPERIENCIAL — DO PRIMEIRO APÊ AO ALTO PADRÃO — TRANSPARÊNCIA RADICAL — "
+        speed="100s">
     </marquee-scroll>
 
-    <manifesto-section id="manifesto" title="Não somos apenas uma imobiliária.<br>Somos o"
-        highlight="Tradutor dos Seus Sonhos."
-        text="Rejeitamos a frieza do mercado tradicional. Ocupamos o espaço entre a funcionalidade e o desejo.">
+    <manifesto-section id="manifesto" title="Não vendemos metros quadrados.<br>Vendemos" highlight="Ciclos de Vida."
+        text="Seja para conquistar sua independência ou encontrar sua raridade. Facilitamos o encontro entre você e o seu próximo passo.">
     </manifesto-section>
 
-    <grid-section id="portfolio" title="Curadoria de Espaços" subtitle="Sua História Começa Aqui" bg-color="#0a0a0a">
+    <page-scanner id="rare-collection" category="rare"></page-scanner>
 
-        <project-card title="Quarten Ibirapuera" vibe="Refúgio Urbano" tags="Luz Natural, Silence, Wellness" price=""
-            image=" ./media/quarten/boulevart.webp" link="projects/quarten.html">
-        </project-card>
+    <div style="height: 1px; background: rgba(255,255,255,0.1); width: 90%; margin: 0 auto;"></div>
 
-        <project-card title="Elev Butantã" vibe="Jovem Profissional" tags="Metrô a pé, Home Office" price=""
-            image="../media/ElevButanta/aereaLazer.webp" link="projects/elevButanta.html">
-        </project-card>
+    <page-scanner id="smart-living" category="smart"></page-scanner>
 
-    </grid-section>
-
-    <cta-banner id="schedule" title="Quer algo que não está na lista?"
-        text="Atuamos como consultores pessoais. Conte para a gente o que o seu apê tem que ter."
-        btn-text="Falar com Curador" link="#">
+    <cta-banner id="schedule" title="Ainda não encontrou o seu?"
+        text="Temos acesso a lançamentos Off-Market e condições exclusivas que não estão no site."
+        btn-text="Consultoria Personalizada" link="#">
     </cta-banner>
 
     <footer-section brand="MEUAPÊTEM" broker="CRECI 268.448" root-path="."> </footer-section>
@@ -135,6 +128,26 @@
     <cookie-banner></cookie-banner>
 
     <custom-cursor></custom-cursor>
+
+    <script>
+        window.addEventListener('load', () => {
+            // Ajusta o Hero Button Secundário para levar ao Smart Living
+            const hero = document.querySelector('hero-brand');
+            if (hero) {
+                // Acessa o Shadow DOM do componente Hero
+                const btnSec = hero.shadowRoot.querySelector('.btn-secondary');
+                if (btnSec) {
+                    btnSec.innerText = "Quero Sair do Aluguel";
+                    btnSec.href = "#smart-living";
+                }
+                const btnPri = hero.shadowRoot.querySelector('.btn-primary');
+                if (btnPri) {
+                    btnPri.innerText = "Busco Exclusividade";
+                    btnPri.href = "#rare-collection";
+                }
+            }
+        });
+    </script>
 
 </body>
 

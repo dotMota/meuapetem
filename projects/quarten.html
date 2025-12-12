@@ -5,40 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Quarten Ibirapuera | The Rare Collection</title>
+    <title>Quarten Ibirapuera | Trisul Lifestyle Boutique</title>
     <meta name="description"
-        content="Um quarteirão inteiro de natureza desenhado para redefinir o privilégio de viver no Ibirapuera.">
+        content="A Raridade ocupa um quarteirão inteiro. Apartamentos de 164m², 207m² e Duplex de 395m² na Vila Clementino.">
 
     <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
 
-    <!-- Google tag (gtag.js) -->
+    <meta property="og:image" content="../media/Quarten_Ibirapuera/fachadas/detalhe_fachada.webp">
+    <meta name="product-category" content="rare">
+    <meta name="product-vibe" content="Refúgio Urbano">
+    <meta name="product-tags" content="Bosque Privativo, Wellness">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'AW-17794513059');
     </script>
-    <!-- Event snippet for Contato conversion page -->
-    <script>
-        gtag('event', 'conversion', {
-            'send_to': 'AW-17794513059/F6EPCJDXos8bEKPxiqVC',
-            'value': 1.0,
-            'currency': 'BRL'
-        });
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059">
-    </script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'AW-17794513059');
-    </script>
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,49 +31,39 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.meuapetem.com.br/projects/quarten.html">
-    <meta property="og:title" content="Quarten Ibirapuera | The Rare Collection">
-    <meta property="og:description"
-        content="Um quarteirão inteiro de natureza desenhado para redefinir o privilégio de viver no Ibirapuera.">
-    <meta property="og:image" content="https://www.meuapetem.com.br/media/quarten/hero.jpg">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.meuapetem.com.br/projects/quarten.html">
-    <meta property="twitter:title" content="Quarten Ibirapuera | The Rare Collection">
-    <meta property="twitter:description"
-        content="Um quarteirão inteiro de natureza desenhado para redefinir o privilégio de viver no Ibirapuera.">
-    <meta property="twitter:image" content="https://www.meuapetem.com.br/media/quarten/hero.jpg">
-
     <style>
-        /* --- TEMA ESPECÍFICO DO PROJETO (GOLD/WINE) --- */
-        /* Mantemos a identidade visual do produto, mas usamos a estrutura da marca */
+        /* --- TEMA QUARTEN (Lifestyle Boutique) --- */
         :root {
-            /* Cores do Quarten (Luxo) */
             --color-highlight: #c5a065;
-            /* Dourado Nobre */
             --color-text-primary: #e0d6cc;
-            /* Off-white */
             --color-text-secondary: #a89f96;
-            /* Bege Escuro */
 
-            /* Fundos */
             --bg-page-body: #050505;
             --bg-section-main: #0f0f0f;
             --bg-brand-dark: #1a0b12;
-            /* Toque Vinho Profundo */
             --bg-cta-gradient: linear-gradient(to bottom, #0f0f0f, #261019);
 
-            /* Tipografia */
             --font-title: 'Cinzel', serif;
-            /* Identidade do Prédio */
             --font-text: 'Manrope', sans-serif;
 
-            /* --- MAPEAMENTO PARA COMPONENTES --- */
             --highlight-color: var(--color-highlight);
             --bg-color: var(--bg-section-main);
             --text-color: var(--color-text-secondary);
             --bg-gradient: var(--bg-cta-gradient);
+        }
+
+        cta-section::part(button) {
+            background: transparent;
+            border: 1px solid var(--highlight-color);
+            color: var(--highlight-color);
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: var(--font-title);
+        }
+
+        cta-section::part(button):hover {
+            background: var(--highlight-color);
+            color: #000;
         }
 
         body,
@@ -123,111 +97,178 @@
     <script src="../components/contact.js" defer></script>
     <script src="../components/cookie.js" defer></script>
     <script src="../components/cursor.js" defer></script>
-
+    <script src="../components/lightbox.js" defer></script>
+    <script src="../components/project-card.js" defer></script>
+    <script src="../components/page-scanner.js" defer></script>
 </head>
 
 <body>
 
-    <site-preloader project="QUARTEN"></site-preloader>
+    <site-preloader project="QUARTEN IBIRAPUERA"></site-preloader>
 
-    <site-menu logo="QUARTEN." image="../media/quarten/boulevart.webp" parent-text="MeuApêTem"
+    <site-menu logo="QUARTEN." image="../media/Quarten_Ibirapuera/fachadas/embasamento.webp" parent-text="MeuApêTem"
         parent-link="../index.html">
         <a slot="links" href="#home">Início</a>
-        <a slot="links" href="#legacy">O Projeto</a>
+        <a slot="links" href="#concept">Conceito</a>
         <a slot="links" href="#video-tour">Filme</a>
-        <a slot="links" href="#resort">Lazer</a>
-        <a slot="links" href="#plans">Plantas</a>
-        <a slot="links" href="#location">Endereço</a>
-        <a slot="links" href="#schedule" class="auto-trigger">Agendar Visita</a>
+        <a slot="links" href="#resort">Private Resort</a>
+        <a slot="links" href="#plans">Residências</a>
+        <a slot="links" href="#location">Localização</a>
+        <a slot="links" href="#schedule" class="auto-trigger">Agendar</a>
     </site-menu>
 
-    <hero-section id="home" image="../media/quarten/hero.jpg" highlight="The Rare Collection"
-        subtitle="CONCRETO E NATUREZA." title="Quarten" curator-badge="true"
-        text="Um quarteirão inteiro de natureza desenhado para redefinir o privilégio de viver no Ibirapuera.">
+    <hero-section id="home" image="../media/Quarten_Ibirapuera/fachadas/detalhe_fachada.webp"
+        highlight="Lifestyle Boutique" subtitle="Quarteirão + Natureza" title="A Raridade Ocupa um Quarteirão Inteiro"
+        curator-badge="true"
+        text="Um projeto que se reinventa a partir da harmonia perfeita entre o concreto e o orgânico. A natureza como protagonista.">
     </hero-section>
 
-    <marquee-scroll text="Quarten Ibirapuera — Experience The Rare — " speed="60s"></marquee-scroll>
+    <marquee-scroll text="QUARTEIRÃO + NATUREZA — LIFESTYLE BOUTIQUE — BEM-ESTAR NA MÁXIMA POTÊNCIA — EXCLUSIVIDADE — "
+        speed="50s"></marquee-scroll>
 
-    <showcase-section id="legacy" highlight="O Legado" title="Privilégio <br>Absoluto"
-        text="Na altura do número 1297 da Avenida Dr. Altino Arantes, nasce um ícone. Aqui, o concreto dá lugar a uma ilha de tranquilidade."
-        button-text="Ver o Filme" button-link="#video-tour">
-        <img slot="gallery" src="../media/quarten/vistaaerea.webp" alt="Vista Aérea">
-        <img slot="gallery" src="../media/quarten/fachadavertical.webp" alt="Fachada">
-        <img slot="gallery" src="../media/quarten/aerea.webp" alt="Aérea">
+    <stats-section>
+        <stat-item slot="items" class="hover-target" number="6.000m²" label="Terreno Exclusivo"></stat-item>
+        <stat-item slot="items" class="hover-target" number="100%" label="Quarteirão Inteiro"></stat-item>
+        <stat-item slot="items" class="hover-target" number="Wellness" label="Private Resort"></stat-item>
+    </stats-section>
+
+    <showcase-section id="concept" highlight="Chegada" title="O Encontro do Urbano <br>com o Natural"
+        text="A arquitetura de Königsberger Vannucchi dialoga com o paisagismo de Benedito Abbud, criando uma ilha de tranquilidade na Vila Clementino."
+        button-text="Ver Lazer" button-link="#resort">
+        <img slot="gallery" src="../media/Quarten_Ibirapuera/area_comum/praca_de_chegada.webp" alt="Praça de Chegada">
+        <img slot="gallery" src="../media/Quarten_Ibirapuera/fachadas/acesso.webp" alt="Portaria Imponente">
+        <img slot="gallery" src="../media/Quarten_Ibirapuera/area_comum/lobby_torre_verano.webp" alt="Lobby Design">
+        <img slot="gallery" src="../media/Quarten_Ibirapuera/fachadas/embasamento.webp" alt="Integração Urbana">
     </showcase-section>
 
-    <video-section id="video-tour" src="https://www.youtube.com/watch?v=c_MxjwCCY0E" cover="../media/quarten/hero.jpg"
-        title="Experience The Rare">
+    <video-section id="video-tour" src="https://www.youtube.com/watch?v=c_MxjwCCY0E"
+        cover="../media/Quarten_Ibirapuera/fachadas/embasamento.webp" title="Experience The Rare">
     </video-section>
 
-    <gallery-section id="resort" subtitle="Private Resort" title="Sua Ilha <br>Particular">
-        <gallery-item slot="items" class="hover-target" image="../media/quarten/brinquedoteca.webp" title="Kids Club"
+    <gallery-section id="resort" subtitle="Exclusividade" title="Seu Universo <br>Particular">
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/quadra_de_tenis.webp" title="Quadra de Tênis"
+            text="Oficial e Exclusiva"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Quarten_Ibirapuera/area_comum/tenis_lounge.webp"
+            title="Tênis Lounge" text="Apoio à Quadra"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Quarten_Ibirapuera/area_comum/fitness.webp"
+            title="Fitness" text="High Performance"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Quarten_Ibirapuera/area_comum/pilates.webp"
+            title="Pilates" text="Studio Completo"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/spa_cold_plunge_e_hidromassagem.webp" title="Wellness Spa"
+            text="Cold Plunge & Hidro"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/piscina_coberta.webp" title="Raia 25m"
+            text="Climatizada"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Quarten_Ibirapuera/area_comum/sauna_umida.webp"
+            title="Sauna" text="Detox & Relax"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/sala_de_massagem.webp" title="Sala de Massagem"
+            text="Terapias Exclusivas"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/piscina_e_solario.webp" title="Piscina Adulto"
+            text="Com Solário"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Quarten_Ibirapuera/area_comum/voo_piscina.webp"
+            title="Vista Aérea" text="Complexo Aquático"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/voo_lazer_rooftop_torre_c.webp" title="Rooftop"
+            text="Lazer nas Alturas"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/salao_de_festas.webp" title="Salão de Festas"
+            text="Eventos Exclusivos"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/churrasqueira_torre_c.webp" title="Churrasqueira"
+            text="Gourmet"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Quarten_Ibirapuera/area_comum/coworking.webp"
+            title="Coworking" text="Work & Meeting"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/praca_de_chegada.webp" title="Praça"
+            text="Boas-vindas"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/lobby_torre_verano.webp" title="Lobby"
+            text="Torre Verano"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/brinquedoteca.webp" title="Brinquedoteca"
             text="Universo Lúdico"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/quarten/quadra.webp" title="Quadra Oficial"
-            text="Medidas Oficiais"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/quarten/lobby.webp" title="Grand Lobby"
-            text="Recepção Monumental"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/quarten/fitness.webp" title="Fitness"
-            text="Design by SETT"></gallery-item>
-        <gallery-item slot="items" class="hover-target" image="../media/quarten/wellness.webp" title="Wellness Spa"
-            text="Santuário de Relaxamento"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Quarten_Ibirapuera/area_comum/playground_e_quadra_recreativa.webp" title="Play & Quadra"
+            text="Diversão ao Ar Livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Quarten_Ibirapuera/area_comum/pet_care.webp"
+            title="Pet Care" text="Cuidado Especial"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Quarten_Ibirapuera/area_comum/espaco_pet.webp"
+            title="Espaço Pet" text="Agility & Diversão"></gallery-item>
     </gallery-section>
 
     <plans-section id="plans" highlight="Coleção" title="Residências" project="Quarten Ibirapuera">
-        <plan-item slot="content" name="164m²" title="Apartamento 164m²"
-            desc="O equilíbrio perfeito. Terraço gourmet com churrasqueira a carvão." area="164m²" dorms="4 Dorms"
-            vagas="2 Vagas" extra-label="Diferencial" extra-val="Churrasq. Carvão">
-            <img slot="image" src="../media/quarten/ape2.webp">
-            <img slot="image" src="../media/quarten/164m2planta.webp">
+
+        <plan-item slot="content" name="395m²" title="Cobertura Duplex 395m²"
+            desc="Mansão suspensa. Lazer privativo no piso superior com piscina e vista infinita." area="395m²"
+            dorms="4 Suítes" vagas="4 Vagas" extra-label="Ícone" extra-val="Piscina Privativa">
+            <img slot="image" src="../media/Quarten_Ibirapuera/apartamento/terraco_do_apto_duplex_395m.webp">
+            <img slot="image" src="../media/Quarten_Ibirapuera/Plantas/4_suites_395m.webp" alt="Pavimento Inferior">
+            <img slot="image" src="../media/Quarten_Ibirapuera/Plantas/4_suites_395m.webp" alt="Pavimento Superior">
         </plan-item>
+
+        <plan-item slot="content" name="306m²" title="Duplex 306m²"
+            desc="Cobertura Duplex Intermediária. Espaço e sofisticação em dose dupla." area="306m²" dorms="4 Suítes"
+            vagas="4 Vagas" extra-label="Duplex" extra-val="Terraço Panorâmico">
+            <img slot="image" src="../media/Quarten_Ibirapuera/apartamento/terraco_do_apto_duplex_306m.webp">
+            <img slot="image" src="../media/Quarten_Ibirapuera/Plantas/4_suites_306m.webp" alt="Pavimento Inferior">
+            <img slot="image" src="../media/Quarten_Ibirapuera/Plantas/4_suites_306m.webp" alt="Pavimento Superior">
+        </plan-item>
+
         <plan-item slot="content" name="207m²" title="Apartamento 207m²"
-            desc="Exclusividade total. 4 Suítes, sala íntima e master com banheira." area="207m²" dorms="4 Suítes"
-            vagas="3 Vagas" extra-label="Exclusividade" extra-val="Hall Privativo">
-            <img slot="image" src="../media/quarten/ape.webp">
-            <img slot="image" src="../media/quarten/207m2planta.webp">
+            desc="Exclusividade total. 4 Suítes, sala íntima e master com banheira e closet ampliado." area="207m²"
+            dorms="4 Suítes" vagas="3 Vagas" extra-label="Exclusividade" extra-val="Sala Íntima">
+            <img slot="image" src="../media/Quarten_Ibirapuera/apartamento/living_apto_decorado_207m.webp">
+            <img slot="image" src="../media/Quarten_Ibirapuera/Plantas/4_suites_207m.webp">
         </plan-item>
-        <plan-item slot="content" name="Duplex" title="Cobertura Duplex"
-            desc="Mansão suspensa. Lazer privativo no piso superior com piscina." area="395m²" dorms="4 Suítes"
-            vagas="4 Vagas" extra-label="Lazer" extra-val="Piscina Privativa">
-            <img slot="image" src="../media/quarten/duplex.webp">
-            <img slot="image" src="../media/quarten/395m2planta-inferior.webp">
-            <img slot="image" src="../media/quarten/395m2planta-superior.webp">
+
+        <plan-item slot="content" name="164m²" title="Apartamento 164m²"
+            desc="O equilíbrio perfeito. 3 ou 4 dormitórios com amplo terraço gourmet integrado ao living." area="164m²"
+            dorms="4 Dorms (2 Suítes)" vagas="2 Vagas" extra-label="Diferencial" extra-val="Hall Privativo">
+            <img slot="image" src="../media/Quarten_Ibirapuera/apartamento/living_apto_decorado_164m.webp">
+            <img slot="image" src="../media/Quarten_Ibirapuera/Plantas/4_dorms_164m.webp">
         </plan-item>
+
     </plans-section>
 
     <team-section highlight="Curadoria" title="Mentes <br>Brilhantes">
         <team-member slot="members" role="Arquitetura" name="Königsberger Vannucchi"
-            text="Um ícone da arquitetura contemporânea brasileira."
+            text="Traços contemporâneos que marcam o skyline da Vila Clementino."
             image="../media/utils/KonigsbergerVannucchi.png"></team-member>
         <team-member slot="members" role="Paisagismo" name="Benedito Abbud"
-            text="Criamos uma verdadeira ilha de biodiversidade."
+            text="A natureza invadindo o concreto, criando microclimas únicos."
             image="../media/utils/BenedittoAbudd.jpg"></team-member>
-        <team-member slot="members" role="Interiores" name="Chris Silveira" text="Sofisticação em cada detalhe."
+        <team-member slot="members" role="Interiores" name="Chris Silveira"
+            text="Sofisticação em cada detalhe, traduzindo o conceito Lifestyle Boutique."
             image="../media/utils/ChrisSilveira.png"></team-member>
     </team-section>
 
-    <stats-section>
-        <stat-item slot="items" class="hover-target" number="6.000m²" label="Terreno Exclusivo"></stat-item>
-        <stat-item slot="items" class="hover-target" number="8 min" label="Do Pq. Ibirapuera"></stat-item>
-        <stat-item slot="items" class="hover-target" number="395m²" label="Residências Suspensas"></stat-item>
-    </stats-section>
-    <region-section id="location" image="../media/quarten/regiao.webp" highlight="Vila Clementino" title="O Endereço"
-        text="Av. Dr. Altino Arantes, 1297.<br>Entre o Ibirapuera e a vibração urbana." lat="-23.6067" lng="-46.6450"
-        zoom="15" pois='[
+    <region-section id="location" image="../media/Quarten_Ibirapuera/fachadas/fachada_torre_c.webp"
+        highlight="Av. Dr. Altino Arantes, 1297" title="O Coração da <br>Vila Clementino"
+        text="Um endereço nobre, conectado ao Parque Ibirapuera e cercado pela melhor infraestrutura da cidade."
+        lat="-23.6067" lng="-46.6450" zoom="16" pois='[
             {"title": "Parque Ibirapuera", "loc": [-23.5874, -46.6576]}, 
             {"title": "Shopping Santa Cruz", "loc": [-23.5990, -46.6369]}, 
-            {"title": "Metrô AACD-Servidor", "loc": [-23.5977, -46.6522]},
             {"title": "Hospital São Paulo", "loc": [-23.5956, -46.6433]}
         ]'>
     </region-section>
-    <curator-review curator="Mota"
-        phrases='["Um Bosque Particular", "Paz em SP", "Uma ilha de Natureza", "Alma de Casa"]'
-        pros="A sensação de estar fora de São Paulo é real. O bosque privativo de 6.000m² não é marketing, é um ecossistema próprio que muda a temperatura do ambiente."
-        cons="É um produto de nicho. Se você busca agitação na porta de casa, este refúgio pode parecer calmo demais. O valor de condomínio reflete a manutenção da extensa área verde.">
+
+    <curator-review curator="Mota" phrases='["Quadra de Tênis", "Natureza Real", "Duplex", "Planta Inteligente"]'
+        pros="Ter uma quadra de tênis com piso Lisonda e academia By Sett em um quarteirão inteiro é raríssimo na região."
+        cons="A exclusividade de ocupar um quarteirão inteiro traz muita privacidade, mas exige rapidez na decisão de compra.">
     </curator-review>
-    <cta-section id="schedule" highlight="Atendimento Exclusivo" title="Agende Sua Visita"
-        text="O luxo de viver aqui começa no atendimento. <br>Agende uma visita privada." button-text="Agendar Visita"
-        project="Quarten Ibirapuera">
+
+    <cta-section id="schedule" highlight="Experience The Rare" title="Pertencer aos Dois"
+        text="O futuro não é escolher entre o urbano e o natural. Agende sua visita e descubra como ter os dois."
+        button-text="Agendar Visita Boutique" project="Quarten Ibirapuera">
     </cta-section>
 
     <trust-section style="--bg-color: var(--bg-brand-dark);">
@@ -235,12 +276,12 @@
         <trust-item slot="items" title="Financiamento" img="../media/utils/bm.svg" alt="BM Realty"></trust-item>
     </trust-section>
 
-    <footer-section project="QUARTEN" broker="CORRETOR MOTA - CRECI 268.448" root-path="..">
-    </footer-section>
+    <page-scanner category="rare"></page-scanner>
+
+    <footer-section project="QUARTEN" broker="CORRETOR MOTA - CRECI 268.448" root-path=".."></footer-section>
+
     <floating-actions></floating-actions>
-
     <contact-popup></contact-popup>
-
     <lightbox-viewer></lightbox-viewer>
     <cookie-banner></cookie-banner>
     <custom-cursor></custom-cursor>
