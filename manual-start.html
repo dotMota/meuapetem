@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Start | O Guia Definitivo MeuApêTem</title>
+
+    <meta name="description"
+        content="O Guia Definitivo do MeuApêTem Start. Entenda seguros, juros, prazos e estratégias.">
+    <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-highlight: #FF6F61;
+            --bg-page-body: #0a0a0a;
+            --bg-section-main: #141414;
+            --bg-card: #141414;
+            --color-text-primary: #F5F5F7;
+            --color-text-secondary: #A1A1AA;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-text: 'Manrope', sans-serif;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-page-body);
+            font-family: var(--font-text);
+            color: var(--color-text-primary);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #fff 10%, var(--color-highlight));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Estilos dos Gráficos e Tickets (Slots) */
+        .chart-row {
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-track {
+            background: #333;
+            height: 12px;
+            border-radius: 6px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .chart-fill {
+            height: 100%;
+            background: var(--color-highlight);
+            width: 0;
+            transition: width 1.5s ease;
+            border-radius: 6px;
+        }
+
+        .ticket-paper {
+            background: #F4F4F5;
+            color: #18181B;
+            padding: 2rem;
+            font-family: 'Space Grotesk', monospace;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), 50% 100%, 0 calc(100% - 15px));
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .ticket-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #ccc;
+            padding: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .ticket-voucher {
+            background: #DCFCE7;
+            color: #166534;
+            padding: 8px;
+            text-align: center;
+            font-weight: 700;
+            margin: 1rem 0;
+            border: 1px dashed #166534;
+        }
+    </style>
+
+    <script src="./components/preloader.js"></script>
+    <script src="./components/menu.js" defer></script>
+    <script src="./components/hero-manual.js" defer></script>
+    <script src="./components/chapter-section.js" defer></script>
+    <script src="./components/marquee.js" defer></script>
+    <script src="./components/cta-banner.js" defer></script>
+    <script src="./components/footer.js" defer></script>
+    <script src="./components/floating.js" defer></script>
+    <script src="./components/contact.js" defer></script>
+    <script src="./components/cursor.js" defer></script>
+    <script src="./components/analytics.js" defer></script>
+    <script src="./components/project-card.js" defer></script>
+    <script src="./components/page-scanner.js" defer></script>
+
+</head>
+
+<body>
+
+    <site-analytics></site-analytics>
+
+    <site-preloader project="Educação Financeira"></site-preloader>
+
+    <site-menu logo="START" parent-text="MeuApêTem" parent-link="./index.html">
+        <a slot="links" href="./index.html" style="opacity: 0.6; font-size: 0.9rem;">Home</a>
+
+        <a slot="links" href="#juros">Juros</a>
+        <a slot="links" href="#regras">Regras</a>
+        <a slot="links" href="#estrategia">Estratégia</a>
+        <a slot="links" href="#seguros">Segurança</a>
+
+        <a slot="links" href="#simulacao"
+            style="color: var(--color-highlight); font-weight: 700; border: 1px solid var(--color-highlight); padding: 8px 20px; border-radius: 50px; margin-left: 10px;">
+            Ver Simulação
+        </a>
+    </site-menu>
+
+    <hero-manual title="Manual <span class='highlight'>Start</span>"
+        subtitle="Dê o start na sua conquista. O guia definitivo para transformar aluguel em patrimônio usando as novas regras do jogo.">
+    </hero-manual>
+
+    <marquee-scroll text="JUROS REDUZIDOS — VOUCHER EXCLUSIVO — PRAZO DE 420 MESES — SEGURANÇA TOTAL — "
+        speed="60s"></marquee-scroll>
+
+    <chapter-section id="juros" title="Fuja da Armadilha dos 14%" tag="01. O Cenário">
+        <div slot="text">
+            <p>Vamos começar com a verdade nua e crua: financiar um imóvel por um banco privado tradicional hoje é caro.
+                As taxas de juros de mercado (bancos comuns) partem de <strong>14% ao ano</strong> (Custo Efetivo
+                Total).</p>
+            <p><strong>O Efeito Bola de Neve:</strong> Com juros de 14%, você acaba pagando o valor de três imóveis para
+                ficar com um. A parcela fica pesada e o saldo devedor demora a cair.</p>
+            <p><strong>A Solução MeuApêTem Start:</strong> Nós operamos dentro das regras do Sistema Financeiro de
+                Habitação (SFH) e do Minha Casa Minha Vida. Isso significa que você acessa taxas subsidiadas que o
+                mercado privado não oferece.</p>
+            <p>Dependendo da sua renda e perfil, sua taxa vai variar de <strong>4% a.a.</strong> (Faixas iniciais) até,
+                no máximo, pouco mais de <strong>12% a.a.</strong> A conta é simples: mesmo no teto máximo da Caixa,
+                você ainda paga menos juros do que no piso mínimo de qualquer banco privado.</p>
+        </div>
+        <div slot="visual">
+            <div class="chart-row">
+                <div class="chart-label"><span>Caixa (Start)</span> <span style="color: var(--color-highlight);">4% -
+                        12%</span></div>
+                <div class="chart-track">
+                    <div class="chart-fill" style="width: 40%;"></div>
+                </div>
+            </div>
+            <div class="chart-row">
+                <div class="chart-label"><span>Bancos Privados</span> <span>14% +</span></div>
+                <div class="chart-track">
+                    <div class="chart-fill" style="width: 95%; background: #555;"></div>
+                </div>
+            </div>
+            <p
+                style="font-size: 0.9rem; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                <i class="fas fa-check-circle" style="color: var(--color-highlight);"></i> Economia de até <strong>R$
+                    200.000,00</strong> ao final do contrato.
+            </p>
+        </div>
+    </chapter-section>
+
+    <chapter-section title="O Teto agora é R$ 500 Mil" tag="02. O Produto" reverse>
+        <div slot="text">
+            <p>Esqueça a ideia antiga de que financiamento com juros reduzidos é apenas para imóveis muito simples, sem
+                elevador ou na periferia distante. O jogo mudou.</p>
+            <p>Hoje, as regras permitem financiar imóveis de até <strong>R$ 500.000,00</strong> (dependendo da cidade).
+            </p>
+            <p><strong>O Que Isso Significa para Você?</strong> Significa que você pode usar o "dinheiro barato" do
+                governo para comprar:</p>
+            <ul>
+                <li>Apartamentos de 2 Dormitórios com Suíte;</li>
+                <li>Varanda Gourmet e Vaga de Garagem;</li>
+                <li>Condomínios com Lazer Completo (Piscina, Academia, Coworking);</li>
+                <li>Localizações valorizadas e centrais.</li>
+            </ul>
+            <p>Com a mesma parcela que você pagaria num estúdio de 25m² pelo banco privado, aqui você compra um imóvel
+                definitivo de 45m² para a família toda.</p>
+        </div>
+        <div slot="visual" style="text-align: center;">
+            <i class="fas fa-building"
+                style="font-size: 4rem; color: var(--color-highlight); margin-bottom: 1.5rem;"></i>
+            <h3 style="font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 1rem; color: #fff;">Upgrade de
+                Vida</h3>
+            <p style="font-size: 1rem; color: var(--color-text-secondary);">Troque um "apertamentinho" caro por um
+                <strong>imóvel completo</strong> com taxas justas.
+            </p>
+        </div>
+    </chapter-section>
+
+    <chapter-section id="regras" title="420 Meses e a Vantagem de Ser Jovem" tag="03. As Regras">
+        <div slot="text">
+            <p>O tempo é o melhor amigo do financiamento.</p>
+            <p><strong>Prazo Estendido (35 Anos):</strong> Antigamente, o limite era 360 meses. Agora, conseguimos
+                aprovar financiamentos em até <strong>420 meses</strong>. Ao esticar o prazo, a parcela mensal
+                obrigatória cai. Isso facilita a aprovação do crédito para quem está com o orçamento justo hoje.</p>
+            <p><strong>Composição de Renda:</strong> "Ganho pouco sozinho". Sem problemas. Você pode somar a renda de
+                até <strong>3 pessoas</strong> (Cônjuge, Pai, Mãe, Irmãos, Filhos ou até Amigos). Juntos, vocês sobem de
+                faixa e aumentam o valor de crédito liberado.</p>
+        </div>
+        <div slot="visual">
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: #fff; margin: 0 0 0.5rem 0; font-family: var(--font-title);">Faixa 1 e 2</h4>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--color-text-secondary);">Renda até R$ 4.700 • Juros
+                    reduzidos (4% a 7%)</p>
+            </div>
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: #fff; margin: 0 0 0.5rem 0; font-family: var(--font-title);">Faixa 3</h4>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--color-text-secondary);">Renda até R$ 8.000 • Taxas
+                    intermediárias</p>
+            </div>
+            <div
+                style="padding: 1rem; background: rgba(255, 111, 97, 0.1); border-radius: 10px; border: 1px solid var(--color-highlight);">
+                <h4 style="color: var(--color-highlight); margin: 0 0 0.5rem 0; font-family: var(--font-title);">Faixa 4
+                    (Novo)</h4>
+                <p style="margin: 0; font-size: 0.9rem; color: #fff;">Renda até <strong>R$ 12.000</strong> • Classe
+                    Média no jogo.</p>
+            </div>
+        </div>
+    </chapter-section>
+
+    <chapter-section title="Blindagem Financeira" tag="04. Seguros" reverse>
+        <div slot="text">
+            <p>Muita gente acha que seguro é "taxa extra". No financiamento habitacional, eles são a garantia de que sua
+                família nunca perderá o teto. Entenda o que você está pagando:</p>
+            <p><strong>1. MIP (Morte e Invalidez Permanente):</strong> Este seguro quita o saldo devedor proporcional à
+                renda de quem faltar. Se algo acontecer, a dívida morre junto. <em>Vantagem Jovem:</em> O preço do MIP é
+                calculado pela idade. Quanto mais jovem, mais barato (pode custar menos de R$ 20,00).</p>
+            <p><strong>2. DFI (Danos Físicos ao Imóvel):</strong> Cobre prejuízos materiais causados por incêndio, queda
+                de raio, explosão, alagamento e vendaval.</p>
+            <p><strong>3. Seguro de Término de Obra:</strong> O maior medo de quem compra na planta é: <em>"E se a
+                    construtora quebrar?"</em>. No modelo de Crédito Associativo, esse risco é <strong>ZERO</strong>. Se
+                a construtora parar, a Seguradora é acionada automaticamente pelo Banco para finalizar o prédio. O banco
+                garante a sua chave.</p>
+        </div>
+        <div slot="visual" style="text-align: center; align-items: center; display: flex; flex-direction: column;">
+            <i class="fas fa-shield-alt"
+                style="font-size: 5rem; color: var(--color-highlight); margin-bottom: 2rem;"></i>
+            <h3 style="color: #fff; font-family: var(--font-title);">Garantia Total</h3>
+            <p style="color: var(--color-text-secondary);">Seu patrimônio protegido contra acidentes, imprevistos de
+                vida e problemas na obra.</p>
+        </div>
+    </chapter-section>
+
+    <chapter-section title="A Escadinha da Obra" tag="05. Evolução">
+        <div slot="text">
+            <p>Durante a construção (geralmente 30 a 36 meses), você <strong>não</strong> paga a parcela cheia do
+                financiamento. Você paga a <strong>Taxa de Evolução de Obra</strong>.</p>
+            <p>O banco não dá o dinheiro todo para a construtora no primeiro dia. Ele libera mês a mês. Você paga juros
+                apenas sobre o dinheiro liberado.</p>
+            <p><strong>Como funciona:</strong></p>
+            <ul>
+                <li><strong>Início:</strong> Só tem fundação? Taxa minúscula (R$ 50 a R$ 100).</li>
+                <li><strong>Meio:</strong> Estrutura subiu? Taxa sobe proporcionalmente.</li>
+                <li><strong>Fim:</strong> Prédio pronto? A taxa chega no teto (limitado à parcela aprovada).</li>
+            </ul>
+            <p>Isso dá fôlego financeiro para você pagar seu aluguel atual enquanto espera o apartamento novo.</p>
+        </div>
+        <div slot="visual">
+            <div
+                style="display: flex; align-items: flex-end; justify-content: space-around; height: 200px; padding-bottom: 20px;">
+                <div
+                    style="width: 28%; height: 20%; background: #333; border-radius: 6px 6px 0 0; position: relative; display: flex; justify-content: center;">
+                    <span
+                        style="position: absolute; top: -30px; font-size: 0.8rem; color: var(--color-text-secondary);">Início</span>
+                </div>
+                <div
+                    style="width: 28%; height: 55%; background: #555; border-radius: 6px 6px 0 0; position: relative; display: flex; justify-content: center;">
+                    <span
+                        style="position: absolute; top: -30px; font-size: 0.8rem; color: var(--color-text-secondary);">Meio</span>
+                </div>
+                <div
+                    style="width: 28%; height: 90%; background: var(--color-highlight); border-radius: 6px 6px 0 0; position: relative; display: flex; justify-content: center;">
+                    <span
+                        style="position: absolute; top: -30px; font-size: 0.8rem; color: var(--color-highlight); font-weight: 700;">Chaves</span>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.9rem; margin-top: 1rem; color: var(--color-text-secondary);">O
+                pagamento acompanha o crescimento do prédio.</p>
+        </div>
+    </chapter-section>
+
+    <chapter-section title="O Segredo da Amortização" tag="06. Estratégia" reverse>
+        <div slot="text">
+            <p>Você financiou em 420 meses para ter a parcela baixa. Mas você <strong>não precisa</strong> ficar preso
+                esse tempo todo. Aqui está a estratégia:</p>
+            <p><strong>1. Escolha o Sistema:</strong> Simulamos <strong>SAC</strong> (parcela cai todo mês) e
+                <strong>PRICE</strong> (parcela fixa) para ver qual aprova melhor.
+            </p>
+            <p><strong>2. O Ataque:</strong> Use qualquer dinheiro extra (13º Salário, Férias, PLR, FGTS) para fazer
+                <strong>Amortização Extraordinária</strong>.
+            </p>
+            <p><strong>3. A Mágica:</strong> Quando você antecipa, você paga apenas o valor da dívida, cortando 100% dos
+                juros daquele período. R$ 1.000,00 dados hoje podem eliminar R$ 3.000,00 do final da dívida. Com
+                disciplina, você quita em 10 anos.</p>
+        </div>
+        <div slot="visual" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <i class="fas fa-piggy-bank" style="font-size: 4rem; color: #fff; margin-bottom: 1.5rem;"></i>
+            <h3 style="margin-bottom: 1rem; font-family: var(--font-title); color: #fff;">Poder do 13º Salário</h3>
+            <p style="color: var(--color-text-secondary);">Uma parcela extra por ano usada na amortização pode reduzir
+                seu financiamento de 35 anos para menos de 15 anos.</p>
+        </div>
+    </chapter-section>
+
+    <chapter-section title="A Engenharia da Entrada" tag="07. Pagamento">
+        <div slot="text">
+            <p>"O banco aprovou 200 mil, mas o imóvel custa 250 mil. Não tenho 50 mil de entrada!".</p>
+            <p>Calma. Ninguém tem. É aqui que entra o <strong>Fluxo Personalizado</strong>. Nós parcelamos essa
+                diferença diretamente com a construtora durante o período de obra.</p>
+            <p>Fatiamos a entrada em uma "Pizza" financeira:</p>
+            <ul>
+                <li><strong>Ato:</strong> Um sinal pequeno para fechar negócio.</li>
+                <li><strong>Mensais:</strong> Parcelas que cabem no bolso.</li>
+                <li><strong>Anuais:</strong> Reforços pontuais usando seu 13º.</li>
+                <li><strong>Chaves:</strong> Parcela final na entrega.</li>
+            </ul>
+        </div>
+        <div slot="visual"
+            style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-content: center;">
+            <span
+                style="border: 1px solid var(--color-highlight); padding: 10px 20px; border-radius: 50px; color: var(--color-highlight); font-family: var(--font-title);">Ato
+                Facilitado</span>
+            <span
+                style="border: 1px solid var(--color-highlight); padding: 10px 20px; border-radius: 50px; color: var(--color-highlight); font-family: var(--font-title);">36x
+                Mensais</span>
+            <span
+                style="border: 1px solid var(--color-highlight); padding: 10px 20px; border-radius: 50px; color: var(--color-highlight); font-family: var(--font-title);">FGTS</span>
+            <span
+                style="border: 1px solid var(--color-highlight); padding: 10px 20px; border-radius: 50px; color: var(--color-highlight); font-family: var(--font-title);">Anuais</span>
+        </div>
+    </chapter-section>
+
+    <chapter-section id="simulacao" title="A Verdade do Lançamento" tag="08. Caso Real" reverse>
+        <div slot="text">
+            <p>Para provar que isso funciona, veja os números reais de um contrato de <strong>Dezembro/2025</strong>.
+            </p>
+            <p><strong>O Perfil:</strong> Casal (Renda R$ 6.000). Imóvel: R$ 293.472.</p>
+            <p><strong>O Desafio:</strong> A Caixa aprovou R$ 236.000. Faltava pagar de Entrada: <strong>R$
+                    56.829,00</strong>.</p>
+            <p><strong>O Pulo do Gato:</strong> Eles compraram no <strong>Lançamento</strong> e garantiram um Voucher de
+                R$ 5.000. Para o restante, montamos um fluxo onde a parcela cai no final da obra:</p>
+            <ul>
+                <li><strong>Ato:</strong> Apenas R$ 3.000 do bolso.</li>
+                <li><strong>Mensais Iniciais:</strong> R$ 1.200.</li>
+                <li><strong>Mensais Finais:</strong> R$ 950 (A parcela caiu!).</li>
+                <li><strong>Anuais:</strong> R$ 5.000 (13º salário).</li>
+            </ul>
+            <p>Garantiram um imóvel de quase 300 mil reais com um sinal de 3 mil.</p>
+        </div>
+        <div slot="visual" style="padding: 0; background: transparent; border: none; box-shadow: none;">
+            <div class="ticket-paper">
+                <div
+                    style="text-align: center; font-weight: 700; border-bottom: 2px solid #000; padding-bottom: 1rem; margin-bottom: 1rem;">
+                    RECIBO DE VENDA #9102</div>
+
+                <div class="ticket-row"><span>Valor Imóvel (34m²)</span> <strong>R$ 293.472,00</strong></div>
+                <div class="ticket-row"><span>Financiamento</span> <span>- R$ 236.643,00</span></div>
+                <div class="ticket-row" style="color: #000; font-weight: 700;"><span>ENTRADA (GAP)</span> <span>R$
+                        56.829,00</span></div>
+
+                <div class="ticket-voucher">VOUCHER LANÇAMENTO: - R$ 5.000,00</div>
+
+                <div class="ticket-row"><span>Ato (Sinal)</span> <span>R$ 3.000,00</span></div>
+                <div class="ticket-row"><span>15x Mensais Iniciais</span> <span>R$ 1.200,00</span></div>
+                <div class="ticket-row" style="color: #b91c1c; font-weight: 700;"><span>16x Mensais Finais 📉</span>
+                    <span>R$ 950,00</span>
+                </div>
+                <div class="ticket-row"><span>2x Anuais</span> <span>R$ 5.000,00</span></div>
+
+                <div style="text-align: center; margin-top: 1.5rem; font-weight: 700; font-size: 1.2rem;">
+                    PARCELA CHAVES: R$ 5.629,00
+                </div>
+            </div>
+        </div>
+    </chapter-section>
+
+    <div style="margin-top: 6rem; text-align: center;">
+        <span
+            style="color: var(--color-highlight); font-family: var(--font-title); letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">Linha
+            Smart</span>
+        <h2 style="font-family: var(--font-title); font-size: 2.5rem; margin-top: 0.5rem; margin-bottom: 2rem;">Conheça
+            os Projetos Start</h2>
+    </div>
+
+    <page-scanner category="smart"></page-scanner>
+
+    <cta-banner id="schedule" title="Não espere o preço subir."
+        text="Imóveis na planta valorizam rápido. Quem chega cedo pega o Voucher de Lançamento. Vamos montar seu fluxo?"
+        btn-text="Simular no WhatsApp" link="https://wa.me/5511957800534">
+    </cta-banner>
+
+    <footer-section brand="MEUAPÊTEM" root-path="."></footer-section>
+
+    <floating-actions></floating-actions>
+    <contact-popup photo="./media/utils/logo-perfil.svg"></contact-popup>
+    <custom-cursor></custom-cursor>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const fills = entry.target.querySelectorAll('.chart-fill');
+                        fills.forEach(fill => fill.style.width = fill.style.width);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            document.querySelectorAll('chapter-section').forEach(section => observer.observe(section));
+        });
+    </script>
+
+</body>
+
+</html>
