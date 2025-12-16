@@ -19,10 +19,42 @@ class PageScanner extends HTMLElement {
         }
 
         const currentFile = window.location.pathname.split('/').pop();
-        const filterCategory = this.getAttribute('category'); // 'rare' ou 'smart'
+
+        // Pega a categoria definida na tag <page-scanner category="invest">
+        const filterCategory = this.getAttribute('category');
 
         // Verifica se estamos na Home ou numa página interna
-        const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+        const isHome = window.location.pathname.endsWith('index.html') ||
+            window.location.pathname.endsWith('/') ||
+            window.location.pathname.endsWith('manual-mcmv.html');
+
+        // --- NOVIDADE: Configuração dos Textos das Linhas ---
+        const categoryDetails = {
+            'signature': {
+                title: 'SIGNATURE',
+                desc: 'Alto e Altíssimo Padrão. Luxo e design autoral para quem busca exclusividade e sofisticação.'
+            },
+            'comfort': {
+                title: 'COMFORT',
+                desc: 'Médio Padrão com foco em Família. Plantas inteligentes de 2 e 3 dormitórios onde o bem-estar é prioridade.'
+            },
+            'start': {
+                title: 'START',
+                desc: 'Econômicos e Primeiro Imóvel (MCMV). A porta de entrada para transformar o aluguel em patrimônio próprio.'
+            },
+            'invest': {
+                title: 'INVEST',
+                desc: 'Foco total em Investimento e Rentabilidade. Studios e compactos em regiões de alta demanda.'
+            }
+        };
+
+        // Define os textos atuais baseados no atributo ou usa um padrão se não achar
+        const currentInfo = categoryDetails[filterCategory] || { title: 'Nossos Projetos', desc: '' };
+
+        // Lógica de exibição: Se for Home usa os textos novos, se for interna usa "Veja Também"
+        const displayKicker = isHome ? 'MEUAPÊTEM' : 'Continue Explorando';
+        const displayTitle = isHome ? currentInfo.title : 'Veja Também';
+        const displayDesc = isHome ? currentInfo.desc : ''; // Não mostra descrição longa em páginas internas
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -34,12 +66,35 @@ class PageScanner extends HTMLElement {
                 }
                 .container { max-width: 1400px; margin: 0 auto; }
                 
-                /* Títulos Diferentes para Home e Internas */
                 .section-header { margin-bottom: 3rem; }
-                h3 { font-family: var(--font-title, serif); font-size: 2rem; color: #fff; margin: 0; }
+                
+                /* Kicker (MeuApêTem) */
                 span { 
                     color: var(--highlight-color, #c5a065); 
-                    text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.5rem;
+                    text-transform: uppercase; 
+                    letter-spacing: 2px; 
+                    font-size: 0.8rem; 
+                    font-weight: 700; 
+                    display: block; 
+                    margin-bottom: 0.5rem;
+                }
+
+                /* Título Principal */
+                h3 { 
+                    font-family: var(--font-title, serif); 
+                    font-size: 2rem; 
+                    color: #fff; 
+                    margin: 0 0 1rem 0; 
+                }
+
+                /* Descrição da Categoria */
+                .category-desc {
+                    color: #a0a0a0;
+                    font-family: var(--font-body, sans-serif);
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    max-width: 700px;
+                    margin: 0;
                 }
 
                 .grid { 
@@ -52,11 +107,12 @@ class PageScanner extends HTMLElement {
             </style>
             <div class="container">
                 <div class="section-header">
-                    <span>${isHome ? 'Coleção' : 'Continue Explorando'}</span>
-                    <h3>${isHome ? (filterCategory === 'rare' ? 'The Rare Collection' : 'Smart Living') : 'Veja Também'}</h3>
+                    <span>${displayKicker}</span>
+                    <h3>${displayTitle}</h3>
+                    ${displayDesc ? `<p class="category-desc">${displayDesc}</p>` : ''}
                 </div>
                 <div class="grid" id="grid">
-                    </div>
+                </div>
             </div>
         `;
 
@@ -71,13 +127,10 @@ class PageScanner extends HTMLElement {
         let foundCount = 0;
 
         for (const file of this.projectFiles) {
-            // Pula o próprio arquivo se estiver dentro dele
             if (file === currentFile) continue;
 
             try {
-                // Define o caminho para buscar o arquivo
                 const pathPrefix = isHome ? 'projects/' : './';
-
                 const response = await fetch(pathPrefix + file);
                 if (!response.ok) throw new Error('404');
 
@@ -85,17 +138,17 @@ class PageScanner extends HTMLElement {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(htmlText, 'text/html');
 
+                // Lê a meta tag do arquivo alvo
                 const category = doc.querySelector('meta[name="product-category"]')?.content;
 
+                // Compara se a categoria do arquivo é igual a solicitada no componente
                 if (category === filterCategory) {
                     const title = doc.querySelector('title').innerText.split('|')[0].trim();
                     const vibe = doc.querySelector('meta[name="product-vibe"]')?.content || 'Ver Projeto';
                     const tags = doc.querySelector('meta[name="product-tags"]')?.content || '';
 
-                    // Ajuste inteligente de imagem
                     let image = doc.querySelector('meta[property="og:image"]')?.content;
                     if (image && isHome) {
-                        // Se estou na home, '../media' vira './media'
                         image = image.replace('../media', './media');
                     }
 
@@ -117,7 +170,7 @@ class PageScanner extends HTMLElement {
         }
 
         if (foundCount === 0) {
-            this.style.display = 'none'; // Esconde a seção se não achar nada
+            this.style.display = 'none';
         }
     }
 }

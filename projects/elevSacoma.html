@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
 
     <meta property="og:image" content="../media/Elev-Park-Sacom/area_comum/voo.webp">
-    <meta name="product-category" content="smart">
+    <meta name="product-category" content="start">
     <meta name="product-vibe" content="Parque Privativo">
     <meta name="product-tags" content="Sacomã, Metrô, Lazer de Clube">
 
@@ -85,6 +85,69 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
+
+        /* --- NEW COMPONENT: MANUAL STRIP (Faixa Fina) --- */
+        .manual-strip {
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.1), rgba(20, 20, 20, 0.8));
+            border-left: 2px solid var(--color-highlight);
+            padding: 1.5rem 2rem;
+            margin: 2rem auto 4rem auto;
+            /* Centralizado com margem */
+            max-width: 1200px;
+            width: 90%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .manual-strip:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.15), rgba(30, 30, 30, 0.9));
+        }
+
+        .manual-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .manual-icon {
+            color: var(--color-highlight);
+            font-size: 1.5rem;
+        }
+
+        .manual-text h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-family: var(--font-title);
+            color: #fff;
+        }
+
+        .manual-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        .manual-btn {
+            white-space: nowrap;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .manual-btn:hover {
+            border-color: var(--color-highlight);
+            color: var(--color-highlight);
+        }
     </style>
 
     <script src="../components/preloader.js"></script>
@@ -140,6 +203,19 @@
 
     <marquee-scroll id="marquee" text="LAZER DE CLUBE — PARQUE PRIVATIVO — 3 MIN DO METRÔ SACOMÃ — ESCRITURA GRÁTIS — "
         speed="60s"></marquee-scroll>
+
+
+    <div class="manual-strip">
+        <div class="manual-content">
+            <i class="fas fa-book-reader manual-icon"></i>
+            <div class="manual-text">
+                <h3>Dúvidas sobre o Minha Casa Minha Vida?</h3>
+                <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
+            </div>
+        </div>
+        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right"
+                style="margin-left:5px; font-size:0.8em;"></i></a>
+    </div>
 
     <stats-section id="stats">
         <stat-item slot="items" class="hover-target" id="stat-1" number="3 min"
@@ -259,15 +335,14 @@
         ]'>
     </region-section>
 
-    <team-section highlight="Assinatura" title="Quem Faz">
-        <team-member slot="members" role="Arquitetura" name="Renato Bianconi"
+    <team-section id="team" title="Quem Assina">
+        <team-member role="Arquitetura" name="Renato Bianconi"
             text="Racionalidade do espaço de morar, integrado à estrutura urbana."
             image="../media/utils/MCAA.png"></team-member>
-        <team-member slot="members" role="Paisagismo" name="Núcleo Arquitetura"
+        <team-member role="Paisagismo" name="Núcleo Arquitetura"
             text="Paisagismo vibrante que cria conexões entre o morador e a natureza."
             image="../media/utils/nucleo.jpg"></team-member>
-        <team-member slot="members" role="Interiores" name="Skiros"
-            text="Estética e funcionalidade com decoração contemporânea."
+        <team-member role="Interiores" name="Skiros" text="Estética e funcionalidade com decoração contemporânea."
             image="../media/utils/Skiros.png"></team-member>
     </team-section>
 
@@ -287,9 +362,7 @@
         <trust-item slot="items" title="Financiamento" img="../media/utils/caixa.svg" alt="Caixa"></trust-item>
     </trust-section>
 
-    <page-scanner category="smart"></page-scanner>
-
-    <footer-section project="ELEV PARK SACOMÃ II" broker="CORRETOR MOTA - CRECI 315675" root-path=".."></footer-section>
+    <footer-section project="ELEV PARK SACOMÃ" broker="CORRETOR MOTA - CRECI 315675" root-path=".."></footer-section>
 
     <floating-actions></floating-actions>
     <contact-popup></contact-popup>
@@ -332,9 +405,9 @@
                 stats: [{ id: 'stat-1', n: 'Sacomã', l: 'Alto Potencial' }, { id: 'stat-2', n: 'Demanda', l: 'Constante' }, { id: 'stat-3', n: 'Liquidez', l: 'Imediata' }],
                 cta: {
                     highlight: 'Investimento Seguro',
-                    title: 'Rentabilidade',
-                    text: 'Ativo perfeito para locação ou valorização patrimonial. Consulte a tabela.',
-                    btn: 'Baixar Estudo'
+                    title: 'Alta Rentabilidade',
+                    text: 'Ativo perfeito para locação ou valorização patrimonial. Conheça as condições exclusivas para investidores.',
+                    btn: 'Agendar Consulta'
                 },
                 review: {
                     phrases: '["Valorização", "Rentabilidade", "Ticket Baixo", "Liquidez"]',

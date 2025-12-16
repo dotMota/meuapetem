@@ -11,12 +11,11 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'AW-17794513059');
     </script>
 
     <meta name="description"
-        content="Da conquista do primeiro apê à coleção de raridades. Encontre o imóvel que combina com seu momento de vida.">
+        content="Encontre o imóvel ideal. MeuApêTem Start, Comfort, Signature e Invest. Curadoria imobiliária completa.">
     <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +57,121 @@
             overflow-x: hidden;
         }
 
-        /* Ajuste fino para os botões do Hero ficarem distintos */
+        /* --- CATEGORY HEADER STYLES --- */
+        .category-header {
+            text-align: center;
+            padding: 5rem 0 3rem;
+            /* Mais respiro */
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .category-header h2 {
+            font-family: var(--font-title);
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 1rem 0;
+            color: #fff;
+        }
+
+        .category-desc {
+            font-family: var(--font-text);
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- NEW COMPONENT: MANUAL STRIP (Faixa Fina) --- */
+        .manual-strip {
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.1), rgba(20, 20, 20, 0.8));
+            border-left: 2px solid var(--color-highlight);
+            padding: 1.5rem 2rem;
+            margin: 2rem auto 4rem auto;
+            /* Centralizado com margem */
+            max-width: 1200px;
+            width: 90%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .manual-strip:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.15), rgba(30, 30, 30, 0.9));
+        }
+
+        .manual-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .manual-icon {
+            color: var(--color-highlight);
+            font-size: 1.5rem;
+        }
+
+        .manual-text h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-family: var(--font-title);
+            color: #fff;
+        }
+
+        .manual-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        .manual-btn {
+            white-space: nowrap;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .manual-btn:hover {
+            border-color: var(--color-highlight);
+            color: var(--color-highlight);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            width: 100%;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .manual-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .manual-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Ajuste fino para os botões do Hero */
         hero-brand::part(btn-primary) {
             background-color: #fff !important;
             color: #000 !important;
@@ -93,57 +206,76 @@
 
     <site-menu logo="MEUAPÊTEM" image="./media/utils/logo-brand.png">
         <a slot="links" href="#home">Início</a>
-        <a slot="links" href="#rare-collection">Alto Padrão</a>
-        <a slot="links" href="#smart-living">Econômicos</a>
-        <a slot="links" href="#schedule" class="auto-trigger">Falar com Consultor</a>
+        <a slot="links" href="#signature">Signature</a>
+        <a slot="links" href="#comfort">Comfort</a>
+        <a slot="links" href="#start">Start</a>
+        <a slot="links" href="#invest">Invest</a>
+        <a slot="links" href="#schedule" class="auto-trigger">Consultoria</a>
     </site-menu>
 
     <hero-brand id="home" title="MeuApêTem"></hero-brand>
 
-    <marquee-scroll text="CURADORIA EXPERIENCIAL — DO PRIMEIRO APÊ AO ALTO PADRÃO — TRANSPARÊNCIA RADICAL — "
-        speed="100s">
+    <marquee-scroll text="CURADORIA EXPERIENCIAL — START — COMFORT — SIGNATURE — INVEST — " speed="100s">
     </marquee-scroll>
 
     <manifesto-section id="manifesto" title="Não vendemos metros quadrados.<br>Vendemos" highlight="Ciclos de Vida."
-        text="Seja para conquistar sua independência ou encontrar sua raridade. Facilitamos o encontro entre você e o seu próximo passo.">
+        text="Seja para conquistar sua independência, acomodar a família ou diversificar patrimônio. Facilitamos o encontro entre você e o seu próximo passo.">
     </manifesto-section>
 
-    <page-scanner id="rare-collection" category="rare"></page-scanner>
 
-    <div style="height: 1px; background: rgba(255,255,255,0.1); width: 90%; margin: 0 auto;"></div>
 
-    <page-scanner id="smart-living" category="smart"></page-scanner>
+    <div class="divider"></div>
+    <div id="signature">
+        <page-scanner category="signature"></page-scanner>
+    </div>
+
+    <div class="divider"></div>
+    <div id="start">
+        <page-scanner category="start"></page-scanner>
+        <div class="manual-strip">
+            <div class="manual-content">
+                <i class="fas fa-book-reader manual-icon"></i>
+                <div class="manual-text">
+                    <h3>Dúvidas sobre o Primeiro Apê?</h3>
+                    <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
+                </div>
+            </div>
+            <a href="./manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right"
+                    style="margin-left:5px; font-size:0.8em;"></i></a>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="invest">
+        <page-scanner category="invest"></page-scanner>
+    </div>
 
     <cta-banner id="schedule" title="Ainda não encontrou o seu?"
         text="Temos acesso a lançamentos Off-Market e condições exclusivas que não estão no site."
-        btn-text="Consultoria Personalizada" link="#">
+        btn-text="Falar com Consultor" link="#">
     </cta-banner>
 
     <footer-section brand="MEUAPÊTEM" broker="CRECI 268.448" root-path="."> </footer-section>
 
     <floating-actions></floating-actions>
-
     <contact-popup photo="./media/utils/logo-perfil.svg"></contact-popup>
-
     <cookie-banner></cookie-banner>
-
     <custom-cursor></custom-cursor>
 
     <script>
         window.addEventListener('load', () => {
-            // Ajusta o Hero Button Secundário para levar ao Smart Living
             const hero = document.querySelector('hero-brand');
             if (hero) {
-                // Acessa o Shadow DOM do componente Hero
                 const btnSec = hero.shadowRoot.querySelector('.btn-secondary');
                 if (btnSec) {
-                    btnSec.innerText = "Quero Sair do Aluguel";
-                    btnSec.href = "#smart-living";
+                    btnSec.innerText = "Linha Start";
+                    btnSec.href = "#start";
                 }
                 const btnPri = hero.shadowRoot.querySelector('.btn-primary');
                 if (btnPri) {
-                    btnPri.innerText = "Busco Exclusividade";
-                    btnPri.href = "#rare-collection";
+                    btnPri.innerText = "Coleção Signature";
+                    btnPri.href = "#signature";
                 }
             }
         });

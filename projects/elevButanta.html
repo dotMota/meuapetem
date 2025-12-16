@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Elev Butantã | Trisul</title>
+    <title>Elev Butantã | MeuApêTem Start</title>
     <meta name="description"
         content="Um passo muda tudo. More em frente à Estação Butantã. Apartamentos de 25m² a 38m² com lazer de clube e fácil acesso à USP.">
 
     <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
 
     <meta property="og:image" content="../media/Elev_Butant/fachadas/elev_butanta.webp">
-    <meta name="product-category" content="smart">
+
+    <meta name="product-category" content="start">
+
     <meta name="product-vibe" content="Metrô na Porta">
     <meta name="product-tags" content="4 Passos do Metrô, USP">
 
@@ -81,6 +83,69 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
+
+        /* --- NEW COMPONENT: MANUAL STRIP (Faixa Fina) --- */
+        .manual-strip {
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.1), rgba(20, 20, 20, 0.8));
+            border-left: 2px solid var(--color-highlight);
+            padding: 1.5rem 2rem;
+            margin: 2rem auto 4rem auto;
+            /* Centralizado com margem */
+            max-width: 1200px;
+            width: 90%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .manual-strip:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.15), rgba(30, 30, 30, 0.9));
+        }
+
+        .manual-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .manual-icon {
+            color: var(--color-highlight);
+            font-size: 1.5rem;
+        }
+
+        .manual-text h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-family: var(--font-title);
+            color: #fff;
+        }
+
+        .manual-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        .manual-btn {
+            white-space: nowrap;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .manual-btn:hover {
+            border-color: var(--color-highlight);
+            color: var(--color-highlight);
+        }
     </style>
 
     <script src="../components/preloader.js"></script>
@@ -91,11 +156,11 @@
     <script src="../components/showcase.js" defer></script>
     <script src="../components/gallery.js" defer></script>
     <script src="../components/plans.js" defer></script>
-    <script src="../components/team.js" defer></script>
     <script src="../components/stats.js" defer></script>
     <script src="../components/region.js" defer></script>
     <script src="../components/cta.js" defer></script>
     <script src="../components/trust.js" defer></script>
+    <script src="../components/team.js" defer></script>
     <script src="../components/footer.js" defer></script>
     <script src="../components/curator-review.js" defer></script>
     <script src="../components/floating.js" defer></script>
@@ -126,7 +191,7 @@
         <a slot="links" href="#schedule" class="auto-trigger" id="menu-cta">Simular</a>
     </site-menu>
 
-    <hero-section id="home" image="../media/Elev_Butant/area_comum/voo_piscinas.webp" highlight="Minha Casa Minha Vida"
+    <hero-section id="home" image="../media/Elev_Butant/area_comum/voo_piscinas.webp" highlight="MeuApêTem Start"
         subtitle="O Futuro é Agora" title="Um Passo Muda Tudo" curator-badge="true"
         text="A apenas 4 passos da Estação Butantã. Conecte-se com a cidade e conquiste sua independência.">
         <a href="#schedule" slot="cta" id="hero-cta-btn"
@@ -136,6 +201,18 @@
 
     <marquee-scroll id="marquee" text="METRÔ NA PORTA — 5 MIN DA USP — LAZER DE CLUBE — VARANDA EM TODAS AS UNIDADES — "
         speed="60s"></marquee-scroll>
+
+    <div class="manual-strip">
+        <div class="manual-content">
+            <i class="fas fa-book-reader manual-icon"></i>
+            <div class="manual-text">
+                <h3>Dúvidas sobre o Minha Casa Minha Vida?</h3>
+                <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
+            </div>
+        </div>
+        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right"
+                style="margin-left:5px; font-size:0.8em;"></i></a>
+    </div>
 
     <stats-section id="stats">
         <stat-item slot="items" class="hover-target" id="stat-1" number="10 seg"
@@ -243,18 +320,6 @@
 
     </plans-section>
 
-    <team-section highlight="Assinatura" title="Quem Faz">
-        <team-member slot="members" role="Arquitetura" name="MCAA Arquitetos"
-            text="Linhas modernas que dialogam com a velocidade da Linha Amarela."
-            image="../media/utils/MCAA.png"></team-member>
-        <team-member slot="members" role="Paisagismo" name="Núcleo Arquitetura"
-            text="Áreas verdes que trazem respiro e bem-estar no meio urbano."
-            image="../media/utils/nucleo.jpg"></team-member>
-        <team-member slot="members" role="Interiores" name="Skiros"
-            text="Jovem, atual e funcional. Ambientes pensados para conectar pessoas."
-            image="../media/utils/Skiros.png"></team-member>
-    </team-section>
-
     <region-section id="location" image="../media/Elev_Butant/fachadas/elev_butanta.webp"
         highlight="Localização Premium" title="O Epicentro da Zona Oeste"
         text="Av. Vital Brasil, 329. Literalmente em frente ao Metrô Butantã. Vizinho da USP, Jockey Club e Shopping Eldorado."
@@ -264,6 +329,22 @@
             {"title": "Shopping Eldorado", "loc": [-23.5730, -46.6960]}
         ]'>
     </region-section>
+
+    <team-section id="team" title="Quem Assina">
+
+        <team-member role="Arquitetura" name="MCAA Arquitetos" image="../media/utils/MCAA.png"
+            text="Traços modernos que dialogam com a velocidade da Linha Amarela. Soluções inteligentes de aproveitamento de espaço.">
+        </team-member>
+
+        <team-member role="Paisagismo" name="Núcleo Arquitetura" image="../media/utils/nucleo.jpg"
+            text="Um oásis no meio do Butantã. Áreas verdes que trazem respiro e bem-estar, criando microclimas agradáveis.">
+        </team-member>
+
+        <team-member role="Interiores" name="Skiros" image="../media/utils/Skiros.png"
+            text="Jovem, atual e funcional. Ambientes pensados para conectar pessoas, com design durável e esteticamente impactante.">
+        </team-member>
+
+    </team-section>
 
     <cta-section id="schedule" highlight="Últimas Unidades" title="Mude de Vida"
         text="Condições facilitadas de lançamento. Compre sem entrada e com escritura grátis."
@@ -275,7 +356,7 @@
         <trust-item slot="items" title="Financiamento" img="../media/utils/caixa.svg" alt="Caixa"></trust-item>
     </trust-section>
 
-    <page-scanner category="smart"></page-scanner>
+    <page-scanner category="start"></page-scanner>
 
     <footer-section project="ELEV BUTANTÃ" broker="CORRETOR MOTA - CRECI 315675" root-path=".."></footer-section>
 
@@ -310,24 +391,25 @@
                 menuBtn: 'Simular'
             },
             investor: {
+                // Modo Investidor (Sem ROI/Tabela)
                 colors: { highlight: '#00b8d4', bgMain: '#0a1014', bgDark: '#05080a', textSec: '#a0c0d0' },
                 hero: {
-                    highlight: 'Alta Liquidez na Linha Amarela',
-                    title: 'Demanda Infinita: USP e Faria Lima',
-                    text: 'O ativo perfeito para locação Short-Stay e Student Housing. Vacância próxima de zero.'
+                    highlight: 'Ativo Seguro',
+                    title: 'Localização é Tudo',
+                    text: 'Garanta seu patrimônio em uma das regiões mais valorizadas e demandadas de SP. Ao lado da USP e do Metrô.'
                 },
-                marquee: 'ALTA DEMANDA DE LOCAÇÃO — AO LADO DA USP — EIXO FARIA LIMA — YIELD ELEVADO — ',
-                stats: [{ id: 'stat-1', n: '4 Passos', l: 'Do Metrô (Liquidez)' }, { id: 'stat-2', n: 'USP', l: 'Demanda Constante' }, { id: 'stat-3', n: 'Alto', l: 'Potencial de Valorização' }],
+                marquee: 'ALTA DEMANDA DE LOCAÇÃO — AO LADO DA USP — EIXO FARIA LIMA — SEGURANÇA PATRIMONIAL — ',
+                stats: [{ id: 'stat-1', n: '4 Passos', l: 'Do Metrô (Liquidez)' }, { id: 'stat-2', n: 'USP', l: 'Demanda Constante' }, { id: 'stat-3', n: 'Sólido', l: 'Proteção Patrimonial' }],
                 cta: {
-                    highlight: 'Investimento Inteligente',
-                    title: 'Rentabilidade Garantida',
-                    text: 'Invista no eixo de maior valorização de SP. Baixe o book de rentabilidade.',
-                    btn: 'Baixar Estudo'
+                    highlight: 'Investimento Seguro',
+                    title: 'Diversifique seu Patrimônio',
+                    text: 'Um imóvel compacto, fácil de alugar e em região consolidada. Fale com um consultor especializado.',
+                    btn: 'Falar com Consultor'
                 },
                 review: {
-                    phrases: '["Alta Liquidez", "Rentabilidade", "AirBnb", "Student Housing"]',
-                    pros: "A proximidade com a USP garante fluxo contínuo de estudantes. A Linha Amarela atrai o público corporativo.",
-                    cons: "Giro rápido de inquilinos exige gestão atenta ou contratação de Housi/Charlie."
+                    phrases: '["Alta Liquidez", "Segurança", "USP", "Patrimônio"]',
+                    pros: "A proximidade com a USP garante fluxo contínuo de interessados na locação. A Linha Amarela valoriza o ativo.",
+                    cons: "Ideal para quem busca segurança e liquidez, mais do que especulação."
                 },
                 menuBtn: 'Consultar'
             }
@@ -339,9 +421,11 @@
             const heroBtn = document.getElementById('hero-cta-btn');
 
             if (mode === 'investor') {
-                heroBtn.innerText = "Receber Tabela";
+                heroBtn.innerText = "Falar com Consultor";
+                heroBtn.href = "https://wa.me/5511999999999?text=Tenho%20interesse%20em%20investir%20no%20Elev%20Butant%C3%A3";
             } else {
                 heroBtn.innerText = "Compre sem Entrada*";
+                heroBtn.href = "#schedule";
             }
         });
 

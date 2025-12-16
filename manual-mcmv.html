@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual do Primeiro Apê | MeuApêTem Start</title>
+
+    <meta name="description" content="O Guia da Conquista MeuApêTem. Entenda como transformar aluguel em patrimônio.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@400;500;700&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-highlight: #FF6F61;
+            --color-highlight-dim: rgba(255, 111, 97, 0.1);
+            --bg-page-body: #0a0a0a;
+            --bg-section-main: #141414;
+            --bg-card: #1f1f1f;
+            --color-text-primary: #F5F5F7;
+            --color-text-secondary: #A1A1AA;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-text: 'Manrope', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-page-body);
+            font-family: var(--font-text);
+            color: var(--color-text-primary);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-title);
+            margin: 0 0 1.5rem 0;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        p {
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .highlight {
+            color: var(--color-highlight);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* --- CATEGORY HEADER STYLES --- */
+        .category-header {
+            text-align: center;
+            padding: 5rem 0 3rem;
+            /* Mais respiro */
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .category-header h2 {
+            font-family: var(--font-title);
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 1rem 0;
+            color: #fff;
+        }
+
+        .category-desc {
+            font-family: var(--font-text);
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- VISUALIZATIONS --- */
+        .visual-container {
+            height: 100%;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .chart-frame {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: var(--color-text-secondary);
+            opacity: 0.8;
+        }
+
+        /* Horizontal Bar Chart */
+        .h-bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+
+        .h-bar-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 50px;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .h-bar-label {
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+            text-align: right;
+            line-height: 1.2;
+        }
+
+        .h-bar-track {
+            background: rgba(255, 255, 255, 0.05);
+            height: 32px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .h-bar-fill {
+            height: 100%;
+            background: #333;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+            border-radius: 4px;
+        }
+
+        .h-bar-fill.mcmv {
+            background: linear-gradient(to right, var(--color-highlight), #ff8a75);
+        }
+
+        .h-bar-value {
+            font-family: var(--font-mono);
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        /* Blueprint Card */
+        .blueprint-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .blueprint-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+
+        .bp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .bp-title {
+            font-family: var(--font-mono);
+            color: var(--color-highlight);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .bp-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        .bp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .bp-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .bp-icon {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .bp-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .bp-val {
+            font-size: 1rem;
+            color: #eee;
+            font-weight: 500;
+        }
+
+        /* Receipt */
+        .receipt {
+            background: #fdfdfd;
+            color: #1a1a1a;
+            width: 340px;
+            padding: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            position: relative;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .receipt:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .receipt::before,
+        .receipt::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-size: 20px 20px;
+        }
+
+        .receipt::before {
+            top: -10px;
+            background-image: radial-gradient(circle at 10px 15px, transparent 8px, #fdfdfd 9px);
+            background-position: 0 5px;
+        }
+
+        .receipt::after {
+            bottom: -10px;
+            background-image: radial-gradient(circle at 10px -5px, transparent 8px, #fdfdfd 9px);
+        }
+
+        .receipt-header {
+            text-align: center;
+            border-bottom: 1px dashed #aaa;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .receipt-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .receipt-meta {
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        .receipt-body {
+            margin-bottom: 1rem;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.2rem;
+        }
+
+        .receipt-detail {
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .receipt-row.total {
+            border-top: 2px dashed #000;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .receipt-divider {
+            border-bottom: 1px dashed #aaa;
+            margin: 1rem 0;
+        }
+
+        .receipt-footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 2rem;
+        }
+
+        .barcode {
+            height: 40px;
+            background: repeating-linear-gradient(to right, #000 0, #000 2px, transparent 2px, transparent 4px, #000 4px, #000 5px);
+            margin-top: 10px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Evolution Chart */
+        .svg-chart {
+            width: 100%;
+            height: 250px;
+            overflow: visible;
+        }
+
+        .chart-line {
+            fill: none;
+            stroke: var(--color-highlight);
+            stroke-width: 3;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 2s ease-out;
+        }
+
+        .chart-area {
+            fill: var(--color-highlight-dim);
+            opacity: 0;
+            transition: opacity 1s 1.5s;
+        }
+
+        .animate .chart-line {
+            stroke-dashoffset: 0;
+        }
+
+        .animate .chart-area {
+            opacity: 1;
+        }
+
+        .chart-axis {
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 1;
+        }
+
+        .chart-text {
+            fill: var(--color-text-secondary);
+            font-size: 12px;
+            font-family: var(--font-text);
+        }
+
+        /* NEW HERO STYLES */
+        .hero {
+            height: 85vh;
+            min-height: 650px;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Canvas for Particles */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 10%, var(--bg-page-body) 90%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+        }
+
+        .section-block {
+            padding: 100px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .zig-zag {
+            display: flex;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .zig-zag:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .col-content {
+            flex: 1.2;
+        }
+
+        .col-visual {
+            flex: 0.8;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--color-highlight);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        @media (max-width: 968px) {
+
+            .zig-zag,
+            .zig-zag:nth-child(even) {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .receipt,
+            .blueprint-card {
+                margin: 0 auto;
+            }
+
+            .h-bar-row {
+                grid-template-columns: 80px 1fr 40px;
+            }
+        }
+    </style>
+
+    <script src="./components/preloader.js"></script>
+    <script src="./components/menu.js" defer></script>
+    <script src="./components/cta-banner.js" defer></script>
+    <script src="./components/project-card.js" defer></script>
+    <script src="./components/footer.js" defer></script>
+    <script src="./components/cursor.js" defer></script>
+    <script src="./components/floating.js" defer></script>
+    <script src="./components/contact.js" defer></script>
+    <script src="./components/cookie.js" defer></script>
+    <script src="./components/page-scanner.js" defer></script>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-17794513059');
+    </script>
+</head>
+
+<body>
+
+
+    <site-preloader project="EDUCAÇÃO"></site-preloader>
+
+    <site-menu logo="EDUCAÇÃO" parent-text="MeuApêTem" parent-link="../index.html">
+        <a slot="links" href="#cenario">Juros</a>
+        <a slot="links" href="#produto">O Imóvel</a>
+        <a slot="links" href="#regras">Regras</a>
+        <a slot="links" href="#obra">Obra</a>
+        <a slot="links" href="#fluxo">Fluxo</a>
+        <a slot="links" href="#start" class="auto-trigger">Ver Imóveis Start</a>
+    </site-menu>
+
+    <header class="hero" id="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content container">
+            <span
+                style="color: var(--color-highlight); letter-spacing: 3px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 1rem;">Manual
+                MeuApêTem Start</span>
+            <h1>Dê o Start na<br><span class="highlight">Sua Conquista</span></h1>
+            <p style="color: #fff; max-width: 700px; margin: 0 auto; font-size: 1.2rem;">O mercado imobiliário é cheio
+                de letras miúdas. Nós traduzimos tudo. Entenda como transformar o aluguel em patrimônio usando as novas
+                regras do jogo a seu favor.</p>
+        </div>
+    </header>
+
+    <section class="section-block" id="cenario">
+        <div class="container">
+            <div class="zig-zag">
+                <div class="col-content">
+                    <span class="highlight" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">O
+                        Cenário Atual</span>
+                    <h2>Fuja da Armadilha dos 14%</h2>
+                    <p>Vamos começar com a verdade nua e crua: financiar um imóvel por um banco privado tradicional hoje
+                        é caro. As taxas de juros de mercado (bancos comuns) partem de 14% ao ano (Custo Efetivo Total).
+                    </p>
+
+                    <h3>O Efeito Bola de Neve</h3>
+                    <p>Com juros de 14%, você acaba pagando o valor de três imóveis para ficar com um. A parcela fica
+                        pesada e o saldo devedor demora a cair.</p>
+
+                    <h3>A Solução MeuApêTem Start</h3>
+                    <p>Nós operamos dentro das regras do Sistema Financeiro de Habitação (SFH) e do Minha Casa Minha
+                        Vida. Isso significa que você acessa taxas subsidiadas que o mercado privado não oferece.</p>
+
+                    <ul class="feature-list">
+                        <li><strong>Taxas Reais:</strong> Dependendo da sua renda e perfil, sua taxa vai variar de 4%
+                            a.a. (Faixas iniciais) até, no máximo, pouco mais de 12% a.a.</li>
+                        <li><strong>A Conta é Simples:</strong> Mesmo no teto máximo da Caixa, você ainda paga menos
+                            juros do que no piso mínimo de qualquer banco privado. Essa diferença coloca centenas de
+                            milhares de reais no seu bolso ao longo de 30 anos.</li>
+                    </ul>
+                </div>
+
+                <div class="col-visual">
+                    <div class="chart-frame" id="chart-rates">
+                        <div class="chart-title">Comparativo de Taxas de Juros (% ao Ano)</div>
+                        <div class="h-bar-chart">
+                            <div class="h-bar-row">
+                                <div class="h-bar-label">MCMV<br>(Faixa 1)</div>
+                                <div class="h-bar-track">
+                                    <div class="h-bar-fill mcmv" style="--w: 28%;"></div>
+                                </div>
+                                <div class="h-bar-value">4%</div>
+                            </div>
+                            <div class="h-bar-row">
+                                <div class="h-bar-label">MCMV<br>(Médio)</div>
+                                <div class="h-bar-track">
+                                    <div class="h-bar-fill mcmv" style="--w: 57%;"></div>
+                                </div>
+                                <div class="h-bar-value">8%</div>
+                            </div>
+                            <div class="h-bar-row">
+                                <div class="h-bar-label">MCMV<br>(Teto)</div>
+                                <div class="h-bar-track">
+                                    <div class="h-bar-fill mcmv" style="--w: 89%;"></div>
+                                </div>
+                                <div class="h-bar-value">12%</div>
+                            </div>
+                            <div class="h-bar-row">
+                                <div class="h-bar-label">Banco<br>Privado</div>
+                                <div class="h-bar-track">
+                                    <div class="h-bar-fill" style="--w: 100%; background: #555;"></div>
+                                </div>
+                                <div class="h-bar-value">14%</div>
+                            </div>
+                        </div>
+                        <p style="text-align: center; font-size: 0.75rem; margin-top: 1rem; color: #666;">*Valores
+                            aproximados baseados no Custo Efetivo Total (CET).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block" id="produto" style="background: var(--bg-section-main);">
+        <div class="container">
+            <div class="zig-zag">
+                <div class="col-content">
+                    <span class="highlight" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">O
+                        Produto</span>
+                    <h2>Caixa não é só "Imóvel Básico".<br>O Teto é R$ 500 Mil.</h2>
+                    <p>Esqueça a ideia antiga de que financiamento com juros reduzidos é apenas para imóveis muito
+                        simples, sem elevador ou na periferia distante.</p>
+                    <p>Hoje, as regras permitem financiar imóveis de até R$ 500.000,00 (dependendo da cidade).</p>
+
+                    <h3>O Que Isso Significa para Você?</h3>
+                    <p>Significa que você pode usar o "dinheiro barato" do governo para comprar:</p>
+                    <ul class="feature-list">
+                        <li>Apartamentos de 2 Dormitórios com Suíte;</li>
+                        <li>Varanda Gourmet e Vaga de Garagem;</li>
+                        <li>Condomínios com Lazer Completo (Piscina, Academia, Coworking);</li>
+                        <li>Localizações valorizadas e centrais.</li>
+                    </ul>
+                    <p class="highlight">Com a mesma parcela que você pagaria num estúdio de 25m² pelo banco privado,
+                        aqui você compra um imóvel definitivo de 45m² para a família toda.</p>
+                </div>
+
+                <div class="col-visual visual-container">
+                    <div class="blueprint-card">
+                        <div class="bp-header">
+                            <span class="bp-title"><i class="fas fa-drafting-compass"></i> TECH SPECS</span>
+                            <span class="bp-badge">SMART LIVING</span>
+                        </div>
+
+                        <div class="bp-grid">
+                            <div class="bp-item">
+                                <i class="fas fa-layer-group bp-icon"></i>
+                                <span class="bp-label">Tipologia</span>
+                                <span class="bp-val">Plantas Inteligentes</span>
+                            </div>
+                            <div class="bp-item">
+                                <i class="fas fa-expand-arrows-alt bp-icon"></i>
+                                <span class="bp-label">Área Privativa</span>
+                                <span class="bp-val">Espaços Otimizados</span>
+                            </div>
+                            <div class="bp-item">
+                                <i class="fas fa-star bp-icon"></i>
+                                <span class="bp-label">Diferencial</span>
+                                <span class="bp-val">Varanda e Lazer</span>
+                            </div>
+                            <div class="bp-item">
+                                <i class="fas fa-building bp-icon"></i>
+                                <span class="bp-label">Infraestrutura</span>
+                                <span class="bp-val">Condomínio Clube</span>
+                            </div>
+                        </div>
+
+                        <div
+                            style="margin-top: 2rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.2); font-size: 0.8rem; color: #888;">
+                            <i class="fas fa-check-circle" style="color: var(--color-highlight);"></i> Financiamento
+                            Aprovado 100% Digital
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block" id="regras">
+        <div class="container">
+            <div class="zig-zag">
+                <div class="col-content">
+                    <span class="highlight"
+                        style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">As Regras do
+                        Jogo</span>
+                    <h2>420 Meses e a Vantagem de Ser Jovem</h2>
+                    <p>O tempo é o melhor amigo do financiamento.</p>
+
+                    <h3>Prazo Estendido (35 Anos)</h3>
+                    <p>Antigamente, o limite era 360 meses. Agora, conseguimos aprovar financiamentos em até 420 meses.
+                    </p>
+                    <p>Por que isso é bom? Ao esticar o prazo, a parcela mensal obrigatória cai. Isso facilita a
+                        aprovação do crédito para quem está com o orçamento justo hoje.</p>
+
+                    <h3>Composição de Renda</h3>
+                    <p>"Ganho pouco sozinho". Sem problemas. Você pode somar a renda de até 3 pessoas (Cônjuge, Pai,
+                        Mãe, Irmãos, Filhos ou até Amigos). Juntos, vocês sobem de faixa e aumentam o valor de crédito
+                        liberado.</p>
+                </div>
+
+                <div class="col-visual">
+                    <div
+                        style="background: var(--bg-card); padding: 2.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                        <h3 style="color: var(--color-highlight); margin-bottom: 2rem;">Blindagem Financeira (Seguros)
+                        </h3>
+                        <p>Muita gente acha que seguro é "taxa extra". No financiamento habitacional, eles são a
+                            garantia de que sua família nunca perderá o teto. Entenda o que você está pagando:</p>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem;">1. MIP (Morte e Invalidez
+                                Permanente)</h4>
+                            <p style="font-size: 0.9rem; margin: 0;">Este seguro quita o saldo devedor proporcional à
+                                renda de quem faltar. Exemplo: Se você compõe renda meio a meio com seu cônjuge e algo
+                                acontecer a um dos dois, 50% da dívida do imóvel desaparece instantaneamente. Vantagem
+                                Jovem: O preço do MIP é calculado pela idade. Quanto mais jovem você for, mais barato
+                                ele é (pode custar menos de R$ 20,00).</p>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem;">2. DFI (Danos Físicos ao
+                                Imóvel)</h4>
+                            <p style="font-size: 0.9rem; margin: 0;">Cobre prejuízos materiais causados por incêndio,
+                                queda de raio, explosão, alagamento e vendaval. É a garantia física do seu patrimônio.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem;">3. Seguro de Término de
+                                Obra (A Garantia de Entrega)</h4>
+                            <p style="font-size: 0.9rem; margin: 0;">O maior medo de quem compra na planta é: "E se a
+                                construtora quebrar?". No modelo de Crédito Associativo da Caixa, esse risco é ZERO.
+                                Existe uma apólice de seguro que garante a entrega da obra. Se a construtora tiver
+                                qualquer problema financeiro e parar, a Seguradora é acionada automaticamente pelo Banco
+                                para contratar outra empresa e finalizar o prédio. O banco garante a sua chave.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block" id="obra" style="background: var(--bg-section-main);">
+        <div class="container">
+            <div class="zig-zag">
+                <div class="col-content">
+                    <span class="highlight"
+                        style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Durante a
+                        Construção</span>
+                    <h2>A "Escadinha" da Evolução de Obra</h2>
+                    <p>Durante a construção (geralmente 30 a 36 meses), você não paga a parcela cheia do financiamento.
+                        Você paga a Taxa de Evolução de Obra.</p>
+                    <p>Muita gente confunde isso. Vamos explicar:</p>
+                    <ul class="feature-list">
+                        <li>O banco não dá o dinheiro todo para a construtora no primeiro dia. Ele libera mês a mês,
+                            conforme a obra sobe.</li>
+                        <li>Você paga juros apenas sobre o dinheiro que o banco já liberou.</li>
+                    </ul>
+                    <p><strong>A Escadinha:</strong><br>
+                        Início: Só tem terra e fundação? O banco liberou pouco. Sua taxa é minúscula (às vezes R$ 50,00
+                        ou R$ 100,00).<br>
+                        Meio: A estrutura subiu? O banco liberou mais. A taxa sobe proporcionalmente (R$ 400,00... R$
+                        600,00).<br>
+                        Fim: Prédio pronto? A taxa chega no teto (que nunca ultrapassa a parcela aprovada).</p>
+                    <p>Isso é excelente porque dá fôlego financeiro para você pagar seu aluguel atual enquanto espera o
+                        apartamento novo ficar pronto.</p>
+
+                    <h3>O Segredo da Amortização (Hackeando o Sistema)</h3>
+                    <p>Você financiou em 420 meses (35 anos) para ter a parcela baixa. Mas você não precisa ficar preso
+                        esse tempo todo. Aqui está a estratégia que ensinamos aos clientes MeuApêTem:</p>
+                    <p><strong>Escolha o Sistema:</strong> Simulamos SAC (parcela cai todo mês) e PRICE (parcela fixa)
+                        para ver qual aprova melhor no seu perfil.<br>
+                        <strong>O Ataque:</strong> Use qualquer dinheiro extra (13º Salário, Férias, PLR, FGTS) para
+                        fazer Amortização Extraordinária.<br>
+                        <strong>A Mágica:</strong> Quando você antecipa parcelas, você paga apenas o valor da dívida (o
+                        "principal"), cortando 100% dos juros daquele período.<br>
+                        <strong>Na Prática:</strong> R$ 1.000,00 dados hoje podem eliminar R$ 3.000,00 ou R$ 4.000,00 lá
+                        do final da dívida.
+                    </p>
+                    <p class="highlight">Com disciplina, usando o FGTS a cada 2 anos e o 13º salário, você quita um
+                        imóvel de 35 anos em 10 ou 12 anos.</p>
+                </div>
+
+                <div class="col-visual">
+                    <div class="chart-frame" id="chart-evolution">
+                        <div class="chart-title">Curva de Evolução (Estimativa)</div>
+                        <svg class="svg-chart" viewBox="0 0 300 150" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:var(--color-highlight);stop-opacity:0.5" />
+                                    <stop offset="100%" style="stop-color:var(--color-highlight);stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <line x1="0" y1="120" x2="300" y2="120" class="chart-axis" />
+                            <line x1="0" y1="60" x2="300" y2="60" class="chart-axis" stroke-dasharray="4" />
+                            <path class="chart-area" d="M10,120 Q150,120 290,20 L290,120 Z" />
+                            <path class="chart-line" d="M10,120 Q150,120 290,20" />
+
+                            <text x="10" y="140" class="chart-text">Início</text>
+                            <text x="150" y="140" class="chart-text" text-anchor="middle">Obra</text>
+                            <text x="290" y="140" class="chart-text" text-anchor="end">Chaves</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block" id="fluxo">
+        <div class="container">
+            <div class="zig-zag">
+                <div class="col-content">
+                    <span class="highlight"
+                        style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Engenharia da
+                        Entrada</span>
+                    <h2>A "Pizza" da Entrada</h2>
+                    <p>"O banco aprovou 200 mil, mas o imóvel custa 250 mil. Não tenho 50 mil de entrada!".<br>
+                        Calma. Ninguém tem. É aqui que entra o Fluxo Personalizado. Nós parcelamos essa diferença
+                        diretamente com a construtora durante o período de obra.</p>
+                    <p>Fatiamos a entrada em:</p>
+                    <ul class="feature-list">
+                        <li>Ato: Um sinal pequeno para fechar negócio.</li>
+                        <li>Mensais: Parcelas que cabem no bolso.</li>
+                        <li>Anuais: Reforços pontuais usando seu 13º.</li>
+                        <li>Chaves: Parcela final na entrega.</li>
+                    </ul>
+
+                    <h3>Caso Real: A Prova Definitiva (Novembro/2025)</h3>
+                    <p>Para provar que isso funciona, veja os números reais de um contrato que fechamos semana passada
+                        aqui no MeuApêTem.</p>
+                    <p><strong>O Perfil:</strong><br>
+                        Casal (25 e 26 anos).<br>
+                        Renda Somada: R$ 6.000,00.<br>
+                        Imóvel Escolhido: Apartamento 2 Dormitórios com Suíte e Varanda (34m²).<br>
+                        Valor de Venda: R$ 293.472,00.</p>
+                    <p><strong>O Desafio:</strong><br>
+                        A Caixa aprovou um financiamento excelente: R$ 236.643,00.<br>
+                        Faltava pagar de Entrada: R$ 56.829,00.</p>
+                    <p><strong>A Solução MeuApêTem (O Pulo do Gato):</strong><br>
+                        Eles foram espertos e compraram no Lançamento. Com isso, garantiram um Voucher de R$ 5.000,00 de
+                        desconto na entrada. Para os R$ 51 mil restantes, montamos um fluxo "inteligente" onde a parcela
+                        cai no final da obra para não apertar o orçamento:</p>
+                </div>
+
+                <div class="col-visual visual-container">
+                    <div class="receipt">
+                        <div class="receipt-header">
+                            <span class="receipt-logo">MEUAPÊTEM STORE</span>
+                            <span class="receipt-meta">CUPOM FISCAL: #VENDA-NOV25</span>
+                            <span class="receipt-meta">DATA: 15/11/2025 14:30</span>
+                        </div>
+
+                        <div class="receipt-body">
+                            <div
+                                style="border-bottom: 1px dashed #aaa; padding-bottom: 0.8rem; margin-bottom: 1rem; font-family: var(--font-mono);">
+                                <div class="receipt-row"><span>VALOR DO IMÓVEL</span><span>293.472,00</span></div>
+                                <div class="receipt-row"><span>FINANCIAMENTO</span><span>236.643,00</span></div>
+                                <div class="receipt-row"><span>RENDA CASAL</span><span>6.000,00</span></div>
+                            </div>
+
+                            <div class="receipt-row"
+                                style="border-bottom: 1px solid #ddd; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                                <span style="font-weight: bold;">ITEM</span>
+                                <span style="font-weight: bold;">VALOR (R$)</span>
+                            </div>
+
+                            <div class="receipt-row">
+                                <span>001 ATO (SINAL)</span>
+                                <span style="font-weight: bold; font-size: 1rem;">3.000,00</span>
+                            </div>
+                            <span class="receipt-detail">(Pago no ato da assinatura)</span>
+
+                            <div class="receipt-row">
+                                <span>15x MENSAIS INICIAIS</span>
+                                <span style="font-weight: bold; font-size: 1rem;">1.200,00</span>
+                            </div>
+                            <span class="receipt-detail">(Total: 18.000,00)</span>
+
+                            <div class="receipt-row">
+                                <span>16x MENSAIS FINAIS</span>
+                                <span style="font-weight: bold; font-size: 1rem;">950,00</span>
+                            </div>
+                            <span class="receipt-detail">(Total: 15.200,00)</span>
+
+                            <div class="receipt-row">
+                                <span>2x ANUAIS (13º SAL)</span>
+                                <span style="font-weight: bold; font-size: 1rem;">5.000,00</span>
+                            </div>
+                            <span class="receipt-detail">(Total: 10.000,00)</span>
+
+                            <div class="receipt-row">
+                                <span>1x CHAVES</span>
+                                <span style="font-weight: bold; font-size: 1rem;">5.629,00</span>
+                            </div>
+
+                            <div class="receipt-divider"></div>
+
+                            <div class="receipt-row">
+                                <span>SUBTOTAL ENTRADA</span>
+                                <span>56.829,00</span>
+                            </div>
+                            <div class="receipt-row" style="color: var(--color-highlight);">
+                                <span>DESCONTO (VOUCHER)</span>
+                                <span>-5.000,00</span>
+                            </div>
+                            <div class="receipt-row total">
+                                <span>TOTAL A PAGAR</span>
+                                <span>R$ 51.829,00</span>
+                            </div>
+                        </div>
+
+                        <div class="receipt-footer">
+                            <div class="barcode"></div>
+                            <span style="font-size: 0.6rem;">1234 5678 9012 3456</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p
+                style="text-align: center; margin-top: 4rem; max-width: 800px; margin-left: auto; margin-right: auto; padding: 2rem; background: var(--bg-card); border-radius: 8px;">
+                <strong>Resultado Final:</strong> Eles compraram um imóvel de quase 300 mil reais, dando apenas 3 mil
+                reais de entrada na hora e pagando parcelas menores que um aluguel. Isso é saber comprar.
+            </p>
+        </div>
+    </section>
+
+    <div id="start">
+        <page-scanner category="start"></page-scanner>
+    </div>
+
+    <cta-banner id="schedule" title="Não espere o preço subir."
+        text="Imóveis na planta têm uma regra clara: quem chega cedo, escolhe as melhores unidades, pega os andares mais altos e paga o menor valor no lançamento. Quem deixa para depois, paga a valorização."
+        btn-text="Montar meu Fluxo no WhatsApp" link="#">
+    </cta-banner>
+
+
+    <footer-section brand="MEUAPÊTEM" broker="CRECI 268.448" root-path="."> </footer-section>
+    <floating-actions></floating-actions>
+    <contact-popup photo="./media/utils/logo-perfil.svg"></contact-popup>
+    <cookie-banner></cookie-banner>
+    <custom-cursor></custom-cursor>
+
+    <script>
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        const particleCount = 80;
+        const connectionDistance = 120;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 1.5 + 0.5;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 111, 97, 0.6)'; // Highlight color
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                for (let j = index + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(255, 111, 97, ${0.2 * (1 - dist / connectionDistance)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.2 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        if (entry.target.id === 'chart-rates') {
+                            entry.target.querySelectorAll('.h-bar-fill').forEach(bar => {
+                                bar.style.width = bar.style.getPropertyValue('--w');
+                            });
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.chart-frame, .blueprint-card, .receipt').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>
