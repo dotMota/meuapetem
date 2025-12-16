@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Península Vila Madalena | MeuApêTem Signature</title>
+    <meta name="description"
+        content="Lifestyle Boutique na Vila Madalena. Apartamentos de 3 e 4 Suítes (154m² a 374m²). Vista eterna e lazer exclusivo. Últimas Unidades.">
+
+    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
+
+    <meta property="og:image" content="../media/Pennsula_Vila_Madalena/fachadas/peninsula_vila_madalena.webp">
+
+    <meta name="product-category" content="signature">
+
+    <meta name="product-vibe" content="Lifestyle Boutique">
+    <meta name="product-tags" content="Ultimas Unidades, Alto Padrão, Vila Madalena, 4 Suítes, Vista Eterna">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-17794513059');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- TEMA PENÍNSULA (Signature / Boutique) --- */
+        :root {
+            /* Identidade Visual - Navy & Gold */
+            --color-highlight: #C5A065;
+            /* Dourado Nobre */
+
+            --color-text-primary: #F5F5F7;
+            --color-text-secondary: #A1A1AA;
+
+            /* Fundos */
+            --bg-page-body: #050505;
+            --bg-section-main: #121212;
+            /* Navy Blue Profundo */
+            --bg-brand-dark: #000000;
+            --bg-cta-gradient: linear-gradient(135deg, #0C1D36 0%, #000 100%);
+
+            /* Tipografia Signature (Serifa nos Títulos) */
+            --font-title: 'Space Grotesk', serif;
+            --font-text: 'Manrope', sans-serif;
+
+            /* Mapeamento */
+            --highlight-color: var(--color-highlight);
+            --bg-color: var(--bg-section-main);
+            --text-color: var(--color-text-secondary);
+            --bg-gradient: var(--bg-cta-gradient);
+        }
+
+        /* Botão CTA Signature (Borda Fina e Elegante) */
+        cta-section::part(button) {
+            background: transparent;
+            color: var(--color-highlight);
+            font-weight: 600;
+            letter-spacing: 2px;
+            border: 1px solid var(--color-highlight);
+            text-transform: uppercase;
+        }
+
+        cta-section::part(button):hover {
+            background: var(--color-highlight);
+            color: #000;
+        }
+
+        /* Ajuste fino para fontes Signature */
+        h1,
+        h2,
+        h3 {
+            font-weight: 300 !important;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-page-body);
+            font-family: var(--font-text);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+    </style>
+
+    <script src="../components/preloader.js"></script>
+    <script src="../components/menu.js" defer></script>
+    <script src="../components/hero.js" defer></script>
+    <script src="../components/marquee.js" defer></script>
+    <script src="../components/video.js" defer></script>
+    <script src="../components/showcase.js" defer></script>
+    <script src="../components/gallery.js" defer></script>
+    <script src="../components/plans.js" defer></script>
+    <script src="../components/stats.js" defer></script>
+    <script src="../components/region.js" defer></script>
+    <script src="../components/cta.js" defer></script>
+    <script src="../components/trust.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+    <script src="../components/curator-review.js" defer></script>
+    <script src="../components/floating.js" defer></script>
+    <script src="../components/contact.js" defer></script>
+    <script src="../components/cookie.js" defer></script>
+    <script src="../components/cursor.js" defer></script>
+    <script src="../components/lightbox.js" defer></script>
+    <script src="../components/project-card.js" defer></script>
+    <script src="../components/page-scanner.js" defer></script>
+    <script src="../components/team.js" defer></script>
+
+</head>
+
+<body>
+
+    <site-preloader project="PENÍNSULA"></site-preloader>
+
+    <site-menu logo="PENÍNSULA" parent-text="MeuApêTem" parent-link="../index.html">
+        <a slot="links" href="#home">Início</a>
+        <a slot="links" href="#concept">Boutique</a>
+        <a slot="links" href="#amenities">Lazer</a>
+        <a slot="links" href="#plans">Plantas</a>
+        <a slot="links" href="#location">Vila Madalena</a>
+        <a slot="links" href="#schedule" class="auto-trigger" id="menu-cta">Visita Private</a>
+    </site-menu>
+
+    <hero-section id="home" image="../media/Pennsula_Vila_Madalena/fachadas/peninsula_vila_madalena.webp"
+        highlight="Coleção Signature" subtitle="Vila Madalena" title="Lifestyle Boutique" curator-badge="true"
+        text="Um projeto raro em um dos pontos mais altos do bairro. Vista eterna, design autoral e a exclusividade de uma torre única na Rua João Moura.">
+        <a href="#schedule" slot="cta" id="hero-cta-btn"
+            style="display:inline-block; margin-top:30px; padding:15px 40px; background:transparent; border: 1px solid var(--color-highlight); color:var(--color-highlight); letter-spacing: 2px; text-decoration:none; text-transform:uppercase; font-size:0.8rem; transition: all 0.3s ease;">
+            Agendar Visita Private
+        </a>
+    </hero-section>
+
+    <marquee-scroll id="marquee"
+        text="LIFESTYLE BOUTIQUE — 154 A 374 M² — VISTA ETERNA — VILA MADALENA — ÚLTIMAS UNIDADES — "
+        speed="80s"></marquee-scroll>
+
+    <stats-section id="stats">
+        <stat-item slot="items" class="hover-target" id="stat-1" number="193m²" label="4 Suítes Master"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-2" number="Lazer"
+            label="Design Internacional"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-3" number="Vista" label="Definitiva"></stat-item>
+    </stats-section>
+
+    <showcase-section id="concept" highlight="O Conceito" title="Design que<br>Emociona"
+        text="Inspirado nos hotéis boutique mais exclusivos do mundo. O Península une a sofisticação da arquitetura contemporânea com a vibração artística da Vila Madalena."
+        button-text="Explorar Lazer" button-link="#amenities">
+        <img slot="gallery" src="../media/Pennsula_Vila_Madalena/fachadas/acesso_residencial.webp"
+            alt="Acesso Privativo">
+        <img slot="gallery" src="../media/Pennsula_Vila_Madalena/area_comum/lobby_residencial.webp" alt="Lobby Galeria">
+        <img slot="gallery" src="../media/Pennsula_Vila_Madalena/area_comum/vista_aerea_do_complexo_da_piscina.webp"
+            alt="Oásis Urbano">
+        <img slot="gallery" src="../media/Pennsula_Vila_Madalena/area_comum/lounge_externo.webp" alt="Lounge Externo">
+    </showcase-section>
+
+    <gallery-section id="amenities" subtitle="Exclusividade" title="Wellness & <br>Social Club">
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/piscina_coberta_com_raia_de_25m.webp" title="Raia de 25m"
+            text="Piscina Coberta Climatizada"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Pennsula_Vila_Madalena/area_comum/piscina.webp"
+            title="Piscina Externa" text="Design Orgânico"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Pennsula_Vila_Madalena/area_comum/bangalo.webp"
+            title="Bangalôs" text="Relaxamento Privativo"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/sauna_seca.webp" title="Sauna Seca"
+            text="Detox & Relax"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Pennsula_Vila_Madalena/area_comum/fitness.webp"
+            title="Fitness Center" text="Equipamentos High-Tech"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Pennsula_Vila_Madalena/area_comum/pilates.webp"
+            title="Studio Pilates" text="Equilíbrio"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/sala_de_luta.webp" title="Sala de Luta"
+            text="Treino Funcional"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/quadra_de_areia.webp" title="Arena Beach"
+            text="Beach Tennis Exclusivo"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/salao_de_festas.webp" title="Ballroom"
+            text="Festas e Eventos"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Pennsula_Vila_Madalena/area_comum/gourmet.webp"
+            title="Espaço Gourmet" text="Chef em Casa"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/sports_bar.webp" title="Sports Bar"
+            text="Entretenimento Adulto"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/sala_de_jogos.webp" title="Game Room"
+            text="Diversão"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/coworking.webp" title="Business Lounge"
+            text="Home Office Elevado"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/brinquedoteca.webp" title="Kids Room"
+            text="Lúdico e Seguro"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/playground.webp" title="Playground"
+            text="Ar Livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/pet_place.webp" title="Pet Place"
+            text="Espaço Pet"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Pennsula_Vila_Madalena/area_comum/delivery.webp"
+            title="Delivery Room" text="Segurança nas Entregas"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Pennsula_Vila_Madalena/area_comum/bicicletario.webp" title="Bicicletário"
+            text="Mobilidade"></gallery-item>
+
+    </gallery-section>
+
+    <curator-review id="review" curator="Mota" phrases='["Exclusividade", "Vila Madalena", "Design", "Vista"]'
+        pros="A planta de 193m² com 4 suítes é uma obra de arte. A localização na parte alta da João Moura garante uma vista que nunca será obstruída."
+        cons="Últimas unidades disponíveis. Produto de desejo para quem busca a Vila Madalena com sofisticação.">
+    </curator-review>
+
+    <plans-section id="plans" highlight="Plantas Generosas" title="Residências" project="Península Vila Madalena">
+
+        <plan-item slot="content" name="193m²" title="4 Suítes Master"
+            desc="O ápice da exclusividade. Living ampliado, varanda gourmet integrada e suíte master com closet senhor e senhora."
+            area="193m²" dorms="4 Suítes" vagas="3 Vagas" extra-label="Signature" extra-val="Exclusivo">
+            <img slot="image" src="../media/Pennsula_Vila_Madalena/Plantas/4_suites_193m.webp">
+        </plan-item>
+
+        <plan-item slot="content" name="154m²" title="3 Suítes"
+            desc="Equilíbrio perfeito. Espaços integrados e confortáveis para famílias que valorizam o convívio."
+            area="154m²" dorms="3 Suítes" vagas="2 Vagas" extra-label="Premium" extra-val="Conforto">
+            <img slot="image" src="../media/Pennsula_Vila_Madalena/Plantas/3_suites_154m.webp">
+        </plan-item>
+
+        <plan-item slot="content" name="Duplex" title="Penthouse 374m²"
+            desc="Uma mansão suspensa. Pavimento superior com terraço descoberto e vista panorâmica de São Paulo."
+            area="374m²" dorms="4 Suítes" vagas="4 Vagas" extra-label="Trophy" extra-val="Único">
+            <img slot="image" src="../media/Pennsula_Vila_Madalena/Plantas/duplex_pav_374m.webp">
+        </plan-item>
+
+    </plans-section>
+
+    <region-section id="location" image="../media/Pennsula_Vila_Madalena/fachadas/peninsula_vila_madalena.webp"
+        highlight="Vila Madalena" title="A Arte de Viver"
+        text="Rua João Moura, 2.455. O ponto de encontro entre a cultura da Vila Madalena e a tranquilidade de uma rua arborizada. Próximo ao Metrô Vila Madalena e aos melhores restaurantes da cidade."
+        lat="-23.5510" lng="-46.6900" zoom="16" pois='[
+            {"title": "Península", "loc": [-23.5510, -46.6900]}, 
+            {"title": "Metrô Vila Madalena", "loc": [-23.5460, -46.6910]}, 
+            {"title": "Beco do Batman", "loc": [-23.5560, -46.6850]}
+        ]'>
+    </region-section>
+
+    <team-section id="team" highlight="Curadoria" title="Assinatura">
+
+        <team-member role="Arquitetura" name="Perkins&Will" image="../media/utils/perkins-will.avif"
+            text="Traços contemporâneos que privilegiam a luz natural e emolduram a vista eterna da Vila Madalena, criando uma fachada atemporal e artística.">
+        </team-member>
+
+        <team-member role="Paisagismo" name="Benedito Abbud" image="../media/utils/BenedittoAbudd.jpg"
+            text="A natureza como protagonista. Um verdadeiro oásis urbano que abraça a arquitetura, criando microclimas, percursos sensoriais e uma transição suave entre o agito do bairro e a paz de casa.">
+        </team-member>
+
+        <team-member role="Interiores" name="GUIMATTOS" image="../media/utils/guimattos.webp"
+            text="A essência do luxo brasileiro. Ambientes que exalam sofisticação sem excessos, combinando texturas naturais, design autoral e uma curadoria de arte que transforma áreas comuns em experiências.">
+        </team-member>
+
+    </team-section>
+
+    <cta-section id="schedule" highlight="Oportunidade Final" title="Reserve sua Unidade"
+        text="Poucas unidades disponíveis. Agende uma visita exclusiva ao apartamento decorado."
+        button-text="Agendar Visita Private" project="Península Vila Madalena">
+    </cta-section>
+
+    <trust-section style="--bg-color: var(--bg-brand-dark);">
+        <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
+    </trust-section>
+
+    <page-scanner category="signature"></page-scanner>
+
+    <footer-section project="PENÍNSULA VILA MADALENA" broker="CORRETOR MOTA - CRECI 315675"
+        root-path=".."></footer-section>
+
+    <floating-actions></floating-actions>
+    <contact-popup></contact-popup>
+    <lightbox-viewer></lightbox-viewer>
+    <cookie-banner></cookie-banner>
+    <custom-cursor></custom-cursor>
+
+</body>
+
+</html>

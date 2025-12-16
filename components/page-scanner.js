@@ -11,6 +11,7 @@ class PageScanner extends HTMLElement {
             'elevSacoma.html',
             'elevAltoIpiranga.html',
             'vilaBoulevardMooca.html',
+            'peninsulaVilaMadalena.html',
         ];
     }
 
