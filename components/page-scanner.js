@@ -8,7 +8,9 @@ class PageScanner extends HTMLElement {
             'quarten.html',
             'granoscar.html',
             'elevButanta.html',
-            'elevSacoma.html'
+            'elevSacoma.html',
+            'elevAltoIpiranga.html',
+            'vilaBoulevardMooca.html',
         ];
     }
 
@@ -40,7 +42,7 @@ class PageScanner extends HTMLElement {
             },
             'start': {
                 title: 'START',
-                desc: 'Econômicos e Primeiro Imóvel (MCMV). A porta de entrada para transformar o aluguel em patrimônio próprio.'
+                desc: 'Econômicos e Primeiro Imóvel (MCMV). A porta de entrada para sair do aluguel.'
             },
             'invest': {
                 title: 'INVEST',

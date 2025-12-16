@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vila Boulevard Mooca | MeuApêTem Start</title>
+    <meta name="description"
+        content="A alma da Mooca em um projeto único. 1 e 2 Dorms com Suíte e Varanda. Um Boulevard vivo e pulsante na Rua dos Trilhos.">
+
+    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
+
+    <meta property="og:image" content="../media/Vila_Boulevard_Mooca/fachadas/vila_boulevard_mooca.webp">
+    <meta name="product-category" content="start">
+    <meta name="product-vibe" content="Alma da Mooca">
+    <meta name="product-tags" content="Rua dos Trilhos, Boulevard, Lazer Completo">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-17794513059');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- TEMA VILA BOULEVARD MOOCA (Terracota & Heritage) --- */
+        :root {
+            /* Identidade Visual - Terracota (Mooca/Tijolo) */
+            --color-highlight: #C04E44;
+
+            --color-text-primary: #f5f5f7;
+            --color-text-secondary: #a1a1aa;
+
+            /* Fundos */
+            --bg-page-body: #101010;
+            --bg-section-main: #161616;
+            --bg-brand-dark: #000000;
+            --bg-cta-gradient: linear-gradient(135deg, #101010 0%, #3d120e 100%);
+
+            /* Tipografia */
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-text: 'Inter', sans-serif;
+
+            /* Mapeamento */
+            --highlight-color: var(--color-highlight);
+            --bg-color: var(--bg-section-main);
+            --text-color: var(--color-text-secondary);
+            --bg-gradient: var(--bg-cta-gradient);
+        }
+
+        /* Botão CTA Personalizado */
+        cta-section::part(button) {
+            background: var(--color-highlight);
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        cta-section::part(button):hover {
+            background: #fff;
+            color: var(--color-highlight);
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-page-body);
+            font-family: var(--font-text);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- NEW COMPONENT: MANUAL STRIP (Faixa Fina) --- */
+        .manual-strip {
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.1), rgba(20, 20, 20, 0.8));
+            border-left: 2px solid var(--color-highlight);
+            padding: 1.5rem 2rem;
+            margin: 2rem auto 4rem auto;
+            /* Centralizado com margem */
+            max-width: 1200px;
+            width: 90%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .manual-strip:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.15), rgba(30, 30, 30, 0.9));
+        }
+
+        .manual-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .manual-icon {
+            color: var(--color-highlight);
+            font-size: 1.5rem;
+        }
+
+        .manual-text h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-family: var(--font-title);
+            color: #fff;
+        }
+
+        .manual-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        .manual-btn {
+            white-space: nowrap;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .manual-btn:hover {
+            border-color: var(--color-highlight);
+            color: var(--color-highlight);
+        }
+    </style>
+
+    <script src="../components/preloader.js"></script>
+    <script src="../components/menu.js" defer></script>
+    <script src="../components/hero.js" defer></script>
+    <script src="../components/marquee.js" defer></script>
+    <script src="../components/video.js" defer></script>
+    <script src="../components/showcase.js" defer></script>
+    <script src="../components/gallery.js" defer></script>
+    <script src="../components/plans.js" defer></script>
+    <script src="../components/stats.js" defer></script>
+    <script src="../components/region.js" defer></script>
+    <script src="../components/cta.js" defer></script>
+    <script src="../components/trust.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+    <script src="../components/curator-review.js" defer></script>
+    <script src="../components/floating.js" defer></script>
+    <script src="../components/contact.js" defer></script>
+    <script src="../components/cookie.js" defer></script>
+    <script src="../components/cursor.js" defer></script>
+    <script src="../components/lightbox.js" defer></script>
+    <script src="../components/persona-switcher.js" defer></script>
+    <script src="../components/project-card.js" defer></script>
+    <script src="../components/page-scanner.js" defer></script>
+    <script src="../components/team.js" defer></script>
+
+</head>
+
+<body>
+
+    <site-preloader project="VILA BOULEVARD"></site-preloader>
+
+    <persona-switcher modes='[{"key": "resident", "label": "Vou Morar"}, {"key": "investor", "label": "Vou Investir"}]'>
+    </persona-switcher>
+
+    <site-menu logo="BOULEVARD" parent-text="MeuApêTem" parent-link="../index.html">
+        <a slot="links" href="#home">Início</a>
+        <a slot="links" href="#concept">Conceito</a>
+        <a slot="links" href="#amenities">Lazer</a>
+        <a slot="links" href="#plans">Plantas</a>
+        <a slot="links" href="#location">Mooca</a>
+        <a slot="links" href="#schedule" class="auto-trigger" id="menu-cta">Simular</a>
+    </site-menu>
+
+    <hero-section id="home" image="../media/Vila_Boulevard_Mooca/fachadas/vila_boulevard_mooca.webp"
+        highlight="MeuApêTem Start" subtitle="Rua dos Trilhos" title="A Alma da Mooca" curator-badge="true"
+        text="Aqui a rua não separa, ela conecta. Um Boulevard vivo e pulsante que une a tradição do bairro ao moderno viver.">
+        <a href="#schedule" slot="cta" id="hero-cta-btn"
+            style="display:inline-block; margin-top:20px; padding:15px 30px; background:var(--color-highlight); color:#fff; font-weight:bold; border-radius:50px; text-decoration:none; text-transform:uppercase; font-size:0.9rem;">
+            Compre sem Entrada*
+        </a>
+    </hero-section>
+
+    <marquee-scroll id="marquee"
+        text="RUA DOS TRILHOS — VARANDA COM SUÍTE — LAZER DE CLUBE — BOULEVARD INTEGRADO — TRISUL E PLANO&PLANO — "
+        speed="60s"></marquee-scroll>
+    <div class="manual-strip">
+        <div class="manual-content">
+            <i class="fas fa-book-reader manual-icon"></i>
+            <div class="manual-text">
+                <h3>Dúvidas sobre o Minha Casa Minha Vida?</h3>
+                <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
+            </div>
+        </div>
+        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right"
+                style="margin-left:5px; font-size:0.8em;"></i></a>
+    </div>
+
+    <stats-section id="stats">
+        <stat-item slot="items" class="hover-target" id="stat-1" number="Mooca"
+            label="Tradição e Modernidade"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-2" number="Lazer" label="Clube Completo"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-3" number="Start"
+            label="Minha Casa Minha Vida"></stat-item>
+    </stats-section>
+
+    <showcase-section id="concept" highlight="O Conceito" title="A Rua não Separa,<br>Ela Conecta"
+        text="Vila Boulevard Mooca é um resgate à essência do bairro. Um condomínio aberto ao convívio, onde o moderno encontra o acolhedor."
+        button-text="Ver Lazer" button-link="#amenities">
+        <img slot="gallery" src="../media/Vila_Boulevard_Mooca/area_comum/boulevard.webp" alt="Boulevard Central">
+        <img slot="gallery" src="../media/Vila_Boulevard_Mooca/fachadas/acesso_rua_dos_trilhos.webp"
+            alt="Acesso Rua dos Trilhos">
+        <img slot="gallery" src="../media/Vila_Boulevard_Mooca/area_comum/hall.webp" alt="Hall de Entrada">
+        <img slot="gallery" src="../media/Vila_Boulevard_Mooca/area_comum/praca_coworking.webp"
+            alt="Praça de Convivência">
+    </showcase-section>
+
+    <gallery-section id="amenities" subtitle="Seu Clube" title="Viva em <br>Harmonia">
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/piscinas_adulto_e_infantil.webp" title="Complexo Aquático"
+            text="Piscinas Adulto e Infantil"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/piscina_adulto.webp" title="Piscina Adulto"
+            text="Relaxamento e Lazer"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/salao_de_festas_gourmet.webp" title="Salão de Festas"
+            text="Espaço Gourmet Integrado"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/churrasqueira_gourmet.webp" title="Churrasqueira Gourmet"
+            text="Para grandes encontros"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/churrasqueira.webp" title="Churrasqueira"
+            text="Lazer com amigos"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/lounge_lareira.webp" title="Lounge Lareira"
+            text="Noites aconchegantes"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/salao_de_jogos.webp" title="Salão de Jogos"
+            text="Diversão"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Vila_Boulevard_Mooca/area_comum/fitness.webp"
+            title="Fitness" text="Academia Completa"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/sala_de_massagem.webp" title="Sala de Massagem"
+            text="Bem-estar"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Vila_Boulevard_Mooca/area_comum/redario.webp"
+            title="Redário" text="Descanso ao ar livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/espaco_beleza.webp" title="Espaço Beleza"
+            text="Cuidado Pessoal"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Vila_Boulevard_Mooca/area_comum/coworking.webp"
+            title="Coworking" text="Trabalho Remoto"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/praca_coworking.webp" title="Praça Coworking"
+            text="Trabalho ao ar livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/mini_mercado.webp" title="Mini Mercado"
+            text="Conveniência 24h"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Vila_Boulevard_Mooca/area_comum/delivery.webp"
+            title="Delivery" text="Entregas"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/bicicletario.webp" title="Bicicletário"
+            text="Mobilidade"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/brinquedoteca.webp" title="Brinquedoteca"
+            text="Diversão Kids"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/praca_playground.webp" title="Playground"
+            text="Ao ar livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Vila_Boulevard_Mooca/area_comum/espaco_pet.webp"
+            title="Espaço Pet" text="Agility"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Vila_Boulevard_Mooca/area_comum/pet_care.webp"
+            title="Pet Care" text="Banho e Tosa"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Vila_Boulevard_Mooca/area_comum/estudio.webp"
+            title="Estúdio" text="Criação de Conteúdo"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Vila_Boulevard_Mooca/area_comum/espaco_feira_e_eventos.webp" title="Espaço Feira"
+            text="Eventos no Condomínio"></gallery-item>
+
+    </gallery-section>
+
+    <curator-review id="review" curator="Mota" phrases='["Mooca", "Boulevard", "Suíte", "Tradição"]'
+        pros="A Mooca é um estilo de vida. Estar na Rua dos Trilhos com esse nível de lazer e acabamento, pelo preço de Minha Casa Minha Vida, é inédito."
+        cons="A região é muito desejada, então a disponibilidade de unidades nos andares mais altos tende a acabar rápido.">
+    </curator-review>
+
+    <plans-section id="plans" highlight="Plantas Modernas" title="Plantas" project="Vila Boulevard Mooca">
+
+        <plan-item slot="content" name="37m²" title="2 Dorms (Suíte)"
+            desc="A planta perfeita para a família. Suíte confortável, varanda integrada e layout inteligente."
+            area="37m²" dorms="2 Dorms" vagas="" extra-label="Destaque" extra-val="Suíte">
+            <img slot="image" src="../media/Vila_Boulevard_Mooca/Plantas/2_dorms_com_1_suite_37m_37m.webp">
+        </plan-item>
+
+        <plan-item slot="content" name="34m²" title="2 Dorms"
+            desc="Dois dormitórios na medida certa. Ideal para quem busca o primeiro apê na Mooca." area="34m²"
+            dorms="2 Dorms" vagas="" extra-label="Smart" extra-val="Econômico">
+            <img slot="image" src="../media/Vila_Boulevard_Mooca/Plantas/2_dorms_34m_34m.webp">
+        </plan-item>
+
+        <plan-item slot="content" name="25m²" title="Studio c/ Varanda"
+            desc="Compacto de luxo. Perfeito para investidores ou solteiros que querem estar perto do Centro."
+            area="25m²" dorms="1 Dorm" vagas="" extra-label="Rentabilidade" extra-val="Studio">
+            <img slot="image" src="../media/Vila_Boulevard_Mooca/Plantas/1_suite_com_varanda_25m_25m.webp">
+        </plan-item>
+
+        <plan-item slot="content" name="Decorado" title="Living Integrado"
+            desc="Perspectiva do apartamento de 37m² decorado. Amplitude e conforto." area="Decorado" dorms="Visual"
+            vagas="" extra-label="Inspiração" extra-val="Design">
+            <img slot="image" src="../media/Vila_Boulevard_Mooca/Plantas/2_dorms_com_1_suite_37m_decorado_37m.webp">
+        </plan-item>
+
+    </plans-section>
+
+    <region-section id="location" image="../media/Vila_Boulevard_Mooca/fachadas/vila_boulevard_mooca.webp"
+        highlight="Mooca Original" title="Rua dos Trilhos"
+        text="Você está no coração da Mooca. Pertinho do Metrô Brás, Parque Dom Pedro e cercado pelas cantinas e padarias mais tradicionais de SP."
+        lat="-23.5555" lng="-46.6060" zoom="15" pois='[
+            {"title": "Vila Boulevard", "loc": [-23.5555, -46.6060]}, 
+            {"title": "Metrô Brás", "loc": [-23.5475, -46.6150]}, 
+            {"title": "Universidade São Judas", "loc": [-23.5500, -46.5980]}
+        ]'>
+    </region-section>
+
+    <team-section id="team" highlight="Quem Assina" title="Mentes Brilhantes">
+
+
+        <team-member role="Arquitetura" name="MCAA Arquitetos" image="../media/utils/MCAA.png"
+            text="Traços contemporâneos que dialogam com a história industrial e charmosa da Mooca.">
+        </team-member>
+
+        <team-member role="Paisagismo" name="Núcleo Arquitetura da Paisagem" image="../media/utils/nucleo.jpg"
+            text="Áreas verdes que promovem bem-estar e integração com a natureza, valorizando o estilo de vida urbano.">
+        </team-member>
+
+        <team-member role="Arquitetura" name="Gabriela Bosso Arquitetura" image="../media/utils/GabrielaBosso.jpeg"
+            text="Ambientes que harmonizam beleza e praticidade, refletindo a estética moderna do empreendimento.">
+        </team-member>
+
+    </team-section>
+
+    <cta-section id="schedule" highlight="Lançamento" title="More na Mooca"
+        text="Condições especiais de lançamento. Use seu FGTS e compre com entrada facilitada."
+        button-text="Simular Agora" project="Vila Boulevard Mooca">
+    </cta-section>
+
+    <trust-section style="--bg-color: var(--bg-brand-dark);">
+        <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
+        <trust-item slot="items" title="Financiamento" img="../media/utils/caixa.svg" alt="Caixa"></trust-item>
+        <trust-item slot="items" title="Realização" img="../media/utils/planoeplano.png" alt="Plano&Plano"></trust-item>
+    </trust-section>
+
+    <page-scanner category="start"></page-scanner>
+
+    <footer-section project="VILA BOULEVARD MOOCA" broker="CORRETOR MOTA - CRECI 315675"
+        root-path=".."></footer-section>
+
+    <floating-actions></floating-actions>
+    <contact-popup></contact-popup>
+    <lightbox-viewer></lightbox-viewer>
+    <cookie-banner></cookie-banner>
+    <custom-cursor></custom-cursor>
+
+    <script>
+        const PROJECT_DATA = {
+            resident: {
+                colors: { highlight: '#C04E44', bgMain: '#161616', bgDark: '#000000', textSec: '#a1a1aa' },
+                hero: {
+                    highlight: 'Minha Casa Minha Vida',
+                    title: 'A Alma da Mooca',
+                    text: 'Viva na Rua dos Trilhos. Um projeto que une a tradição do bairro ao conforto de um condomínio clube moderno.'
+                },
+                marquee: 'RUA DOS TRILHOS — MOOCA — VARANDA GOURMET — LAZER DE CLUBE — ',
+                stats: [{ id: 'stat-1', n: 'Mooca', l: 'Tradicional' }, { id: 'stat-2', n: 'Lazer', l: 'Completo' }, { id: 'stat-3', n: 'MCMV', l: 'Facilitado' }],
+                cta: {
+                    highlight: 'Oportunidade',
+                    title: 'Saia do Aluguel',
+                    text: 'Entrada facilitada e parcelas que cabem no seu bolso. More no bairro mais querido de SP.',
+                    btn: 'Simular Financiamento'
+                },
+                review: {
+                    phrases: '["Mooca", "Boulevard", "Varanda", "Trisul"]',
+                    pros: "Localização histórica com infraestrutura moderna. O Boulevard integrado à rua é um diferencial arquitetônico lindo.",
+                    cons: "Alta procura por ser um dos poucos MCMV 'premium' na Mooca."
+                },
+                menuBtn: 'Simular'
+            },
+            investor: {
+                colors: { highlight: '#A33830', bgMain: '#0a1014', bgDark: '#05080a', textSec: '#a0c0d0' },
+                hero: {
+                    highlight: 'Ativo Imobiliário',
+                    title: 'Tradição e Retorno',
+                    text: 'A Mooca é um dos bairros com maior fidelidade de moradores. Demanda constante e valorização garantida.'
+                },
+                marquee: 'ALTA DEMANDA — REGIÃO CENTRAL — PERTO DO METRÔ — MOOCA — ',
+                stats: [{ id: 'stat-1', n: 'Demanda', l: 'Alta Fidelidade' }, { id: 'stat-2', n: 'Bairro', l: 'Consolidado' }, { id: 'stat-3', n: 'Studio', l: 'Rentável' }],
+                cta: {
+                    highlight: 'Investimento Sólido',
+                    title: 'Diversifique seu Patrimônio',
+                    text: 'Studios e Aptos compactos na Mooca têm liquidez altíssima. Consulte a tabela de investidor.',
+                    btn: 'Falar com Consultor'
+                },
+                review: {
+                    phrases: '["Liquidez", "Tradição", "Centro", "Patrimônio"]',
+                    pros: "A proximidade com o Centro e Universidades (São Judas) garante fluxo de locação. A marca Mooca valoriza o m².",
+                    cons: "Foco em perfil jovem ou casais que buscam o lifestyle da Mooca."
+                },
+                menuBtn: 'Investir'
+            }
+        };
+
+        window.addEventListener('persona-changed', (e) => {
+            const mode = e.detail.mode;
+            const heroBtn = document.getElementById('hero-cta-btn');
+
+            if (mode === 'investor') {
+                heroBtn.innerText = "Falar com Consultor";
+                heroBtn.href = "#schedule";
+            } else {
+                heroBtn.innerText = "Compre sem Entrada*";
+                heroBtn.href = "#schedule";
+            }
+        });
+
+        window.addEventListener('load', () => {
+            const switcher = document.querySelector('persona-switcher');
+            if (switcher) switcher.setProjectData(PROJECT_DATA);
+        });
+    </script>
+
+</body>
+
+</html>

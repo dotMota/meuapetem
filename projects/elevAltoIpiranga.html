@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elev Alto do Ipiranga | MeuApêTem Start</title>
+    <meta name="description"
+        content="Eleve seus sonhos perto de tudo. A apenas 400m do Metrô Santos-Imigrantes. Apartamentos de 2 Dormitórios com Lazer de Clube e qualidade Trisul.">
+
+    <link rel="icon" type="image/png" href="../media/utils/mAPTmLogo.svg">
+
+    <meta property="og:image" content="../media/Elev_Alto_do_Ipiranga/area_comum/voo_piscina.webp">
+    <meta name="product-category" content="start">
+    <meta name="product-vibe" content="400m do Metrô">
+    <meta name="product-tags" content="Linha Verde, Lazer Completo, Trisul">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-17794513059');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- TEMA ELEV ALTO DO IPIRANGA (Green Line & Nature) --- */
+        :root {
+            /* Identidade Visual - Verde (Ref. Linha Verde / Ipiranga) */
+            /* Se o book for de outra cor, altere este Hex */
+            --color-highlight: #00A859;
+
+            --color-text-primary: #f5f5f7;
+            --color-text-secondary: #a1a1aa;
+
+            /* Fundos */
+            --bg-page-body: #101010;
+            --bg-section-main: #161616;
+            --bg-brand-dark: #000000;
+            --bg-cta-gradient: linear-gradient(135deg, #101010 0%, #002914 100%);
+
+            /* Tipografia */
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-text: 'Inter', sans-serif;
+
+            /* Mapeamento */
+            --highlight-color: var(--color-highlight);
+            --bg-color: var(--bg-section-main);
+            --text-color: var(--color-text-secondary);
+            --bg-gradient: var(--bg-cta-gradient);
+        }
+
+        /* Botão CTA Personalizado */
+        cta-section::part(button) {
+            background: var(--color-highlight);
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        cta-section::part(button):hover {
+            background: #fff;
+            color: var(--color-highlight);
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-page-body);
+            font-family: var(--font-text);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- NEW COMPONENT: MANUAL STRIP (Faixa Fina) --- */
+        .manual-strip {
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.1), rgba(20, 20, 20, 0.8));
+            border-left: 2px solid var(--color-highlight);
+            padding: 1.5rem 2rem;
+            margin: 2rem auto 4rem auto;
+            /* Centralizado com margem */
+            max-width: 1200px;
+            width: 90%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .manual-strip:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.15), rgba(30, 30, 30, 0.9));
+        }
+
+        .manual-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .manual-icon {
+            color: var(--color-highlight);
+            font-size: 1.5rem;
+        }
+
+        .manual-text h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-family: var(--font-title);
+            color: #fff;
+        }
+
+        .manual-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        .manual-btn {
+            white-space: nowrap;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .manual-btn:hover {
+            border-color: var(--color-highlight);
+            color: var(--color-highlight);
+        }
+    </style>
+
+    <script src="../components/preloader.js"></script>
+    <script src="../components/menu.js" defer></script>
+    <script src="../components/hero.js" defer></script>
+    <script src="../components/marquee.js" defer></script>
+    <script src="../components/video.js" defer></script>
+    <script src="../components/showcase.js" defer></script>
+    <script src="../components/gallery.js" defer></script>
+    <script src="../components/plans.js" defer></script>
+    <script src="../components/stats.js" defer></script>
+    <script src="../components/region.js" defer></script>
+    <script src="../components/cta.js" defer></script>
+    <script src="../components/trust.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+    <script src="../components/curator-review.js" defer></script>
+    <script src="../components/floating.js" defer></script>
+    <script src="../components/contact.js" defer></script>
+    <script src="../components/cookie.js" defer></script>
+    <script src="../components/cursor.js" defer></script>
+    <script src="../components/lightbox.js" defer></script>
+    <script src="../components/persona-switcher.js" defer></script>
+    <script src="../components/project-card.js" defer></script>
+    <script src="../components/page-scanner.js" defer></script>
+
+    <script src="../components/team.js" defer></script>
+
+</head>
+
+<body>
+
+    <site-preloader project="ELEV IPIRANGA"></site-preloader>
+
+    <persona-switcher modes='[{"key": "resident", "label": "Vou Morar"}, {"key": "investor", "label": "Vou Investir"}]'>
+    </persona-switcher>
+
+    <site-menu logo="ELEV." parent-text="MeuApêTem" parent-link="../index.html">
+        <a slot="links" href="#home">Início</a>
+        <a slot="links" href="#concept">O Projeto</a>
+        <a slot="links" href="#amenities">Lazer</a>
+        <a slot="links" href="#plans">Plantas</a>
+        <a slot="links" href="#location">Localização</a>
+        <a slot="links" href="#schedule" class="auto-trigger" id="menu-cta">Simular</a>
+    </site-menu>
+
+    <hero-section id="home" image="../media/Elev_Alto_do_Ipiranga/area_comum/voo_piscina.webp"
+        highlight=" MeuApêTem Start" subtitle="Linha Verde" title="Eleve seus Sonhos" curator-badge="true"
+        text="A apenas 400 metros da Estação Santos-Imigrantes. Conforto, tranquilidade e mobilidade em um projeto Trisul.">
+        <a href="#schedule" slot="cta" id="hero-cta-btn"
+            style="display:inline-block; margin-top:20px; padding:15px 30px; background:var(--color-highlight); color:#fff; font-weight:bold; border-radius:50px; text-decoration:none; text-transform:uppercase; font-size:0.9rem;">
+            Se mude ainda em 2026
+        </a>
+    </hero-section>
+
+    <marquee-scroll id="marquee"
+        text="400M DO METRÔ SANTOS-IMIGRANTES — QUALIDADE TRISUL — LAZER DE CLUBE — VARANDA EM TODAS AS UNIDADES — "
+        speed="60s">
+    </marquee-scroll>
+
+    <div class="manual-strip">
+        <div class="manual-content">
+            <i class="fas fa-book-reader manual-icon"></i>
+            <div class="manual-text">
+                <h3>Dúvidas sobre o Minha Casa Minha Vida?</h3>
+                <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
+            </div>
+        </div>
+        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right"
+                style="margin-left:5px; font-size:0.8em;"></i></a>
+    </div>
+
+    <stats-section id="stats">
+        <stat-item slot="items" class="hover-target" id="stat-1" number="400m"
+            label="Do Metrô (Linha Verde)"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-2" number="Lazer" label="Clube Completo"></stat-item>
+        <stat-item slot="items" class="hover-target" id="stat-3" number="Trisul"
+            label="Qualidade Garantida"></stat-item>
+    </stats-section>
+
+    <showcase-section id="concept" highlight="O Projeto" title="Elevar sua<br>Qualidade de Vida"
+        text="Um projeto pensado para proporcionar uma experiência completa de bem-estar. Segurança, praticidade e uma localização estratégica no melhor do Ipiranga."
+        button-text="Ver Lazer" button-link="#amenities">
+        <img slot="gallery" src="../media/Elev_Alto_do_Ipiranga/fachadas/acesso.webp" alt="Acesso Seguro">
+        <img slot="gallery" src="../media/Elev_Alto_do_Ipiranga/fachadas/portaria.webp" alt="Portaria 24h">
+        <img slot="gallery" src="../media/Elev_Alto_do_Ipiranga/area_comum/praca_de_chegada.webp"
+            alt="Praça de Chegada">
+        <img slot="gallery" src="../media/Elev_Alto_do_Ipiranga/area_comum/praca_do_ipe.webp" alt="Praça do Ipê">
+    </showcase-section>
+
+    <gallery-section id="amenities" subtitle="Seu Clube" title="Viva em <br>Movimento">
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/piscina_com_deck_e_solario.webp" title="Piscina Adulto"
+            text="Com Deck e Solário"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Alto_do_Ipiranga/area_comum/piscina.webp"
+            title="Piscina" text="Lazer Aquático"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/voo_piscina.webp" title="Vista Aérea"
+            text="Complexo de Lazer"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/sala_de_massagem.webp" title="Massagem"
+            text="Espaço Relax"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/espaco_bem_estar.webp" title="Bem-Estar"
+            text="Saúde e Equilíbrio"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Alto_do_Ipiranga/area_comum/academia.webp"
+            title="Academia" text="Equipamentos Modernos"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/quadra_de_areia.webp" title="Quadra de Areia"
+            text="Beach Sports"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/salao_de_festas.webp" title="Salão de Festas"
+            text="Celebre Momentos"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/apoio_salao_de_festas.webp" title="Apoio Festas"
+            text="Área Externa"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/salao_de_festas_esporte.webp" title="Sports Bar"
+            text="Integração e Torcida"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/churrasqueira.webp" title="Churrasqueira"
+            text="Espaço Gourmet"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/salao_gourmet_e_coworking.webp" title="Gourmet & Work"
+            text="Multiuso"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/brinquedoteca.webp" title="Brinquedoteca"
+            text="Espaço Kids"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/playground.webp" title="Playground"
+            text="Ao Ar Livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/oficina_criativa.webp" title="Oficina Criativa"
+            text="DIY e Artes"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Alto_do_Ipiranga/area_comum/pet_place.webp"
+            title="Pet Place" text="Diversão para seu Pet"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Alto_do_Ipiranga/area_comum/pet_care.webp"
+            title="Pet Care" text="Banho e Tosa"></gallery-item>
+
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Alto_do_Ipiranga/area_comum/coworking.webp"
+            title="Coworking" text="Home Office Profissional"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/coworking_externo.webp" title="Coworking Externo"
+            text="Trabalhe ao Ar Livre"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/salas_de_reunioes_individualizadas.webp"
+            title="Sala de Reunião" text="Privacidade"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/espaco_para_mini_mercado.webp" title="Mini Mercado"
+            text="Conveniência 24h"></gallery-item>
+        <gallery-item slot="items" class="hover-target" image="../media/Elev_Alto_do_Ipiranga/area_comum/delivery.webp"
+            title="Delivery" text="Entregas Seguras"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/lavanderia_coletiva_omo.webp" title="Lavanderia OMO"
+            text="Praticidade"></gallery-item>
+        <gallery-item slot="items" class="hover-target"
+            image="../media/Elev_Alto_do_Ipiranga/area_comum/oficina_bike.webp" title="Oficina Bike"
+            text="Manutenção"></gallery-item>
+
+    </gallery-section>
+
+    <curator-review id="review" curator="Mota" phrases='["Ipiranga", "Metrô", "Varanda", "Trisul"]'
+        pros="A localização é o ponto forte: Linha Verde do Metrô conecta você à Paulista em minutos. A planta com suíte de 37m² é excelente."
+        cons="Região em franca valorização, o que significa que esta tabela de lançamento é uma oportunidade única antes da alta de preços.">
+    </curator-review>
+
+    <plans-section id="plans" highlight="Plantas Inteligentes" title="Plantas" project="Elev Alto do Ipiranga">
+
+        <plan-item slot="content" name="37m²" title="2 Dorms (Suíte)"
+            desc="A planta mais desejada. Dois dormitórios, sendo uma suíte, com varanda integrada ao living."
+            area="37m²" dorms="2 Dorms" vagas="" extra-label="Destaque" extra-val="Suíte">
+            <img slot="image" src="../media/Elev_Alto_do_Ipiranga/Plantas/2_dorms_c_suite_varanda_37m.webp">
+        </plan-item>
+
+        <plan-item slot="content" name="34m²" title="2 Dorms (Varanda)"
+            desc="Layout inteligente e funcional. Sala ampliada pela varanda, ideal para quem busca o primeiro imóvel."
+            area="34m²" dorms="2 Dorms" vagas="" extra-label="Smart" extra-val="Econômico">
+            <img slot="image" src="../media/Elev_Alto_do_Ipiranga/Plantas/2_dorms_varanda_34m.webp">
+        </plan-item>
+
+    </plans-section>
+
+    <region-section id="location" image="../media/Elev_Alto_do_Ipiranga/fachadas/elev_alto_do_ipiranga.webp"
+        highlight="Alto do Ipiranga" title="Conexão Total"
+        text="Você está a 400m da Estação Santos-Imigrantes (Linha 2-Verde). Fácil acesso à Av. Ricardo Jafet, Parque da Independência e Shopping Plaza Sul."
+        lat="-23.5932" lng="-46.6205" zoom="15" pois='[
+            {"title": "Metrô Santos-Imigrantes", "loc": [-23.5932, -46.6205]}, 
+            {"title": "Parque da Independência", "loc": [-23.5850, -46.6090]}, 
+            {"title": "Shopping Plaza Sul", "loc": [-23.6140, -46.6230]}
+        ]'>
+    </region-section>
+
+    <team-section id="team" highlight="Quem Assina" title="Mentes Brilhantes">
+
+        <team-member role="Arquitetura" name="ELG Arquitetos" image="../media/utils/ELG Arquitetos.png"
+            text="A arquitetura foi concebida visando a praticidade foram pensados com espaços integrados e modernos, evidenciando um novo modo de morar. As áreas de lazer e convivência seguem estes conceitos, propiciando uma experiência de maior interação e bem-estar aos futuros moradores, num projeto que toma partido do tamanho do terreno e sua frente para três ruas, com linhas contemporâneas e harmônicas.">
+        </team-member>
+
+        <team-member role="Paisagismo" name="Roberta Ventura" image="../media/utils/RobertaVenturaPaisagismo.jpg"
+            text="O condomínio ELEV Alto do Ipiranga destaca-se como um espaço ideal para a família desfrutar de momentos memoráveis. Com uma área de lazer completa e integrada à natureza, proporciona tudo o que você busca em um ambiente contemporâneo,onde a qualidade de vida e o contato com o verde se harmonizam perfeitamente.">
+        </team-member>
+
+        <team-member role="Interiores" name="Gabriela Bosso" image="../media/utils/GabrielaBosso.jpeg"
+            text="Na concepção da decoração das áreas comuns do ELEV Alto do Ipiranga, busquei criar ambientes que harmonizam beleza e praticidade e que alinham funcionalidade com uma decoração mais contemporânea. Cada escolha de mobiliário e detalhe foi pensada para otimizar o espaço, promover a circulação fluida e refletir a estética moderna do empreendimento. A integração de materiais modernos com a paleta de cores equilibrada cria ambientes vibrantes e sofisticados">
+        </team-member>
+
+    </team-section>
+
+    <cta-section id="schedule" highlight="Últimas Unidades" title="Mude de Vida"
+        text="Condições facilitadas de lançamento Trisul. Compre sem entrada e utilize seu FGTS."
+        button-text="Simular Agora" project="Elev Alto do Ipiranga">
+    </cta-section>
+
+    <trust-section style="--bg-color: var(--bg-brand-dark);">
+        <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
+        <trust-item slot="items" title="Financiamento" img="../media/utils/caixa.svg" alt="Caixa"></trust-item>
+    </trust-section>
+
+    <page-scanner category="start"></page-scanner>
+
+    <footer-section project="ELEV ALTO DO IPIRANGA" broker="CORRETOR MOTA - CRECI 315675"
+        root-path=".."></footer-section>
+
+    <floating-actions></floating-actions>
+    <contact-popup></contact-popup>
+    <lightbox-viewer></lightbox-viewer>
+    <cookie-banner></cookie-banner>
+    <custom-cursor></custom-cursor>
+
+    <script>
+        const PROJECT_DATA = {
+            resident: {
+                colors: { highlight: '#00A859', bgMain: '#161616', bgDark: '#000000', textSec: '#a1a1aa' },
+                hero: {
+                    highlight: 'Minha Casa Minha Vida',
+                    title: 'Eleve seus Sonhos',
+                    text: 'A apenas 400m do Metrô Santos-Imigrantes. Conquiste sua independência com qualidade Trisul.'
+                },
+                marquee: 'USE SEU FGTS — LAZER DE CLUBE — 400M DO METRÔ — TRISUL — ',
+                stats: [{ id: 'stat-1', n: '400m', l: 'Do Metrô' }, { id: 'stat-2', n: 'Lazer', l: 'Clube Completo' }, { id: 'stat-3', n: 'Trisul', l: 'Segurança' }],
+                cta: {
+                    highlight: 'Oportunidade',
+                    title: 'Saia do Aluguel',
+                    text: 'Entrada facilitada e parcelas que cabem no seu bolso. Aproveite as condições de lançamento.',
+                    btn: 'Simular Financiamento'
+                },
+                review: {
+                    phrases: '["Linha Verde", "Mobilidade", "Varanda", "Lazer"]',
+                    pros: "Estar na Linha Verde (acesso à Paulista) por este preço é um achado. A planta com suíte é muito bem resolvida.",
+                    cons: "Unidades com alta procura devido à proximidade do metrô."
+                },
+                menuBtn: 'Simular'
+            },
+            investor: {
+                colors: { highlight: '#008542', bgMain: '#0a1014', bgDark: '#05080a', textSec: '#a0c0d0' },
+                hero: {
+                    highlight: 'Ativo Imobiliário',
+                    title: 'Liquidez & Valorização',
+                    text: 'Invista na região que mais valoriza na Zona Sul. A 400m do Metrô, garantia de alta demanda de locação.'
+                },
+                marquee: 'ALTA DEMANDA DE LOCAÇÃO — LINHA VERDE — ACESSO À PAULISTA — TRISUL — ',
+                stats: [{ id: 'stat-1', n: 'Liquidez', l: 'Alta Procura' }, { id: 'stat-2', n: 'Linha 2', l: 'Valorização' }, { id: 'stat-3', n: 'Sólido', l: 'Ativo Seguro' }],
+                cta: {
+                    highlight: 'Investimento Seguro',
+                    title: 'Diversifique seu Patrimônio',
+                    text: 'Imóvel próximo ao metrô é moeda forte. Fale com um consultor para entender o potencial de rentabilidade.',
+                    btn: 'Falar com um Consultor'
+                },
+                review: {
+                    phrases: '["Rentabilidade", "Segurança", "Metrô", "Patrimônio"]',
+                    pros: "Projetos perto do metrô sempre performam acima da média na locação e revenda. A marca Trisul traz segurança à entrega.",
+                    cons: "Foco em rentabilidade segura e longo prazo."
+                },
+                menuBtn: 'Investir'
+            }
+        };
+
+        window.addEventListener('persona-changed', (e) => {
+            const mode = e.detail.mode;
+            const heroBtn = document.getElementById('hero-cta-btn');
+
+            if (mode === 'investor') {
+                heroBtn.innerText = "Falar com Consultor";
+                heroBtn.href = "#schedule";
+            } else {
+                heroBtn.innerText = "Se mude ainda em 2026";
+                heroBtn.href = "#schedule";
+            }
+        });
+
+        window.addEventListener('load', () => {
+            const switcher = document.querySelector('persona-switcher');
+            if (switcher) switcher.setProjectData(PROJECT_DATA);
+        });
+    </script>
+
+</body>
+
+</html>
