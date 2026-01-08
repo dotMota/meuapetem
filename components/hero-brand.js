@@ -2,245 +2,317 @@ class HeroBrand extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+
+        // LISTA CENTRALIZADA (A mesma lógica do page-scanner)
+        // Se criar um imóvel novo, adicione o nome do arquivo aqui
+        this.projectFiles = [
+            'quarten.html',
+            'granoscar.html',
+            'elevButanta.html',
+            'elevSacoma.html',
+            'elevAltoIpiranga.html',
+            'vilaBoulevardMooca.html',
+            'peninsulaVilaMadalena.html'
+        ];
+
+        this.slides = [];
+        this.currentIndex = 0;
+        this.timer = null;
     }
 
-    connectedCallback() {
-        const image = this.getAttribute('image') || '';
-        const phrases = ["Luz Natural", "Espaço para Criar", "Silêncio para Refletir", "Alma", "História"];
+    async connectedCallback() {
+        // 1. Renderiza a estrutura vazia (Loading...)
+        this.renderSkeleton();
 
+        // 2. Busca os dados reais dos imóveis
+        await this.fetchProjectsData();
+
+        // 3. Renderiza o carrossel real se achou imóveis
+        if (this.slides.length > 0) {
+            this.render();
+            this.startAutoSlide();
+            this.addEvents();
+        } else {
+            // Fallback se der erro na leitura (mostra só a marca)
+            this.renderFallback();
+        }
+    }
+
+    disconnectedCallback() {
+        this.stopAutoSlide();
+    }
+
+    // --- O CÉREBRO DA OPERAÇÃO ---
+    async fetchProjectsData() {
+        const pathPrefix = 'projects/'; // Como estamos na home, a pasta é projects/
+
+        // Cria uma lista de promessas para ler todos ao mesmo tempo (rápido)
+        const promises = this.projectFiles.map(async (file) => {
+            try {
+                const response = await fetch(pathPrefix + file);
+                if (!response.ok) return null;
+
+                const htmlText = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+
+                // Extrai as meta tags (Open Graph) que já existem nas suas páginas
+                // Título: "Nome do Prédio | MeuApêTem" -> Pega só o nome
+                const fullTitle = doc.querySelector('title')?.innerText || '';
+                const title = fullTitle.split('|')[0].trim().toUpperCase();
+
+                // Imagem de Capa (og:image)
+                let image = doc.querySelector('meta[property="og:image"]')?.content;
+                if (image) {
+                    // Corrige o caminho relativo (de ../media para ./media)
+                    image = image.replace('../media', './media');
+                } else {
+                    return null; // Sem imagem não serve pra Hero
+                }
+
+                // Tag/Vibe
+                const tag = doc.querySelector('meta[name="product-vibe"]')?.content || 'EXCLUSIVO';
+
+                // Subtítulo (pega a description ou cria um genérico)
+                const desc = doc.querySelector('meta[name="description"]')?.content || 'O imóvel ideal para você.';
+
+                return {
+                    title: title,
+                    subtitle: desc.split('.')[0], // Pega só a primeira frase pra não ficar longo
+                    image: image,
+                    link: pathPrefix + file,
+                    tag: tag.toUpperCase()
+                };
+
+            } catch (e) {
+                console.warn('Erro ao ler imóvel para Hero:', file);
+                return null;
+            }
+        });
+
+        const results = await Promise.all(promises);
+
+        // Filtra os nulos e embaralha
+        const validSlides = results.filter(s => s !== null);
+        this.slides = this.shuffleArray(validSlides);
+    }
+
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    startAutoSlide() {
+        this.timer = setInterval(() => this.nextSlide(), 6000);
+    }
+
+    stopAutoSlide() {
+        if (this.timer) clearInterval(this.timer);
+    }
+
+    nextSlide() {
+        this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+        this.updateSlide();
+    }
+
+    prevSlide() {
+        this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+        this.updateSlide();
+    }
+
+    updateSlide() {
+        const slidesElements = this.shadowRoot.querySelectorAll('.slide');
+        const dots = this.shadowRoot.querySelectorAll('.dot');
+
+        if (slidesElements.length === 0) return;
+
+        slidesElements.forEach((el, index) => {
+            if (index === this.currentIndex) el.classList.add('active');
+            else el.classList.remove('active');
+        });
+
+        dots.forEach((dot, index) => {
+            if (index === this.currentIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    renderSkeleton() {
+        this.shadowRoot.innerHTML = `
+            <style>
+                :host { display: block; height: 100vh; background: #000; }
+            </style>
+        `;
+    }
+
+    renderFallback() {
         this.shadowRoot.innerHTML = `
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+            :host { display: block; height: 100vh; background: #111; color: #fff; display: flex; align-items: center; justify-content: center; font-family: sans-serif; }
+            h1 { font-size: 3rem; text-transform: uppercase; letter-spacing: 5px; }
+        </style>
+        <div><h1>MEUAPÊTEM</h1></div>
+        `;
+    }
 
+    render() {
+        this.shadowRoot.innerHTML = `
+        <style>
             :host { 
                 display: block; 
-                position: relative; 
-                height: 95vh; 
+                height: 100vh; 
                 width: 100%; 
+                position: relative; 
                 overflow: hidden; 
-                background-color: #050505;
-                --mouse-x: 0.5;
-                --mouse-y: 0.5;
+                background: #000;
+                --highlight: var(--color-highlight, #FF6F61);
             }
 
-            /* --- CAMADA 1: O GRID VIVO (Deslizando) --- */
-            .grid-pattern {
-                position: absolute; inset: -50%; width: 200%; height: 200%;
-                background-size: 80px 80px;
-                background-image:
-                    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-                
-                /* Animação de "viagem" no grid */
-                animation: gridMove 60s linear infinite;
-                transform: perspective(500px) rotateX(20deg); /* Perspectiva 3D Tech */
-                opacity: 0.6;
-                mask-image: radial-gradient(circle, black 30%, transparent 70%);
+            .carousel-container { width: 100%; height: 100%; position: relative; }
+
+            .slide {
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                opacity: 0; transition: opacity 1.2s ease-in-out;
+                z-index: 1; pointer-events: none;
             }
 
-            @keyframes gridMove {
-                0% { transform: perspective(500px) rotateX(20deg) translateY(0); }
-                100% { transform: perspective(500px) rotateX(20deg) translateY(-80px); }
+            .slide.active { opacity: 1; z-index: 2; pointer-events: all; }
+
+            .bg-image {
+                width: 100%; height: 100%; object-fit: cover;
+                transform: scale(1.1); transition: transform 8s ease;
+                filter: brightness(0.65);
             }
 
-            /* --- CAMADA 2: LUZ PULSANTE (A Alma) --- */
-            .glow-spot {
-                position: absolute;
-                top: 50%; left: 50%;
-                width: 60vw; height: 60vw;
-                background: radial-gradient(circle, var(--highlight-color, #FF6F61) 0%, transparent 60%);
-                opacity: 0.15;
-                filter: blur(100px);
-                transform: translate(-50%, -50%) scale(1);
-                animation: pulseGlow 8s ease-in-out infinite alternate;
-                pointer-events: none;
+            .slide.active .bg-image { transform: scale(1); filter: brightness(0.5); }
+
+            .overlay {
+                position: absolute; inset: 0;
+                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.4) 100%);
             }
 
-            @keyframes pulseGlow {
-                0% { opacity: 0.1; transform: translate(-50%, -50%) scale(0.9); }
-                100% { opacity: 0.25; transform: translate(-50%, -50%) scale(1.1); }
-            }
-
-            /* --- CAMADA 3: FORMAS GEOMÉTRICAS (Flutuantes + Parallax) --- */
-            .shape {
-                position: absolute;
-                border: 1px solid rgba(255,255,255,0.1);
-                pointer-events: none;
-                transition: transform 0.1s linear; /* Suavidade para o mouse */
-            }
-
-            .shape-circle {
-                width: 500px; height: 500px;
-                border-radius: 50%;
-                bottom: -150px; left: -100px;
-                border-color: rgba(255, 111, 97, 0.3); /* Coral */
-                animation: floatCircle 20s infinite linear;
-            }
-
-            .shape-square {
-                width: 200px; height: 200px;
-                top: 15%; right: 20%;
-                border: 1px solid rgba(255,255,255,0.15);
-                transform: rotate(45deg);
-                animation: floatSquare 25s infinite ease-in-out;
-            }
-
-            .shape-line {
-                width: 2px; height: 300px;
-                background: linear-gradient(to bottom, transparent, var(--highlight-color), transparent);
-                left: 20%; top: 10%;
-                opacity: 0.5;
-                animation: floatLine 15s infinite ease-in-out;
-            }
-
-            /* Animações Independentes para parecer orgânico */
-            @keyframes floatCircle {
-                0% { transform: translate(0, 0) rotate(0deg); }
-                50% { transform: translate(20px, -20px) rotate(180deg); }
-                100% { transform: translate(0, 0) rotate(360deg); }
-            }
-            @keyframes floatSquare {
-                0% { transform: rotate(45deg) translateY(0); }
-                50% { transform: rotate(50deg) translateY(-30px); }
-                100% { transform: rotate(45deg) translateY(0); }
-            }
-            @keyframes floatLine {
-                0% { transform: translateY(0); height: 300px; }
-                50% { transform: translateY(50px); height: 200px; }
-                100% { transform: translateY(0); height: 300px; }
-            }
-
-
-            /* --- CONTEÚDO (Texto) --- */
             .content {
-                position: relative; z-index: 10; height: 100%;
-                display: flex; flex-direction: column; justify-content: center;
-                padding: 0 5%; max-width: 1400px; margin: 0 auto;
+                position: absolute; bottom: 20%; left: 5%; width: 90%; max-width: 900px;
+                z-index: 10; color: #fff;
+                opacity: 0; transform: translateY(40px);
+                transition: all 0.8s ease 0.3s;
             }
 
-            .brand-tag {
-                color: var(--highlight-color); font-family: var(--font-text);
-                font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
-                font-size: 0.9rem; margin-bottom: 1.5rem;
-                display: flex; align-items: center; gap: 10px;
-                opacity: 0; animation: fadeUp 1s ease 0.5s forwards;
+            .slide.active .content { opacity: 1; transform: translateY(0); }
+
+            .tag {
+                background: var(--highlight); color: #000;
+                padding: 6px 14px; font-family: 'Manrope', sans-serif;
+                font-weight: 800; text-transform: uppercase; font-size: 0.75rem;
+                letter-spacing: 2px; display: inline-block; margin-bottom: 1.5rem;
+                border-radius: 2px;
             }
-            .brand-tag::before { content: ''; width: 40px; height: 2px; background: var(--highlight-color); }
 
             h1 {
-                font-family: var(--font-title); 
-                font-size: clamp(3.5rem, 7vw, 6rem);
-                color: #fff; line-height: 1.1; margin: 0 0 2rem 0;
-                opacity: 0; animation: fadeUp 1s ease 0.7s forwards;
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: clamp(2.5rem, 6vw, 5.5rem);
+                margin: 0; line-height: 0.95; text-transform: uppercase;
+                letter-spacing: -2px;
             }
 
-            .dynamic-wrapper { display: block; min-height: 1.2em; }
-            .dynamic-text { color: var(--highlight-color); }
-
-            .cursor {
-                display: inline-block; width: 3px; height: 0.8em;
-                background: var(--highlight-color); margin-left: 5px;
-                animation: blink 1s infinite;
-            }
-            @keyframes blink { 50% { opacity: 0; } }
-
-            p {
-                font-family: var(--font-text); font-size: 1.2rem; color: #e0e0e0;
-                max-width: 500px; line-height: 1.6; margin-bottom: 3rem;
-                opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
-            }
-
-            .cta-group { 
-                display: flex; gap: 20px; flex-wrap: wrap; 
-                opacity: 0; animation: fadeUp 1s ease 1.1s forwards;
+            h2 {
+                font-family: 'Manrope', sans-serif;
+                font-size: clamp(1rem, 2vw, 1.4rem);
+                margin: 1.5rem 0 2.5rem 0; font-weight: 300;
+                color: #ddd; max-width: 700px; line-height: 1.5;
             }
 
             .btn {
-                padding: 18px 40px; border-radius: 50px; font-weight: 600; text-decoration: none;
-                transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
-                font-size: 0.9rem; cursor: pointer; position: relative; overflow: hidden;
+                display: inline-flex; align-items: center; gap: 12px;
+                padding: 1.2rem 3rem; border: 1px solid rgba(255,255,255,0.4);
+                color: #fff; text-decoration: none; text-transform: uppercase;
+                font-family: 'Space Grotesk', sans-serif; letter-spacing: 3px;
+                font-size: 0.9rem; font-weight: 600;
+                transition: all 0.3s ease; background: rgba(255,255,255,0.05);
+                backdrop-filter: blur(5px);
             }
 
-            .btn-primary { background: var(--highlight-color); color: #000; border: 2px solid var(--highlight-color); }
-            .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3); }
-
-            .btn-secondary { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
-            .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
-
-            @keyframes fadeUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
+            .btn:hover {
+                background: #fff; color: #000; border-color: #fff;
+                padding-right: 4rem; transform: translateY(-3px);
             }
+            
+            .nav-btn {
+                position: absolute; top: 50%; transform: translateY(-50%);
+                background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+                color: #fff; width: 60px; height: 60px; border-radius: 50%;
+                cursor: pointer; z-index: 20; display: flex;
+                align-items: center; justify-content: center;
+                transition: 0.3s; backdrop-filter: blur(4px); font-size: 1.5rem;
+            }
+            .nav-btn:hover { background: var(--highlight); border-color: var(--highlight); color: #000; }
+            .prev { left: 2rem; }
+            .next { right: 2rem; }
 
-            @media(max-width: 768px) {
-                h1 { font-size: 2.5rem; }
-                .shape-circle { width: 300px; height: 300px; left: -50px; }
-                .shape-square { width: 100px; height: 100px; top: 10%; right: 10%; }
+            .dots {
+                position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+                display: flex; gap: 12px; z-index: 20;
+            }
+            .dot {
+                width: 6px; height: 6px; border-radius: 50%;
+                background: rgba(255,255,255,0.2); cursor: pointer; transition: 0.4s;
+            }
+            .dot.active { background: var(--highlight); transform: scale(1.6); }
+
+            @media (max-width: 768px) {
+                .nav-btn { display: none; }
+                .content { bottom: 25%; }
+                h1 { font-size: 3rem; letter-spacing: -1px; }
             }
         </style>
 
-        <div class="grid-pattern"></div>
-        <div class="glow-spot"></div>
-        
-        <div class="shape shape-circle" id="c1"></div>
-        <div class="shape shape-square" id="s1"></div>
-        <div class="shape shape-line"></div>
-        
-        <div class="content">
-            <span class="brand-tag">Curadoria Experiencial</span>
-            <h1>
-                MeuApêTem<br>
-                <span class="dynamic-wrapper">
-                    <span id="typewriter" class="dynamic-text"></span><span class="cursor"></span>
-                </span>
-            </h1>
-            <p>Não vendemos paredes. Facilitamos o encontro entre você e o espaço onde sua história vai acontecer.</p>
-            
-            <div class="cta-group">
-                <a href="#portfolio" class="btn btn-primary">Encontrar meu Cenário</a>
-                <a href="#manifesto" class="btn btn-secondary">Entender a Filosofia</a>
+        <div class="carousel-container">
+            ${this.slides.map((slide, index) => `
+                <div class="slide ${index === 0 ? 'active' : ''}">
+                    <img src="${slide.image}" class="bg-image" alt="${slide.title}">
+                    <div class="overlay"></div>
+                    <div class="content">
+                        <span class="tag">${slide.tag}</span>
+                        <h1>${slide.title}</h1>
+                        <h2>${slide.subtitle}</h2>
+                        <a href="${slide.link}" class="btn">
+                            Ver Projeto <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('')}
+
+            <button class="nav-btn prev" id="prevBtn">❮</button>
+            <button class="nav-btn next" id="nextBtn">❯</button>
+
+            <div class="dots">
+                ${this.slides.map((_, index) => `
+                    <div class="dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>
+                `).join('')}
             </div>
         </div>
         `;
+    }
 
-        // 1. LÓGICA DE DIGITAÇÃO (Typewriter)
-        const el = this.shadowRoot.getElementById('typewriter');
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+    addEvents() {
+        this.shadowRoot.getElementById('prevBtn')?.addEventListener('click', () => {
+            this.stopAutoSlide(); this.prevSlide();
+        });
 
-        const type = () => {
-            const currentPhrase = phrases[phraseIndex];
-            if (isDeleting) {
-                el.innerText = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                el.innerText = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            let typeSpeed = isDeleting ? 50 : 100;
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                typeSpeed = 2000; isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500;
-            }
-            setTimeout(type, typeSpeed);
-        }
-        type();
+        this.shadowRoot.getElementById('nextBtn')?.addEventListener('click', () => {
+            this.stopAutoSlide(); this.nextSlide();
+        });
 
-        // 2. LÓGICA DE PARALLAX (Segue o Mouse)
-        const host = this.shadowRoot.host; // O elemento <hero-brand>
-        const c1 = this.shadowRoot.getElementById('c1');
-        const s1 = this.shadowRoot.getElementById('s1');
-
-        document.addEventListener('mousemove', (e) => {
-            // Calcula a posição do mouse relativa ao centro da tela
-            const x = (window.innerWidth - e.pageX * 2) / 100;
-            const y = (window.innerHeight - e.pageY * 2) / 100;
-
-            // Move as formas levemente na direção oposta
-            if (c1) c1.style.transform = `translate(${x * 2}px, ${y * 2}px) rotate(${x}deg)`;
-            if (s1) s1.style.transform = `translate(${x}px, ${y}px) rotate(${45 + x}deg)`;
+        const dots = this.shadowRoot.querySelectorAll('.dot');
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                this.stopAutoSlide();
+                this.currentIndex = parseInt(e.target.dataset.index);
+                this.updateSlide();
+            });
         });
     }
 }
