@@ -9,17 +9,21 @@ class ContactPopup extends HTMLElement {
     connectedCallback() {
         this.render();
         this.addEvents();
-        this.applyPhoneMask(); // Ativa a máscara
+        this.applyPhoneMask(); // Ativa a máscara (11) 9...
 
+        // OUVINTE INTELIGENTE: Dispara sempre que o popup abre
         window.addEventListener('open-contact-popup', (e) => {
             const data = e.detail || {};
 
-            // 1. CAPTURA INTELIGENTE DE DADOS
-            // Tenta pegar o nome do projeto enviado pelo botão OU pega o título da página atual
-            const currentContext = data.project || document.title.split('|')[0].trim();
-            const actionSource = data.message || 'Botão de Contato Geral';
+            // 1. DESCOBRE O PRODUTO (Pega do título da página se não vier do botão)
+            // Ex: "Elev Butantã | MeuApêTem" vira apenas "Elev Butantã"
+            let pageTitle = document.title.split('|')[0].trim();
+            const currentContext = data.project || pageTitle;
 
-            // Preenche os campos ocultos para o E-mail
+            // 2. DESCOBRE A ORIGEM (Qual botão foi clicado?)
+            const actionSource = data.message || 'Botão Flutuante (WhatsApp/Tabela)';
+
+            // 3. PREENCHE OS CAMPOS OCULTOS (Espiões)
             const inputPage = this.shadowRoot.getElementById('inputPage');
             const inputAction = this.shadowRoot.getElementById('inputAction');
             const inputMessage = this.shadowRoot.getElementById('inputMessage');
@@ -27,8 +31,8 @@ class ContactPopup extends HTMLElement {
             if (inputPage) inputPage.value = currentContext;
             if (inputAction) inputAction.value = actionSource;
 
-            // Monta uma mensagem amigável para o campo de texto visível (se houver) ou log interno
-            if (inputMessage) inputMessage.value = `Lead vindo de: ${currentContext}. Interesse: ${actionSource}`;
+            // Cria um resumo para facilitar sua leitura no e-mail
+            if (inputMessage) inputMessage.value = `Lead vindo de: ${currentContext} | Interesse: ${actionSource}`;
 
             this.open();
         });
@@ -44,14 +48,22 @@ class ContactPopup extends HTMLElement {
         document.body.style.overflow = '';
     }
 
-    // --- LÓGICA DA MÁSCARA DE TELEFONE (BRASIL) ---
+    // --- MÁSCARA DE TELEFONE BRASIL ---
     applyPhoneMask() {
         const phoneInput = this.shadowRoot.getElementById('phoneInput');
         if (!phoneInput) return;
 
         phoneInput.addEventListener('input', (e) => {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+
+            if (value.length > 2) {
+                value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+            }
+            if (value.length > 7) {
+                value = `${value.substring(0, 7)}-${value.substring(7)}`;
+            }
+            e.target.value = value;
         });
     }
 
@@ -60,6 +72,7 @@ class ContactPopup extends HTMLElement {
         const name = this.getAttribute('name') || 'MeuApêTem';
         const creci = this.getAttribute('creci') || 'CRECI 315675';
 
+        // Redireciona para o WhatsApp DEPOIS de enviar o e-mail
         const whatsappRedirect = `https://wa.me/${this.masterNumber}?text=Ol%C3%A1%2C+preenchi+o+formul%C3%A1rio+no+site+e+gostaria+de+atendimento.`;
 
         this.shadowRoot.innerHTML = `
@@ -78,8 +91,7 @@ class ContactPopup extends HTMLElement {
                 .creci { color: #666; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2rem; }
                 .benefit-list { text-align: left; color: #999; font-size: 0.9rem; line-height: 1.6; }
                 .benefit-list li { margin-bottom: 0.5rem; list-style: none; }
-                .benefit-list i { color: var(--accent); margin-right: 8px; }
-
+                
                 .form-col { padding: 3rem; position: relative; }
                 .close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #555; font-size: 1.5rem; cursor: pointer; transition: 0.2s; }
                 .close-btn:hover { color: #fff; }
@@ -96,7 +108,6 @@ class ContactPopup extends HTMLElement {
 
                 .alt-action { margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: #666; border-top: 1px solid #222; padding-top: 1.5rem; }
                 .alt-action a { color: #fff; text-decoration: none; border-bottom: 1px dotted #666; transition: 0.2s; }
-                .alt-action a:hover { color: var(--accent); border-color: var(--accent); }
 
                 @media (max-width: 768px) {
                     .modal { grid-template-columns: 1fr; width: 95%; height: auto; max-height: 90vh; overflow-y: auto; }
@@ -114,14 +125,14 @@ class ContactPopup extends HTMLElement {
                         <h3 class="name">${name}</h3>
                         <span class="creci">${creci}</span>
                         <ul class="benefit-list">
-                            <li>✓ Plantas em Alta Resolução</li>
-                            <li>✓ Tabela de Preços Atualizada</li>
-                            <li>✓ Book Digital Completo</li>
+                            <li>✓ Tabela de Preços</li>
+                            <li>✓ Plantas em Alta</li>
+                            <li>✓ Book Digital</li>
                         </ul>
                     </div>
 
                     <div class="form-col">
-                        <h3>Receba o Material Completo</h3>
+                        <h3>Receba o Material</h3>
                         
                         <form action="${this.formAction}" method="POST">
                             <input type="hidden" name="_next" value="${whatsappRedirect}">
@@ -131,7 +142,7 @@ class ContactPopup extends HTMLElement {
                             
                             <input type="hidden" name="Produto_Pagina" id="inputPage" value="">
                             <input type="hidden" name="Botao_Clicado" id="inputAction" value="">
-                            <input type="hidden" name="Resumo" id="inputMessage" value="">
+                            <input type="hidden" name="Resumo_Lead" id="inputMessage" value="">
 
                             <div class="form-group">
                                 <label>Seu Nome</label>

@@ -13,75 +13,33 @@ class FloatingActions extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
-                    position: fixed;
-                    bottom: 2rem;
-                    right: 2rem;
-                    z-index: 9000;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    gap: 10px;
+                    position: fixed; bottom: 2rem; right: 2rem; z-index: 9000;
+                    display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
                     font-family: 'Manrope', sans-serif;
                 }
-
-                /* Botão Isca (Tabela) */
                 .bait-btn {
-                    background: #fff;
-                    color: #000;
-                    padding: 10px 20px;
-                    border-radius: 50px;
-                    font-weight: 700;
-                    font-size: 0.9rem;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    text-decoration: none;
-                    animation: pulse 3s infinite;
+                    background: #fff; color: #000; padding: 10px 20px; border-radius: 50px;
+                    font-weight: 700; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                    cursor: pointer; display: flex; align-items: center; gap: 8px;
+                    text-decoration: none; animation: pulse 3s infinite;
                     border: 1px solid var(--color-highlight, #FF6F61);
                 }
+                .bait-btn:hover { transform: scale(1.05); background: var(--color-highlight, #FF6F61); color: #fff; }
                 
-                .bait-btn:hover {
-                    transform: scale(1.05);
-                    background: var(--color-highlight, #FF6F61);
-                    color: #fff;
-                }
-
                 @keyframes pulse {
                     0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
                     70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
                     100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
                 }
 
-                /* Botão WhatsApp (Principal) */
                 .fab {
-                    width: 60px;
-                    height: 60px;
-                    background-color: #25d366;
-                    border-radius: 50%;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    transition: transform 0.3s ease;
-                    text-decoration: none;
-                    color: white;
-                    font-size: 30px;
+                    width: 60px; height: 60px; background-color: #25d366; border-radius: 50%;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center;
+                    justify-content: center; cursor: pointer; transition: transform 0.3s ease;
+                    text-decoration: none; color: white;
                 }
-
-                .fab:hover {
-                    transform: scale(1.1);
-                    background-color: #20ba5a;
-                }
-
-                .fab svg {
-                    width: 32px;
-                    height: 32px;
-                    fill: currentColor;
-                }
+                .fab:hover { transform: scale(1.1); background-color: #20ba5a; }
+                .fab svg { width: 32px; height: 32px; fill: currentColor; }
 
                 @media (max-width: 768px) {
                     :host { bottom: 1.5rem; right: 1.5rem; }
@@ -102,18 +60,15 @@ class FloatingActions extends HTMLElement {
     }
 
     addEvents() {
-        // O botão Tabela abre o Form
         this.shadowRoot.getElementById('baitTrigger').onclick = () => {
             window.dispatchEvent(new CustomEvent('open-contact-popup', {
                 detail: { type: 'lead_magnet', message: 'Interesse em Baixar Tabela de Preços' }
             }));
         };
 
-        // O botão WhatsApp abre o Form também (mas a pessoa pode clicar em "WhatsApp Direto" lá dentro se quiser)
-        // Isso força a pessoa a ver o form antes. Se preferir direto, mude abaixo para window.open no link do whats.
         this.shadowRoot.getElementById('waTrigger').onclick = () => {
             window.dispatchEvent(new CustomEvent('open-contact-popup', {
-                detail: { type: 'general', message: 'Olá, gostaria de atendimento.' }
+                detail: { type: 'general', message: 'Botão Flutuante do WhatsApp' }
             }));
         };
     }
