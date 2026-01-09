@@ -4,10 +4,8 @@ class ContactPopup extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.masterNumber = "5511957800534"; 
         this.formAction = "https://formsubmit.co/meuapetem@gmail.com";
-        
-        // --- CONFIGURAÇÃO FINAL DO GOOGLE ADS ---
         this.googleAdsId = "AW-17794513059"; 
-        this.conversionLabel = "w2ExCN2Ust8bEKPxiqVC"; // Label inserido com sucesso!
+        this.conversionLabel = "w2ExCN2Ust8bEKPxiqVC";
     }
 
     connectedCallback() {
@@ -17,11 +15,9 @@ class ContactPopup extends HTMLElement {
 
         window.addEventListener('open-contact-popup', (e) => {
             const data = e.detail || {};
-            
-            // Lógica para pegar o nome do imóvel
             let pageTitle = document.title.split('|')[0].trim();
             const currentContext = data.project || pageTitle;
-            const actionSource = data.message || 'Botão Flutuante';
+            const actionSource = data.message || 'Contato Geral';
 
             const inputPage = this.shadowRoot.getElementById('inputPage');
             const inputAction = this.shadowRoot.getElementById('inputAction');
@@ -52,8 +48,6 @@ class ContactPopup extends HTMLElement {
         phoneInput.addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 11) value = value.slice(0, 11);
-            
-            // Formata Celular (11) 91234-5678 ou Fixo (11) 1234-5678
             if (value.length > 10) {
                 value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
             } else if (value.length > 6) {
@@ -65,15 +59,10 @@ class ContactPopup extends HTMLElement {
         });
     }
 
-    // Dispara o evento para o Google quando o formulário é enviado
     trackConversion() {
         if (typeof gtag === 'function') {
             const fullTag = `${this.googleAdsId}/${this.conversionLabel}`;
-            console.log('Disparando conversão Google Ads:', fullTag);
-            gtag('event', 'conversion', { 
-                'send_to': fullTag,
-                'event_callback': () => console.log('Conversão registrada!')
-            });
+            gtag('event', 'conversion', { 'send_to': fullTag });
         }
     }
 
@@ -82,30 +71,27 @@ class ContactPopup extends HTMLElement {
         const name = this.getAttribute('name') || 'MeuApêTem';
         const creci = this.getAttribute('creci') || 'CRECI 315675';
         
-        // Redireciona para o WhatsApp DEPOIS do e-mail
-        const whatsappRedirect = `https://wa.me/${this.masterNumber}?text=Ol%C3%A1%2C+j%C3%A1+enviei+meus+dados+no+site+e+aguardo+a+tabela.`;
+        // Mensagem mais natural para o cliente iniciar a conversa
+        const whatsappRedirect = `https://wa.me/${this.masterNumber}?text=Ol%C3%A1%2C+gostaria+de+saber+os+valores+e+disponibilidade+de+unidades.`;
 
         this.shadowRoot.innerHTML = `
             <style>
                 :host { display: block; --accent: var(--color-highlight, #FF6F61); font-family: 'Manrope', sans-serif; }
                 .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: all 0.3s ease; }
                 .overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
-                
                 .modal { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.1); width: 90%; max-width: 850px; display: grid; grid-template-columns: 1fr 1.5fr; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.4s ease; }
                 .overlay.active .modal { transform: translateY(0); }
-
-                /* Lado Esquerdo */
                 .broker-col { background: #111; padding: 3rem 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-right: 1px solid #222; }
                 .photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); margin-bottom: 1.5rem; }
                 .name { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: #fff; margin: 0; }
                 .creci { color: #666; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem; }
+                
+                /* Lista de Benefícios atualizada para VENDAS */
                 .benefit-list { text-align: left; color: #999; font-size: 0.9rem; list-style: none; padding: 0; }
-                .benefit-list li { margin-bottom: 0.8rem; }
-                
-                /* Lado Direito (Formulário) */
+                .benefit-list li { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
+                .benefit-list li span { color: var(--accent); font-weight: bold; }
+
                 .form-col { padding: 3rem; position: relative; }
-                
-                /* Botão Fechar (Corrigido para ficar dentro da coluna relativa) */
                 .close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #777; font-size: 2rem; line-height: 1; cursor: pointer; z-index: 10; transition: 0.2s; }
                 .close-btn:hover { color: #fff; transform: rotate(90deg); }
 
@@ -135,16 +121,17 @@ class ContactPopup extends HTMLElement {
                         <h3 class="name">${name}</h3>
                         <span class="creci">${creci}</span>
                         <ul class="benefit-list">
-                            <li>✓ Tabela de Preços (PDF)</li>
-                            <li>✓ Plantas em Alta Resolução</li>
-                            <li>✓ Tour Virtual Exclusivo</li>
+                            <li><span>✓</span> Disponibilidade de Unidades</li>
+                            <li><span>✓</span> Condições de Pagamento</li>
+                            <li><span>✓</span> Agendamento de Visita</li>
                         </ul>
                     </div>
                     
                     <div class="form-col">
                         <button class="close-btn" id="close">×</button>
                         
-                        <h3>Acessar Material Completo</h3>
+                        <h3>Consultar Valores</h3>
+                        <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">Preencha para receber atendimento exclusivo sobre as unidades disponíveis.</p>
                         
                         <form action="${this.formAction}" method="POST">
                             <input type="hidden" name="_next" value="${whatsappRedirect}">
@@ -164,11 +151,11 @@ class ContactPopup extends HTMLElement {
                                 <input type="tel" name="phone" id="phoneInput" required placeholder="(11) 99999-9999" maxlength="15">
                             </div>
 
-                            <button type="submit" class="btn-submit">Enviar e Acessar Material</button>
+                            <button type="submit" class="btn-submit">Ver Disponibilidade</button>
                         </form>
 
                         <div class="alt-action">
-                            Prefere falar agora? <a href="https://wa.me/${this.masterNumber}" target="_blank">Clique para WhatsApp Direto</a>
+                            Prefere ligar? <a href="tel:${this.masterNumber}" target="_blank">Ligar Agora</a>
                         </div>
                     </div>
                 </div>
@@ -177,17 +164,14 @@ class ContactPopup extends HTMLElement {
     }
 
     addEvents() {
-        // Evento de Fechar no X
         const closeBtn = this.shadowRoot.getElementById('close');
         if(closeBtn) closeBtn.onclick = () => this.close();
         
-        // Evento de Fechar no Overlay (fundo escuro)
         const overlay = this.shadowRoot.getElementById('overlay');
         if(overlay) overlay.onclick = (e) => { 
             if (e.target.id === 'overlay') this.close(); 
         };
 
-        // Dispara a conversão ao enviar o formulário
         const form = this.shadowRoot.querySelector('form');
         if(form) {
             form.addEventListener('submit', () => {
