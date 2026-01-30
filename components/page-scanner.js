@@ -2,14 +2,6 @@ class PageScanner extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-
-        // LISTA EXATA DOS ARQUIVOS NA PASTA PROJECTS
-        this.projectFiles = [
-            'quarten.html',
-            'granoscar.html',
-            'elevButanta.html',
-            'elevSacoma.html'
-        ];
     }
 
     async connectedCallback() {
@@ -18,12 +10,15 @@ class PageScanner extends HTMLElement {
             return;
         }
 
-        const currentFile = window.location.pathname.split('/').pop();
         const categorySlot = this.querySelector('[slot="category"]');
         const filterCategory = categorySlot ? categorySlot.textContent.trim() : (this.getAttribute('category') || null);
+        const dataSource = this.getAttribute('data-src');
 
         // Verifica se estamos na Home ou numa página interna
         const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+        const isProjectPage = window.location.pathname.includes('/projects/');
+        const assetPrefix = isProjectPage ? '../' : './';
+        const dataPath = dataSource || (isProjectPage ? '../data/projects.json' : 'data/projects.json');
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -70,61 +65,50 @@ class PageScanner extends HTMLElement {
         }
 
         let foundCount = 0;
+        let hasError = false;
 
-        for (const file of this.projectFiles) {
-            // Pula o próprio arquivo se estiver dentro dele
-            if (file === currentFile) continue;
+        try {
+            const response = await fetch(dataPath);
+            if (!response.ok) throw new Error('404');
 
-            try {
-                // Define o caminho para buscar o arquivo
-                const pathPrefix = isHome ? 'projects/' : './';
+            const projects = await response.json();
+            const normalizedFilter = filterCategory ? filterCategory.toLowerCase() : null;
 
-                const response = await fetch(pathPrefix + file);
-                if (!response.ok) throw new Error('404');
+            projects.forEach(project => {
+                const category = (project.category || '').toLowerCase();
+                if (normalizedFilter && category !== normalizedFilter) return;
 
-                const htmlText = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
+                const title = project.title || 'Projeto';
+                const vibe = project.vibe || 'Ver Projeto';
+                const tags = Array.isArray(project.tags) ? project.tags : [];
+                const image = project.image ? `${assetPrefix}${project.image}` : '';
+                const link = project.path ? `${assetPrefix}${project.path}` : '#';
 
-                const category = doc.querySelector('meta[name="product-category"]')?.content;
+                const card = document.createElement('project-card');
+                const tagMarkup = tags
+                    .filter(Boolean)
+                    .map(tag => `<span class="tag" slot="tags">${tag.trim()}</span>`)
+                    .join('');
+                card.innerHTML = `
+                    <img slot="image" src="${image}" alt="${title}" loading="lazy">
+                    <span slot="price">Conhecer</span>
+                    <span slot="vibe">${vibe}</span>
+                    <h3 slot="title">${title}</h3>
+                    ${tagMarkup}
+                    <a slot="link" href="${link}"></a>
+                    <span slot="link-text">Me mostre este apê</span>
+                `;
 
-                if (category === filterCategory) {
-                    const title = doc.querySelector('title').innerText.split('|')[0].trim();
-                    const vibe = doc.querySelector('meta[name="product-vibe"]')?.content || 'Ver Projeto';
-                    const tags = doc.querySelector('meta[name="product-tags"]')?.content || '';
-
-                    // Ajuste inteligente de imagem
-                    let image = doc.querySelector('meta[property="og:image"]')?.content;
-                    if (image && isHome) {
-                        // Se estou na home, '../media' vira './media'
-                        image = image.replace('../media', './media');
-                    }
-
-                    const card = document.createElement('project-card');
-                    const tagMarkup = tags.split(',')
-                        .filter(Boolean)
-                        .map(tag => `<span class="tag" slot="tags">${tag.trim()}</span>`)
-                        .join('');
-                    card.innerHTML = `
-                        <img slot="image" src="${image}" alt="${title}" loading="lazy">
-                        <span slot="price">Conhecer</span>
-                        <span slot="vibe">${vibe}</span>
-                        <h3 slot="title">${title}</h3>
-                        ${tagMarkup}
-                        <a slot="link" href="${pathPrefix + file}"></a>
-                        <span slot="link-text">Me mostre este apê</span>
-                    `;
-
-                    grid.appendChild(card);
-                    foundCount++;
-                }
-
-            } catch (err) {
-                console.warn(`Erro ao ler ${file}:`, err);
-            }
+                grid.appendChild(card);
+                foundCount++;
+            });
+        } catch (err) {
+            console.warn(`Erro ao ler ${dataPath}:`, err);
+            grid.innerHTML = '<div class="error-msg">⚠️ Não foi possível carregar a vitrine de projetos.</div>';
+            hasError = true;
         }
 
-        if (foundCount === 0) {
+        if (!hasError && foundCount === 0) {
             this.style.display = 'none'; // Esconde a seção se não achar nada
         }
     }

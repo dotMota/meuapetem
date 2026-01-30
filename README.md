@@ -154,15 +154,16 @@ Para lançar um novo prédio (ex: "Gran Cipresso"), siga este passo a passo:
 
 1.  **Mídia:** Crie a pasta `media/gran-cipresso/` e faça upload das imagens otimizadas (preferencialmente `.webp`).
 2.  **Página:** Duplique o arquivo `projects/template.html` (ou um existente como `quarten.html`) e renomeie para `gran-cipresso.html`.
-3.  **Identidade:** No `<style>` do novo arquivo, altere as cores no `:root`:
+3.  **Manifesto:** Abra `painel-projetos.html`, gere o bloco JSON e cole a nova entrada em `data/projects.json`.
+4.  **Identidade:** No `<style>` do novo arquivo, altere as cores no `:root`:
     ```css
     :root {
         --accent-color: #2E8B57; /* Verde Cipresso */
         --bg-dark: #121212;
     }
     ```
-4.  **Conteúdo:** Atualize os caminhos das imagens (apontando para `../media/gran-cipresso/...`) e os textos dentro dos slots.
-5.  **Deploy:** Faça o commit e push para a branch `main`. O GitHub Pages atualizará o site automaticamente em poucos minutos.
+5.  **Conteúdo:** Atualize os caminhos das imagens (apontando para `../media/gran-cipresso/...`) e os textos dentro dos slots.
+6.  **Deploy:** Faça o commit e push para a branch `main`. O GitHub Pages atualizará o site automaticamente em poucos minutos.
 
 ---
 

@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Quarten Ibirapuera",
+    "path": "projects/quarten.html",
+    "category": "rare",
+    "vibe": "Refúgio Urbano",
+    "tags": ["Bosque Privativo", "Wellness"],
+    "image": "media/Quarten_Ibirapuera/fachadas/detalhe_fachada.webp"
+  },
+  {
+    "title": "Granoscar Ibirapuera",
+    "path": "projects/granoscar.html",
+    "category": "rare",
+    "vibe": "Ícone do Ibirapuera",
+    "tags": ["Perkins&Will", "Hanazaki"],
+    "image": "media/Granoscar_Ibirapuera/fachadas/granoscar_ibirapuera.webp"
+  },
+  {
+    "title": "Elev Butantã",
+    "path": "projects/elevButanta.html",
+    "category": "smart",
+    "vibe": "Metrô na Porta",
+    "tags": ["4 Passos do Metrô", "USP"],
+    "image": "media/Elev_Butant/fachadas/elev_butanta.webp"
+  },
+  {
+    "title": "Elev Park Sacomã",
+    "path": "projects/elevSacoma.html",
+    "category": "smart",
+    "vibe": "Parque Privativo",
+    "tags": ["Sacomã", "Metrô", "Lazer de Clube"],
+    "image": "media/Elev-Park-Sacom/area_comum/voo.webp"
+  }
+]

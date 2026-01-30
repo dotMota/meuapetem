@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Projetos | MeuApêTem</title>
+
+    <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --color-highlight: #FF6F61;
+            --bg-page-body: #0a0a0a;
+            --bg-section-main: #141414;
+            --color-text-primary: #F5F5F7;
+            --color-text-secondary: #A1A1AA;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-text: 'Manrope', sans-serif;
+            --highlight-color: var(--color-highlight);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-page-body);
+            color: var(--color-text-primary);
+            font-family: var(--font-text);
+        }
+
+        header {
+            padding: 3rem 6%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: radial-gradient(circle at top, rgba(255, 111, 97, 0.2), transparent 60%);
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            margin: 0 0 0.5rem;
+            font-size: 2.6rem;
+        }
+
+        p {
+            margin: 0;
+            color: var(--color-text-secondary);
+        }
+
+        main {
+            padding: 3rem 6% 5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        section {
+            background: var(--bg-section-main);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        section h2 {
+            font-family: var(--font-title);
+            margin-top: 0;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.2rem;
+        }
+
+        input,
+        select,
+        textarea {
+            background: #0f0f0f;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 0.7rem 0.9rem;
+            color: var(--color-text-primary);
+            font-family: var(--font-text);
+            resize: vertical;
+        }
+
+        textarea {
+            min-height: 140px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 999px;
+            padding: 0.8rem 1.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--color-highlight);
+            color: #111;
+        }
+
+        button.secondary {
+            background: transparent;
+            color: var(--color-text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .helper {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin-top: -0.6rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .json-output {
+            background: #0f0f0f;
+            border-radius: 14px;
+            padding: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            color: #dcdcdc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-card {
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+    </style>
+
+    <script src="./components/project-card.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Painel de Projetos</h1>
+        <p>Modelo enxuto para adicionar novos projetos em <strong>data/projects.json</strong>.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Cadastro rápido</h2>
+            <label>
+                Nome do projeto
+                <input type="text" id="title" placeholder="Ex: Aurora Paulista" value="Aurora Paulista">
+            </label>
+            <label>
+                Caminho do arquivo
+                <input type="text" id="path" placeholder="projects/aurora.html" value="projects/aurora.html">
+            </label>
+            <label>
+                Categoria
+                <select id="category">
+                    <option value="rare">Rare (Alto Padrão)</option>
+                    <option value="smart">Smart (Econômicos)</option>
+                </select>
+            </label>
+            <label>
+                Vibe / Frase curta
+                <input type="text" id="vibe" placeholder="Ex: Rooftop 360º" value="Rooftop 360º">
+            </label>
+            <label>
+                Tags (separadas por vírgula)
+                <input type="text" id="tags" placeholder="Ex: Metrô, Coworking" value="Metrô, Coworking">
+            </label>
+            <label>
+                Imagem destaque
+                <input type="text" id="image" placeholder="media/projeto/fachada.webp" value="media/projeto/fachada.webp">
+            </label>
+            <div class="actions">
+                <button id="generate">Gerar JSON</button>
+                <button class="secondary" id="copy">Copiar JSON</button>
+            </div>
+            <p class="footer-note">Depois de copiar, cole o bloco no arquivo <strong>data/projects.json</strong> mantendo a lista em ordem.</p>
+        </section>
+
+        <section>
+            <h2>Preview do card</h2>
+            <div class="preview-card" id="preview"></div>
+        </section>
+
+        <section>
+            <h2>Saída pronta</h2>
+            <p class="helper">Cole este bloco no manifesto para que o projeto apareça automaticamente.</p>
+            <pre class="json-output" id="output"></pre>
+        </section>
+    </main>
+
+    <script>
+        const fields = {
+            title: document.getElementById('title'),
+            path: document.getElementById('path'),
+            category: document.getElementById('category'),
+            vibe: document.getElementById('vibe'),
+            tags: document.getElementById('tags'),
+            image: document.getElementById('image')
+        };
+
+        const output = document.getElementById('output');
+        const preview = document.getElementById('preview');
+
+        const buildEntry = () => {
+            const tagsArray = fields.tags.value
+                .split(',')
+                .map(tag => tag.trim())
+                .filter(Boolean);
+
+            return {
+                title: fields.title.value.trim(),
+                path: fields.path.value.trim(),
+                category: fields.category.value,
+                vibe: fields.vibe.value.trim(),
+                tags: tagsArray,
+                image: fields.image.value.trim()
+            };
+        };
+
+        const render = () => {
+            const entry = buildEntry();
+            output.textContent = JSON.stringify(entry, null, 2);
+
+            preview.innerHTML = `
+                <project-card>
+                    <img slot="image" src="./${entry.image}" alt="${entry.title}" loading="lazy">
+                    <span slot="price">Conhecer</span>
+                    <span slot="vibe">${entry.vibe}</span>
+                    <h3 slot="title">${entry.title}</h3>
+                    ${entry.tags.map(tag => `<span class="tag" slot="tags">${tag}</span>`).join('')}
+                    <a slot="link" href="./${entry.path}"></a>
+                    <span slot="link-text">Me mostre este apê</span>
+                </project-card>
+            `;
+        };
+
+        document.getElementById('generate').addEventListener('click', (event) => {
+            event.preventDefault();
+            render();
+        });
+
+        document.getElementById('copy').addEventListener('click', (event) => {
+            event.preventDefault();
+            render();
+            navigator.clipboard.writeText(output.textContent);
+        });
+
+        Object.values(fields).forEach(field => {
+            field.addEventListener('input', render);
+        });
+
+        render();
+    </script>
+</body>
+
+</html>
