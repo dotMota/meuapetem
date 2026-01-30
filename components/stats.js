@@ -9,6 +9,19 @@ class StatItem extends HTMLElement {
         const number = this.getAttribute('number') || '';
         const label = this.getAttribute('label') || '';
 
+        if (number && !this.querySelector('[slot="number"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'number');
+            span.textContent = number;
+            this.appendChild(span);
+        }
+        if (label && !this.querySelector('[slot="label"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'label');
+            span.textContent = label;
+            this.appendChild(span);
+        }
+
         this.shadowRoot.innerHTML = `
             <style>
                 :host { display: block; transition: transform 0.3s ease; text-align: center; }
@@ -32,8 +45,8 @@ class StatItem extends HTMLElement {
                 }
             </style>
             
-            <span class="number">${number}</span>
-            <span class="label">${label}</span>
+            <span class="number"><slot name="number"></slot></span>
+            <span class="label"><slot name="label"></slot></span>
         `;
     }
 }

@@ -9,6 +9,26 @@ class VideoSection extends HTMLElement {
         const src = this.getAttribute('src') || '';
         const title = this.getAttribute('title') || 'Assista ao Filme';
 
+        if (cover && !this.querySelector('[slot="cover"]')) {
+            const img = document.createElement('img');
+            img.setAttribute('slot', 'cover');
+            img.src = cover;
+            img.alt = title;
+            this.appendChild(img);
+        }
+        if (title && !this.querySelector('[slot="title"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'title');
+            span.textContent = title;
+            this.appendChild(span);
+        }
+        if (src && !this.querySelector('[slot="source"]')) {
+            const a = document.createElement('a');
+            a.setAttribute('slot', 'source');
+            a.href = src;
+            this.appendChild(a);
+        }
+
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -44,7 +64,7 @@ class VideoSection extends HTMLElement {
                 }
 
                 /* A CAPA (FOTO) */
-                .poster {
+                .poster, ::slotted([slot="cover"]) {
                     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
                     object-fit: cover; 
                     z-index: 1; 
@@ -75,7 +95,7 @@ class VideoSection extends HTMLElement {
                 .play-btn:hover svg { fill: #000; }
 
                 /* TÍTULO */
-                .label {
+                .label, ::slotted([slot="title"]) {
                     position: absolute; bottom: 2rem; color: #fff;
                     font-family: var(--font); 
                     letter-spacing: 3px; text-transform: uppercase;
@@ -108,17 +128,20 @@ class VideoSection extends HTMLElement {
             </style>
 
             <div class="wrapper">
-                <img src="${cover}" class="poster" alt="Capa do Vídeo">
+                <slot name="cover"></slot>
 
                 <div class="play-btn" id="playBtn">
                     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
-                <span class="label">${title}</span>
+                <slot name="title"></slot>
 
                 <div class="video-container" id="videoContainer"></div>
             </div>
+            <slot name="source" hidden></slot>
         `;
 
+        const sourceSlot = this.querySelector('[slot="source"]');
+        const src = sourceSlot?.getAttribute('href') || '';
         this.initLogic(src);
     }
 

@@ -1,8 +1,6 @@
 class RegionSection extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); this.mapInitialized = false; }
 
-    static get observedAttributes() { return ['lat', 'lng', 'pois']; }
-
     connectedCallback() { this.render(); }
 
     render() {
@@ -10,6 +8,50 @@ class RegionSection extends HTMLElement {
         const highlight = this.getAttribute('highlight') || '';
         const title = this.getAttribute('title') || '';
         const text = this.getAttribute('text') || '';
+        const lat = this.getAttribute('lat');
+        const lng = this.getAttribute('lng');
+        const zoom = this.getAttribute('zoom');
+        const pois = this.getAttribute('pois');
+
+        if (bgImage && !this.querySelector('[slot="image"]')) {
+            const img = document.createElement('img');
+            img.setAttribute('slot', 'image');
+            img.src = bgImage;
+            img.alt = 'Mapa';
+            this.appendChild(img);
+        }
+        if (highlight && !this.querySelector('[slot="highlight"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'highlight');
+            span.textContent = highlight;
+            this.appendChild(span);
+        }
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h2 = document.createElement('h2');
+            h2.setAttribute('slot', 'title');
+            h2.textContent = title;
+            this.appendChild(h2);
+        }
+        if (text && !this.querySelector('[slot="text"]')) {
+            const p = document.createElement('p');
+            p.setAttribute('slot', 'text');
+            p.textContent = text;
+            this.appendChild(p);
+        }
+        if ((lat || lng || zoom || pois) && !this.querySelector('[slot="map-data"]')) {
+            let parsedPois = [];
+            try { parsedPois = pois ? JSON.parse(pois) : []; } catch (e) { parsedPois = []; }
+            const script = document.createElement('script');
+            script.type = 'application/json';
+            script.setAttribute('slot', 'map-data');
+            script.textContent = JSON.stringify({
+                lat: lat ? parseFloat(lat) : undefined,
+                lng: lng ? parseFloat(lng) : undefined,
+                zoom: zoom ? parseInt(zoom, 10) : undefined,
+                pois: parsedPois
+            });
+            this.appendChild(script);
+        }
 
         this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -31,7 +73,7 @@ class RegionSection extends HTMLElement {
                     transition: opacity 1s ease, visibility 1s ease;
                     display: flex; align-items: flex-end; justify-content: flex-end; padding: 5%; box-sizing: border-box;
                 }
-                .cover-bg {
+                .cover-bg, ::slotted([slot="image"]) {
                     position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
                     object-fit: cover;
                     /* --- AJUSTE SOLICITADO --- */
@@ -50,9 +92,9 @@ class RegionSection extends HTMLElement {
                 :host(.map-active) .cover { opacity: 0; visibility: hidden; pointer-events: none; }
                 :host(.map-active) .info-card { transform: translateY(50px); opacity: 0; }
                 
-                .hl { color: var(--accent); font-family: var(--font-text, sans-serif); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 1rem; }
-                .tt { font-family: var(--font-title, serif); font-size: 2.5rem; margin: 0 0 1rem 0; line-height: 1.1; color: var(--txt-main); }
-                .txt { font-family: var(--font-text, sans-serif); color: var(--txt-sec); font-size: 1rem; line-height: 1.6; font-weight: 300; display: block; }
+                .hl, ::slotted([slot="highlight"]) { color: var(--accent); font-family: var(--font-text, sans-serif); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 1rem; }
+                .tt, ::slotted([slot="title"]) { font-family: var(--font-title, serif); font-size: 2.5rem; margin: 0 0 1rem 0; line-height: 1.1; color: var(--txt-main); }
+                .txt, ::slotted([slot="text"]) { font-family: var(--font-text, sans-serif); color: var(--txt-sec); font-size: 1rem; line-height: 1.6; font-weight: 300; display: block; }
                 
                 .btn-line {
                     display: inline-block; margin-top: 2rem; text-transform: uppercase; letter-spacing: 2px;
@@ -81,14 +123,15 @@ class RegionSection extends HTMLElement {
 
             <div id="map-container"></div>
             <div class="cover">
-                <img src="${bgImage}" class="cover-bg" alt="Mapa">
+                <slot name="image"></slot>
                 <div class="info-card">
-                    <span class="hl">${highlight}</span>
-                    <h2 class="tt">${title}</h2>
-                    <p class="txt">${text}</p>
+                    <slot name="highlight"></slot>
+                    <slot name="title"></slot>
+                    <slot name="text"></slot>
                     <a class="btn-line" id="btnExplorar">Explorar Vizinhança</a>
                 </div>
             </div>
+            <slot name="map-data" hidden></slot>
         `;
         this.shadowRoot.getElementById('btnExplorar').addEventListener('click', () => this.activateMap());
     }
@@ -110,12 +153,19 @@ class RegionSection extends HTMLElement {
         if (this.mapInitialized) return;
         this.mapInitialized = true;
 
-        const lat = parseFloat(this.getAttribute('lat')) || -23.5505;
-        const lng = parseFloat(this.getAttribute('lng')) || -46.6333;
-        const zoom = parseInt(this.getAttribute('zoom')) || 15;
+        const mapDataSlot = this.querySelector('[slot="map-data"]');
+        let mapData = {};
+        try {
+            mapData = mapDataSlot ? JSON.parse(mapDataSlot.textContent) : {};
+        } catch (e) {
+            mapData = {};
+        }
+        const lat = parseFloat(mapData.lat) || -23.5505;
+        const lng = parseFloat(mapData.lng) || -46.6333;
+        const zoom = parseInt(mapData.zoom) || 15;
 
         let pois = [];
-        try { pois = JSON.parse(this.getAttribute('pois') || '[]'); } catch (e) { }
+        try { pois = Array.isArray(mapData.pois) ? mapData.pois : []; } catch (e) { }
 
         const mapContainer = this.shadowRoot.getElementById('map-container');
         const map = L.map(mapContainer, { center: [lat, lng], zoom: zoom, zoomControl: false, scrollWheelZoom: false });

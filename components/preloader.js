@@ -5,7 +5,15 @@ class SitePreloader extends HTMLElement {
     }
 
     connectedCallback() {
-        const project = this.getAttribute('project');
+        const projectAttr = this.getAttribute('project') || '';
+        if (projectAttr && !this.querySelector('[slot="project"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'project');
+            span.textContent = projectAttr;
+            this.appendChild(span);
+        }
+        const projectSlot = this.querySelector('[slot="project"]');
+        const project = projectSlot ? projectSlot.textContent.trim() : '';
 
         // Lógica de Exibição
         const contentHtml = project

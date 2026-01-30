@@ -10,6 +10,31 @@ class CtaBanner extends HTMLElement {
         const btnText = this.getAttribute('btn-text') || 'Fale Conosco';
         const link = this.getAttribute('link') || '#';
 
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h3 = document.createElement('h3');
+            h3.setAttribute('slot', 'title');
+            h3.textContent = title;
+            this.appendChild(h3);
+        }
+        if (text && !this.querySelector('[slot="text"]')) {
+            const p = document.createElement('p');
+            p.setAttribute('slot', 'text');
+            p.textContent = text;
+            this.appendChild(p);
+        }
+        if (btnText && !this.querySelector('[slot="button-text"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'button-text');
+            span.textContent = btnText;
+            this.appendChild(span);
+        }
+        if (link && !this.querySelector('[slot="link"]')) {
+            const a = document.createElement('a');
+            a.setAttribute('slot', 'link');
+            a.href = link;
+            this.appendChild(a);
+        }
+
         this.shadowRoot.innerHTML = `
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
@@ -39,7 +64,7 @@ class CtaBanner extends HTMLElement {
                 min-width: 300px;
             }
 
-            h3 {
+            h3, ::slotted([slot="title"]) {
                 font-family: var(--font-title, 'Space Grotesk', sans-serif);
                 font-size: 2rem;
                 margin: 0 0 1rem 0;
@@ -48,7 +73,7 @@ class CtaBanner extends HTMLElement {
                 line-height: 1.2;
             }
 
-            p {
+            p, ::slotted([slot="text"]) {
                 font-family: var(--font-text, sans-serif);
                 font-size: 1.1rem;
                 margin: 0;
@@ -58,7 +83,7 @@ class CtaBanner extends HTMLElement {
             }
 
             /* Botão */
-            .btn {
+            .btn, ::slotted([slot="button-text"]) {
                 background: #000;
                 color: #fff;
                 padding: 18px 40px;
@@ -110,18 +135,23 @@ class CtaBanner extends HTMLElement {
 
         <div class="container">
             <div class="content">
-                <h3>${title}</h3>
-                <p>${text}</p>
+                <slot name="title"></slot>
+                <slot name="text"></slot>
             </div>
             
-            <a href="${link}" class="btn" id="ctaBtn">
-                ${btnText}
+            <a href="#" class="btn" id="ctaBtn">
+                <slot name="button-text"></slot>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
         </div>
+        <slot name="link" hidden></slot>
         `;
         // Lógica de Interceptação do Clique (Popup)
         const btn = this.shadowRoot.getElementById('ctaBtn');
+        const linkSlot = this.querySelector('[slot="link"]');
+        if (linkSlot && linkSlot.getAttribute('href')) {
+            btn.href = linkSlot.getAttribute('href');
+        }
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             // Mensagem natural para consultoria geral

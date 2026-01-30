@@ -5,7 +5,6 @@ class HeroBrand extends HTMLElement {
     }
 
     connectedCallback() {
-        const image = this.getAttribute('image') || '';
         const phrases = ["Luz Natural", "Espaço para Criar", "Silêncio para Refletir", "Alma", "História"];
 
         this.shadowRoot.innerHTML = `
@@ -118,7 +117,7 @@ class HeroBrand extends HTMLElement {
                 padding: 0 5%; max-width: 1400px; margin: 0 auto;
             }
 
-            .brand-tag {
+            .brand-tag, ::slotted([slot="tag"]) {
                 color: var(--highlight-color); font-family: var(--font-text);
                 font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
                 font-size: 0.9rem; margin-bottom: 1.5rem;
@@ -127,7 +126,7 @@ class HeroBrand extends HTMLElement {
             }
             .brand-tag::before { content: ''; width: 40px; height: 2px; background: var(--highlight-color); }
 
-            h1 {
+            h1, ::slotted([slot="title"]) {
                 font-family: var(--font-title); 
                 font-size: clamp(3.5rem, 7vw, 6rem);
                 color: #fff; line-height: 1.1; margin: 0 0 2rem 0;
@@ -144,18 +143,24 @@ class HeroBrand extends HTMLElement {
             }
             @keyframes blink { 50% { opacity: 0; } }
 
-            p {
+            p, ::slotted([slot="text"]) {
                 font-family: var(--font-text); font-size: 1.2rem; color: #e0e0e0;
                 max-width: 500px; line-height: 1.6; margin-bottom: 3rem;
                 opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
             }
 
-            .cta-group { 
+            .cta-group, ::slotted([slot="actions"]) { 
                 display: flex; gap: 20px; flex-wrap: wrap; 
                 opacity: 0; animation: fadeUp 1s ease 1.1s forwards;
             }
+            ::slotted([slot="phrases"]) { display: none; }
 
             .btn {
+                padding: 18px 40px; border-radius: 50px; font-weight: 600; text-decoration: none;
+                transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
+                font-size: 0.9rem; cursor: pointer; position: relative; overflow: hidden;
+            }
+            ::slotted(.btn) {
                 padding: 18px 40px; border-radius: 50px; font-weight: 600; text-decoration: none;
                 transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
                 font-size: 0.9rem; cursor: pointer; position: relative; overflow: hidden;
@@ -166,6 +171,11 @@ class HeroBrand extends HTMLElement {
 
             .btn-secondary { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
             .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+            ::slotted(.btn-primary) { background: var(--highlight-color); color: #000; border: 2px solid var(--highlight-color); }
+            ::slotted(.btn-primary:hover) { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3); }
+
+            ::slotted(.btn-secondary) { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+            ::slotted(.btn-secondary:hover) { border-color: #fff; background: rgba(255,255,255,0.1); }
 
             @keyframes fadeUp {
                 from { opacity: 0; transform: translateY(30px); }
@@ -187,21 +197,28 @@ class HeroBrand extends HTMLElement {
         <div class="shape shape-line"></div>
         
         <div class="content">
-            <span class="brand-tag">Curadoria Experiencial</span>
+            <slot name="tag"></slot>
             <h1>
-                MeuApêTem<br>
+                <slot name="title"></slot>
                 <span class="dynamic-wrapper">
                     <span id="typewriter" class="dynamic-text"></span><span class="cursor"></span>
                 </span>
             </h1>
-            <p>Não vendemos paredes. Facilitamos o encontro entre você e o espaço onde sua história vai acontecer.</p>
-            
+            <slot name="text"></slot>
             <div class="cta-group">
-                <a href="#portfolio" class="btn btn-primary">Encontrar meu Cenário</a>
-                <a href="#manifesto" class="btn btn-secondary">Entender a Filosofia</a>
+                <slot name="actions"></slot>
             </div>
         </div>
+        <slot name="phrases"></slot>
         `;
+
+        const phrasesSlot = this.querySelector('[slot="phrases"]');
+        if (phrasesSlot) {
+            const customPhrases = Array.from(phrasesSlot.children)
+                .map((node) => node.textContent.trim())
+                .filter(Boolean);
+            if (customPhrases.length) phrases.splice(0, phrases.length, ...customPhrases);
+        }
 
         // 1. LÓGICA DE DIGITAÇÃO (Typewriter)
         const el = this.shadowRoot.getElementById('typewriter');

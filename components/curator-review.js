@@ -6,11 +6,55 @@ class CuratorReview extends HTMLElement {
 
     connectedCallback() {
         // Dados do Projeto
-        const phrases = JSON.parse(this.getAttribute('phrases') || '["Alma", "Vida"]');
-        const curatorName = this.getAttribute('curator') || 'Equipe MeuApêTem';
-        const pros = this.getAttribute('pros') || '';
-        const cons = this.getAttribute('cons') || ''; // Transparência Radical
+        const phrases = ["Alma", "Vida"];
+        const attrPhrases = this.getAttribute('phrases');
+        const attrCurator = this.getAttribute('curator') || 'Equipe MeuApêTem';
+        const attrPros = this.getAttribute('pros') || '';
+        const attrCons = this.getAttribute('cons') || '';
 
+        if (!this.querySelector('[slot="curator-name"]') && attrCurator) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'curator-name');
+            span.textContent = attrCurator;
+            this.appendChild(span);
+        }
+        if (!this.querySelector('[slot="prefix"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'prefix');
+            span.textContent = 'Conceito do Imóvel';
+            this.appendChild(span);
+        }
+        if (!this.querySelector('[slot="avatar"]')) {
+            const img = document.createElement('img');
+            img.setAttribute('slot', 'avatar');
+            img.src = '../media/utils/perfilcrop.png';
+            img.alt = 'Curador';
+            this.appendChild(img);
+        }
+        if (!this.querySelector('[slot="pros"]') && attrPros) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'pros');
+            span.textContent = attrPros;
+            this.appendChild(span);
+        }
+        if (!this.querySelector('[slot="cons"]') && attrCons) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'cons');
+            span.textContent = attrCons;
+            this.appendChild(span);
+        }
+        if (!this.querySelector('[slot="phrases"]') && attrPhrases) {
+            let parsed = [];
+            try { parsed = JSON.parse(attrPhrases); } catch (e) { parsed = []; }
+            const container = document.createElement('div');
+            container.setAttribute('slot', 'phrases');
+            container.innerHTML = parsed.map((p) => `<span>${p}</span>`).join('');
+            this.appendChild(container);
+        }
+
+        const curatorName = this.querySelector('[slot="curator-name"]')?.textContent?.trim() || 'Equipe MeuApêTem';
+        const pros = this.querySelector('[slot="pros"]')?.textContent?.trim() || '';
+        const cons = this.querySelector('[slot="cons"]')?.textContent?.trim() || '';
         // Cores (Puxa do CSS Global ou usa padrão)
         const brandColor = 'var(--color-highlight, #c5a065)';
         const accentColor = '#FF6F61'; // Coral Vivo da Marca Mãe
@@ -73,6 +117,15 @@ class CuratorReview extends HTMLElement {
                 text-transform: uppercase;
                 letter-spacing: 3px;
             }
+            ::slotted([slot="prefix"]) {
+                font-size: 1.5rem;
+                color: #666;
+                display: block;
+                margin-bottom: 0.5rem;
+                font-family: var(--font-text, sans-serif);
+                text-transform: uppercase;
+                letter-spacing: 3px;
+            }
 
             /* Lado Direito: Transparência Radical (Review) */
             .review-card {
@@ -102,6 +155,12 @@ class CuratorReview extends HTMLElement {
             }
 
             .curator-avatar {
+                width: 50px; height: 50px;
+                border-radius: 50%;
+                background: #333;
+                object-fit: cover;
+            }
+            ::slotted([slot="avatar"]) {
                 width: 50px; height: 50px;
                 border-radius: 50%;
                 background: #333;
@@ -149,13 +208,14 @@ class CuratorReview extends HTMLElement {
                 .container { grid-template-columns: 1fr; }
                 .bg-deco { font-size: 8rem; top: 0; }
             }
+            ::slotted([slot="phrases"]) { display: none; }
         </style>
 
         <div class="bg-deco">MEUAPÊTEM</div>
 
         <div class="container">
             <div class="wordplay-area">
-                <span class="prefix">Conceito do Imóvel</span>
+                <slot name="prefix"></slot>
                 <h2>
                     MeuApêTem...<br>
                     <span class="dynamic-wrapper">
@@ -166,7 +226,7 @@ class CuratorReview extends HTMLElement {
 
             <div class="review-card">
                 <div class="curator-header">
-                    <img src="../media/utils/perfilcrop.png" alt="Curador" class="curator-avatar">
+                    <slot name="avatar"></slot>
                     <div class="curator-info">
                         <h4>${curatorName}</h4>
                         <span>Curadoria Oficial</span>
@@ -186,7 +246,16 @@ class CuratorReview extends HTMLElement {
                 </div>
             </div>
         </div>
+        <slot name="phrases"></slot>
         `;
+
+        const phrasesSlot = this.querySelector('[slot="phrases"]');
+        if (phrasesSlot) {
+            const customPhrases = Array.from(phrasesSlot.children)
+                .map((node) => node.textContent.trim())
+                .filter(Boolean);
+            if (customPhrases.length) phrases.splice(0, phrases.length, ...customPhrases);
+        }
 
         // Lógica de Digitação
         const el = this.shadowRoot.getElementById('typewriter');

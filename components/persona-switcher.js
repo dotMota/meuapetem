@@ -89,7 +89,7 @@ class PersonaSwitcher extends HTMLElement {
         // C. Marquee (Requer reinício da animação)
         const marquee = document.getElementById('marquee');
         if (marquee && d.marquee) {
-            marquee.setAttribute('text', d.marquee);
+            marquee.textContent = d.marquee;
             // Truque para reiniciar CSS animation
             const newMarquee = marquee.cloneNode(true);
             marquee.parentNode.replaceChild(newMarquee, marquee);
@@ -121,9 +121,45 @@ class PersonaSwitcher extends HTMLElement {
         const oldEl = document.getElementById(id);
         if (!oldEl) return;
 
-        // Atualiza atributos
+        const slotMap = {
+            highlight: 'highlight',
+            title: 'title',
+            text: 'text',
+            subtitle: 'subtitle',
+            'button-text': 'button-text',
+            number: 'number',
+            label: 'label',
+            desc: 'desc',
+            'extra-label': 'label-extra',
+            'extra-val': 'extra'
+        };
+
         for (const [key, value] of Object.entries(attributes)) {
-            oldEl.setAttribute(key, value);
+            if (key === 'phrases') {
+                const slot = oldEl.querySelector('[slot="phrases"]');
+                if (slot) {
+                    let phrases = [];
+                    try { phrases = JSON.parse(value); } catch (e) { phrases = []; }
+                    slot.innerHTML = phrases.map(p => `<span>${p}</span>`).join('');
+                }
+                continue;
+            }
+            if (key === 'pros' || key === 'cons') {
+                const slot = oldEl.querySelector(`[slot="${key}"]`);
+                if (slot) slot.textContent = value;
+                continue;
+            }
+            if (slotMap[key]) {
+                const slot = oldEl.querySelector(`[slot="${slotMap[key]}"]`);
+                if (slot) {
+                    slot.textContent = value;
+                }
+                if (key === 'button-text') {
+                    const btnSlot = oldEl.querySelector('[slot="button"]');
+                    if (btnSlot) btnSlot.textContent = value;
+                }
+                continue;
+            }
         }
 
         // Força re-render clonando o nó (necessário para alguns componentes redesenharem)
@@ -142,7 +178,20 @@ class PersonaSwitcher extends HTMLElement {
 
     render() {
         // Pega a configuração dos botões do atributo HTML ou usa padrão
-        const modes = JSON.parse(this.getAttribute('modes') || '[{"key":"resident","label":"Morar"},{"key":"investor","label":"Investir"}]');
+        const modesSlot = this.querySelector('[slot="modes"]');
+        const modesAttr = this.getAttribute('modes');
+        let modes = [];
+        try {
+            modes = modesSlot ? JSON.parse(modesSlot.textContent) : [];
+        } catch (e) {
+            modes = [];
+        }
+        if (!modes.length && modesAttr) {
+            try { modes = JSON.parse(modesAttr); } catch (e) { modes = []; }
+        }
+        if (!modes.length) {
+            modes = [{ key: "resident", label: "Morar" }, { key: "investor", label: "Investir" }];
+        }
 
         const buttonsHtml = modes.map(m =>
             `<button class="btn" data-mode="${m.key}">${m.label}</button>`

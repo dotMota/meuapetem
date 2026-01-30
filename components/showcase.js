@@ -11,12 +11,38 @@ class ShowcaseSection extends HTMLElement {
         const btnText = this.getAttribute('button-text') || 'Saiba Mais';
         const btnLink = this.getAttribute('button-link') || '#';
 
-        this.render(highlight, title, text, btnText, btnLink);
+        if (highlight && !this.querySelector('[slot="highlight"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'highlight');
+            span.textContent = highlight;
+            this.appendChild(span);
+        }
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h2 = document.createElement('h2');
+            h2.setAttribute('slot', 'title');
+            h2.innerHTML = title;
+            this.appendChild(h2);
+        }
+        if (text && !this.querySelector('[slot="text"]')) {
+            const p = document.createElement('p');
+            p.setAttribute('slot', 'text');
+            p.textContent = text;
+            this.appendChild(p);
+        }
+        if (btnText && !this.querySelector('[slot="button"]')) {
+            const a = document.createElement('a');
+            a.setAttribute('slot', 'button');
+            a.href = btnLink;
+            a.textContent = btnText;
+            this.appendChild(a);
+        }
+
+        this.render();
         this.initCarousel();
         this.initScrollReveal();
     }
 
-    render(hl, tt, txt, btnTxt, btnHref) {
+    render() {
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -81,11 +107,24 @@ class ShowcaseSection extends HTMLElement {
                     text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; 
                     font-weight: 600; display: block; margin-bottom: 1.5rem; 
                 }
+                ::slotted([slot="highlight"]) { 
+                    color: var(--color-hl); font-family: var(--font-p); 
+                    text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; 
+                    font-weight: 600; display: block; margin-bottom: 1.5rem; 
+                }
                 .tt { 
                     font-family: var(--font-h); font-size: 2.5rem; 
                     color: var(--color-title); margin: 0 0 1.5rem 0; line-height: 1.2; font-weight: 400; 
                 }
+                ::slotted([slot="title"]) { 
+                    font-family: var(--font-h); font-size: 2.5rem; 
+                    color: var(--color-title); margin: 0 0 1.5rem 0; line-height: 1.2; font-weight: 400; 
+                }
                 .txt { 
+                    font-family: var(--font-p); color: var(--color-txt); 
+                    line-height: 1.8; font-size: 1rem; margin-bottom: 2rem; 
+                }
+                ::slotted([slot="text"]) { 
                     font-family: var(--font-p); color: var(--color-txt); 
                     line-height: 1.8; font-size: 1rem; margin-bottom: 2rem; 
                 }
@@ -97,6 +136,13 @@ class ShowcaseSection extends HTMLElement {
                     cursor: pointer; font-family: var(--font-p); transition: color 0.3s; 
                 }
                 .btn:hover { color: var(--color-hl); }
+                ::slotted([slot="button"]) { 
+                    display: inline-block; color: var(--color-title); text-decoration: none; 
+                    text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; 
+                    padding-bottom: 5px; border-bottom: 1px solid var(--color-hl); 
+                    cursor: pointer; font-family: var(--font-p); transition: color 0.3s; 
+                }
+                ::slotted([slot="button"]:hover) { color: var(--color-hl); }
 
                 @media (max-width: 768px) {
                     :host { padding: 4rem 5%; }
@@ -115,10 +161,10 @@ class ShowcaseSection extends HTMLElement {
                 </div>
 
                 <div class="text-box">
-                    <span class="hl">${hl}</span>
-                    <h2 class="tt">${tt}</h2>
-                    <p class="txt">${txt}</p>
-                    <a class="btn" href="${btnHref}">${btnTxt}</a>
+                    <slot name="highlight"></slot>
+                    <slot name="title"></slot>
+                    <slot name="text"></slot>
+                    <slot name="button"></slot>
                 </div>
             </div>
         `;
@@ -141,10 +187,13 @@ class ShowcaseSection extends HTMLElement {
         slot.addEventListener('click', (e) => {
             const img = e.target;
             if (img && img.tagName === 'IMG') {
+                const titleSlot = this.shadowRoot.querySelector('slot[name="title"]');
+                const assignedTitle = titleSlot.assignedElements()[0];
+                const fallbackTitle = assignedTitle ? assignedTitle.textContent.trim() : '';
                 window.dispatchEvent(new CustomEvent('open-lightbox', {
                     detail: {
                         src: img.src,
-                        title: img.alt || this.getAttribute('title')
+                        title: img.alt || fallbackTitle
                     }
                 }));
             }

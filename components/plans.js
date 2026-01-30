@@ -16,6 +16,28 @@ class PlanItem extends HTMLElement {
         const extraLabel = this.getAttribute('extra-label') || '';
         const extraVal = this.getAttribute('extra-val') || '';
         const btnText = this.getAttribute('button-text') || 'Solicitar Book Digital';
+        const tabName = this.getAttribute('name') || '';
+
+        const ensureSlot = (slotName, tag, value) => {
+            if (!value || this.querySelector(`[slot="${slotName}"]`)) return;
+            const el = document.createElement(tag);
+            el.setAttribute('slot', slotName);
+            el.textContent = value;
+            this.appendChild(el);
+        };
+
+        ensureSlot('tab', 'span', tabName);
+        ensureSlot('title', 'h3', title);
+        ensureSlot('desc', 'span', desc);
+        ensureSlot('label-area', 'span', 'Área Privativa');
+        ensureSlot('area', 'span', area);
+        ensureSlot('label-dorms', 'span', 'Dormitórios');
+        ensureSlot('dorms', 'span', dorms);
+        ensureSlot('label-vagas', 'span', 'Vagas');
+        ensureSlot('vagas', 'span', vagas || '-');
+        ensureSlot('label-extra', 'span', extraLabel);
+        ensureSlot('extra', 'span', extraVal);
+        ensureSlot('button-text', 'span', btnText);
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -54,8 +76,8 @@ class PlanItem extends HTMLElement {
                 button:hover { background: var(--accent); color: #000; }
 
                 .info-box { color: var(--txt-main); }
-                .tt { font-family: var(--font-title, serif); font-size: 2.2rem; margin: 0 0 1rem 0; color: var(--txt-main); }
-                .desc { font-family: var(--font-text, sans-serif); font-size: 1rem; color: var(--txt-sec); line-height: 1.6; margin-bottom: 2.5rem; display: block; }
+                .tt, ::slotted([slot="title"]) { font-family: var(--font-title, serif); font-size: 2.2rem; margin: 0 0 1rem 0; color: var(--txt-main); }
+                .desc, ::slotted([slot="desc"]) { font-family: var(--font-text, sans-serif); font-size: 1rem; color: var(--txt-sec); line-height: 1.6; margin-bottom: 2.5rem; display: block; }
 
                 .specs-grid {
                     display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
@@ -63,17 +85,33 @@ class PlanItem extends HTMLElement {
                     padding-top: 2rem; margin-bottom: 2.5rem;
                 }
                 .spec-item { display: flex; flex-direction: column; gap: 5px; }
-                .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--txt-sec); font-family: var(--font-text, sans-serif); font-weight: 600; }
-                .val { font-family: var(--font-text, sans-serif); font-size: 1.1rem; color: var(--txt-main); font-weight: 400; }
+                .label,
+                ::slotted([slot="label"]),
+                ::slotted([slot="label-area"]),
+                ::slotted([slot="label-dorms"]),
+                ::slotted([slot="label-vagas"]),
+                ::slotted([slot="label-extra"]) {
+                    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--txt-sec);
+                    font-family: var(--font-text, sans-serif); font-weight: 600;
+                }
+                .val,
+                ::slotted([slot="value"]),
+                ::slotted([slot="dorms"]),
+                ::slotted([slot="vagas"]),
+                ::slotted([slot="extra"]) {
+                    font-family: var(--font-text, sans-serif); font-size: 1.1rem; color: var(--txt-main); font-weight: 400;
+                }
+                ::slotted([slot="area"]) { font-family: var(--font-text, sans-serif); font-size: 1.1rem; color: var(--accent); font-weight: 600; }
                 .val.gold { color: var(--accent); font-weight: 600; }
 
-                .action-btn {
+                .action-btn, ::slotted([slot="button-text"]) {
                     display: inline-block; padding-bottom: 5px; border-bottom: 1px solid var(--accent);
                     color: var(--txt-main); text-decoration: none; text-transform: uppercase;
                     letter-spacing: 2px; font-size: 0.8rem; cursor: pointer;
                     font-family: var(--font-text, sans-serif); transition: color 0.3s;
                 }
                 .action-btn:hover { color: var(--accent); }
+                ::slotted([slot="tab"]) { display: none; }
 
                 @media (max-width: 768px) {
                     .grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -95,15 +133,15 @@ class PlanItem extends HTMLElement {
                 </div>
 
                 <div class="info-box">
-                    <h3 class="tt">${title}</h3>
-                    <span class="desc">${desc}</span>
+                    <slot name="title"></slot>
+                    <slot name="desc"></slot>
                     <div class="specs-grid">
-                        <div class="spec-item"><span class="label">Área Privativa</span><span class="val gold">${area}</span></div>
-                        <div class="spec-item"><span class="label">Dormitórios</span><span class="val">${dorms}</span></div>
-                        <div class="spec-item"><span class="label">Vagas</span><span class="val">${vagas}</span></div>
-                        <div class="spec-item"><span class="label">${extraLabel}</span><span class="val">${extraVal}</span></div>
+                        <div class="spec-item"><span class="label"><slot name="label-area"></slot></span><span class="val gold"><slot name="area"></slot></span></div>
+                        <div class="spec-item"><span class="label"><slot name="label-dorms"></slot></span><span class="val"><slot name="dorms"></slot></span></div>
+                        <div class="spec-item"><span class="label"><slot name="label-vagas"></slot></span><span class="val"><slot name="vagas"></slot></span></div>
+                        <div class="spec-item"><span class="label"><slot name="label-extra"></slot></span><span class="val"><slot name="extra"></slot></span></div>
                     </div>
-                    <a class="action-btn" id="bookBtn">${btnText}</a>
+                    <a class="action-btn" id="bookBtn"><slot name="button-text"></slot></a>
                 </div>
             </div>
         `;
@@ -114,7 +152,8 @@ class PlanItem extends HTMLElement {
         this.shadowRoot.getElementById('bookBtn').onclick = () => {
             // 1. Nome do Projeto
             const section = this.closest('plans-section');
-            const project = section ? section.getAttribute('project') : 'deste empreendimento';
+            const projectSlot = section ? section.querySelector('[slot="project"]') : null;
+            const project = projectSlot ? projectSlot.textContent.trim() : 'deste empreendimento';
 
             // 2. Perfil (Só adiciona se for Elev)
             const persona = localStorage.getItem('site-persona');
@@ -127,7 +166,9 @@ class PlanItem extends HTMLElement {
             }
 
             // 3. Monta a mensagem final
-            const msg = `Olá! Estou vendo o projeto ${project}${intentString}. Gostei da planta ${title} e gostaria de receber o Book Digital.`;
+            const titleSlot = this.querySelector('[slot="title"]');
+            const planTitle = titleSlot ? titleSlot.textContent.trim() : 'esta planta';
+            const msg = `Olá! Estou vendo o projeto ${project}${intentString}. Gostei da planta ${planTitle} e gostaria de receber o Book Digital.`;
 
             window.dispatchEvent(new CustomEvent('open-contact-popup', {
                 detail: { message: msg }
@@ -157,8 +198,10 @@ class PlanItem extends HTMLElement {
         const slideWrapper = this.shadowRoot.getElementById('slideWrapper');
         slideWrapper.addEventListener('click', () => {
             if (!imgs.length) return;
+            const titleSlot = this.querySelector('[slot="title"]');
+            const planTitle = titleSlot ? titleSlot.textContent.trim() : 'Planta';
             window.dispatchEvent(new CustomEvent('open-lightbox', {
-                detail: { src: imgs[this.slideIndex].src, title: this.getAttribute('title') || 'Planta' }
+                detail: { src: imgs[this.slideIndex].src, title: planTitle }
             }));
         });
 
@@ -180,6 +223,26 @@ class PlansSection extends HTMLElement {
     render() {
         const highlight = this.getAttribute('highlight') || '';
         const title = this.getAttribute('title') || '';
+        const project = this.getAttribute('project') || '';
+
+        if (highlight && !this.querySelector('[slot="highlight"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'highlight');
+            span.textContent = highlight;
+            this.appendChild(span);
+        }
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h2 = document.createElement('h2');
+            h2.setAttribute('slot', 'title');
+            h2.textContent = title;
+            this.appendChild(h2);
+        }
+        if (project && !this.querySelector('[slot="project"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'project');
+            span.textContent = project;
+            this.appendChild(span);
+        }
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -196,8 +259,8 @@ class PlansSection extends HTMLElement {
                     flex-wrap: wrap; gap: 2rem; margin-bottom: 4rem;
                     border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2rem;
                 }
-                .hl { color: var(--accent); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; display: block; margin-bottom: 0.5rem; font-family: var(--font-text, sans-serif); }
-                .tt { font-family: var(--font-title, serif); font-size: 3rem; margin: 0; line-height: 1; font-weight: 400; color: var(--txt-main); }
+                .hl, ::slotted([slot="highlight"]) { color: var(--accent); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; display: block; margin-bottom: 0.5rem; font-family: var(--font-text, sans-serif); }
+                .tt, ::slotted([slot="title"]) { font-family: var(--font-title, serif); font-size: 3rem; margin: 0; line-height: 1; font-weight: 400; color: var(--txt-main); }
                 
                 .tabs { display: flex; gap: 2rem; }
                 button {
@@ -219,9 +282,10 @@ class PlansSection extends HTMLElement {
             </style>
             <div class="wrapper">
                 <div class="header">
-                    <div><span class="hl">${highlight}</span><h2 class="tt">${title}</h2></div>
+                    <div><slot name="highlight"></slot><slot name="title"></slot></div>
                     <div class="tabs" id="tabs"></div>
                 </div>
+                <slot name="project"></slot>
                 <slot name="content"></slot>
             </div>
         `;
@@ -236,7 +300,8 @@ class PlansSection extends HTMLElement {
             tabsDiv.innerHTML = '';
             items.forEach((item, i) => {
                 const btn = document.createElement('button');
-                btn.innerText = item.getAttribute('name');
+                const tabSlot = item.querySelector('[slot="tab"]');
+                btn.innerText = tabSlot ? tabSlot.textContent.trim() : 'Opção';
                 btn.onclick = () => {
                     this.shadowRoot.querySelectorAll('button').forEach(b => b.classList.remove('active'));
                     items.forEach(el => el.removeAttribute('active'));

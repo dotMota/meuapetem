@@ -19,7 +19,8 @@ class PageScanner extends HTMLElement {
         }
 
         const currentFile = window.location.pathname.split('/').pop();
-        const filterCategory = this.getAttribute('category'); // 'rare' ou 'smart'
+        const categorySlot = this.querySelector('[slot="category"]');
+        const filterCategory = categorySlot ? categorySlot.textContent.trim() : (this.getAttribute('category') || null);
 
         // Verifica se estamos na Home ou numa página interna
         const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
@@ -100,12 +101,19 @@ class PageScanner extends HTMLElement {
                     }
 
                     const card = document.createElement('project-card');
-                    card.setAttribute('title', title);
-                    card.setAttribute('vibe', vibe);
-                    card.setAttribute('image', image);
-                    card.setAttribute('tags', tags);
-                    card.setAttribute('link', pathPrefix + file);
-                    card.setAttribute('price', 'Conhecer');
+                    const tagMarkup = tags.split(',')
+                        .filter(Boolean)
+                        .map(tag => `<span class="tag" slot="tags">${tag.trim()}</span>`)
+                        .join('');
+                    card.innerHTML = `
+                        <img slot="image" src="${image}" alt="${title}" loading="lazy">
+                        <span slot="price">Conhecer</span>
+                        <span slot="vibe">${vibe}</span>
+                        <h3 slot="title">${title}</h3>
+                        ${tagMarkup}
+                        <a slot="link" href="${pathPrefix + file}"></a>
+                        <span slot="link-text">Me mostre este apê</span>
+                    `;
 
                     grid.appendChild(card);
                     foundCount++;

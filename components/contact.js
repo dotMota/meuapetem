@@ -67,11 +67,17 @@ class ContactPopup extends HTMLElement {
     render() {
         // --- DADOS PADRÃO CENTRALIZADOS AQUI ---
         // Se o HTML não tiver atributo, usa estes valores:
-        const photo = this.getAttribute('photo') || '../media/utils/logo-perfil.svg'; // Caminho relativo padrão
-        const name = this.getAttribute('name') || 'MeuApêTem';
-        const creci = this.getAttribute('creci') || 'CRECI 315675'; // SEU NOVO CRECI
-        const email = this.getAttribute('email') || 'meuapetem@gmail.com';
-        const phone = this.getAttribute('phone') || '11 95780-0534';
+        const photoSlot = this.querySelector('[slot="photo"]');
+        const nameSlot = this.querySelector('[slot="name"]');
+        const creciSlot = this.querySelector('[slot="creci"]');
+        const emailSlot = this.querySelector('[slot="email"]');
+        const phoneSlot = this.querySelector('[slot="phone"]');
+
+        const photo = photoSlot?.getAttribute('src') || '../media/utils/logo-perfil.svg';
+        const name = nameSlot?.textContent?.trim() || 'MeuApêTem';
+        const creci = creciSlot?.textContent?.trim() || 'CRECI 315675';
+        const email = emailSlot?.textContent?.trim() || 'meuapetem@gmail.com';
+        const phone = phoneSlot?.textContent?.trim() || '11 95780-0534';
         const phoneClean = phone.replace(/\D/g, '');
 
         this.shadowRoot.innerHTML = `

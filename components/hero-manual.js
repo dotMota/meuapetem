@@ -8,6 +8,19 @@ class HeroManual extends HTMLElement {
         const title = this.getAttribute('title') || 'Manual Start';
         const subtitle = this.getAttribute('subtitle') || '';
 
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h1 = document.createElement('h1');
+            h1.setAttribute('slot', 'title');
+            h1.innerHTML = title;
+            this.appendChild(h1);
+        }
+        if (subtitle && !this.querySelector('[slot="subtitle"]')) {
+            const p = document.createElement('p');
+            p.setAttribute('slot', 'subtitle');
+            p.textContent = subtitle;
+            this.appendChild(p);
+        }
+
         this.shadowRoot.innerHTML = `
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
@@ -50,7 +63,7 @@ class HeroManual extends HTMLElement {
                 padding: 0 5%; max-width: 1200px; margin: 0 auto;
             }
 
-            h1 {
+            h1, ::slotted([slot="title"]) {
                 font-family: 'Space Grotesk', sans-serif; 
                 font-size: clamp(3.5rem, 6vw, 5.5rem);
                 color: #fff; line-height: 1.1; margin: 0 0 1.5rem 0;
@@ -58,7 +71,7 @@ class HeroManual extends HTMLElement {
                 opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
             }
 
-            .subtitle {
+            .subtitle, ::slotted([slot="subtitle"]) {
                 font-family: 'Manrope', sans-serif; 
                 font-size: clamp(1.1rem, 1.5vw, 1.3rem); 
                 color: #A1A1AA;
@@ -83,8 +96,8 @@ class HeroManual extends HTMLElement {
         <div class="glow"></div>
         
         <div class="content">
-            <h1>${title}</h1>
-            <p class="subtitle">${subtitle}</p>
+            <slot name="title"></slot>
+            <slot name="subtitle"></slot>
         </div>
         `;
     }

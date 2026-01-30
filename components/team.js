@@ -11,6 +11,32 @@ class TeamMember extends HTMLElement {
         const text = this.getAttribute('text') || '';
         const image = this.getAttribute('image') || '';
 
+        if (role && !this.querySelector('[slot="role"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'role');
+            span.textContent = role;
+            this.appendChild(span);
+        }
+        if (name && !this.querySelector('[slot="name"]')) {
+            const h3 = document.createElement('h3');
+            h3.setAttribute('slot', 'name');
+            h3.textContent = name;
+            this.appendChild(h3);
+        }
+        if (text && !this.querySelector('[slot="text"]')) {
+            const p = document.createElement('p');
+            p.setAttribute('slot', 'text');
+            p.textContent = text;
+            this.appendChild(p);
+        }
+        if (image && !this.querySelector('[slot="image"]')) {
+            const img = document.createElement('img');
+            img.setAttribute('slot', 'image');
+            img.src = image;
+            img.alt = name;
+            this.appendChild(img);
+        }
+
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -39,7 +65,7 @@ class TeamMember extends HTMLElement {
                     justify-content: center;
                 }
 
-                .role {
+                .role, ::slotted([slot="role"]) {
                     font-size: 0.75rem; 
                     color: var(--text-color-muted, #a0a0a0); 
                     text-transform: uppercase; letter-spacing: 3px;
@@ -48,14 +74,14 @@ class TeamMember extends HTMLElement {
                     padding-left: 15px; font-family: var(--font-text, sans-serif);
                 }
 
-                .name {
+                .name, ::slotted([slot="name"]) {
                     font-size: 2.5rem; 
                     font-family: var(--font-title, serif); 
                     color: var(--highlight-color, #c5a065);
                     margin: 0 0 1.5rem 0; line-height: 1.1; font-weight: 400;
                 }
 
-                .text {
+                .text, ::slotted([slot="text"]) {
                     font-size: 1rem; 
                     color: var(--text-color, #ccc); 
                     line-height: 1.8;
@@ -74,7 +100,7 @@ class TeamMember extends HTMLElement {
                     border: 1px solid rgba(197, 160, 101, 0.2);
                 }
 
-                .member-img {
+                ::slotted([slot="image"]) {
                     width: 100%; height: 100%; 
                     object-fit: cover;
                     /* --- AJUSTE PARA PESSOAS (Foca no Rosto) --- */
@@ -85,7 +111,7 @@ class TeamMember extends HTMLElement {
                     display: block;
                 }
 
-                :host([active]) .member-img {
+                :host([active]) ::slotted([slot="image"]) {
                     filter: grayscale(0%); transform: scale(1.05);
                 }
 
@@ -99,12 +125,12 @@ class TeamMember extends HTMLElement {
 
             <div class="slide-grid">
                 <div class="info-content">
-                    <span class="role">${role}</span>
-                    <h3 class="name">${name}</h3>
-                    <p class="text">${text}</p>
+                    <slot name="role"></slot>
+                    <slot name="name"></slot>
+                    <slot name="text"></slot>
                 </div>
                 <div class="img-wrapper">
-                    <img class="member-img" src="${image}" alt="${name}">
+                    <slot name="image"></slot>
                 </div>
             </div>
         `;
@@ -132,6 +158,19 @@ class TeamSection extends HTMLElement {
         const highlight = this.getAttribute('highlight') || '';
         const title = this.getAttribute('title') || '';
 
+        if (highlight && !this.querySelector('[slot="highlight"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'highlight');
+            span.textContent = highlight;
+            this.appendChild(span);
+        }
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h2 = document.createElement('h2');
+            h2.setAttribute('slot', 'title');
+            h2.innerHTML = title;
+            this.appendChild(h2);
+        }
+
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -147,11 +186,11 @@ class TeamSection extends HTMLElement {
                     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                     padding-bottom: 2rem;
                 }
-                .hl {
+                .hl, ::slotted([slot="highlight"]) {
                     color: var(--gold); text-transform: uppercase; letter-spacing: 4px; 
                     font-size: 0.7rem; display: block; margin-bottom: 0.5rem; font-family: var(--font-text, sans-serif);
                 }
-                .tt {
+                .tt, ::slotted([slot="title"]) {
                     font-family: var(--font-title, serif); font-size: 3rem; margin: 0; 
                     color: #fff; line-height: 1.1; font-weight: 400;
                 }
@@ -186,8 +225,8 @@ class TeamSection extends HTMLElement {
 
             <div class="wrapper">
                 <div class="header">
-                    <span class="hl">${highlight}</span>
-                    <h2 class="tt">${title}</h2>
+                    <slot name="highlight"></slot>
+                    <slot name="title"></slot>
                 </div>
 
                 <div class="slides-container">

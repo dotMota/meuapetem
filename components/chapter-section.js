@@ -5,11 +5,23 @@ class ChapterSection extends HTMLElement {
     }
 
     connectedCallback() {
-        // Pega os atributos passados no HTML
-        const title = this.getAttribute('title') || '';
-        const tag = this.getAttribute('tag') || '';
         const id = this.getAttribute('id') || '';
         const isReverse = this.hasAttribute('reverse');
+        const title = this.getAttribute('title') || '';
+        const tag = this.getAttribute('tag') || '';
+
+        if (tag && !this.querySelector('[slot="tag"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'tag');
+            span.textContent = tag;
+            this.appendChild(span);
+        }
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h2 = document.createElement('h2');
+            h2.setAttribute('slot', 'title');
+            h2.innerHTML = title;
+            this.appendChild(h2);
+        }
 
         this.shadowRoot.innerHTML = `
         <style>
@@ -38,7 +50,7 @@ class ChapterSection extends HTMLElement {
             }
 
             /* Tipografia */
-            h2 {
+            h2, ::slotted([slot="title"]) {
                 font-family: var(--font-title, 'Space Grotesk', sans-serif);
                 font-size: 2.8rem;
                 color: #fff;
@@ -47,7 +59,7 @@ class ChapterSection extends HTMLElement {
                 letter-spacing: -1px;
             }
 
-            .tag {
+            .tag, ::slotted([slot="tag"]) {
                 color: var(--color-highlight, #FF6F61);
                 font-family: var(--font-title, 'Space Grotesk', sans-serif);
                 text-transform: uppercase;
@@ -108,8 +120,8 @@ class ChapterSection extends HTMLElement {
 
         <section id="${id}" class="chapter-grid ${isReverse ? 'reverse' : ''}">
             <div class="content-col">
-                ${tag ? `<span class="tag">${tag}</span>` : ''}
-                <h2>${title}</h2>
+                <slot name="tag"></slot>
+                <slot name="title"></slot>
                 <slot name="text"></slot>
             </div>
 

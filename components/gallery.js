@@ -7,6 +7,26 @@ class GalleryItem extends HTMLElement {
         const title = this.getAttribute('title') || '';
         const text = this.getAttribute('text') || '';
 
+        if (image && !this.querySelector('[slot="image"]')) {
+            const img = document.createElement('img');
+            img.setAttribute('slot', 'image');
+            img.src = image;
+            img.alt = title;
+            this.appendChild(img);
+        }
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h3 = document.createElement('h3');
+            h3.setAttribute('slot', 'title');
+            h3.textContent = title;
+            this.appendChild(h3);
+        }
+        if (text && !this.querySelector('[slot="text"]')) {
+            const p = document.createElement('p');
+            p.setAttribute('slot', 'text');
+            p.textContent = text;
+            this.appendChild(p);
+        }
+
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -33,12 +53,12 @@ class GalleryItem extends HTMLElement {
                     box-shadow: 0 15px 50px rgba(0,0,0,0.9);
                 }
 
-                .bg-img {
+                ::slotted([slot="image"]) {
                     width: 100%; height: 100%; object-fit: cover;
                     object-position: bottom center; position: absolute; top: 0; left: 0; display: block;
                     transition: transform 0.5s ease;
                 }
-                :host(:hover) .bg-img { transform: scale(1.05); }
+                :host(:hover) ::slotted([slot="image"]) { transform: scale(1.05); }
 
                 .caption {
                     position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem;
@@ -47,11 +67,11 @@ class GalleryItem extends HTMLElement {
                 }
                 :host(.active) .caption { opacity: 1; transform: translateY(0); }
 
-                .tt { 
+                .tt, ::slotted([slot="title"]) { 
                     font-family: var(--font-display, serif); 
                     color: var(--txt-main); font-size: 1.8rem; margin: 0; line-height: 1.1; 
                 }
-                .txt { 
+                .txt, ::slotted([slot="text"]) { 
                     font-family: var(--font-body, sans-serif); 
                     color: var(--accent); font-size: 0.85rem; 
                     margin: 8px 0 0 0; text-transform: uppercase; letter-spacing: 2px; 
@@ -59,8 +79,11 @@ class GalleryItem extends HTMLElement {
 
                 @media (max-width: 768px) { :host { width: 80vw; height: 50vh; } }
             </style>
-            <img class="bg-img" src="${image}" alt="${title}">
-            <div class="caption"><h3 class="tt">${title}</h3><p class="txt">${text}</p></div>
+            <slot name="image"></slot>
+            <div class="caption">
+                <slot name="title"></slot>
+                <slot name="text"></slot>
+            </div>
         `;
     }
 }
@@ -76,6 +99,19 @@ class GallerySection extends HTMLElement {
     render() {
         const subtitle = this.getAttribute('subtitle') || '';
         const title = this.getAttribute('title') || '';
+
+        if (subtitle && !this.querySelector('[slot="subtitle"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'subtitle');
+            span.textContent = subtitle;
+            this.appendChild(span);
+        }
+        if (title && !this.querySelector('[slot="title"]')) {
+            const h2 = document.createElement('h2');
+            h2.setAttribute('slot', 'title');
+            h2.innerHTML = title;
+            this.appendChild(h2);
+        }
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -98,8 +134,8 @@ class GallerySection extends HTMLElement {
                     box-shadow: 10px 0 30px rgba(0,0,0,0.5); 
                 }
                 
-                .sub { color: var(--accent); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; margin-bottom: 1rem; font-family: var(--font-body, sans-serif); display: block; }
-                .tit { font-family: var(--font-display, serif); font-size: 3.5rem; color: var(--txt-main); margin: 0; line-height: 1.1; font-weight: 400; }
+                .sub, ::slotted([slot="subtitle"]) { color: var(--accent); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; margin-bottom: 1rem; font-family: var(--font-body, sans-serif); display: block; }
+                .tit, ::slotted([slot="title"]) { font-family: var(--font-display, serif); font-size: 3.5rem; color: var(--txt-main); margin: 0; line-height: 1.1; font-weight: 400; }
                 .hint { color: var(--txt-sec); margin-top: 2rem; font-family: var(--font-body, sans-serif); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; }
                 
                 .track-container { flex: 1; height: 100%; min-width: 0; overflow-x: auto; overflow-y: hidden; display: flex; align-items: center; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; cursor: grab; }
@@ -130,8 +166,8 @@ class GallerySection extends HTMLElement {
 
             <div class="wrapper">
                 <div class="intro">
-                    <span class="sub">${subtitle}</span>
-                    <h2 class="tit">${title}</h2>
+                    <slot name="subtitle"></slot>
+                    <slot name="title"></slot>
                     <div class="hint">← Deslize ou use as setas →</div>
                 </div>
                 <button class="nav-btn prev" id="btnPrev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
@@ -177,8 +213,10 @@ class GallerySection extends HTMLElement {
             if (isDragging) return;
             const item = e.target.closest('gallery-item');
             if (item) {
-                const src = item.getAttribute('image');
-                const title = item.getAttribute('title');
+                const img = item.querySelector('[slot="image"]');
+                const titleEl = item.querySelector('[slot="title"]');
+                const src = img ? img.getAttribute('src') : '';
+                const title = titleEl ? titleEl.textContent.trim() : '';
                 window.dispatchEvent(new CustomEvent('open-lightbox', {
                     detail: { src, title }
                 }));

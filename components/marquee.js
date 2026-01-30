@@ -5,12 +5,8 @@ class MarqueeScroll extends HTMLElement {
     }
 
     connectedCallback() {
-        // --- CONFIGURAÇÕES ---
-        // Texto padrão caso não seja passado nada
-        const textContent = this.getAttribute('text') || 'Experience The Rare';
-        // Velocidade da animação (duração do ciclo)
-        const animationSpeed = this.getAttribute('speed') || '30s';
-
+        const slotText = this.textContent.trim();
+        const textContent = slotText || 'Experience The Rare';
         // Repetimos o texto 4 vezes para garantir que cubra telas grandes (loop visual)
         const repeatedText = (textContent + ' ').repeat(4);
 
@@ -36,7 +32,7 @@ class MarqueeScroll extends HTMLElement {
                     display: flex;
                     width: fit-content;
                     /* Animação linear infinita */
-                    animation: scrollText ${animationSpeed} linear infinite;
+                    animation: scrollText var(--marquee-speed, 30s) linear infinite;
                 }
 
                 .marquee-text {

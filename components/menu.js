@@ -12,6 +12,36 @@ class SiteMenu extends HTMLElement {
         const parentLink = this.getAttribute('parent-link') || '';
         const image = this.getAttribute('image') || null;
 
+        if (logoText && !this.querySelector('[slot="logo"]')) {
+            const a = document.createElement('a');
+            a.setAttribute('slot', 'logo');
+            a.href = '#';
+            a.textContent = logoText;
+            this.appendChild(a);
+        }
+        if (parentText && !this.querySelector('[slot="parent"]')) {
+            const a = document.createElement('a');
+            a.setAttribute('slot', 'parent');
+            a.href = parentLink || '#';
+            a.textContent = parentText;
+            this.appendChild(a);
+        }
+        if (parentLink && !this.querySelector('[slot="back-link"]')) {
+            const a = document.createElement('a');
+            a.setAttribute('slot', 'back-link');
+            a.className = 'back-link';
+            a.href = parentLink;
+            a.textContent = '← Voltar para Coleção';
+            this.appendChild(a);
+        }
+        if (image && !this.querySelector('[slot="image"]')) {
+            const img = document.createElement('img');
+            img.setAttribute('slot', 'image');
+            img.src = image;
+            img.alt = 'Menu Visual';
+            this.appendChild(img);
+        }
+
         this.shadowRoot.innerHTML = `
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
@@ -54,6 +84,11 @@ class SiteMenu extends HTMLElement {
                 font-size: 1.4rem; font-weight: 700; color: #fff;
                 text-decoration: none; letter-spacing: 1px; white-space: nowrap;
             }
+            ::slotted([slot="logo"]) {
+                font-family: var(--font-title, serif);
+                font-size: 1.4rem; font-weight: 700; color: #fff;
+                text-decoration: none; letter-spacing: 1px; white-space: nowrap;
+            }
 
             .divider { font-size: 1.4rem; color: rgba(255,255,255,0.3); font-weight: 300; }
 
@@ -64,6 +99,12 @@ class SiteMenu extends HTMLElement {
                 text-decoration: none; transition: opacity 0.3s; white-space: nowrap;
             }
             .brand-parent:hover { opacity: 0.8; }
+            ::slotted([slot="parent"]) {
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: 1.1rem; font-weight: 700; 
+                color: var(--highlight-color, #FF6F61);
+                text-decoration: none; transition: opacity 0.3s; white-space: nowrap;
+            }
 
             .desktop-links {
                 display: none;
@@ -153,6 +194,11 @@ class SiteMenu extends HTMLElement {
                 width: 100%; height: 100%; object-fit: cover;
                 filter: brightness(0.6) contrast(1.1);
             }
+            ::slotted([slot="image"]) {
+                width: 100%; height: 100%; object-fit: cover;
+                filter: brightness(0.6) contrast(1.1);
+                display: block;
+            }
 
             ::slotted(a) {
                 font-family: var(--font-title, serif); font-size: 3rem; color: rgba(255,255,255,0.4);
@@ -167,6 +213,14 @@ class SiteMenu extends HTMLElement {
             ::slotted(a:hover) { color: #fff; transform: translateX(10px); }
             
             .back-link {
+                display: inline-flex; align-items: center; gap: 10px;
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: 1rem; color: var(--highlight-color, #FF6F61);
+                text-decoration: none; margin-bottom: 2rem;
+                padding: 8px 20px; border: 1px solid currentColor; border-radius: 50px;
+                transition: all 0.3s;
+            }
+            ::slotted(.back-link) {
                 display: inline-flex; align-items: center; gap: 10px;
                 font-family: 'Space Grotesk', sans-serif;
                 font-size: 1rem; color: var(--highlight-color, #FF6F61);
@@ -189,11 +243,9 @@ class SiteMenu extends HTMLElement {
         
         <div class="nav-container">
             <div class="brand-group">
-                <a href="#" class="brand-main">${logoText}</a>
-                ${parentText ? `
-                    <span class="divider">/</span>
-                    <a href="${parentLink}" class="brand-parent">${parentText}</a>
-                ` : ''}
+                <slot name="logo"></slot>
+                <span class="divider">/</span>
+                <slot name="parent"></slot>
             </div>
 
             <div class="desktop-links" id="desktopNav"></div>
@@ -203,11 +255,11 @@ class SiteMenu extends HTMLElement {
 
         <div class="overlay" id="overlay">
             <div class="menu-content">
-                ${parentLink ? `<a href="${parentLink}" class="back-link">← Voltar para Coleção</a>` : ''}
+                <slot name="back-link"></slot>
                 <slot name="links"></slot>
             </div>
             <div class="menu-image-wrapper">
-                ${image ? `<img src="${image}" class="menu-img-full" alt="Menu Visual">` : ''}
+                <slot name="image"></slot>
             </div>
         </div>
         `;
@@ -218,6 +270,12 @@ class SiteMenu extends HTMLElement {
 
         setTimeout(() => this.initScrollSpy(), 500);
         window.addEventListener('load', () => this.initScrollSpy());
+
+        const parentSlot = this.querySelector('[slot="parent"]');
+        const divider = this.shadowRoot.querySelector('.divider');
+        if (!parentSlot || !parentSlot.textContent.trim()) {
+            if (divider) divider.style.display = 'none';
+        }
     }
 
     initLogic() {

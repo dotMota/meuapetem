@@ -10,6 +10,20 @@ class TrustItem extends HTMLElement {
         const imgSrc = this.getAttribute('img') || '';
         const altText = this.getAttribute('alt') || title;
 
+        if (title && !this.querySelector('[slot="title"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'title');
+            span.textContent = title;
+            this.appendChild(span);
+        }
+        if (imgSrc && !this.querySelector('[slot="image"]')) {
+            const img = document.createElement('img');
+            img.setAttribute('slot', 'image');
+            img.src = imgSrc;
+            img.alt = altText;
+            this.appendChild(img);
+        }
+
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -32,7 +46,7 @@ class TrustItem extends HTMLElement {
                     transform: translateY(-5px);
                 }
 
-                .label {
+                .label, ::slotted([slot="title"]) {
                     font-size: 0.7rem;
                     text-transform: uppercase;
                     letter-spacing: 3px;
@@ -42,7 +56,7 @@ class TrustItem extends HTMLElement {
                     font-family: sans-serif;
                 }
 
-                .logo {
+                .logo, ::slotted([slot="image"]) {
                     display: block;
                     height: 60px;
                     width: auto;
@@ -53,8 +67,8 @@ class TrustItem extends HTMLElement {
                 }
             </style>
 
-            <span class="label">${title}</span>
-            <img class="logo" src="${imgSrc}" alt="${altText}">
+            <slot name="title"></slot>
+            <slot name="image"></slot>
         `;
     }
 }

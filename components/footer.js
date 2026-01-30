@@ -5,11 +5,64 @@ class FooterSection extends HTMLElement {
     }
 
     connectedCallback() {
-        const parentBrand = 'MeuApêTem';
-        const project = this.getAttribute('project') || '';
-        const creci = this.getAttribute('broker') || 'CRECI 315675';
-        // Define o caminho da raiz para os links funcionarem em qualquer pasta
+        const brandAttr = this.getAttribute('brand') || 'MeuApêTem';
+        const projectAttr = this.getAttribute('project') || '';
+        const brokerAttr = this.getAttribute('broker') || '';
         const rootPath = this.getAttribute('root-path') || '.';
+
+        const ensureSlot = (slotName, tag, text, attrs = {}) => {
+            if (!text || this.querySelector(`[slot="${slotName}"]`)) return;
+            const el = document.createElement(tag);
+            el.setAttribute('slot', slotName);
+            el.textContent = text;
+            Object.entries(attrs).forEach(([key, value]) => {
+                if (value) el.setAttribute(key, value);
+            });
+            this.appendChild(el);
+        };
+
+        ensureSlot('brand', 'span', brandAttr);
+        if (projectAttr) ensureSlot('project', 'span', projectAttr);
+        if (brokerAttr) ensureSlot('broker', 'span', brokerAttr);
+        ensureSlot('description', 'p', 'Curadoria imobiliária que conecta pessoas a espaços com alma.');
+
+        if (!this.querySelector('[slot="nav-links"]')) {
+            const navLinks = [
+                { href: `${rootPath}/index.html#portfolio`, label: 'Coleção' },
+                { href: `${rootPath}/index.html#manifesto`, label: 'Sobre' },
+                { href: `${rootPath}/index.html#home`, label: 'Início' }
+            ];
+            navLinks.forEach(link => {
+                const li = document.createElement('li');
+                li.setAttribute('slot', 'nav-links');
+                li.innerHTML = `<a href="${link.href}">${link.label}</a>`;
+                this.appendChild(li);
+            });
+        }
+        if (!this.querySelector('[slot="support-links"]')) {
+            const supportLinks = [
+                { href: '#', label: 'Fale Conosco', className: 'contact-trigger' },
+                { href: `${rootPath}/politica.html`, label: 'Transparência' }
+            ];
+            supportLinks.forEach(link => {
+                const li = document.createElement('li');
+                li.setAttribute('slot', 'support-links');
+                li.innerHTML = `<a href="${link.href}" ${link.className ? `class="${link.className}"` : ''}>${link.label}</a>`;
+                this.appendChild(li);
+            });
+        }
+        if (!this.querySelector('[slot="social-links"]')) {
+            const socialLinks = [
+                { href: 'https://instagram.com/meuapetem', label: '@meuapetem', target: '_blank' },
+                { href: '#', label: 'LinkedIn' }
+            ];
+            socialLinks.forEach(link => {
+                const li = document.createElement('li');
+                li.setAttribute('slot', 'social-links');
+                li.innerHTML = `<a href="${link.href}" ${link.target ? `target="${link.target}"` : ''}>${link.label}</a>`;
+                this.appendChild(li);
+            });
+        }
 
         this.shadowRoot.innerHTML = `
         <style>
@@ -37,9 +90,10 @@ class FooterSection extends HTMLElement {
                 display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
             }
 
-            .brand-parent { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+            ::slotted([slot="brand"]) { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
             .brand-divider { font-size: 1.5rem; color: rgba(255,255,255,0.3); font-weight: 300; }
-            .brand-project { font-family: var(--font-title, serif); font-size: 1.5rem; color: var(--highlight-color, #c5a065); }
+            ::slotted([slot="project"]) { font-family: var(--font-title, serif); font-size: 1.5rem; color: var(--highlight-color, #c5a065); }
+            ::slotted([slot="description"]) { margin: 0; }
 
             h4 { color: #fff; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
             ul { list-style: none; padding: 0; }
@@ -61,53 +115,59 @@ class FooterSection extends HTMLElement {
         <div class="grid">
             <div class="brand-area">
                 <h2>
-                    <span class="brand-parent">${parentBrand}</span>
-                    ${project ? `
-                        <span class="brand-divider">/</span>
-                        <span class="brand-project">${project}</span>
-                    ` : ''}
+                    <slot name="brand"></slot>
+                    <span class="brand-divider" id="brandDivider">/</span>
+                    <slot name="project"></slot>
                 </h2>
-                <p>Curadoria imobiliária que conecta pessoas a espaços com alma.</p>
+                <slot name="description"></slot>
             </div>
             
             <div>
                 <h4>Navegação</h4>
                 <ul>
-                    <li><a href="${rootPath}/index.html#portfolio">Coleção</a></li>
-                    <li><a href="${rootPath}/index.html#manifesto">Sobre</a></li>
-                    <li><a href="${rootPath}/index.html#home">Início</a></li>
+                    <slot name="nav-links"></slot>
                 </ul>
             </div>
 
             <div>
                 <h4>Suporte</h4>
                 <ul>
-                    <li><a href="#" class="contact-trigger">Fale Conosco</a></li>
-                    <li><a href="${rootPath}/politica.html">Transparência</a></li>
+                    <slot name="support-links"></slot>
                 </ul>
             </div>
 
             <div>
                 <h4>Social</h4>
                 <ul>
-                    <li><a href="https://instagram.com/meuapetem" target="_blank">@meuapetem</a></li>
-                    <li><a href="#">LinkedIn</a></li>
+                    <slot name="social-links"></slot>
                 </ul>
             </div>
         </div>
 
         <div class="bottom-bar">
-            <span>© ${new Date().getFullYear()} ${parentBrand}</span>
-            <span>${creci}</span>
+            <span>© ${new Date().getFullYear()} <span id="brandCopy"></span></span>
+            <span><slot name="broker"></slot></span>
         </div>
         `;
 
-        this.shadowRoot.querySelectorAll('.contact-trigger').forEach(el => {
+        this.querySelectorAll('.contact-trigger').forEach(el => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.dispatchEvent(new CustomEvent('open-contact-popup'));
             });
         });
+
+        const projectSlot = this.querySelector('[slot="project"]');
+        const divider = this.shadowRoot.getElementById('brandDivider');
+        if (!projectSlot || !projectSlot.textContent.trim()) {
+            divider.style.display = 'none';
+        }
+
+        const brandSlot = this.querySelector('[slot="brand"]');
+        const brandCopy = this.shadowRoot.getElementById('brandCopy');
+        if (brandSlot && brandCopy) {
+            brandCopy.textContent = brandSlot.textContent.trim();
+        }
     }
 }
 customElements.define('footer-section', FooterSection);

@@ -91,39 +91,79 @@
 
     <site-preloader></site-preloader>
 
-    <site-menu logo="MEUAPÊTEM" image="./media/utils/logo-brand.png">
+    <site-menu>
+        <a slot="logo" href="#home">MEUAPÊTEM</a>
+        <img slot="image" src="./media/utils/logo-brand.png" alt="Menu Visual">
         <a slot="links" href="#home">Início</a>
         <a slot="links" href="#rare-collection">Alto Padrão</a>
         <a slot="links" href="#smart-living">Econômicos</a>
         <a slot="links" href="#schedule" class="auto-trigger">Falar com Consultor</a>
     </site-menu>
 
-    <hero-brand id="home" title="MeuApêTem"></hero-brand>
+    <hero-brand id="home">
+        <span slot="tag">Curadoria Experiencial</span>
+        <span slot="title">MeuApêTem<br></span>
+        <p slot="text">Não vendemos paredes. Facilitamos o encontro entre você e o espaço onde sua história vai acontecer.</p>
+        <a slot="actions" class="btn btn-primary" href="#portfolio">Encontrar meu Cenário</a>
+        <a slot="actions" class="btn btn-secondary" href="#manifesto">Entender a Filosofia</a>
+        <div slot="phrases">
+            <span>Luz Natural</span>
+            <span>Espaço para Criar</span>
+            <span>Silêncio para Refletir</span>
+            <span>Alma</span>
+            <span>História</span>
+        </div>
+    </hero-brand>
 
-    <marquee-scroll text="CURADORIA EXPERIENCIAL — DO PRIMEIRO APÊ AO ALTO PADRÃO — TRANSPARÊNCIA RADICAL — "
-        speed="100s">
+    <marquee-scroll style="--marquee-speed: 100s;">
+        CURADORIA EXPERIENCIAL — DO PRIMEIRO APÊ AO ALTO PADRÃO — TRANSPARÊNCIA RADICAL —
     </marquee-scroll>
 
-    <manifesto-section id="manifesto" title="Não vendemos metros quadrados.<br>Vendemos" highlight="Ciclos de Vida."
-        text="Seja para conquistar sua independência ou encontrar sua raridade. Facilitamos o encontro entre você e o seu próximo passo.">
+    <manifesto-section id="manifesto">
+        <span slot="title">Não vendemos metros quadrados.<br>Vendemos</span>
+        <span slot="highlight" class="highlight">Ciclos de Vida.</span>
+        <p slot="text">Seja para conquistar sua independência ou encontrar sua raridade. Facilitamos o encontro entre você e o seu próximo passo.</p>
     </manifesto-section>
 
-    <page-scanner id="rare-collection" category="rare"></page-scanner>
+    <page-scanner id="rare-collection">
+        <span slot="category">rare</span>
+    </page-scanner>
 
     <div style="height: 1px; background: rgba(255,255,255,0.1); width: 90%; margin: 0 auto;"></div>
 
-    <page-scanner id="smart-living" category="smart"></page-scanner>
+    <page-scanner id="smart-living">
+        <span slot="category">smart</span>
+    </page-scanner>
 
-    <cta-banner id="schedule" title="Ainda não encontrou o seu?"
-        text="Temos acesso a lançamentos Off-Market e condições exclusivas que não estão no site."
-        btn-text="Consultoria Personalizada" link="#">
+    <cta-banner id="schedule">
+        <h3 slot="title">Ainda não encontrou o seu?</h3>
+        <p slot="text">Temos acesso a lançamentos Off-Market e condições exclusivas que não estão no site.</p>
+        <span slot="button-text">Consultoria Personalizada</span>
+        <a slot="link" href="#"></a>
     </cta-banner>
 
-    <footer-section brand="MEUAPÊTEM" broker="CRECI 268.448" root-path="."> </footer-section>
+    <footer-section>
+        <span slot="brand">MEUAPÊTEM</span>
+        <span slot="broker">CRECI 268.448</span>
+        <p slot="description">Curadoria imobiliária que conecta pessoas a espaços com alma.</p>
+        <li slot="nav-links"><a href="./index.html#portfolio">Coleção</a></li>
+        <li slot="nav-links"><a href="./index.html#manifesto">Sobre</a></li>
+        <li slot="nav-links"><a href="./index.html#home">Início</a></li>
+        <li slot="support-links"><a href="#" class="contact-trigger">Fale Conosco</a></li>
+        <li slot="support-links"><a href="./politica.html">Transparência</a></li>
+        <li slot="social-links"><a href="https://instagram.com/meuapetem" target="_blank">@meuapetem</a></li>
+        <li slot="social-links"><a href="#">LinkedIn</a></li>
+    </footer-section>
 
     <floating-actions></floating-actions>
 
-    <contact-popup photo="./media/utils/logo-perfil.svg"></contact-popup>
+    <contact-popup>
+        <img slot="photo" src="./media/utils/logo-perfil.svg" alt="MeuApêTem">
+        <span slot="name">MeuApêTem</span>
+        <span slot="creci">CRECI 315675</span>
+        <span slot="email">meuapetem@gmail.com</span>
+        <span slot="phone">11 95780-0534</span>
+    </contact-popup>
 
     <cookie-banner></cookie-banner>
 
@@ -135,12 +175,12 @@
             const hero = document.querySelector('hero-brand');
             if (hero) {
                 // Acessa o Shadow DOM do componente Hero
-                const btnSec = hero.shadowRoot.querySelector('.btn-secondary');
+                const btnSec = hero.querySelector('.btn-secondary');
                 if (btnSec) {
                     btnSec.innerText = "Quero Sair do Aluguel";
                     btnSec.href = "#smart-living";
                 }
-                const btnPri = hero.shadowRoot.querySelector('.btn-primary');
+                const btnPri = hero.querySelector('.btn-primary');
                 if (btnPri) {
                     btnPri.innerText = "Busco Exclusividade";
                     btnPri.href = "#rare-collection";

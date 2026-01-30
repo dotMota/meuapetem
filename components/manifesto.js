@@ -6,8 +6,27 @@ class ManifestoSection extends HTMLElement {
 
     connectedCallback() {
         const title = this.getAttribute('title') || 'Manifesto';
-        const highlight = this.getAttribute('highlight') || ''; // A parte colorida do título
+        const highlight = this.getAttribute('highlight') || '';
         const text = this.getAttribute('text') || '';
+
+        if (title && !this.querySelector('[slot="title"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'title');
+            span.innerHTML = title;
+            this.appendChild(span);
+        }
+        if (highlight && !this.querySelector('[slot="highlight"]')) {
+            const span = document.createElement('span');
+            span.setAttribute('slot', 'highlight');
+            span.textContent = highlight;
+            this.appendChild(span);
+        }
+        if (text && !this.querySelector('[slot="text"]')) {
+            const p = document.createElement('p');
+            p.setAttribute('slot', 'text');
+            p.textContent = text;
+            this.appendChild(p);
+        }
 
         this.shadowRoot.innerHTML = `
         <style>
@@ -28,7 +47,7 @@ class ManifestoSection extends HTMLElement {
                 align-items: center;
             }
 
-            h2 {
+            h2, ::slotted([slot="title"]) {
                 font-family: var(--font-title, sans-serif);
                 font-size: clamp(2rem, 4vw, 3.5rem);
                 line-height: 1.2;
@@ -36,7 +55,7 @@ class ManifestoSection extends HTMLElement {
                 font-weight: 700;
             }
 
-            .highlight {
+            .highlight, ::slotted([slot="highlight"]) {
                 color: var(--highlight-color, #FF6F61);
                 position: relative;
                 display: inline-block;
@@ -53,7 +72,7 @@ class ManifestoSection extends HTMLElement {
                 opacity: 0.3;
             }
 
-            p {
+            p, ::slotted([slot="text"]) {
                 font-family: var(--font-text, sans-serif);
                 font-size: clamp(1.1rem, 1.5vw, 1.3rem);
                 line-height: 1.6;
@@ -78,9 +97,10 @@ class ManifestoSection extends HTMLElement {
         <div class="container">
             <div class="divider"></div>
             <h2>
-                ${title} <span class="highlight">${highlight}</span>
+                <slot name="title"></slot>
+                <slot name="highlight"></slot>
             </h2>
-            <p>${text}</p>
+            <slot name="text"></slot>
         </div>
         `;
     }
