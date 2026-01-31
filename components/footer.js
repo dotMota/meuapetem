@@ -33,10 +33,11 @@ class FooterSection extends HTMLElement {
                 { href: `${rootPath}/index.html#home`, label: 'Início' }
             ];
             navLinks.forEach(link => {
-                const li = document.createElement('li');
-                li.setAttribute('slot', 'nav-links');
-                li.innerHTML = `<a href="${link.href}">${link.label}</a>`;
-                this.appendChild(li);
+                const anchor = document.createElement('a');
+                anchor.setAttribute('slot', 'nav-links');
+                anchor.href = link.href;
+                anchor.textContent = link.label;
+                this.appendChild(anchor);
             });
         }
         if (!this.querySelector('[slot="support-links"]')) {
@@ -45,10 +46,12 @@ class FooterSection extends HTMLElement {
                 { href: `${rootPath}/politica.html`, label: 'Transparência' }
             ];
             supportLinks.forEach(link => {
-                const li = document.createElement('li');
-                li.setAttribute('slot', 'support-links');
-                li.innerHTML = `<a href="${link.href}" ${link.className ? `class="${link.className}"` : ''}>${link.label}</a>`;
-                this.appendChild(li);
+                const anchor = document.createElement('a');
+                anchor.setAttribute('slot', 'support-links');
+                anchor.href = link.href;
+                if (link.className) anchor.className = link.className;
+                anchor.textContent = link.label;
+                this.appendChild(anchor);
             });
         }
         if (!this.querySelector('[slot="social-links"]')) {
@@ -57,10 +60,12 @@ class FooterSection extends HTMLElement {
                 { href: '#', label: 'LinkedIn' }
             ];
             socialLinks.forEach(link => {
-                const li = document.createElement('li');
-                li.setAttribute('slot', 'social-links');
-                li.innerHTML = `<a href="${link.href}" ${link.target ? `target="${link.target}"` : ''}>${link.label}</a>`;
-                this.appendChild(li);
+                const anchor = document.createElement('a');
+                anchor.setAttribute('slot', 'social-links');
+                anchor.href = link.href;
+                if (link.target) anchor.target = link.target;
+                anchor.textContent = link.label;
+                this.appendChild(anchor);
             });
         }
 
@@ -95,11 +100,28 @@ class FooterSection extends HTMLElement {
             ::slotted([slot="project"]) { font-family: var(--font-title, serif); font-size: 1.5rem; color: var(--highlight-color, #c5a065); }
             ::slotted([slot="description"]) { margin: 0; }
 
-            h4 { color: #fff; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
-            ul { list-style: none; padding: 0; }
-            li { margin-bottom: 0.8rem; }
-            a { text-decoration: none; color: inherit; transition: color 0.3s; }
-            a:hover { color: var(--highlight-color, #FF6F61); }
+            h4 {
+                color: #fff;
+                margin-bottom: 1.5rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-size: 0.9rem;
+                font-family: var(--font-title, sans-serif);
+            }
+            .link-list { display: flex; flex-direction: column; gap: 0.8rem; }
+            ::slotted([slot="nav-links"]),
+            ::slotted([slot="support-links"]),
+            ::slotted([slot="social-links"]) {
+                display: block;
+                text-decoration: none;
+                color: inherit;
+                transition: color 0.3s;
+            }
+            ::slotted([slot="nav-links"]:hover),
+            ::slotted([slot="support-links"]:hover),
+            ::slotted([slot="social-links"]:hover) {
+                color: var(--highlight-color, #FF6F61);
+            }
 
             .bottom-bar {
                 border-top: 1px solid rgba(255,255,255,0.05);
@@ -124,23 +146,23 @@ class FooterSection extends HTMLElement {
             
             <div>
                 <h4>Navegação</h4>
-                <ul>
+                <div class="link-list">
                     <slot name="nav-links"></slot>
-                </ul>
+                </div>
             </div>
 
             <div>
                 <h4>Suporte</h4>
-                <ul>
+                <div class="link-list">
                     <slot name="support-links"></slot>
-                </ul>
+                </div>
             </div>
 
             <div>
                 <h4>Social</h4>
-                <ul>
+                <div class="link-list">
                     <slot name="social-links"></slot>
-                </ul>
+                </div>
             </div>
         </div>
 

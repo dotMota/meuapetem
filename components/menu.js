@@ -200,17 +200,17 @@ class SiteMenu extends HTMLElement {
                 display: block;
             }
 
-            ::slotted(a) {
+            ::slotted([slot="links"]) {
                 font-family: var(--font-title, serif); font-size: 3rem; color: rgba(255,255,255,0.4);
                 text-decoration: none; margin: 0; transition: color 0.3s, transform 0.3s;
                 display: block; line-height: 1.2;
             }
             
-            ::slotted(a.active) {
+            ::slotted([slot="links"].active) {
                 color: var(--highlight-color, #FF6F61) !important;
                 padding-left: 20px; border-left: 2px solid var(--highlight-color, #FF6F61);
             }
-            ::slotted(a:hover) { color: #fff; transform: translateX(10px); }
+            ::slotted([slot="links"]:hover) { color: #fff; transform: translateX(10px); }
             
             .back-link {
                 display: inline-flex; align-items: center; gap: 10px;
@@ -233,8 +233,8 @@ class SiteMenu extends HTMLElement {
                 .overlay { grid-template-columns: 1fr; }
                 .menu-image-wrapper { display: none; }
                 .menu-content { align-items: center; padding-left: 0; padding-bottom: 50px; }
-                ::slotted(a) { font-size: 2rem; text-align: center; }
-                ::slotted(a.active) { padding-left: 0; border-left: none; color: #fff !important; opacity: 1; }
+                ::slotted([slot="links"]) { font-size: 2rem; text-align: center; }
+                ::slotted([slot="links"].active) { padding-left: 0; border-left: none; color: #fff !important; opacity: 1; }
                 .brand-parent, .divider { display: none; }
             }
         </style>
