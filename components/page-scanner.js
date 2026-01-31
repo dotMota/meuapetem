@@ -48,8 +48,8 @@ class PageScanner extends HTMLElement {
             </style>
             <div class="container">
                 <div class="section-header">
-                    <span>${isHome ? 'Coleção' : 'Continue Explorando'}</span>
-                    <h3>${isHome ? (filterCategory === 'rare' ? 'The Rare Collection' : 'Smart Living') : 'Veja Também'}</h3>
+                    <span>${isHome ? (filterCategory ? 'Coleção' : 'Coleção Completa') : 'Continue Explorando'}</span>
+                    <h3>${isHome ? (filterCategory === 'rare' ? 'The Rare Collection' : (filterCategory === 'smart' ? 'Smart Living' : 'Todos os Projetos')) : 'Veja Também'}</h3>
                 </div>
                 <div class="grid" id="grid">
                     </div>

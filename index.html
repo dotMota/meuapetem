@@ -95,8 +95,7 @@
         <a slot="logo" href="#home">MEUAPÊTEM</a>
         <img slot="image" src="./media/utils/logo-brand.png" alt="Menu Visual">
         <a slot="links" href="#home">Início</a>
-        <a slot="links" href="#rare-collection">Alto Padrão</a>
-        <a slot="links" href="#smart-living">Econômicos</a>
+        <a slot="links" href="#portfolio">Coleção Completa</a>
         <a slot="links" href="#schedule" class="auto-trigger">Falar com Consultor</a>
     </site-menu>
 
@@ -125,15 +124,7 @@
         <p slot="text">Seja para conquistar sua independência ou encontrar sua raridade. Facilitamos o encontro entre você e o seu próximo passo.</p>
     </manifesto-section>
 
-    <page-scanner id="rare-collection">
-        <span slot="category">rare</span>
-    </page-scanner>
-
-    <div style="height: 1px; background: rgba(255,255,255,0.1); width: 90%; margin: 0 auto;"></div>
-
-    <page-scanner id="smart-living">
-        <span slot="category">smart</span>
-    </page-scanner>
+    <page-scanner id="portfolio"></page-scanner>
 
     <cta-banner id="schedule">
         <h3 slot="title">Ainda não encontrou o seu?</h3>
@@ -177,13 +168,13 @@
                 // Acessa o Shadow DOM do componente Hero
                 const btnSec = hero.querySelector('.btn-secondary');
                 if (btnSec) {
-                    btnSec.innerText = "Quero Sair do Aluguel";
-                    btnSec.href = "#smart-living";
+                    btnSec.innerText = "Falar com Consultor";
+                    btnSec.href = "#schedule";
                 }
                 const btnPri = hero.querySelector('.btn-primary');
                 if (btnPri) {
-                    btnPri.innerText = "Busco Exclusividade";
-                    btnPri.href = "#rare-collection";
+                    btnPri.innerText = "Ver Todos os Projetos";
+                    btnPri.href = "#portfolio";
                 }
             }
         });
