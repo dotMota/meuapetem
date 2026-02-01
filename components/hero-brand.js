@@ -1,23 +1,25 @@
 /**
  * <hero-brand>
  * Attributes: none (content is built from project pages)
+ * Data: uses window.MeuapetemProjectFiles when available.
  */
 class HeroBrand extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
 
-        // LISTA CENTRALIZADA (A mesma lógica do page-scanner)
-        // Se criar um imóvel novo, adicione o nome do arquivo aqui
-        this.projectFiles = [
-            'quarten.html',
-            'granoscar.html',
-            'elevButanta.html',
-            'elevSacoma.html',
-            'elevAltoIpiranga.html',
-            'vilaBoulevardMooca.html',
-            'peninsulaVilaMadalena.html'
-        ];
+        // Lista centralizada em components/projects-data.js
+        this.projectFiles = Array.isArray(window.MeuapetemProjectFiles)
+            ? window.MeuapetemProjectFiles
+            : [
+                'quarten.html',
+                'granoscar.html',
+                'elevButanta.html',
+                'elevSacoma.html',
+                'elevAltoIpiranga.html',
+                'vilaBoulevardMooca.html',
+                'peninsulaVilaMadalena.html'
+            ];
 
         this.slides = [];
         this.currentIndex = 0;

@@ -2,22 +2,25 @@
  * <page-scanner>
  * Attributes: category
  * Dependencies: requires project-card to be registered.
+ * Data: uses window.MeuapetemProjectFiles when available.
  */
 class PageScanner extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
 
-        // LISTA EXATA DOS ARQUIVOS NA PASTA PROJECTS
-        this.projectFiles = [
-            'quarten.html',
-            'granoscar.html',
-            'elevButanta.html',
-            'elevSacoma.html',
-            'elevAltoIpiranga.html',
-            'vilaBoulevardMooca.html',
-            'peninsulaVilaMadalena.html',
-        ];
+        // Lista centralizada em components/projects-data.js
+        this.projectFiles = Array.isArray(window.MeuapetemProjectFiles)
+            ? window.MeuapetemProjectFiles
+            : [
+                'quarten.html',
+                'granoscar.html',
+                'elevButanta.html',
+                'elevSacoma.html',
+                'elevAltoIpiranga.html',
+                'vilaBoulevardMooca.html',
+                'peninsulaVilaMadalena.html'
+            ];
     }
 
     async connectedCallback() {
