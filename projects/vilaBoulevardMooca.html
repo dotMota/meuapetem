@@ -89,69 +89,6 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
-
-        /* --- NEW COMPONENT: MANUAL STRIP (Faixa Fina) --- */
-        .manual-strip {
-            background: linear-gradient(90deg, rgba(255, 111, 97, 0.1), rgba(20, 20, 20, 0.8));
-            border-left: 2px solid var(--color-highlight);
-            padding: 1.5rem 2rem;
-            margin: 2rem auto 4rem auto;
-            /* Centralizado com margem */
-            max-width: 1200px;
-            width: 90%;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .manual-strip:hover {
-            transform: translateX(10px);
-            background: linear-gradient(90deg, rgba(255, 111, 97, 0.15), rgba(30, 30, 30, 0.9));
-        }
-
-        .manual-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .manual-icon {
-            color: var(--color-highlight);
-            font-size: 1.5rem;
-        }
-
-        .manual-text h3 {
-            margin: 0;
-            font-size: 1rem;
-            font-family: var(--font-title);
-            color: var(--color-white, #fff);
-        }
-
-        .manual-text p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--color-text-secondary);
-        }
-
-        .manual-btn {
-            white-space: nowrap;
-            color: var(--color-white, #fff);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .manual-btn:hover {
-            border-color: var(--color-highlight);
-            color: var(--color-highlight);
-        }
     </style>
 
     <script src="../components/preloader.js"></script>
@@ -167,6 +104,7 @@
     <script src="../components/cta.js" defer></script>
     <script src="../components/trust.js" defer></script>
     <script src="../components/footer.js" defer></script>
+    <script src="../components/manual-strip.js" defer></script>
     <script src="../components/curator-review.js" defer></script>
     <script src="../components/floating.js" defer></script>
     <script src="../components/contact.js" defer></script>
@@ -208,17 +146,12 @@
     <marquee-scroll id="marquee"
         text="RUA DOS TRILHOS — VARANDA COM SUÍTE — LAZER DE CLUBE — BOULEVARD INTEGRADO — TRISUL E PLANO&PLANO — "
         speed="100s"></marquee-scroll>
-    <div class="manual-strip">
-        <div class="manual-content">
-            <i class="fas fa-book-reader manual-icon"></i>
-            <div class="manual-text">
-                <h3>Dúvidas sobre o Minha Casa Minha Vida?</h3>
-                <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
-            </div>
-        </div>
-        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right"
-                style="margin-left:5px; font-size:0.8em;"></i></a>
-    </div>
+    <manual-strip>
+        <i slot="icon" class="fas fa-book-reader"></i>
+        <span slot="title">Dúvidas sobre o Minha Casa Minha Vida?</span>
+        <span slot="text">Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</span>
+        <a slot="cta" href="../manual-mcmv.html">Ler Guia da Conquista <i class="fas fa-arrow-right" style="margin-left:5px; font-size:0.8em;"></i></a>
+    </manual-strip>
 
     <stats-section id="stats">
         <stat-item slot="items" class="hover-target" id="stat-1" number="Mooca"
