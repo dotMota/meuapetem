@@ -1,3 +1,7 @@
+/**
+ * <region-section>
+ * Attributes: image, highlight, title, text, lat, lng, zoom, pois (JSON array)
+ */
 class RegionSection extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); this.mapInitialized = false; }
 

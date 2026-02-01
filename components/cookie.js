@@ -1,3 +1,8 @@
+/**
+ * <cookie-banner>
+ * Attributes: none
+ * Behavior: builds policy link based on location (projects vs root).
+ */
 class CookieBanner extends HTMLElement {
     constructor() {
         super();

@@ -1,3 +1,7 @@
+/**
+ * <site-preloader>
+ * Attributes: project
+ */
 class SitePreloader extends HTMLElement {
     constructor() {
         super();

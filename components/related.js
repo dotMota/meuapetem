@@ -1,3 +1,8 @@
+/**
+ * <related-products>
+ * Attributes: current, category
+ * Dependencies: requires project-card to be registered.
+ */
 class RelatedProducts extends HTMLElement {
     constructor() {
         super();

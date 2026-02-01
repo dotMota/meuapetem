@@ -1,3 +1,8 @@
+/**
+ * <site-menu>
+ * Attributes: logo, parent-text, parent-link, image
+ * Slots: links
+ */
 class SiteMenu extends HTMLElement {
     constructor() {
         super();

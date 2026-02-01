@@ -1,3 +1,8 @@
+/**
+ * <page-scanner>
+ * Attributes: category
+ * Dependencies: requires project-card to be registered.
+ */
 class PageScanner extends HTMLElement {
     constructor() {
         super();

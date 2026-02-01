@@ -1,3 +1,10 @@
+/**
+ * <gallery-section>
+ * Attributes: subtitle, title
+ * Slots: items (gallery-item children)
+ * Child <gallery-item> attributes: image, title, text
+ * Events: dispatches window 'open-lightbox' on item click.
+ */
 // --- ITEM (CARD INDIVIDUAL) ---
 class GalleryItem extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); }

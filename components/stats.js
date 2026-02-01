@@ -1,3 +1,8 @@
+/**
+ * <stats-section>
+ * Slots: items (stat-item children)
+ * Child <stat-item> attributes: number, label
+ */
 // --- ITEM (Número + Texto) ---
 class StatItem extends HTMLElement {
     constructor() {

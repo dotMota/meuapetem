@@ -1,3 +1,11 @@
+/**
+ * <plans-section>
+ * Attributes: highlight, title, project
+ * Slots: content (plan-item children)
+ * Child <plan-item> attributes: title, desc, area, dorms, vagas, extra-label, extra-val, button-text
+ * Child slots: image
+ * Events: dispatches window 'open-contact-popup' and 'open-lightbox'.
+ */
 // --- ITEM INDIVIDUAL (O Apartamento) ---
 class PlanItem extends HTMLElement {
     constructor() {

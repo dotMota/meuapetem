@@ -1,3 +1,7 @@
+/**
+ * <hero-brand>
+ * Attributes: none (content is built from project pages)
+ */
 class HeroBrand extends HTMLElement {
     constructor() {
         super();

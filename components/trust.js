@@ -1,3 +1,8 @@
+/**
+ * <trust-section>
+ * Slots: items (trust-item children)
+ * Child <trust-item> attributes: title, img, alt
+ */
 // --- ITEM (Empresa) ---
 class TrustItem extends HTMLElement {
     constructor() {

@@ -1,3 +1,8 @@
+/**
+ * <hero-section>
+ * Attributes: image, title, text, highlight, subtitle, curator-badge
+ * Slots: cta
+ */
 class HeroSection extends HTMLElement {
     constructor() {
         super();

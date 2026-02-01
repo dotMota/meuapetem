@@ -1,3 +1,8 @@
+/**
+ * <floating-actions>
+ * Attributes: none
+ * Events: dispatches window 'open-contact-popup' for CTA, chat, and WhatsApp actions.
+ */
 class FloatingActions extends HTMLElement {
     constructor() {
         super();

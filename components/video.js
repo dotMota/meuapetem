@@ -1,3 +1,7 @@
+/**
+ * <video-section>
+ * Attributes: cover, src, title
+ */
 class VideoSection extends HTMLElement {
     constructor() {
         super();

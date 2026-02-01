@@ -1,3 +1,9 @@
+/**
+ * <persona-switcher>
+ * Attributes: modes (JSON array of { key, label })
+ * Public: setProjectData(data)
+ * Events: dispatches window 'persona-changed' (detail: { mode }).
+ */
 class PersonaSwitcher extends HTMLElement {
     constructor() {
         super();

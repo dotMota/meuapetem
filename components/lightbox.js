@@ -1,3 +1,8 @@
+/**
+ * <lightbox-viewer>
+ * Attributes: none
+ * Events: listens for window 'open-lightbox' (detail: { src, title }).
+ */
 class LightboxViewer extends HTMLElement {
     constructor() {
         super();

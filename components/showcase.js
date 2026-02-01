@@ -1,3 +1,9 @@
+/**
+ * <showcase-section>
+ * Attributes: highlight, title, text, button-text, button-link
+ * Slots: gallery
+ * Events: dispatches window 'open-lightbox' for gallery clicks.
+ */
 class ShowcaseSection extends HTMLElement {
     constructor() {
         super();

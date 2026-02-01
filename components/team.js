@@ -1,3 +1,9 @@
+/**
+ * <team-section>
+ * Attributes: title
+ * Slots: default (team-member children)
+ * Child <team-member> attributes: role, name, text, image, inverted (auto).
+ */
 // --- COMPONENTE 1: O MEMBRO (Linha do Zig-Zag) ---
 class TeamMember extends HTMLElement {
     constructor() {

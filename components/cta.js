@@ -1,3 +1,8 @@
+/**
+ * <cta-section>
+ * Attributes: highlight, title, text, button-text, project
+ * Events: dispatches window 'open-contact-popup' on CTA click.
+ */
 class CtaSection extends HTMLElement {
     constructor() {
         super();

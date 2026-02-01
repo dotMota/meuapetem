@@ -1,3 +1,8 @@
+/**
+ * <cta-banner>
+ * Attributes: title, text, btn-text, link
+ * Events: dispatches window 'open-contact-popup' on CTA click.
+ */
 class CtaBanner extends HTMLElement {
     constructor() {
         super();

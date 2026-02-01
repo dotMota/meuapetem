@@ -1,3 +1,7 @@
+/**
+ * <custom-cursor>
+ * Attributes: none
+ */
 class CustomCursor extends HTMLElement {
     constructor() {
         super();

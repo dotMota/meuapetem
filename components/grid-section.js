@@ -1,3 +1,8 @@
+/**
+ * <grid-section>
+ * Attributes: title, subtitle, bg-color
+ * Slots: default (grid children)
+ */
 class GridSection extends HTMLElement {
     constructor() {
         super();

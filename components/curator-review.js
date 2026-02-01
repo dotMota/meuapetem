@@ -1,3 +1,7 @@
+/**
+ * <curator-review>
+ * Attributes: phrases (JSON array), curator, pros, cons
+ */
 class CuratorReview extends HTMLElement {
     constructor() {
         super();

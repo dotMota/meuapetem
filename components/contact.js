@@ -1,3 +1,8 @@
+/**
+ * <contact-popup>
+ * Attributes: photo, name, creci
+ * Events: listens for window 'open-contact-popup' (detail: { message, project })
+ */
 class ContactPopup extends HTMLElement {
     constructor() {
         super();

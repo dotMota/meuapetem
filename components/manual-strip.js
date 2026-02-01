@@ -1,3 +1,8 @@
+/**
+ * <manual-strip>
+ * Slots: icon, title, text, cta
+ * Style vars: --manual-strip-bg, --manual-strip-bg-hover, --manual-strip-border, --manual-strip-icon, --manual-strip-cta-border
+ */
 class ManualStrip extends HTMLElement {
     constructor() {
         super();

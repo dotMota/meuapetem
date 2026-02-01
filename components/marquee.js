@@ -1,3 +1,7 @@
+/**
+ * <marquee-scroll>
+ * Attributes: text, speed
+ */
 class MarqueeScroll extends HTMLElement {
     constructor() {
         super();

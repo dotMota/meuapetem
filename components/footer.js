@@ -1,3 +1,8 @@
+/**
+ * <footer-section>
+ * Attributes: project, broker, root-path
+ * Events: dispatches window 'open-contact-popup' when contact links are clicked.
+ */
 class FooterSection extends HTMLElement {
     constructor() {
         super();

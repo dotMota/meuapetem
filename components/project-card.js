@@ -1,3 +1,7 @@
+/**
+ * <project-card>
+ * Attributes: title, vibe, image, link, price, tags
+ */
 class ProjectCard extends HTMLElement {
     constructor() {
         super();

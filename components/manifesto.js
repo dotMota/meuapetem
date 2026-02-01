@@ -1,3 +1,7 @@
+/**
+ * <manifesto-section>
+ * Attributes: title, highlight, text
+ */
 class ManifestoSection extends HTMLElement {
     constructor() {
         super();
