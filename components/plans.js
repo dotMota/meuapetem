@@ -51,7 +51,7 @@ class PlanItem extends HTMLElement {
                     display: flex; align-items: center; justify-content: center;
                     font-size: 1.2rem; transition: 0.3s;
                 }
-                button:hover { background: var(--accent); color: #000; }
+                button:hover { background: var(--accent); color: var(--color-black, #000); }
 
                 .info-box { color: var(--txt-main); }
                 .tt { font-family: var(--font-title, serif); font-size: 2.2rem; margin: 0 0 1rem 0; color: var(--txt-main); }

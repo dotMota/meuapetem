@@ -13,14 +13,14 @@ class CuratorReview extends HTMLElement {
 
         // Cores (Puxa do CSS Global ou usa padrão)
         const brandColor = 'var(--color-highlight, #c5a065)';
-        const accentColor = '#FF6F61'; // Coral Vivo da Marca Mãe
+        const accentColor = 'var(--color-accent, #FF6F61)'; // Coral Vivo da Marca Mãe
 
         this.shadowRoot.innerHTML = `
         <style>
             :host {
                 display: block;
                 padding: 6rem 5%;
-                background: #0a0a0a;
+                background: var(--bg-page-body, var(--color-surface-900, #0a0a0a));
                 position: relative;
                 overflow: hidden;
             }
@@ -32,7 +32,7 @@ class CuratorReview extends HTMLElement {
                 font-family: var(--font-title, sans-serif);
                 font-size: 15rem;
                 opacity: 0.03;
-                color: #fff;
+                color: var(--color-white, #fff);
                 white-space: nowrap;
                 pointer-events: none;
                 z-index: 0;
@@ -53,7 +53,7 @@ class CuratorReview extends HTMLElement {
             .wordplay-area h2 {
                 font-family: var(--font-title, sans-serif);
                 font-size: clamp(2.5rem, 5vw, 4rem);
-                color: #fff;
+                color: var(--color-white, #fff);
                 line-height: 1.1;
                 margin-bottom: 1rem;
             }
@@ -66,7 +66,7 @@ class CuratorReview extends HTMLElement {
             
             .prefix {
                 font-size: 1.5rem;
-                color: #666;
+                color: var(--color-surface-300, #666);
                 display: block;
                 margin-bottom: 0.5rem;
                 font-family: var(--font-text, sans-serif);
@@ -104,12 +104,12 @@ class CuratorReview extends HTMLElement {
             .curator-avatar {
                 width: 50px; height: 50px;
                 border-radius: 50%;
-                background: #333;
+                background: var(--color-surface-500, #333);
                 object-fit: cover;
             }
 
-            .curator-info h4 { margin: 0; color: #fff; font-family: var(--font-text); font-size: 1.1rem; }
-            .curator-info span { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+            .curator-info h4 { margin: 0; color: var(--color-white, #fff); font-family: var(--font-text); font-size: 1.1rem; }
+            .curator-info span { color: var(--color-surface-200, #888); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
             .verdict-grid {
                 display: grid;
@@ -127,7 +127,7 @@ class CuratorReview extends HTMLElement {
             .verdict-item.know strong { color: ${accentColor}; } /* Coral (Atenção) */
 
             .verdict-item p {
-                color: #ccc;
+                color: var(--color-surface-200, #ccc);
                 font-family: var(--font-text);
                 font-size: 0.95rem;
                 line-height: 1.6;

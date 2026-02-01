@@ -50,7 +50,7 @@ class SitePreloader extends HTMLElement {
                     gap: 15px;
                     /* Fonte Padrão da Marca (MeuApêTem) */
                     font-family: 'Space Grotesk', sans-serif;
-                    color: #fff;
+                    color: var(--color-white, #fff);
                     font-size: clamp(1.5rem, 4vw, 2.5rem);
                     opacity: 0;
                     transform: translateY(30px);

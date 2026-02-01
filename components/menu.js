@@ -37,7 +37,7 @@ class SiteMenu extends HTMLElement {
                 background: var(--bg-brand-dark, #050505);
                 opacity: 0.95; 
                 backdrop-filter: blur(10px);
-                border-bottom: 1px solid rgba(255,255,255,0.1);
+                border-bottom: 1px solid var(--color-white-10, rgba(255,255,255,0.1));
             }
 
             .nav-container {
@@ -51,11 +51,11 @@ class SiteMenu extends HTMLElement {
 
             .brand-main {
                 font-family: var(--font-title, serif);
-                font-size: 1.4rem; font-weight: 700; color: #fff;
+                font-size: 1.4rem; font-weight: 700; color: var(--color-white, #fff);
                 text-decoration: none; letter-spacing: 1px; white-space: nowrap;
             }
 
-            .divider { font-size: 1.4rem; color: rgba(255,255,255,0.3); font-weight: 300; }
+            .divider { font-size: 1.4rem; color: var(--color-white-30, rgba(255,255,255,0.3)); font-weight: 300; }
 
             .brand-parent {
                 font-family: 'Space Grotesk', sans-serif;
@@ -72,7 +72,7 @@ class SiteMenu extends HTMLElement {
             }
             
             .desktop-links a {
-                color: rgba(255,255,255,0.7);
+                color: var(--color-white-70, rgba(255,255,255,0.7));
                 text-decoration: none;
                 font-family: var(--font-text, sans-serif);
                 font-size: 0.9rem;
@@ -105,8 +105,8 @@ class SiteMenu extends HTMLElement {
 
             .menu-btn {
                 background: transparent;
-                border: 1px solid rgba(255,255,255,0.3);
-                color: #fff;
+                border: 1px solid var(--color-white-30, rgba(255,255,255,0.3));
+                color: var(--color-white, #fff);
                 padding: 10px 25px;
                 border-radius: 50px;
                 font-family: var(--font-text, sans-serif);
@@ -114,7 +114,7 @@ class SiteMenu extends HTMLElement {
                 cursor: pointer; transition: all 0.3s ease; font-weight: 600;
                 display: block;
             }
-            .menu-btn:hover { background: #fff; color: #000; border-color: #fff; }
+            .menu-btn:hover { background: var(--color-white, #fff); color: var(--color-black, #000); border-color: var(--color-white, #fff); }
 
             @media (min-width: 1024px) {
                 .menu-btn { display: none; }
@@ -143,7 +143,7 @@ class SiteMenu extends HTMLElement {
             .menu-image-wrapper {
                 height: 100%; width: 100%;
                 position: relative; overflow: hidden;
-                border-left: 1px solid rgba(255,255,255,0.1);
+                border-left: 1px solid var(--color-white-10, rgba(255,255,255,0.1));
                 transform: translateX(50px); opacity: 0;
                 transition: all 0.6s ease 0.1s;
             }
@@ -155,7 +155,7 @@ class SiteMenu extends HTMLElement {
             }
 
             ::slotted(a) {
-                font-family: var(--font-title, serif); font-size: 3rem; color: rgba(255,255,255,0.4);
+                font-family: var(--font-title, serif); font-size: 3rem; color: var(--color-white-40, rgba(255,255,255,0.4));
                 text-decoration: none; margin: 0; transition: color 0.3s, transform 0.3s;
                 display: block; line-height: 1.2;
             }
@@ -164,7 +164,7 @@ class SiteMenu extends HTMLElement {
                 color: var(--highlight-color, #FF6F61) !important;
                 padding-left: 20px; border-left: 2px solid var(--highlight-color, #FF6F61);
             }
-            ::slotted(a:hover) { color: #fff; transform: translateX(10px); }
+            ::slotted(a:hover) { color: var(--color-white, #fff); transform: translateX(10px); }
             
             .back-link {
                 display: inline-flex; align-items: center; gap: 10px;
@@ -180,7 +180,7 @@ class SiteMenu extends HTMLElement {
                 .menu-image-wrapper { display: none; }
                 .menu-content { align-items: center; padding-left: 0; padding-bottom: 50px; }
                 ::slotted(a) { font-size: 2rem; text-align: center; }
-                ::slotted(a.active) { padding-left: 0; border-left: none; color: #fff !important; opacity: 1; }
+                ::slotted(a.active) { padding-left: 0; border-left: none; color: var(--color-white, #fff) !important; opacity: 1; }
                 .brand-parent, .divider { display: none; }
             }
         </style>
@@ -230,7 +230,7 @@ class SiteMenu extends HTMLElement {
             if (this.isOpen) {
                 overlay.classList.add('active');
                 btn.textContent = 'Fechar';
-                btn.style.background = '#fff'; btn.style.color = '#000';
+                btn.style.background = 'var(--color-white, #fff)'; btn.style.color = 'var(--color-black, #000)';
                 document.documentElement.style.overflow = 'hidden'; document.body.style.overflow = 'hidden';
             } else {
                 overlay.classList.remove('active');

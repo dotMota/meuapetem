@@ -83,7 +83,7 @@ class TeamMember extends HTMLElement {
                 .name {
                     font-family: var(--font-title, serif);
                     font-size: 2rem;
-                    color: #fff;
+                    color: var(--color-text-primary, var(--color-white, #fff));
                     margin: 0 0 1rem 0;
                     font-weight: 400;
                 }
@@ -177,7 +177,7 @@ class TeamSection extends HTMLElement {
                     font-family: var(--font-title, serif);
                     font-size: clamp(2rem, 4vw, 3rem);
                     text-transform: uppercase;
-                    color: #fff;
+                    color: var(--color-text-primary, var(--color-white, #fff));
                     margin: 0 0 1rem 0;
                 }
 

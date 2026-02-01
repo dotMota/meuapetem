@@ -163,7 +163,7 @@ class PersonaSwitcher extends HTMLElement {
                 }
                 .btn {
                     background: transparent; border: none;
-                    color: #888;
+                    color: var(--color-surface-200, #888);
                     font-family: var(--font-text, sans-serif);
                     font-size: 0.85rem; font-weight: 600;
                     padding: 12px 24px;
@@ -173,11 +173,11 @@ class PersonaSwitcher extends HTMLElement {
                     white-space: nowrap;
                 }
                 .btn.active {
-                    background: var(--color-highlight, #fff);
-                    color: #000;
+                    background: var(--color-highlight, var(--color-white, #fff));
+                    color: var(--color-black, #000);
                     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
                 }
-                .btn:hover:not(.active) { color: #fff; }
+                .btn:hover:not(.active) { color: var(--color-white, #fff); }
 
                 @media (max-width: 768px) {
                     :host { bottom: 1.5rem; width: auto; max-width: 90%; }

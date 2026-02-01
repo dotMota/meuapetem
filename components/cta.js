@@ -15,9 +15,9 @@ class CtaSection extends HTMLElement {
             <style>
                 :host {
                     display: block;
-                    background: var(--bg-gradient, #111);
+                    background: var(--bg-gradient, var(--color-surface-800, #111));
                     padding: var(--section-padding, 8rem 10%);
-                    border-top: var(--border-top, 1px solid #222); 
+                    border-top: var(--border-top, 1px solid var(--color-surface-600, #222)); 
                     text-align: center;
                 }
                 .container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
@@ -29,7 +29,7 @@ class CtaSection extends HTMLElement {
                 }
                 .tt { 
                     font-family: var(--font-title, serif); 
-                    font-size: 3rem; color: #fff; margin: 0; line-height: 1.1; font-weight: 400; 
+                    font-size: 3rem; color: var(--color-text-primary, var(--color-white, #fff)); margin: 0; line-height: 1.1; font-weight: 400; 
                 }
                 .txt { 
                     font-family: var(--font-text, sans-serif);
@@ -49,7 +49,7 @@ class CtaSection extends HTMLElement {
                 }
                 .btn:hover { 
                     background: var(--highlight-color, #c5a065); 
-                    color: #000; padding: 1.2rem 5rem; 
+                    color: var(--color-black, #000); padding: 1.2rem 5rem; 
                 }
                 
                 @media (max-width: 768px) {

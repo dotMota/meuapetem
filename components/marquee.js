@@ -20,9 +20,9 @@ class MarqueeScroll extends HTMLElement {
                     display: block;
                     width: 100%;
                     overflow: hidden;
-                    background: #000;
-                    border-top: 1px solid #222;
-                    border-bottom: 1px solid #222;
+                background: var(--color-black, #000);
+                border-top: 1px solid var(--color-surface-600, #222);
+                border-bottom: 1px solid var(--color-surface-600, #222);
                     padding: 4rem 0;
                     
                     /* --- VARIÁVEIS DE ESTILO (Padrões) --- */

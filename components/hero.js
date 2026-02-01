@@ -57,7 +57,7 @@ class HeroSection extends HTMLElement {
             h1 {
                 font-family: var(--font-title, serif);
                 font-size: clamp(3rem, 6vw, 5.5rem);
-                color: #fff; line-height: 1.1; margin: 0 0 1.5rem 0;
+                color: var(--color-white, #fff); line-height: 1.1; margin: 0 0 1.5rem 0;
                 opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
             }
 
@@ -81,8 +81,8 @@ class HeroSection extends HTMLElement {
             @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
             .seal-text { text-align: right; }
-            .seal-label { display: block; font-family: sans-serif; font-size: 0.65rem; color: #ccc; text-transform: uppercase; letter-spacing: 2px; }
-            .seal-brand { font-family: sans-serif; font-size: 1.4rem; color: #fff; font-weight: 700; line-height: 1; }
+            .seal-label { display: block; font-family: sans-serif; font-size: 0.65rem; color: var(--color-surface-200, #ccc); text-transform: uppercase; letter-spacing: 2px; }
+            .seal-brand { font-family: sans-serif; font-size: 1.4rem; color: var(--color-white, #fff); font-weight: 700; line-height: 1; }
             .seal-brand strong { color: var(--highlight-color); }
 
             .seal-icon {

@@ -48,14 +48,14 @@ class LightboxViewer extends HTMLElement {
                     max-width: 100%;
                     max-height: 90vh;
                     object-fit: contain;
-                    border: 1px solid #333;
+                    border: 1px solid var(--color-surface-500, #333);
                     box-shadow: 0 0 50px rgba(0,0,0,0.8);
                     display: block;
                 }
 
                 /* Legenda */
                 .caption {
-                    color: #fff;
+                    color: var(--color-white, #fff);
                     font-family: sans-serif;
                     text-align: center;
                     margin-top: 1rem;
@@ -67,7 +67,7 @@ class LightboxViewer extends HTMLElement {
                 .close-btn {
                     position: absolute; top: 2rem; right: 2rem;
                     background: none; border: none;
-                    color: #fff; font-size: 3rem; cursor: pointer;
+                    color: var(--color-white, #fff); font-size: 3rem; cursor: pointer;
                     line-height: 1; transition: transform 0.3s, color 0.3s;
                     z-index: 10;
                 }

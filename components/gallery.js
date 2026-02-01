@@ -14,8 +14,8 @@ class GalleryItem extends HTMLElement {
                     flex-shrink: 0; scroll-snap-align: center;
                     
                     /* SEMÂNTICA: Fundo do Card */
-                    background: var(--bg-section-main, #111);
-                    border-right: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--bg-section-main, var(--color-surface-800, #111));
+                    border-right: 1px solid var(--color-border-light, rgba(255, 255, 255, 0.1));
                     
                     overflow: hidden; box-sizing: border-box;
                     filter: grayscale(100%) brightness(0.5); transform: scale(0.9);
@@ -42,7 +42,7 @@ class GalleryItem extends HTMLElement {
 
                 .caption {
                     position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem;
-                    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+                    background: linear-gradient(to top, var(--color-overlay-strong, rgba(0,0,0,0.95)), transparent);
                     opacity: 0; transition: 0.4s ease; transform: translateY(20px); pointer-events: none;
                 }
                 :host(.active) .caption { opacity: 1; transform: translateY(0); }
@@ -81,7 +81,7 @@ class GallerySection extends HTMLElement {
             <style>
                 :host { 
                     display: block; 
-                    background-color: var(--bg-page-body, #050505); 
+                    background-color: var(--bg-page-body, var(--color-surface-950, #050505)); 
                     position: relative; width: 100%; overflow: hidden;
                     
                     --accent: var(--color-highlight, #c5a065);
@@ -93,7 +93,7 @@ class GallerySection extends HTMLElement {
                 
                 .intro { 
                     flex: 0 0 30%; padding: 0 4%; z-index: 10; 
-                    background: var(--bg-page-body, #050505); 
+                    background: var(--bg-page-body, var(--color-surface-950, #050505)); 
                     height: 100%; display: flex; flex-direction: column; justify-content: center; 
                     box-shadow: 10px 0 30px rgba(0,0,0,0.5); 
                 }
@@ -109,11 +109,11 @@ class GallerySection extends HTMLElement {
 
                 .nav-btn { 
                     position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; width: 60px; height: 60px; 
-                    border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.2); 
-                    background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); 
-                    color: #fff; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; 
+                    border-radius: 50%; border: 1px solid var(--color-border-lighter, rgba(255, 255, 255, 0.2)); 
+                    background: var(--color-overlay-medium, rgba(0, 0, 0, 0.5)); backdrop-filter: blur(5px); 
+                    color: var(--color-white, #fff); cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; 
                 }
-                .nav-btn:hover { background: var(--accent); border-color: var(--accent); color: #000; transform: translateY(-50%) scale(1.1); }
+                .nav-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--color-black, #000); transform: translateY(-50%) scale(1.1); }
                 .nav-btn svg { width: 24px; height: 24px; fill: currentColor; }
                 .prev { left: 32%; } .next { right: 2%; }
 
@@ -121,7 +121,7 @@ class GallerySection extends HTMLElement {
                     /* Ajuste de padding para não cortar o fundo */
                     .wrapper { flex-direction: column; height: auto; padding-bottom: 6rem; }
                     
-                    .intro { width: 100%; padding: 4rem 2rem; height: auto; border-bottom: 1px solid #222; box-sizing: border-box; }
+                    .intro { width: 100%; padding: 4rem 2rem; height: auto; border-bottom: 1px solid var(--color-surface-600, #222); box-sizing: border-box; }
                     .track-container { width: 100%; height: 60vh; }
                     .track { padding-left: 12.5vw; padding-right: 12.5vw; }
                     .nav-btn { display: none; } .tit { font-size: 2.5rem; }

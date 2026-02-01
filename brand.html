@@ -17,6 +17,7 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles/theme.css">
 
     <style>
         :root {
@@ -27,13 +28,16 @@
             --text-sec: #A1A1AA;
             --font-title: 'Space Grotesk', sans-serif;
             --font-text: 'Manrope', sans-serif;
+            --bg-page-glow: #1a1a1a;
+            --color-preview-start: #2a2a2a;
+            --color-preview-end: #141414;
         }
 
         body {
             margin: 0;
             padding: 0;
             background-color: var(--bg-page);
-            background-image: radial-gradient(circle at top center, #1a1a1a 0%, #0a0a0a 60%);
+            background-image: radial-gradient(circle at top center, var(--bg-page-glow) 0%, var(--bg-page) 60%);
             font-family: var(--font-text);
             color: var(--text-main);
             display: flex;
@@ -59,7 +63,7 @@
             font-family: var(--font-title);
             font-size: 4rem;
             margin-bottom: 1rem;
-            background: linear-gradient(to right bottom, #fff 30%, var(--color-highlight) 100%);
+            background: linear-gradient(to right bottom, var(--color-white, #fff) 30%, var(--color-highlight) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
@@ -80,7 +84,7 @@
             color: var(--text-sec);
             margin: 5rem 0 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--color-white-10, rgba(255, 255, 255, 0.1));
             text-transform: uppercase;
             letter-spacing: 2px;
         }
@@ -96,7 +100,7 @@
         /* Cards */
         .asset-card {
             background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--color-white-10, rgba(255, 255, 255, 0.1));
             border-radius: 20px;
             padding: 2rem;
             display: flex;
@@ -114,9 +118,9 @@
 
         /* Área de Preview */
         .preview-area {
-            background: radial-gradient(circle at center, #2a2a2a 0%, #141414 100%);
+            background: radial-gradient(circle at center, var(--color-preview-start) 0%, var(--color-preview-end) 100%);
             border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--color-white-10, rgba(255, 255, 255, 0.1));
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
@@ -174,7 +178,7 @@
 
         .btn-download:hover {
             background: var(--color-highlight);
-            color: #000;
+            color: var(--color-black, #000);
         }
 
         /* ESTILOS DOS SVGs */
@@ -225,11 +229,11 @@
             <div class="asset-card">
                 <div class="preview-area square-ratio">
                     <svg viewBox="0 0 512 512" id="icon-round-coral" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="256" cy="256" r="256" fill="#FF6F61" />
-                        <text x="50%" y="155" class="logo-font" font-size="130" fill="#fff">MEU</text>
-                        <text x="50%" y="290" class="logo-font" font-size="150" fill="#fff"
+                        <circle cx="256" cy="256" r="256" fill="var(--color-highlight, #FF6F61)" />
+                        <text x="50%" y="155" class="logo-font" font-size="130" fill="var(--color-white, #fff)">MEU</text>
+                        <text x="50%" y="290" class="logo-font" font-size="150" fill="var(--color-white, #fff)"
                             letter-spacing="-3">APÊ</text>
-                        <text x="50%" y="415" class="logo-font" font-size="130" fill="#fff">TEM</text>
+                        <text x="50%" y="415" class="logo-font" font-size="130" fill="var(--color-white, #fff)">TEM</text>
                     </svg>
                 </div>
                 <h3>Perfil Coral</h3>
@@ -242,11 +246,11 @@
             <div class="asset-card">
                 <div class="preview-area square-ratio">
                     <svg viewBox="0 0 512 512" id="icon-round-dark" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="256" cy="256" r="256" fill="#0a0a0a" />
-                        <text x="50%" y="155" class="logo-font" font-size="130" fill="#fff">MEU</text>
-                        <text x="50%" y="290" class="logo-font" font-size="150" fill="#FF6F61"
+                        <circle cx="256" cy="256" r="256" fill="var(--bg-page, #0a0a0a)" />
+                        <text x="50%" y="155" class="logo-font" font-size="130" fill="var(--color-white, #fff)">MEU</text>
+                        <text x="50%" y="290" class="logo-font" font-size="150" fill="var(--color-highlight, #FF6F61)"
                             letter-spacing="-3">APÊ</text>
-                        <text x="50%" y="415" class="logo-font" font-size="130" fill="#fff">TEM</text>
+                        <text x="50%" y="415" class="logo-font" font-size="130" fill="var(--color-white, #fff)">TEM</text>
                     </svg>
                 </div>
                 <h3>Perfil Dark</h3>
@@ -263,11 +267,11 @@
             <div class="asset-card">
                 <div class="preview-area square-ratio">
                     <svg viewBox="0 0 512 512" id="icon-coral" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="512" height="512" rx="90" fill="#FF6F61" />
-                        <text x="50%" y="155" class="logo-font" font-size="130" fill="#fff">MEU</text>
-                        <text x="50%" y="290" class="logo-font" font-size="150" fill="#fff"
+                        <rect width="512" height="512" rx="90" fill="var(--color-highlight, #FF6F61)" />
+                        <text x="50%" y="155" class="logo-font" font-size="130" fill="var(--color-white, #fff)">MEU</text>
+                        <text x="50%" y="290" class="logo-font" font-size="150" fill="var(--color-white, #fff)"
                             letter-spacing="-3">APÊ</text>
-                        <text x="50%" y="415" class="logo-font" font-size="130" fill="#fff">TEM</text>
+                        <text x="50%" y="415" class="logo-font" font-size="130" fill="var(--color-white, #fff)">TEM</text>
                     </svg>
                 </div>
                 <h3>Ícone Coral (App)</h3>
@@ -279,11 +283,11 @@
             <div class="asset-card">
                 <div class="preview-area square-ratio">
                     <svg viewBox="0 0 512 512" id="icon-dark" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="512" height="512" rx="90" fill="#0a0a0a" />
-                        <text x="50%" y="155" class="logo-font" font-size="130" fill="#fff">MEU</text>
-                        <text x="50%" y="290" class="logo-font" font-size="150" fill="#FF6F61"
+                        <rect width="512" height="512" rx="90" fill="var(--bg-page, #0a0a0a)" />
+                        <text x="50%" y="155" class="logo-font" font-size="130" fill="var(--color-white, #fff)">MEU</text>
+                        <text x="50%" y="290" class="logo-font" font-size="150" fill="var(--color-highlight, #FF6F61)"
                             letter-spacing="-3">APÊ</text>
-                        <text x="50%" y="415" class="logo-font" font-size="130" fill="#fff">TEM</text>
+                        <text x="50%" y="415" class="logo-font" font-size="130" fill="var(--color-white, #fff)">TEM</text>
                     </svg>
                 </div>
                 <h3>Ícone Dark (App)</h3>
@@ -300,8 +304,8 @@
                 <div class="preview-area rect-ratio">
                     <svg viewBox="0 0 600 120" id="logo-full" xmlns="http://www.w3.org/2000/svg">
                         <text x="50%" y="90" class="logo-font"
-                            style="font-size: 80px; fill: #fff; letter-spacing: -2px;">
-                            MEU<tspan style="fill: #FF6F61;">APÊ</tspan>TEM
+                            style="font-size: 80px; fill: var(--color-white, #fff); letter-spacing: -2px;">
+                            MEU<tspan style="fill: var(--color-highlight, #FF6F61);">APÊ</tspan>TEM
                         </text>
                     </svg>
                 </div>

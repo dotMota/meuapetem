@@ -20,7 +20,7 @@ class CtaBanner extends HTMLElement {
             :host {
                 display: block;
                 background-color: var(--highlight-color, #FF6F61);
-                color: #000;
+                color: var(--color-black, #000);
                 padding: 4rem 5%;
             }
 
@@ -59,8 +59,8 @@ class CtaBanner extends HTMLElement {
 
             /* Botão */
             .btn {
-                background: #000;
-                color: #fff;
+                background: var(--color-black, #000);
+                color: var(--color-white, #fff);
                 padding: 18px 40px;
                 border-radius: 50px;
                 font-family: var(--font-text, sans-serif);

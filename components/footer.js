@@ -18,10 +18,10 @@ class FooterSection extends HTMLElement {
             :host {
                 display: block;
                 background-color: var(--bg-brand-dark, #050505); 
-                color: #a1a1aa;
+                color: var(--color-text-secondary, var(--color-surface-150, #a1a1aa));
                 padding: 5rem 5% 2rem;
                 font-family: var(--font-text, sans-serif);
-                border-top: 1px solid rgba(255,255,255,0.05);
+                border-top: 1px solid var(--color-white-10, rgba(255,255,255,0.1));
             }
 
             .grid {
@@ -37,18 +37,18 @@ class FooterSection extends HTMLElement {
                 display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
             }
 
-            .brand-parent { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
-            .brand-divider { font-size: 1.5rem; color: rgba(255,255,255,0.3); font-weight: 300; }
+            .brand-parent { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--color-white, #fff); }
+            .brand-divider { font-size: 1.5rem; color: var(--color-white-30, rgba(255,255,255,0.3)); font-weight: 300; }
             .brand-project { font-family: var(--font-title, serif); font-size: 1.5rem; color: var(--highlight-color, #c5a065); }
 
-            h4 { color: #fff; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+            h4 { color: var(--color-white, #fff); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
             ul { list-style: none; padding: 0; }
             li { margin-bottom: 0.8rem; }
             a { text-decoration: none; color: inherit; transition: color 0.3s; }
             a:hover { color: var(--highlight-color, #FF6F61); }
 
             .bottom-bar {
-                border-top: 1px solid rgba(255,255,255,0.05);
+                border-top: 1px solid var(--color-white-10, rgba(255,255,255,0.1));
                 padding-top: 2rem;
                 display: flex; justify-content: space-between;
                 font-size: 0.85rem; opacity: 0.6;

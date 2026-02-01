@@ -24,7 +24,7 @@ class CustomCursor extends HTMLElement {
                     width: 20px; height: 20px;
                     border-radius: 50%;
                     background: transparent;
-                    border: 2px solid #c5a065; /* Dourado */
+                    border: 2px solid var(--color-highlight, #c5a065); /* Dourado */
                     transform: translate(-50%, -50%) scale(0.5);
                     opacity: 0;
                     transition: transform 0.4s ease-out, opacity 0.4s ease-out;
@@ -34,7 +34,7 @@ class CustomCursor extends HTMLElement {
                 .click-ripple.active {
                     transform: translate(-50%, -50%) scale(2.5);
                     opacity: 1;
-                    background: rgba(197, 160, 101, 0.2);
+                    background: color-mix(in srgb, var(--color-highlight, #c5a065) 20%, transparent);
                 }
             </style>
 

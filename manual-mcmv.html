@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&family=Fira+Code:wght@400;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles/theme.css">
 
     <script type="text/javascript">
         (function (c, l, a, r, i, t, y) {
@@ -45,6 +46,17 @@
             --font-title: 'Space Grotesk', sans-serif;
             --font-text: 'Manrope', sans-serif;
             --font-mono: 'Fira Code', monospace;
+            --color-neutral-1a: #1a1a1a;
+            --color-neutral-333: #333;
+            --color-neutral-555: #555;
+            --color-neutral-888: #888;
+            --color-neutral-aaa: #aaa;
+            --color-neutral-ccc: #ccc;
+            --color-neutral-ddd: #ddd;
+            --color-neutral-e0: #e0e0e0;
+            --color-hero-gradient-start: #1B2735;
+            --color-hero-gradient-end: #090A0F;
+            --color-receipt-red: #d32f2f;
         }
 
         body,
@@ -68,7 +80,7 @@
             margin: 0 0 1rem 0;
             font-weight: 700;
             line-height: 1.2;
-            color: #fff;
+            color: var(--color-white, #fff);
         }
 
         p {
@@ -79,7 +91,7 @@
         }
 
         strong {
-            color: #fff;
+            color: var(--color-white, #fff);
             font-weight: 600;
         }
 
@@ -98,7 +110,7 @@
         /* --- UI COMPONENTS --- */
         .btn-primary {
             background: var(--color-highlight);
-            color: #000;
+            color: var(--color-black, #000);
             padding: 1rem 2rem;
             font-weight: 700;
             font-family: var(--font-title);
@@ -148,7 +160,7 @@
         .hero {
             min-height: 600px;
             padding: 120px 0 80px;
-            background: radial-gradient(circle at center, #1B2735 0%, #090A0F 100%);
+            background: radial-gradient(circle at center, var(--color-hero-gradient-start, #1B2735) 0%, var(--color-hero-gradient-end, #090A0F) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -217,13 +229,13 @@
         .bracket-value {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--color-white, #fff);
             margin-bottom: 0.25rem;
         }
 
         .bracket-sub {
             font-size: 0.9rem;
-            color: #888;
+            color: var(--color-neutral-888, #888);
             margin-bottom: 1rem;
         }
 
@@ -232,7 +244,7 @@
             padding-top: 1rem;
             margin-top: 1rem;
             font-size: 0.85rem;
-            color: #ccc;
+            color: var(--color-neutral-ccc, #ccc);
         }
 
         /* --- 2. VERTICAL CHART (CORRIGIDO) --- */
@@ -252,7 +264,7 @@
             height: 350px;
             min-width: 600px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--color-neutral-333, #333);
             gap: 1rem;
         }
 
@@ -268,7 +280,7 @@
 
         .v-bar {
             width: 50px;
-            background: linear-gradient(to top, #333, var(--color-highlight));
+            background: linear-gradient(to top, var(--color-neutral-333, #333), var(--color-highlight));
             border-radius: 4px 4px 0 0;
             position: relative;
             transition: height 1.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -283,13 +295,13 @@
         }
 
         .v-bar.private {
-            background: linear-gradient(to top, #333, #555);
+            background: linear-gradient(to top, var(--color-neutral-333, #333), var(--color-neutral-555, #555));
         }
 
         .v-label {
             margin-top: 15px;
             font-size: 0.75rem;
-            color: #888;
+            color: var(--color-neutral-888, #888);
             text-align: center;
             line-height: 1.3;
         }
@@ -298,7 +310,7 @@
             margin-bottom: 10px;
             font-family: var(--font-mono);
             font-size: 0.85rem;
-            color: #fff;
+            color: var(--color-white, #fff);
             font-weight: bold;
         }
 
@@ -322,7 +334,7 @@
             padding: 1.5rem;
             text-align: center;
             background: rgba(0, 0, 0, 0.2);
-            color: #888;
+            color: var(--color-neutral-888, #888);
             cursor: pointer;
             font-family: var(--font-title);
             font-weight: 600;
@@ -357,7 +369,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #ddd;
+            color: var(--color-neutral-ddd, #ddd);
             font-size: 0.95rem;
         }
 
@@ -406,7 +418,7 @@
 
         .insurance-icon {
             font-size: 2rem;
-            color: #fff;
+            color: var(--color-white, #fff);
             margin-bottom: 1rem;
             display: block;
         }
@@ -425,7 +437,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, var(--color-highlight), #333);
+            background: linear-gradient(to bottom, var(--color-highlight), var(--color-neutral-333, #333));
             z-index: 0;
         }
 
@@ -449,7 +461,7 @@
             justify-content: center;
             font-weight: 800;
             font-size: 1.1rem;
-            color: #fff;
+            color: var(--color-white, #fff);
             box-shadow: 0 0 15px rgba(255, 111, 97, 0.2);
             z-index: 2;
         }
@@ -463,7 +475,7 @@
         }
 
         .step-content h3 {
-            color: #fff;
+            color: var(--color-white, #fff);
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
@@ -471,7 +483,7 @@
         .step-content p {
             margin: 0;
             font-size: 0.95rem;
-            color: #aaa;
+            color: var(--color-neutral-aaa, #aaa);
         }
 
         /* --- 6. CASE REAL (FUNDO ESCURO, RECIBO BRANCO) --- */
@@ -483,8 +495,8 @@
         }
 
         .receipt {
-            background: #fff;
-            color: #1a1a1a;
+            background: var(--color-white, #fff);
+            color: var(--color-neutral-1a, #1a1a1a);
             width: 100%;
             max-width: 380px;
             padding: 2.5rem 2rem;
@@ -500,12 +512,12 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.5rem;
-            border-bottom: 1px dashed #e0e0e0;
+            border-bottom: 1px dashed var(--color-neutral-e0, #e0e0e0);
             padding-bottom: 0.3rem;
         }
 
         .receipt-row.total {
-            border-top: 2px dashed #000;
+            border-top: 2px dashed var(--color-black, #000);
             border-bottom: none;
             padding-top: 1rem;
             margin-top: 1rem;
@@ -516,7 +528,7 @@
         .receipt-header {
             text-align: center;
             margin-bottom: 2rem;
-            border-bottom: 2px solid #000;
+            border-bottom: 2px solid var(--color-black, #000);
             padding-bottom: 1rem;
         }
 
@@ -584,7 +596,7 @@
                 style="color: var(--color-highlight); letter-spacing: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 1.5rem;">Dê
                 o START e saia do aluguel</span>
             <h1>Minha Casa<br><span class="highlight">Minha Vida</span></h1>
-            <p style="color: #ccc; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">Entenda as novas regras,
+            <p style="color: var(--color-neutral-ccc, #ccc); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">Entenda as novas regras,
                 descubra sua faixa de renda e veja como transformar sair do aluguel e conquistar seu patrimônio com
                 segurança.</p>
 
@@ -632,7 +644,7 @@
                     <span class="bracket-badge">FAIXA 4 (Novo)</span>
                     <div class="bracket-value">Até R$ 12.000</div>
                     <div class="bracket-sub">Renda Familiar Bruta</div>
-                    <div class="bracket-limit" style="color: #fff;">
+                    <div class="bracket-limit" style="color: var(--color-white, #fff);">
                         <i class="fas fa-home"></i> Imóvel até <strong>R$ 500 Mil</strong>
                     </div>
                 </div>
@@ -745,19 +757,19 @@
                 <div class="insurance-card">
                     <i class="fas fa-user-shield insurance-icon"></i>
                     <h4>MIP (Morte e Invalidez)</h4>
-                    <p style="margin:0; color: #aaa; font-size: 0.9rem;">Quita o saldo devedor proporcional à renda de
+                    <p style="margin:0; color: var(--color-neutral-aaa, #aaa); font-size: 0.9rem;">Quita o saldo devedor proporcional à renda de
                         quem faltar. Protege sua família de herdar dívidas.</p>
                 </div>
                 <div class="insurance-card">
                     <i class="fas fa-house-damage insurance-icon"></i>
                     <h4>DFI (Danos Físicos)</h4>
-                    <p style="margin:0; color: #aaa; font-size: 0.9rem;">Cobre incêndios, explosões, alagamentos e danos
+                    <p style="margin:0; color: var(--color-neutral-aaa, #aaa); font-size: 0.9rem;">Cobre incêndios, explosões, alagamentos e danos
                         estruturais no imóvel. É a proteção do patrimônio.</p>
                 </div>
                 <div class="insurance-card">
                     <i class="fas fa-hard-hat insurance-icon"></i>
                     <h4>Término de Obra</h4>
-                    <p style="margin:0; color: #aaa; font-size: 0.9rem;">Se a construtora tiver problemas, a Seguradora
+                    <p style="margin:0; color: var(--color-neutral-aaa, #aaa); font-size: 0.9rem;">Se a construtora tiver problemas, a Seguradora
                         da Caixa garante a entrega do prédio. Risco zero.</p>
                 </div>
             </div>
@@ -809,7 +821,7 @@
         </div>
     </section>
 
-    <section class="section-block" id="case-real" style="background: #111;">
+    <section class="section-block" id="case-real" style="background: var(--color-surface-800, #111);">
         <div class="container">
             <div class="section-title-center">
                 <span class="highlight"
@@ -827,14 +839,14 @@
                     </div>
 
                     <div class="receipt-body">
-                        <div style="border-bottom: 1px dashed #aaa; padding-bottom: 0.8rem; margin-bottom: 1rem;">
+                        <div style="border-bottom: 1px dashed var(--color-neutral-aaa, #aaa); padding-bottom: 0.8rem; margin-bottom: 1rem;">
                             <div class="receipt-row"><span>VALOR DO IMÓVEL</span><span>293.472,00</span></div>
                             <div class="receipt-row"><span>FINANCIAMENTO</span><span>236.643,00</span></div>
                             <div class="receipt-row"><span>RENDA CASAL</span><span>6.000,00</span></div>
                         </div>
 
                         <div class="receipt-row"
-                            style="border-bottom: 1px solid #ddd; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                            style="border-bottom: 1px solid var(--color-neutral-ddd, #ddd); padding-bottom: 0.5rem; margin-bottom: 1rem;">
                             <span style="font-weight: bold;">ITEM</span>
                             <span style="font-weight: bold;">VALOR (R$)</span>
                         </div>
@@ -867,7 +879,7 @@
                             <span>SUBTOTAL</span>
                             <span>56.829,00</span>
                         </div>
-                        <div class="receipt-row" style="color: #d32f2f;">
+                        <div class="receipt-row" style="color: var(--color-receipt-red, #d32f2f);">
                             <span>DESCONTO (VOUCHER)</span>
                             <span>-5.000,00</span>
                         </div>

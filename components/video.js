@@ -13,7 +13,7 @@ class VideoSection extends HTMLElement {
             <style>
                 :host {
                     display: block;
-                    background: var(--bg-page-body, #000);
+                    background: var(--bg-page-body, var(--color-black, #000));
                     
                     /* --- AQUI ESTÁ A MUDANÇA (Margens de Segurança) --- */
                     padding: 6rem 5%; /* Cria o espaço em volta */
@@ -38,7 +38,7 @@ class VideoSection extends HTMLElement {
                     overflow: hidden; /* Corta o conteúdo arredondado */
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-                    background: #000;
+                    background: var(--color-black, #000);
 
                     display: flex; align-items: center; justify-content: center;
                 }
@@ -71,12 +71,12 @@ class VideoSection extends HTMLElement {
                     transform: scale(1.1); 
                     background: var(--accent);
                 }
-                .play-btn svg { width: 30px; height: 30px; fill: #fff; margin-left: 5px; transition: fill 0.3s; }
-                .play-btn:hover svg { fill: #000; }
+                .play-btn svg { width: 30px; height: 30px; fill: var(--color-white, #fff); margin-left: 5px; transition: fill 0.3s; }
+                .play-btn:hover svg { fill: var(--color-black, #000); }
 
                 /* TÍTULO */
                 .label {
-                    position: absolute; bottom: 2rem; color: #fff;
+                    position: absolute; bottom: 2rem; color: var(--color-white, #fff);
                     font-family: var(--font); 
                     letter-spacing: 3px; text-transform: uppercase;
                     font-size: 0.9rem; z-index: 10; pointer-events: none;
@@ -87,7 +87,7 @@ class VideoSection extends HTMLElement {
                 .video-container {
                     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
                     z-index: 5; 
-                    background: #000;
+                    background: var(--color-black, #000);
                     
                     opacity: 0; 
                     pointer-events: none;

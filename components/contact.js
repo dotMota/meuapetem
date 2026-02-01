@@ -79,33 +79,33 @@ class ContactPopup extends HTMLElement {
                 :host { display: block; --accent: var(--color-highlight, #FF6F61); font-family: 'Manrope', sans-serif; }
                 .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: all 0.3s ease; }
                 .overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
-                .modal { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.1); width: 90%; max-width: 850px; display: grid; grid-template-columns: 1fr 1.5fr; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.4s ease; }
+                .modal { background: var(--bg-page-body, var(--color-surface-900, #0a0a0a)); border: 1px solid var(--color-white-10, rgba(255,255,255,0.1)); width: 90%; max-width: 850px; display: grid; grid-template-columns: 1fr 1.5fr; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.4s ease; }
                 .overlay.active .modal { transform: translateY(0); }
-                .broker-col { background: #111; padding: 3rem 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-right: 1px solid #222; }
+                .broker-col { background: var(--color-surface-800, #111); padding: 3rem 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-right: 1px solid var(--color-surface-600, #222); }
                 .photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); margin-bottom: 1.5rem; }
-                .name { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: #fff; margin: 0; }
-                .creci { color: #666; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem; }
+                .name { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--color-white, #fff); margin: 0; }
+                .creci { color: var(--color-surface-300, #666); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem; }
                 
                 /* Lista de Benefícios atualizada para VENDAS */
-                .benefit-list { text-align: left; color: #999; font-size: 0.9rem; list-style: none; padding: 0; }
+                .benefit-list { text-align: left; color: var(--color-surface-200, #999); font-size: 0.9rem; list-style: none; padding: 0; }
                 .benefit-list li { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
                 .benefit-list li span { color: var(--accent); font-weight: bold; }
 
                 .form-col { padding: 3rem; position: relative; }
-                .close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #777; font-size: 2rem; line-height: 1; cursor: pointer; z-index: 10; transition: 0.2s; }
-                .close-btn:hover { color: #fff; transform: rotate(90deg); }
+                .close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--color-surface-200, #777); font-size: 2rem; line-height: 1; cursor: pointer; z-index: 10; transition: 0.2s; }
+                .close-btn:hover { color: var(--color-white, #fff); transform: rotate(90deg); }
 
-                h3 { margin: 0 0 1.5rem 0; color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; }
+                h3 { margin: 0 0 1.5rem 0; color: var(--color-white, #fff); font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; }
                 .form-group { margin-bottom: 1.2rem; }
-                label { display: block; color: #777; font-size: 0.8rem; margin-bottom: 0.5rem; }
-                input { width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 6px; color: #fff; box-sizing: border-box; }
+                label { display: block; color: var(--color-surface-200, #777); font-size: 0.8rem; margin-bottom: 0.5rem; }
+                input { width: 100%; padding: 12px; background: var(--color-surface-700, #1a1a1a); border: 1px solid var(--color-surface-500, #333); border-radius: 6px; color: var(--color-white, #fff); box-sizing: border-box; }
                 input:focus { border-color: var(--accent); outline: none; }
                 
-                .btn-submit { width: 100%; padding: 14px; background: var(--accent); color: #000; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px; }
+                .btn-submit { width: 100%; padding: 14px; background: var(--accent); color: var(--color-black, #000); font-weight: 700; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px; }
                 .btn-submit:hover { filter: brightness(1.1); transform: translateY(-2px); }
                 
-                .alt-action { margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: #666; border-top: 1px solid #222; padding-top: 1.5rem; }
-                .alt-action a { color: #fff; text-decoration: none; border-bottom: 1px dotted #666; transition: 0.2s; }
+                .alt-action { margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: var(--color-surface-300, #666); border-top: 1px solid var(--color-surface-600, #222); padding-top: 1.5rem; }
+                .alt-action a { color: var(--color-white, #fff); text-decoration: none; border-bottom: 1px dotted var(--color-surface-300, #666); transition: 0.2s; }
 
                 @media (max-width: 768px) { 
                     .modal { grid-template-columns: 1fr; width: 95%; max-height: 90vh; overflow-y: auto; } 
@@ -131,7 +131,7 @@ class ContactPopup extends HTMLElement {
                         <button class="close-btn" id="close">×</button>
                         
                         <h3>Consultar Valores</h3>
-                        <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">Preencha para receber atendimento exclusivo sobre as unidades disponíveis.</p>
+                        <p style="color: var(--color-surface-200, #888); font-size: 0.9rem; margin-bottom: 1.5rem;">Preencha para receber atendimento exclusivo sobre as unidades disponíveis.</p>
                         
                         <form action="${this.formAction}" method="POST">
                             <input type="hidden" name="_next" value="${whatsappRedirect}">

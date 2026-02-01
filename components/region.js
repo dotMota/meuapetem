@@ -17,14 +17,14 @@ class RegionSection extends HTMLElement {
                 :host {
                     display: block; position: relative; height: 100vh; width: 100%;
                     overflow: hidden; 
-                    background: var(--bg-page-body, #050505); 
+                    background: var(--bg-page-body, var(--color-surface-950, #050505)); 
                     font-family: var(--font-text, sans-serif);
                     
                     --accent: var(--color-highlight, #c5a065);
                     --txt-main: var(--color-text-primary, #fff);
                     --txt-sec: var(--color-text-secondary, #ccc);
                 }
-                #map-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: var(--bg-page-body); }
+                #map-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: var(--bg-page-body, var(--color-surface-950, #050505)); }
                 
                 .cover {
                     position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
@@ -44,7 +44,7 @@ class RegionSection extends HTMLElement {
                     background: rgba(15, 15, 15, 0.95);
                     backdrop-filter: blur(10px); padding: 3rem;
                     border: 1px solid rgba(255, 255, 255, 0.1); width: 100%; max-width: 450px;
-                    color: #fff; text-align: left; transform: translateY(0); transition: transform 1s ease, opacity 1s ease;
+                    color: var(--color-white, #fff); text-align: left; transform: translateY(0); transition: transform 1s ease, opacity 1s ease;
                 }
                 
                 :host(.map-active) .cover { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -61,11 +61,11 @@ class RegionSection extends HTMLElement {
                 }
                 .btn-line:hover { color: var(--accent); }
 
-                .custom-pin { background-color: var(--accent); border: 3px solid #fff; border-radius: 50%; width: 24px; height: 24px; box-shadow: 0 0 20px rgba(0,0,0,0.8); animation: pulse 2s infinite; }
-                .brand-pin { background-color: #666; border: 2px solid #fff; border-radius: 50%; width: 14px; height: 14px; opacity: 0.7; transition: 0.3s; }
-                .brand-pin:hover { transform: scale(1.5); background-color: #fff; opacity: 1; }
-                .poi-label { background: #000; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 10px; text-transform: uppercase; white-space: nowrap; border: 1px solid #333; font-family: sans-serif; font-weight: bold; }
-                .poi-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; margin: 0 auto 5px auto; box-shadow: 0 0 10px #000; }
+                .custom-pin { background-color: var(--accent); border: 3px solid var(--color-white, #fff); border-radius: 50%; width: 24px; height: 24px; box-shadow: 0 0 20px rgba(0,0,0,0.8); animation: pulse 2s infinite; }
+                .brand-pin { background-color: var(--color-surface-300, #666); border: 2px solid var(--color-white, #fff); border-radius: 50%; width: 14px; height: 14px; opacity: 0.7; transition: 0.3s; }
+                .brand-pin:hover { transform: scale(1.5); background-color: var(--color-white, #fff); opacity: 1; }
+                .poi-label { background: var(--color-black, #000); color: var(--color-white, #fff); padding: 4px 8px; border-radius: 4px; font-size: 10px; text-transform: uppercase; white-space: nowrap; border: 1px solid var(--color-surface-500, #333); font-family: sans-serif; font-weight: bold; }
+                .poi-dot { width: 8px; height: 8px; background: var(--color-white, #fff); border-radius: 50%; margin: 0 auto 5px auto; box-shadow: 0 0 10px var(--color-black, #000); }
 
                 @keyframes pulse {
                     0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }

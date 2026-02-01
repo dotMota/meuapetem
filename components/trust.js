@@ -36,7 +36,7 @@ class TrustItem extends HTMLElement {
                     font-size: 0.7rem;
                     text-transform: uppercase;
                     letter-spacing: 3px;
-                    color: #a0a0a0;
+                    color: var(--color-text-secondary, var(--color-surface-150, #a0a0a0));
                     margin-bottom: 1.5rem;
                     display: block;
                     font-family: sans-serif;
@@ -80,7 +80,7 @@ class TrustSection extends HTMLElement {
                     /* Usa as variáveis globais ou o fallback vinho */
                     background-color: var(--bg-color, #261019);
                     padding: 5rem 10%;
-                    border-top: 1px solid rgba(255, 255, 255, 0.05);
+                    border-top: 1px solid var(--color-border-light, rgba(255, 255, 255, 0.1));
                 }
                 .container {
                     display: flex;

@@ -71,14 +71,14 @@ class RelatedProducts extends HTMLElement {
                     display: block;
                     padding: 6rem 5%;
                     background-color: var(--bg-section-main, #0f0f0f);
-                    border-top: 1px solid rgba(255,255,255,0.05);
+                    border-top: 1px solid var(--color-border-light, rgba(255,255,255,0.1));
                 }
                 .container { max-width: 1200px; margin: 0 auto; }
                 
                 .header { margin-bottom: 3rem; }
                 h3 { 
                     font-family: var(--font-title, serif); 
-                    font-size: 2rem; color: #fff; margin: 0; 
+                    font-size: 2rem; color: var(--color-text-primary, var(--color-white, #fff)); margin: 0; 
                 }
                 .sub {
                     color: var(--highlight-color, #c5a065);

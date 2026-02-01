@@ -27,7 +27,7 @@ class GridSection extends HTMLElement {
             h2 {
                 font-family: var(--font-title, sans-serif);
                 font-size: 2.5rem;
-                color: #fff;
+                color: var(--color-text-primary, var(--color-white, #fff));
                 margin: 0;
             }
 

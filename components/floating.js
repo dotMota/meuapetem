@@ -40,8 +40,8 @@ class FloatingActions extends HTMLElement {
 
                 /* Balão de Fala do Corretor */
                 .chat-bubble {
-                    background: #fff;
-                    color: #000;
+                    background: var(--color-white, #fff);
+                    color: var(--color-black, #000);
                     padding: 12px 20px;
                     border-radius: 20px 20px 0 20px;
                     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
@@ -52,7 +52,7 @@ class FloatingActions extends HTMLElement {
                     transform: scale(0.8);
                     transform-origin: bottom right;
                     animation: popIn 0.5s ease 5s forwards; /* Aparece 2s depois do botão */
-                    border: 1px solid #eee;
+                    border: 1px solid var(--color-surface-200, #eee);
                     pointer-events: auto;
                     display: flex;
                     align-items: center;
@@ -67,8 +67,8 @@ class FloatingActions extends HTMLElement {
                 /* Botão "Consultar Valores" (Antigo Baixar Tabela) */
                 .bait-btn {
                     pointer-events: auto;
-                    background: #fff;
-                    color: #000;
+                    background: var(--color-white, #fff);
+                    color: var(--color-black, #000);
                     padding: 12px 24px;
                     border-radius: 50px;
                     font-weight: 800;
@@ -86,7 +86,7 @@ class FloatingActions extends HTMLElement {
                 .bait-btn:hover {
                     transform: scale(1.05);
                     background: var(--color-highlight, #FF6F61);
-                    color: #fff;
+                    color: var(--color-white, #fff);
                 }
 
                 /* Botão WhatsApp */
@@ -94,7 +94,7 @@ class FloatingActions extends HTMLElement {
                     pointer-events: auto;
                     width: 70px;
                     height: 70px;
-                    background-color: #25d366;
+                    background-color: var(--color-success, #25d366);
                     border-radius: 50%;
                     box-shadow: 0 6px 20px rgba(0,0,0,0.4);
                     display: flex;
@@ -103,7 +103,7 @@ class FloatingActions extends HTMLElement {
                     cursor: pointer;
                     transition: transform 0.3s ease;
                     text-decoration: none;
-                    color: white;
+                    color: var(--color-white, #fff);
                     position: relative;
                 }
 
@@ -116,11 +116,11 @@ class FloatingActions extends HTMLElement {
                     position: absolute;
                     top: 0;
                     right: 0;
-                    background: red;
+                    background: var(--color-danger, red);
                     width: 18px;
                     height: 18px;
                     border-radius: 50%;
-                    border: 2px solid #fff;
+                    border: 2px solid var(--color-white, #fff);
                     animation: pulseBadge 2s infinite;
                 }
 

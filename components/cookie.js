@@ -32,9 +32,9 @@ class CookieBanner extends HTMLElement {
                     box-shadow: 0 20px 60px rgba(0,0,0,0.6);
                     animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
                 }
-                .text { color: #ccc; font-size: 0.85rem; line-height: 1.6; margin: 0; }
+                .text { color: var(--color-surface-200, #ccc); font-size: 0.85rem; line-height: 1.6; margin: 0; }
                 
-                .text strong { color: #fff; }
+                .text strong { color: var(--color-white, #fff); }
 
                 .text a {
                     color: var(--color-highlight, #FF6F61);
@@ -42,24 +42,24 @@ class CookieBanner extends HTMLElement {
                     cursor: pointer;
                     transition: 0.2s;
                 }
-                .text a:hover { color: #fff; }
+                .text a:hover { color: var(--color-white, #fff); }
 
                 .actions { display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem; }
                 
                 .btn-accept {
-                    background: var(--color-highlight, #FF6F61); color: #000; border: none;
+                    background: var(--color-highlight, #FF6F61); color: var(--color-black, #000); border: none;
                     padding: 1rem 2rem; text-transform: uppercase; font-size: 0.8rem;
                     font-weight: 700; letter-spacing: 1px; cursor: pointer;
                     transition: all 0.3s; flex: 1; border-radius: 4px;
                 }
-                .btn-accept:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 111, 97, 0.3); }
+                .btn-accept:hover { background: var(--color-white, #fff); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 111, 97, 0.3); }
 
                 .btn-close {
-                    background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #888;
+                    background: transparent; border: 1px solid var(--color-white-20, rgba(255,255,255,0.2)); color: var(--color-surface-200, #888);
                     padding: 1rem; cursor: pointer; text-transform: uppercase; font-size: 0.75rem;
                     border-radius: 4px; transition: 0.3s;
                 }
-                .btn-close:hover { color: #fff; border-color: #fff; }
+                .btn-close:hover { color: var(--color-white, #fff); border-color: var(--color-white, #fff); }
 
                 @media (max-width: 768px) {
                     :host { left: 1rem; right: 1rem; bottom: 1rem; }

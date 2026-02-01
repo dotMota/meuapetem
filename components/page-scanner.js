@@ -65,7 +65,7 @@ class PageScanner extends HTMLElement {
                     display: block; 
                     padding: 6rem 5%; 
                     background: var(--bg-section-main, #141414); 
-                    border-top: 1px solid rgba(255,255,255,0.05); 
+                    border-top: 1px solid var(--color-border-light, rgba(255,255,255,0.1)); 
                 }
                 .container { max-width: 1400px; margin: 0 auto; }
                 
@@ -86,13 +86,13 @@ class PageScanner extends HTMLElement {
                 h3 { 
                     font-family: var(--font-title, serif); 
                     font-size: 2rem; 
-                    color: #fff; 
+                    color: var(--color-text-primary, var(--color-white, #fff)); 
                     margin: 0 0 1rem 0; 
                 }
 
                 /* Descrição da Categoria */
                 .category-desc {
-                    color: #a0a0a0;
+                    color: var(--color-text-secondary, var(--color-surface-150, #a0a0a0));
                     font-family: var(--font-body, sans-serif);
                     font-size: 1rem;
                     line-height: 1.6;
@@ -106,7 +106,7 @@ class PageScanner extends HTMLElement {
                     gap: 2rem; 
                 }
                 
-                .error-msg { color: #ff6b6b; background: rgba(255,0,0,0.1); padding: 1rem; border-radius: 4px; }
+                .error-msg { color: var(--color-danger, #ff6b6b); background: var(--color-danger-soft, rgba(255,0,0,0.1)); padding: 1rem; border-radius: 4px; }
             </style>
             <div class="container">
                 <div class="section-header">

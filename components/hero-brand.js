@@ -143,7 +143,7 @@ class HeroBrand extends HTMLElement {
     renderSkeleton() {
         this.shadowRoot.innerHTML = `
             <style>
-                :host { display: block; height: 100vh; background: #000; }
+                :host { display: block; height: 100vh; background: var(--color-black, #000); }
             </style>
         `;
     }
@@ -151,7 +151,7 @@ class HeroBrand extends HTMLElement {
     renderFallback() {
         this.shadowRoot.innerHTML = `
         <style>
-            :host { display: block; height: 100vh; background: #111; color: #fff; display: flex; align-items: center; justify-content: center; font-family: sans-serif; }
+            :host { display: block; height: 100vh; background: var(--color-surface-800, #111); color: var(--color-white, #fff); display: flex; align-items: center; justify-content: center; font-family: sans-serif; }
             h1 { font-size: 3rem; text-transform: uppercase; letter-spacing: 5px; }
         </style>
         <div><h1>MEUAPÊTEM</h1></div>
@@ -167,7 +167,7 @@ class HeroBrand extends HTMLElement {
                 width: 100%; 
                 position: relative; 
                 overflow: hidden; 
-                background: #000;
+                background: var(--color-black, #000);
                 --highlight: var(--color-highlight, #FF6F61);
             }
 
@@ -196,7 +196,7 @@ class HeroBrand extends HTMLElement {
 
             .content {
                 position: absolute; bottom: 20%; left: 5%; width: 90%; max-width: 900px;
-                z-index: 10; color: #fff;
+                z-index: 10; color: var(--color-white, #fff);
                 opacity: 0; transform: translateY(40px);
                 transition: all 0.8s ease 0.3s;
             }
@@ -204,7 +204,7 @@ class HeroBrand extends HTMLElement {
             .slide.active .content { opacity: 1; transform: translateY(0); }
 
             .tag {
-                background: var(--highlight); color: #000;
+                background: var(--highlight); color: var(--color-black, #000);
                 padding: 6px 14px; font-family: 'Manrope', sans-serif;
                 font-weight: 800; text-transform: uppercase; font-size: 0.75rem;
                 letter-spacing: 2px; display: inline-block; margin-bottom: 1.5rem;
@@ -222,13 +222,13 @@ class HeroBrand extends HTMLElement {
                 font-family: 'Manrope', sans-serif;
                 font-size: clamp(1rem, 2vw, 1.4rem);
                 margin: 1.5rem 0 2.5rem 0; font-weight: 300;
-                color: #ddd; max-width: 700px; line-height: 1.5;
+                color: var(--color-surface-200, #ddd); max-width: 700px; line-height: 1.5;
             }
 
             .btn {
                 display: inline-flex; align-items: center; gap: 12px;
                 padding: 1.2rem 3rem; border: 1px solid rgba(255,255,255,0.4);
-                color: #fff; text-decoration: none; text-transform: uppercase;
+                color: var(--color-white, #fff); text-decoration: none; text-transform: uppercase;
                 font-family: 'Space Grotesk', sans-serif; letter-spacing: 3px;
                 font-size: 0.9rem; font-weight: 600;
                 transition: all 0.3s ease; background: rgba(255,255,255,0.05);
@@ -236,19 +236,19 @@ class HeroBrand extends HTMLElement {
             }
 
             .btn:hover {
-                background: #fff; color: #000; border-color: #fff;
+                background: var(--color-white, #fff); color: var(--color-black, #000); border-color: var(--color-white, #fff);
                 padding-right: 4rem; transform: translateY(-3px);
             }
             
             .nav-btn {
                 position: absolute; top: 50%; transform: translateY(-50%);
                 background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-                color: #fff; width: 60px; height: 60px; border-radius: 50%;
+                color: var(--color-white, #fff); width: 60px; height: 60px; border-radius: 50%;
                 cursor: pointer; z-index: 20; display: flex;
                 align-items: center; justify-content: center;
                 transition: 0.3s; backdrop-filter: blur(4px); font-size: 1.5rem;
             }
-            .nav-btn:hover { background: var(--highlight); border-color: var(--highlight); color: #000; }
+            .nav-btn:hover { background: var(--highlight); border-color: var(--highlight); color: var(--color-black, #000); }
             .prev { left: 2rem; }
             .next { right: 2rem; }
 
