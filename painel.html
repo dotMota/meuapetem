@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel MeuApêTem | Corretores & Produtos</title>
+    <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
+    <link rel="stylesheet" href="./styles/theme.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --panel-bg: #0b0b0b;
+            --panel-card: #141414;
+            --panel-border: rgba(255, 255, 255, 0.1);
+            --panel-text: #f5f5f7;
+            --panel-muted: #a1a1aa;
+            --panel-accent: #ff6f61;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Manrope', sans-serif;
+            background: var(--panel-bg);
+            color: var(--panel-text);
+        }
+
+        header {
+            padding: 2rem 5%;
+            border-bottom: 1px solid var(--panel-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 0;
+            color: var(--panel-muted);
+            font-size: 0.95rem;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr) minmax(420px, 1.2fr);
+            gap: 1.5rem;
+            padding: 2rem 5% 4rem;
+        }
+
+        .card {
+            background: var(--panel-card);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--panel-muted);
+            font-size: 0.9rem;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--panel-muted);
+        }
+
+        input,
+        select,
+        textarea {
+            background: #0e0e0e;
+            border: 1px solid var(--panel-border);
+            border-radius: 6px;
+            color: var(--panel-text);
+            padding: 0.6rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: var(--panel-accent);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            padding: 0.7rem 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: transparent;
+            border: 1px solid var(--panel-border);
+            color: var(--panel-text);
+        }
+
+        .list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .list-item {
+            background: #0f0f0f;
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .list-item strong {
+            font-size: 0.95rem;
+        }
+
+        .list-item span {
+            color: var(--panel-muted);
+            font-size: 0.85rem;
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .preview-card {
+            background: #0f0f0f;
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .preview-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .preview-tabs button {
+            background: transparent;
+            color: var(--panel-text);
+            border: 1px solid var(--panel-border);
+            font-weight: 600;
+        }
+
+        .preview-tabs button.active {
+            background: var(--panel-accent);
+            color: #000;
+            border-color: var(--panel-accent);
+        }
+
+        iframe {
+            width: 100%;
+            min-height: 480px;
+            border: none;
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .slot-list {
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        @media (max-width: 1200px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>Painel Interativo</h1>
+            <p>Cadastre corretores, gerencie produtos e monte páginas com componentes via slots.</p>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="card" id="brokers-card">
+            <div>
+                <h2>Corretores</h2>
+                <p>Cadastre novos corretores e reutilize nos produtos.</p>
+            </div>
+            <label>
+                Nome
+                <input type="text" id="broker-name" placeholder="Ex: Maria Souza">
+            </label>
+            <div class="split">
+                <label>
+                    Telefone
+                    <input type="text" id="broker-phone" placeholder="(11) 99999-9999">
+                </label>
+                <label>
+                    WhatsApp
+                    <input type="text" id="broker-whatsapp" placeholder="55 11 99999-9999">
+                </label>
+            </div>
+            <label>
+                E-mail
+                <input type="email" id="broker-email" placeholder="corretor@email.com">
+            </label>
+            <label>
+                Foto (URL)
+                <input type="text" id="broker-photo" placeholder="https://...">
+            </label>
+            <div class="actions">
+                <button id="save-broker">Salvar Corretor</button>
+                <button class="secondary" id="reset-broker">Limpar</button>
+            </div>
+            <div class="list" id="broker-list"></div>
+        </section>
+
+        <section class="card" id="products-card">
+            <div>
+                <h2>Produtos</h2>
+                <p>Crie produtos e vincule corretores responsáveis.</p>
+            </div>
+            <label>
+                Nome do Produto
+                <input type="text" id="product-name" placeholder="Ex: Quarten Ibirapuera">
+            </label>
+            <label>
+                Categoria
+                <select id="product-category">
+                    <option value="signature">Signature</option>
+                    <option value="comfort">Comfort</option>
+                    <option value="start">Start</option>
+                    <option value="invest">Invest</option>
+                </select>
+            </label>
+            <label>
+                Corretor Responsável
+                <select id="product-broker"></select>
+            </label>
+            <label>
+                Contato do Produto (visível ao cliente)
+                <textarea id="product-contact" placeholder="WhatsApp, telefone, e-mail"></textarea>
+            </label>
+            <label>
+                Descrição curta
+                <textarea id="product-description" placeholder="Resumo rápido para a página"></textarea>
+            </label>
+            <div class="actions">
+                <button id="save-product">Salvar Produto</button>
+                <button class="secondary" id="reset-product">Limpar</button>
+            </div>
+            <div class="list" id="product-list"></div>
+        </section>
+
+        <section class="card">
+            <div>
+                <h2>Construtor de Página</h2>
+                <p>Selecione componentes, preencha slots e veja o preview ao vivo.</p>
+            </div>
+            <label>
+                Componente
+                <select id="component-type"></select>
+            </label>
+            <div class="slot-list" id="component-fields"></div>
+            <div class="actions">
+                <button id="add-component">Adicionar componente</button>
+                <button class="secondary" id="reset-components">Limpar página</button>
+            </div>
+            <div class="preview-card">
+                <div class="preview-tabs">
+                    <button class="active" data-preview="component">Ver componente</button>
+                    <button data-preview="page">Ver página</button>
+                </div>
+                <iframe id="preview-frame" title="Preview"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const storageKey = 'painel-meuapetem-data';
+        const componentQueue = [];
+        const data = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        data.brokers = data.brokers || [];
+        data.products = data.products || [];
+
+        const brokerFields = {
+            name: document.getElementById('broker-name'),
+            phone: document.getElementById('broker-phone'),
+            whatsapp: document.getElementById('broker-whatsapp'),
+            email: document.getElementById('broker-email'),
+            photo: document.getElementById('broker-photo')
+        };
+
+        const productFields = {
+            name: document.getElementById('product-name'),
+            category: document.getElementById('product-category'),
+            broker: document.getElementById('product-broker'),
+            contact: document.getElementById('product-contact'),
+            description: document.getElementById('product-description')
+        };
+
+        const brokerList = document.getElementById('broker-list');
+        const productList = document.getElementById('product-list');
+        const componentSelect = document.getElementById('component-type');
+        const componentFields = document.getElementById('component-fields');
+        const previewFrame = document.getElementById('preview-frame');
+
+        const components = [
+            {
+                key: 'hero-section',
+                label: 'Hero',
+                fields: [
+                    { id: 'title', label: 'Título', type: 'text' },
+                    { id: 'subtitle', label: 'Subtítulo', type: 'text' },
+                    { id: 'highlight', label: 'Highlight', type: 'text' },
+                    { id: 'text', label: 'Texto', type: 'textarea' },
+                    { id: 'image', label: 'Imagem (URL)', type: 'text' },
+                    { id: 'ctaLabel', label: 'CTA (texto)', type: 'text' },
+                    { id: 'ctaLink', label: 'CTA (link)', type: 'text' }
+                ],
+                build: (values) => `
+                    <hero-section id="home" image="${values.image}" highlight="${values.highlight}"
+                        subtitle="${values.subtitle}" title="${values.title}" curator-badge="true"
+                        text="${values.text}">
+                        <a href="${values.ctaLink}" slot="cta" style="display:inline-block; margin-top:20px; padding:15px 30px; background:var(--color-highlight); color:#000; font-weight:bold; border-radius:50px; text-decoration:none; text-transform:uppercase; font-size:0.9rem;">
+                            ${values.ctaLabel}
+                        </a>
+                    </hero-section>`
+            },
+            {
+                key: 'cta-banner',
+                label: 'CTA Banner',
+                fields: [
+                    { id: 'title', label: 'Título', type: 'text' },
+                    { id: 'text', label: 'Texto', type: 'textarea' },
+                    { id: 'btnText', label: 'Texto do botão', type: 'text' },
+                    { id: 'link', label: 'Link', type: 'text' }
+                ],
+                build: (values) => `
+                    <cta-banner title="${values.title}" text="${values.text}" btn-text="${values.btnText}" link="${values.link}"></cta-banner>`
+            },
+            {
+                key: 'manual-strip',
+                label: 'Manual Strip',
+                fields: [
+                    { id: 'title', label: 'Título', type: 'text' },
+                    { id: 'text', label: 'Texto', type: 'textarea' },
+                    { id: 'ctaText', label: 'Texto do CTA', type: 'text' },
+                    { id: 'ctaLink', label: 'Link do CTA', type: 'text' }
+                ],
+                build: (values) => `
+                    <manual-strip>
+                        <span slot="title">${values.title}</span>
+                        <span slot="text">${values.text}</span>
+                        <a slot="cta" href="${values.ctaLink}">${values.ctaText}</a>
+                    </manual-strip>`
+            },
+            {
+                key: 'showcase-section',
+                label: 'Showcase',
+                fields: [
+                    { id: 'highlight', label: 'Highlight', type: 'text' },
+                    { id: 'title', label: 'Título', type: 'text' },
+                    { id: 'text', label: 'Texto', type: 'textarea' },
+                    { id: 'buttonText', label: 'Texto do botão', type: 'text' },
+                    { id: 'buttonLink', label: 'Link do botão', type: 'text' },
+                    { id: 'image1', label: 'Imagem 1 (URL)', type: 'text' },
+                    { id: 'image2', label: 'Imagem 2 (URL)', type: 'text' }
+                ],
+                build: (values) => `
+                    <showcase-section highlight="${values.highlight}" title="${values.title}" text="${values.text}"
+                        button-text="${values.buttonText}" button-link="${values.buttonLink}">
+                        <img slot="gallery" src="${values.image1}" alt="Imagem 1">
+                        <img slot="gallery" src="${values.image2}" alt="Imagem 2">
+                    </showcase-section>`
+            }
+        ];
+
+        function saveData() {
+            localStorage.setItem(storageKey, JSON.stringify(data));
+        }
+
+        function renderBrokers() {
+            brokerList.innerHTML = '';
+            productFields.broker.innerHTML = '<option value="">Selecione</option>';
+            data.brokers.forEach((broker, index) => {
+                const item = document.createElement('div');
+                item.className = 'list-item';
+                item.innerHTML = `<strong>${broker.name}</strong>
+                    <span>${broker.phone || 'Sem telefone'} · ${broker.email || 'Sem e-mail'}</span>`;
+                brokerList.appendChild(item);
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = broker.name;
+                productFields.broker.appendChild(option);
+            });
+        }
+
+        function renderProducts() {
+            productList.innerHTML = '';
+            data.products.forEach(product => {
+                const brokerName = data.brokers[product.brokerIndex]?.name || 'Sem corretor';
+                const item = document.createElement('div');
+                item.className = 'list-item';
+                item.innerHTML = `<strong>${product.name}</strong>
+                    <span>${product.category.toUpperCase()} · ${brokerName}</span>`;
+                productList.appendChild(item);
+            });
+        }
+
+        function resetBrokerForm() {
+            Object.values(brokerFields).forEach(field => field.value = '');
+        }
+
+        function resetProductForm() {
+            Object.values(productFields).forEach(field => field.value = '');
+        }
+
+        function renderComponentFields() {
+            const selected = components.find(c => c.key === componentSelect.value);
+            componentFields.innerHTML = '';
+            selected.fields.forEach(field => {
+                const wrapper = document.createElement('label');
+                wrapper.textContent = field.label;
+                const input = field.type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
+                input.dataset.field = field.id;
+                wrapper.appendChild(input);
+                componentFields.appendChild(wrapper);
+            });
+        }
+
+        function getComponentValues() {
+            const values = {};
+            componentFields.querySelectorAll('[data-field]').forEach(input => {
+                values[input.dataset.field] = input.value;
+            });
+            return values;
+        }
+
+        function buildPreview() {
+            const componentHtml = componentQueue.map(item => item.html).join('');
+            const pageHtml = `
+                <div style="background:#0a0a0a; color:#fff;">
+                    ${componentHtml}
+                </div>`;
+
+            const mode = document.querySelector('.preview-tabs .active').dataset.preview;
+            const content = mode === 'component' ? (componentQueue.at(-1)?.html || '') : pageHtml;
+
+            const scripts = `
+                <script src="./components/manual-strip.js"><\\/script>
+                <script src="./components/cta-banner.js"><\\/script>
+                <script src="./components/showcase.js"><\\/script>
+                <script src="./components/hero.js"><\\/script>`;
+
+            previewFrame.srcdoc = `
+                <html>
+                    <head>
+                        <link rel="stylesheet" href="./styles/theme.css">
+                    </head>
+                    <body style="margin:0;">
+                        ${content}
+                        ${scripts}
+                    </body>
+                </html>`;
+        }
+
+        document.getElementById('save-broker').addEventListener('click', () => {
+            if (!brokerFields.name.value) return;
+            data.brokers.push({
+                name: brokerFields.name.value,
+                phone: brokerFields.phone.value,
+                whatsapp: brokerFields.whatsapp.value,
+                email: brokerFields.email.value,
+                photo: brokerFields.photo.value
+            });
+            saveData();
+            renderBrokers();
+            resetBrokerForm();
+        });
+
+        document.getElementById('reset-broker').addEventListener('click', resetBrokerForm);
+
+        document.getElementById('save-product').addEventListener('click', () => {
+            if (!productFields.name.value) return;
+            data.products.push({
+                name: productFields.name.value,
+                category: productFields.category.value,
+                brokerIndex: productFields.broker.value,
+                contact: productFields.contact.value,
+                description: productFields.description.value
+            });
+            saveData();
+            renderProducts();
+            resetProductForm();
+        });
+
+        document.getElementById('reset-product').addEventListener('click', resetProductForm);
+
+        components.forEach(component => {
+            const option = document.createElement('option');
+            option.value = component.key;
+            option.textContent = component.label;
+            componentSelect.appendChild(option);
+        });
+
+        componentSelect.addEventListener('change', renderComponentFields);
+
+        document.getElementById('add-component').addEventListener('click', () => {
+            const selected = components.find(c => c.key === componentSelect.value);
+            const values = getComponentValues();
+            componentQueue.push({ type: selected.key, html: selected.build(values) });
+            buildPreview();
+        });
+
+        document.getElementById('reset-components').addEventListener('click', () => {
+            componentQueue.length = 0;
+            buildPreview();
+        });
+
+        document.querySelectorAll('.preview-tabs button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.preview-tabs button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                buildPreview();
+            });
+        });
+
+        renderBrokers();
+        renderProducts();
+        componentSelect.value = components[0].key;
+        renderComponentFields();
+        buildPreview();
+    </script>
+</body>
+
+</html>
