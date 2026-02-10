@@ -86,8 +86,7 @@ class CookieBanner extends HTMLElement {
 
         this.shadowRoot.getElementById('accept').onclick = () => {
             localStorage.setItem('cookies-accepted', 'true');
-            // Opcional: Aqui você poderia ativar o Clarity via JS se quisesse ser super restrito
-            // mas deixar no index.html garante que grave desde o primeiro segundo.
+            window.dispatchEvent(new CustomEvent('cookies-accepted'));
             this.remove();
         };
 

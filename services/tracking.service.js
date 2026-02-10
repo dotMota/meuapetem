@@ -1,6 +1,9 @@
 (function () {
     const ADS_ID = 'AW-17794513059';
     const CLARITY_ID = 'uyd6e6odr2';
+    const CONSENT_KEY = 'cookies-accepted';
+
+    let initialized = false;
 
     if (!window.dataLayer) {
         window.dataLayer = [];
@@ -35,6 +38,21 @@
         loadScript(`https://www.clarity.ms/tag/${CLARITY_ID}`);
     }
 
-    initGoogleAds();
-    initClarity();
+    function initTracking() {
+        if (initialized) return;
+        initialized = true;
+        initGoogleAds();
+        initClarity();
+    }
+
+    window.initTracking = initTracking;
+
+    if (localStorage.getItem(CONSENT_KEY) === 'true') {
+        initTracking();
+    }
+
+    window.addEventListener('cookies-accepted', () => {
+        localStorage.setItem(CONSENT_KEY, 'true');
+        initTracking();
+    });
 })();
