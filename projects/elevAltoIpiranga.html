@@ -15,24 +15,9 @@
     <meta name="product-category" content="start">
     <meta name="product-vibe" content="400m do Metrô">
     <meta name="product-tags" content="Linha Verde, Lazer Completo, Trisul">
+    <script src="../services/tracking.service.js"></script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'AW-17794513059');
-    </script>
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "uyd6e6odr2");
-    </script>
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap"
@@ -90,95 +75,6 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
-
-        /* --- NEW COMPONENT: MANUAL STRIP (Faixa Fina) --- */
-        .manual-strip {
-            background: linear-gradient(90deg, rgba(255, 111, 97, 0.1), rgba(20, 20, 20, 0.8));
-            border-left: 2px solid var(--color-highlight);
-            padding: 1.5rem 2rem;
-            margin: 2rem auto 4rem auto;
-            /* Centralizado com margem */
-            max-width: 1200px;
-            width: 90%;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .manual-strip:hover {
-            transform: translateX(10px);
-            background: linear-gradient(90deg, rgba(255, 111, 97, 0.15), rgba(30, 30, 30, 0.9));
-        }
-
-        .manual-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .manual-icon {
-            color: var(--color-highlight);
-            font-size: 1.5rem;
-        }
-
-        .manual-text h3 {
-            margin: 0;
-            font-size: 1rem;
-            font-family: var(--font-title);
-            color: #fff;
-        }
-
-        .manual-text p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--color-text-secondary);
-        }
-
-        .manual-btn {
-            white-space: nowrap;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .manual-btn:hover {
-            border-color: var(--color-highlight);
-            color: var(--color-highlight);
-        }
-
-
-        .hero-cta {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
-            background: var(--color-accent-primary, var(--color-highlight));
-            font-weight: bold;
-            border-radius: 50px;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .hero-cta--dark {
-            color: var(--color-surface-base, #000);
-        }
-
-        .hero-cta--light {
-            color: var(--color-text-primary, #fff);
-        }
-
-        .manual-arrow {
-            margin-left: 5px;
-            font-size: 0.8em;
-        }
     </style>
 
     <script src="../components/preloader.js"></script>
@@ -194,6 +90,7 @@
     <script src="../components/region.js" defer></script>
     <script src="../components/cta.js" defer></script>
     <script src="../components/trust.js" defer></script>
+    <script src="../components/manual-strip.js" defer></script>
     <script src="../components/footer.js" defer></script>
     <script src="../components/curator-review.js" defer></script>
     <script src="../components/floating.js" defer></script>
@@ -237,17 +134,12 @@
         text="400M DO METRÔ SANTOS-IMIGRANTES — QUALIDADE TRISUL — LAZER DE CLUBE — VARANDA EM TODAS AS UNIDADES — "
         speed="100s">
     </marquee-scroll>
-
-    <div class="manual-strip">
-        <div class="manual-content">
-            <i class="fas fa-book-reader manual-icon"></i>
-            <div class="manual-text">
-                <h3>Dúvidas sobre o Minha Casa Minha Vida?</h3>
-                <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
-            </div>
-        </div>
-        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right manual-arrow"></i></a>
-    </div>
+    <manual-strip
+        title="Dúvidas sobre o Minha Casa Minha Vida?"
+        text="Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão."
+        href="../manual-mcmv.html"
+        cta="Ler Guia da Conquista">
+    </manual-strip>
 
     <stats-section id="stats">
         <stat-item slot="items" class="hover-target" id="stat-1" number="400m"

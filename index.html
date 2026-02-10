@@ -5,24 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MeuApêTem | Curadoria Imobiliária Inteligente</title>
+    <script src="./services/tracking.service.js"></script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17794513059"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'AW-17794513059');
-    </script>
-
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "uyd6e6odr2");
-    </script>
-
-    <meta name="description"
+<meta name="description"
         content="Encontre o imóvel ideal. MeuApêTem Start, Comfort, Signature e Invest. Curadoria imobiliária completa.">
     <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
 
@@ -94,94 +79,12 @@
             font-weight: 300;
         }
 
-        /* --- NEW COMPONENT: MANUAL STRIP (Faixa Fina) --- */
-        .manual-strip {
-            background: linear-gradient(90deg, rgba(255, 111, 97, 0.1), rgba(20, 20, 20, 0.8));
-            border-left: 2px solid var(--color-highlight);
-            padding: 1.5rem 2rem;
-            margin: 2rem auto 4rem auto;
-            /* Centralizado com margem */
-            max-width: 1200px;
-            width: 90%;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .manual-strip:hover {
-            transform: translateX(10px);
-            background: linear-gradient(90deg, rgba(255, 111, 97, 0.15), rgba(30, 30, 30, 0.9));
-        }
-
-        .manual-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .manual-icon {
-            color: var(--color-highlight);
-            font-size: 1.5rem;
-        }
-
-        .manual-text h3 {
-            margin: 0;
-            font-size: 1rem;
-            font-family: var(--font-title);
-            color: #fff;
-        }
-
-        .manual-text p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--color-text-secondary);
-        }
-
-        .manual-btn {
-            white-space: nowrap;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .manual-btn:hover {
-            border-color: var(--color-highlight);
-            color: var(--color-highlight);
-        }
-
-        .manual-arrow {
-            margin-left: 5px;
-            font-size: 0.8em;
-        }
-
         /* Divider */
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
             width: 100%;
             margin: 0;
-        }
-
-        @media (max-width: 768px) {
-            .manual-strip {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-                padding: 1.5rem;
-            }
-
-            .manual-btn {
-                width: 100%;
-                text-align: center;
-            }
         }
 
         /* Ajuste fino para os botões do Hero */
@@ -206,6 +109,7 @@
     <script src="./components/project-card.js" defer></script>
     <script src="./components/page-scanner.js" defer></script>
     <script src="./components/cta-banner.js" defer></script>
+    <script src="./components/manual-strip.js" defer></script>
     <script src="./components/footer.js" defer></script>
     <script src="./components/cursor.js" defer></script>
     <script src="./components/floating.js" defer></script>
@@ -246,16 +150,12 @@
     <div class="divider"></div>
     <div id="start">
         <page-scanner category="start"></page-scanner>
-        <div class="manual-strip">
-            <div class="manual-content">
-                <i class="fas fa-book-reader manual-icon"></i>
-                <div class="manual-text">
-                    <h3>Dúvidas sobre o Primeiro Apê?</h3>
-                    <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
-                </div>
-            </div>
-            <a href="./manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right manual-arrow"></i></a>
-        </div>
+        <manual-strip
+            title="Dúvidas sobre o Primeiro Apê?"
+            text="Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão."
+            href="./manual-mcmv.html"
+            cta="Ler Guia da Conquista">
+        </manual-strip>
     </div>
 
     <div class="divider"></div>
