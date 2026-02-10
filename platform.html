@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeuApêTem Platform | SaaS para Corretores</title>
+  <meta name="description"
+    content="Plataforma MeuApêTem: assinatura para corretores criarem suas próprias páginas com componentes personalizáveis e painel de controle.">
+  <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
+  <style>
+    :root {
+      --surface: #0b0b0d;
+      --surface-card: #15151a;
+      --text: #f5f5f7;
+      --text-soft: #b5b5bf;
+      --primary: #d4af37;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", Arial, sans-serif;
+      background: radial-gradient(circle at top, #181820 0%, var(--surface) 55%);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 56px;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .actions a {
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    .actions a.primary {
+      background: var(--primary);
+      color: #111;
+      border-color: transparent;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: var(--text-soft);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin: 36px 0 52px;
+    }
+
+    .card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .steps {
+      background: #111117;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 48px;
+    }
+
+    ol {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .pricing {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .price {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .price strong {
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
+  </style>
+  <script src="./services/platform.service.js" defer></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="logo">MEUAPÊTEM PLATFORM</div>
+      <div class="actions">
+        <a href="./index.html">Voltar ao site</a>
+        <a href="./dashboard.html" class="primary">Abrir painel</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Transformamos a MeuApêTem em uma plataforma SaaS para corretores.</h1>
+      <p>
+        Inspirado na lógica de multi-tenant do Platforms Starter Kit da Vercel, este fluxo cria um painel onde cada
+        corretor assina um plano, personaliza sua marca, ativa/desativa componentes e publica uma página própria em URL
+        dedicada.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h3>Arquitetura multi-tenant</h3>
+        <p>Cada corretor vira um tenant com slug exclusivo e configuração isolada de tema e conteúdo.</p>
+      </article>
+      <article class="card">
+        <h3>Painel de controle</h3>
+        <p>Login simples, edição de branding, paleta de cor e blocos de página por toggle.</p>
+      </article>
+      <article class="card">
+        <h3>Reuso dos componentes</h3>
+        <p>Os blocos seguem o estilo do seu projeto atual para acelerar rollout sem quebrar o site institucional.</p>
+      </article>
+      <article class="card">
+        <h3>Assinaturas prontas</h3>
+        <p>Estrutura de planos Starter, Pro e Scale preparada para conectar gateway de pagamento depois.</p>
+      </article>
+    </section>
+
+    <section class="steps">
+      <h2>Fluxo de operação da plataforma</h2>
+      <ol>
+        <li>Corretor cria conta no painel e escolhe um plano de assinatura.</li>
+        <li>A conta recebe um slug (ex.: <code>?slug=studio</code>) para sua página pública.</li>
+        <li>No painel, o corretor personaliza headline, contatos, paleta e blocos ativos.</li>
+        <li>Ao salvar, a página pública do corretor é atualizada automaticamente.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Planos de assinatura</h2>
+      <div class="pricing" id="pricing"></div>
+    </section>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const pricing = document.getElementById('pricing');
+      const store = window.PlatformService.readStore();
+      const plans = Object.values(store.subscriptions);
+
+      pricing.innerHTML = plans.map((plan) => `
+          <article class="price">
+            <h3>${plan.name}</h3>
+            <strong>${plan.price}</strong>
+            <p>${plan.seats} usuário(s) no painel</p>
+          </article>
+        `).join('');
+    });
+  </script>
+</body>
+
+</html>

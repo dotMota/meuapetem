@@ -210,3 +210,36 @@ node --check components/project-card.js
 
 - O projeto está em operação com tráfego real; mudanças devem priorizar **compatibilidade retroativa**.
 - Erros de asset ausente (ex.: imagem com path inválido) devem ser tratados como correção de conteúdo, sem acoplar workaround no componente.
+
+---
+
+## Extensão SaaS (Platform)
+
+Para iniciar a evolução no modelo do tutorial de referência (Platforms Starter Kit), foi adicionada uma camada de plataforma multi-tenant em modo progressivo, sem quebrar o site atual:
+
+- `platform.html`: landing da plataforma SaaS, proposta de valor e planos de assinatura.
+- `dashboard.html`: painel de controle para corretor editar marca, tema e componentes ativos.
+- `tenant.html`: página pública por corretor (`?slug=...`) renderizada a partir da configuração salva.
+- `services/platform.service.js`: service de tenants, assinaturas, seed de dados e persistência (`localStorage`).
+- `services/platform-auth.service.js`: autenticação simplificada de sessão (`sessionStorage`).
+
+### Como testar o fluxo SaaS localmente
+
+1. Suba o servidor estático:
+
+```bash
+python3 -m http.server 4173 --directory /workspace/meuapetem
+```
+
+2. Acesse:
+
+- Landing da plataforma: `http://127.0.0.1:4173/platform.html`
+- Painel: `http://127.0.0.1:4173/dashboard.html`
+- Tenant demo: `http://127.0.0.1:4173/tenant.html?slug=studio`
+
+3. Login demo no painel:
+
+- E-mail: `demo@meuapetem.com`
+- Senha: `demo123`
+
+> Observação: nesta etapa o backend é simulado no browser para validar UX, arquitetura e modelo de produto. Próximo passo recomendado é migrar persistência/autenticação para API real (ex.: Next.js + Postgres + Auth) mantendo o mesmo contrato de dados.

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel MeuApêTem Platform</title>
+  <link rel="icon" type="image/png" href="./media/utils/mAPTmLogo.svg">
+  <style>
+    :root {
+      --bg: #0f1014;
+      --card: #191b22;
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f4f4f6;
+      --soft: #a3a4ad;
+      --primary: #d4af37;
+      --ok: #3ddc97;
+      --danger: #ff5c7a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .hidden { display: none; }
+
+    h1, h2, h3 { margin-top: 0; }
+
+    label { display: block; margin-bottom: 6px; color: var(--soft); font-size: 0.9rem; }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #13151b;
+      color: var(--text);
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .primary { background: var(--primary); color: #121212; }
+    .ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
+    .danger { background: var(--danger); color: #fff; }
+
+    .status { margin-top: 8px; color: var(--ok); min-height: 20px; }
+
+    .block-list { display: grid; gap: 8px; }
+
+    .block-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-links a { color: var(--text); }
+  </style>
+  <script src="./services/platform.service.js" defer></script>
+  <script src="./services/platform-auth.service.js" defer></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="header">
+      <h1>Painel de Corretores</h1>
+      <div class="top-links">
+        <a href="./platform.html">Sobre a plataforma</a>
+      </div>
+    </div>
+
+    <section id="authCard" class="card">
+      <h2>Entrar</h2>
+      <p style="color:var(--soft)">Use <strong>demo@meuapetem.com</strong> / <strong>demo123</strong> para testar.</p>
+      <div class="grid">
+        <div>
+          <label for="loginEmail">E-mail</label>
+          <input id="loginEmail" type="email" value="demo@meuapetem.com">
+        </div>
+        <div>
+          <label for="loginPassword">Senha</label>
+          <input id="loginPassword" type="password" value="demo123">
+        </div>
+      </div>
+      <button id="loginBtn" class="primary">Entrar no painel</button>
+      <p id="authStatus" class="status"></p>
+    </section>
+
+    <section id="appCard" class="hidden">
+      <article class="card">
+        <h2>Conta</h2>
+        <div class="grid">
+          <div>
+            <label for="brokerName">Nome comercial</label>
+            <input id="brokerName">
+          </div>
+          <div>
+            <label for="brokerHeadline">Headline</label>
+            <input id="brokerHeadline">
+          </div>
+          <div>
+            <label for="brokerSubheadline">Subheadline</label>
+            <input id="brokerSubheadline">
+          </div>
+          <div>
+            <label for="brokerPhone">Telefone</label>
+            <input id="brokerPhone">
+          </div>
+          <div>
+            <label for="brokerWhatsapp">WhatsApp URL</label>
+            <input id="brokerWhatsapp">
+          </div>
+          <div>
+            <label for="brokerInstagram">Instagram</label>
+            <input id="brokerInstagram">
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Tema visual</h2>
+        <div class="grid">
+          <div><label for="colorPrimary">Cor primária</label><input id="colorPrimary"></div>
+          <div><label for="colorSurface">Fundo</label><input id="colorSurface"></div>
+          <div><label for="colorCard">Cards</label><input id="colorCard"></div>
+          <div><label for="colorText">Texto</label><input id="colorText"></div>
+          <div><label for="colorTextSoft">Texto auxiliar</label><input id="colorTextSoft"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Componentes ativos</h2>
+        <div id="blockList" class="block-list"></div>
+      </article>
+
+      <article class="card">
+        <button id="saveBtn" class="primary">Salvar alterações</button>
+        <button id="previewBtn" class="ghost">Abrir página pública</button>
+        <button id="logoutBtn" class="danger">Sair</button>
+        <p id="saveStatus" class="status"></p>
+      </article>
+    </section>
+  </div>
+
+  <script>
+    const authCard = document.getElementById('authCard');
+    const appCard = document.getElementById('appCard');
+    const authStatus = document.getElementById('authStatus');
+    const saveStatus = document.getElementById('saveStatus');
+
+    const state = {
+      broker: null,
+      enabledBlocks: new Set()
+    };
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function currentBrokerFromSession() {
+      const session = window.PlatformAuthService.getSession();
+      if (!session) return null;
+
+      const store = window.PlatformService.readStore();
+      return store.brokers.find((broker) => broker.id === session.brokerId) || null;
+    }
+
+    function renderBlockList() {
+      const list = byId('blockList');
+      const catalog = window.PlatformService.componentCatalog;
+
+      list.innerHTML = Object.keys(catalog).map((key) => {
+        const item = catalog[key];
+        const checked = state.enabledBlocks.has(key) ? 'checked' : '';
+        return `
+          <label class="block-item">
+            <span>
+              <strong>${item.label}</strong><br>
+              <small style="color:var(--soft)">${item.description}</small>
+            </span>
+            <input type="checkbox" data-block="${key}" ${checked}>
+          </label>
+        `;
+      }).join('');
+
+      list.querySelectorAll('input[type="checkbox"]').forEach((input) => {
+        input.addEventListener('change', (event) => {
+          const block = event.target.getAttribute('data-block');
+          if (event.target.checked) {
+            state.enabledBlocks.add(block);
+          } else {
+            state.enabledBlocks.delete(block);
+          }
+        });
+      });
+    }
+
+    function fillForm(broker) {
+      byId('brokerName').value = broker.name;
+      byId('brokerHeadline').value = broker.brand.headline;
+      byId('brokerSubheadline').value = broker.brand.subheadline;
+      byId('brokerPhone').value = broker.brand.phone;
+      byId('brokerWhatsapp').value = broker.brand.whatsapp;
+      byId('brokerInstagram').value = broker.brand.instagram;
+
+      byId('colorPrimary').value = broker.site.palette.primary;
+      byId('colorSurface').value = broker.site.palette.surface;
+      byId('colorCard').value = broker.site.palette.card;
+      byId('colorText').value = broker.site.palette.text;
+      byId('colorTextSoft').value = broker.site.palette.textSoft;
+
+      state.enabledBlocks = new Set(broker.site.enabledBlocks);
+      renderBlockList();
+    }
+
+    function showApp(broker) {
+      state.broker = broker;
+      fillForm(broker);
+      authCard.classList.add('hidden');
+      appCard.classList.remove('hidden');
+    }
+
+    function collectPatch() {
+      return {
+        brand: {
+          headline: byId('brokerHeadline').value,
+          subheadline: byId('brokerSubheadline').value,
+          phone: byId('brokerPhone').value,
+          whatsapp: byId('brokerWhatsapp').value,
+          instagram: byId('brokerInstagram').value
+        },
+        homepage: {
+          title: byId('brokerHeadline').value,
+          subtitle: byId('brokerSubheadline').value,
+          ctaUrl: byId('brokerWhatsapp').value
+        },
+        palette: {
+          primary: byId('colorPrimary').value,
+          surface: byId('colorSurface').value,
+          card: byId('colorCard').value,
+          text: byId('colorText').value,
+          textSoft: byId('colorTextSoft').value
+        },
+        enabledBlocks: Array.from(state.enabledBlocks)
+      };
+    }
+
+    byId('loginBtn').addEventListener('click', () => {
+      try {
+        const email = byId('loginEmail').value;
+        const password = byId('loginPassword').value;
+        window.PlatformAuthService.login(email, password);
+        const broker = currentBrokerFromSession();
+        showApp(broker);
+        authStatus.textContent = '';
+      } catch (error) {
+        authStatus.textContent = error.message;
+      }
+    });
+
+    byId('saveBtn').addEventListener('click', () => {
+      if (!state.broker) return;
+
+      try {
+        const patch = collectPatch();
+        const updated = window.PlatformService.updateBrokerSite(state.broker.id, patch);
+        state.broker = updated;
+        saveStatus.textContent = 'Configurações salvas com sucesso.';
+      } catch (error) {
+        saveStatus.textContent = error.message;
+      }
+    });
+
+    byId('previewBtn').addEventListener('click', () => {
+      if (!state.broker) return;
+      window.open(`./tenant.html?slug=${state.broker.slug}`, '_blank');
+    });
+
+    byId('logoutBtn').addEventListener('click', () => {
+      window.PlatformAuthService.logout();
+      window.location.reload();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const broker = currentBrokerFromSession();
+      if (broker) showApp(broker);
+    });
+  </script>
+</body>
+
+</html>
