@@ -88,8 +88,6 @@ class HeroBrand extends HTMLElement {
             .dots { position: absolute; bottom: 9%; left: 5%; z-index: 20; display: flex; gap: 8px; }
             .dot { width: 26px; height: 3px; background: rgba(255,255,255,0.3); border: none; cursor: pointer; transition: all 0.3s ease; }
             .dot.active { background: var(--highlight); width: 46px; }
-            .home-buttons { position: absolute; top: 2rem; right: 5%; z-index: 30; display: flex; gap: 1rem; }
-            .home-btn { padding: 0.9rem 1.2rem; text-decoration: none; color: #fff; border: 1px solid rgba(255,255,255,0.35); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; background: rgba(0,0,0,0.35); }
             @media (max-width: 768px) { .content { bottom: 23%; } .controls { bottom: 5%; right: 5%; } .dots { bottom: 5.5%; left: 5%; } h1 { line-height: 1; letter-spacing: -1px; } }
         </style>
 
@@ -116,10 +114,6 @@ class HeroBrand extends HTMLElement {
                 ${this.slides.map((_, index) => `<button class="dot ${index === 0 ? 'active' : ''}" data-index="${index}"></button>`).join('')}
             </div>
 
-            <div class="home-buttons">
-                <a class="home-btn btn-primary" part="btn-primary" href="#signature">Coleção Signature</a>
-                <a class="home-btn btn-secondary" part="btn-secondary" href="#start">Linha Start</a>
-            </div>
         </div>`;
     }
 

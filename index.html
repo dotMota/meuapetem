@@ -86,18 +86,6 @@
             width: 100%;
             margin: 0;
         }
-
-        /* Ajuste fino para os botões do Hero */
-        hero-brand::part(btn-primary) {
-            background-color: #fff !important;
-            color: #000 !important;
-            border-color: #fff !important;
-        }
-
-        hero-brand::part(btn-secondary) {
-            border-color: var(--highlight-color) !important;
-            color: var(--highlight-color) !important;
-        }
     </style>
 
     <script src="./components/preloader.js"></script>
@@ -175,24 +163,6 @@
     <contact-popup photo="./media/utils/logo-perfil.svg"></contact-popup>
     <cookie-banner></cookie-banner>
     <custom-cursor></custom-cursor>
-
-    <script>
-        window.addEventListener('load', () => {
-            const hero = document.querySelector('hero-brand');
-            if (hero) {
-                const btnSec = hero.shadowRoot.querySelector('.btn-secondary');
-                if (btnSec) {
-                    btnSec.innerText = "Linha Start";
-                    btnSec.href = "#start";
-                }
-                const btnPri = hero.shadowRoot.querySelector('.btn-primary');
-                if (btnPri) {
-                    btnPri.innerText = "Coleção Signature";
-                    btnPri.href = "#signature";
-                }
-            }
-        });
-    </script>
 
 </body>
 
