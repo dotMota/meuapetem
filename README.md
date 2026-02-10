@@ -1,173 +1,212 @@
-# 🏢 MeuApêTem - Plataforma de Experiência Imobiliária
+# MeuApêTem — Plataforma de Curadoria Imobiliária
 
-> "Não vendemos apenas paredes e janelas, mas a luz da manhã que atravessa os cômodos."
+Site institucional/comercial da MeuApêTem com landing principal e páginas de produto, construído em **HTML + CSS + Web Components nativos (Vanilla JS)**, sem build step.
 
-Bem-vindo ao repositório oficial do **MeuApêTem**. Este projeto não é apenas um site imobiliário; é uma plataforma de curadoria experiencial projetada para humanizar a jornada de compra do primeiro imóvel, conectando pessoas a espaços onde suas histórias serão vividas.
+## Visão geral
 
----
+O projeto é orientado a:
 
-## 📄 Descrição do Projeto
-
-A **MeuApêTem** é uma solução digital que rejeita a frieza do mercado imobiliário tradicional. Utilizamos tecnologia web moderna para criar uma vitrine imersiva, focada em sensações e experiências de vida, e não apenas em especificações técnicas.
-
-**Objetivo:** Transformar a busca por um lar em uma experiência de autodescobrimento, simples e transparente.
-
----
-
-## 🌟 Conceito e Essência
-
-A marca existe na intersecção entre *habitat* e *identidade*.
-
-### Pilares da Marca
-
-* **Autenticidade Descomplicada:** Rejeitamos o "imobiliariês". Falamos de pessoas para pessoas, de forma direta e honesta.
-* **Curadoria Experiencial:** Filtramos imóveis pelo que eles proporcionam (home office produtivo, espaço para pets, silêncio para refletir), indo além da metragem quadrada.
-* **Transparência Radical:** A tecnologia serve para mostrar a verdade, sem letras miúdas ou surpresas desagradáveis.
+- **Curadoria por categoria** (`start`, `comfort`, `signature`, `invest`).
+- **Arquitetura HTML-first** para edição rápida de conteúdo.
+- **Componentização via Custom Elements** para reuso de blocos visuais.
+- **Tematização por variáveis CSS** definidas por página de produto.
+- **Indexação centralizada de produtos** por service (`services/product-index.service.js`).
 
 ---
 
-## 🏗️ Arquitetura Técnica (HTML-First)
+## Stack e princípios
 
-Para garantir performance máxima, SEO impecável e facilidade de manutenção por qualquer membro da equipe (devs ou estagiários), adotamos a arquitetura **HTML-First com Web Components Nativos**.
+- **Frontend:** HTML5, CSS3, JavaScript ES Modules-like (scripts globais carregados por `<script src>`).
+- **Componentes:** Web Components com Shadow DOM (`components/*.js`).
+- **Sem framework e sem bundler:** deploy estático (compatível com GitHub Pages / CDN estático).
 
-### Por que HTML-First?
+Princípios aplicados no código:
 
-1.  **Zero Dependências:** Não usamos frameworks pesados (React, Vue, Angular). Apenas o navegador e Javascript puro (Vanilla JS).
-2.  **Resiliência:** Se o JavaScript falhar, o conteúdo crítico (texto e imagens) continua visível e legível no HTML.
-3.  **Manutenção Simples:** Para alterar um texto, preço ou imagem, basta editar o arquivo `.html`. Não é necessário conhecer lógica de programação complexa ou "buildar" o projeto.
+1. **HTMLS + SLOTS**
+   - Conteúdo é injetável por slots quando o componente permite.
+   - Fallback por atributos é mantido para compatibilidade com páginas já em produção.
+
+2. **Tema por variáveis semânticas**
+   - As cores ficam na página de produto (`:root`) e os componentes consomem variáveis semânticas.
+   - Exemplo de cadeia de fallback: `--color-accent-primary -> --color-highlight`.
+
+3. **Baixo risco em produção**
+   - Refactors preservam API pública dos componentes (atributos existentes continuam válidos).
 
 ---
 
-## 📂 Estrutura de Pastas
-
-A organização do projeto é estrita para manter a escalabilidade.
+## Estrutura real do repositório
 
 ```text
-MeuApêTem/
-│
-├── index.html              # Vitrine Principal (Landing Page da Marca)
-├── README.md               # Este guia de documentação
-│
-├── css/
-│   └── global.css          # Design System (Variáveis CSS, Fontes, Resets)
-│
-├── media/                  # Repositório Central de Assets
-│   ├── utils/              # Logos, ícones de UI, favicons, social assets
-│   ├── quarten/            # [PROJETO] Imagens do Quarten Ibirapuera
-│   ├── aire/               # [PROJETO] Imagens do Aire (Futuro lançamento)
-│   └── [novo-projeto]/     # Crie uma pasta nova para cada novo prédio
-│
-├── _components/            # Lógica JS (Web Components) - NÚCLEO DO SISTEMA
-│   ├── hero-banner.js      # Banner principal com suporte a vídeo/imagem
-│   ├── resort-gallery.js   # Galeria de slides infinita e arrastável
-│   ├── floor-plans.js      # Visualizador de plantas com abas
-│   └── site-footer.js      # Rodapé padrão
-│
-└── projects/               # Páginas de Produto (Landing Pages Individuais)
-    ├── quarten.html        # Página do produto Quarten
-    └── template.html       # Arquivo base para novos lançamentos
+.
+├── index.html
+├── manual-mcmv.html
+├── brand.html
+├── politica.html
+├── projects/
+│   ├── quarten.html
+│   ├── granoscar.html
+│   ├── elevButanta.html
+│   ├── elevSacoma.html
+│   ├── elevAltoIpiranga.html
+│   ├── vilaBoulevardMooca.html
+│   └── peninsulaVilaMadalena.html
+├── components/
+│   ├── hero-brand.js
+│   ├── page-scanner.js
+│   ├── project-card.js
+│   ├── hero.js
+│   ├── gallery.js
+│   ├── plans.js
+│   ├── cta.js
+│   ├── trust.js
+│   └── ... (demais componentes de UI)
+├── services/
+│   └── product-index.service.js
+├── media/
+│   ├── utils/
+│   └── [pastas de empreendimentos]
+└── README.md
 ```
-## 🎨 Padrões de Desenvolvimento (Code Standards)
-
-Para manter a consistência e escalabilidade do projeto, seguimos regras estritas de nomenclatura e estrutura.
-
-### 1. Idioma
-
-* **Código (Lógica):** Todo JavaScript, nomes de classes CSS, IDs e atributos HTML customizados devem ser escritos em **INGLÊS**.
-    * ✅ **Correto:** `accent-color`, `initGallery()`, `background-image`, `floor-plans`
-    * ❌ **Errado:** `cor-destaque`, `iniciarGaleria()`, `imagem-fundo`, `plantas-baixas`
-* **Conteúdo (Texto):** Todo texto visível ao cliente final e comentários explicativos no código devem ser escritos em **PORTUGUÊS**.
-
-### 2. Estilização (CSS Variables)
-
-Nunca use cores hexadecimais "hardcoded" (ex: `#c5a065`) diretamente dentro dos componentes ou nas páginas de produto. Use sempre as variáveis semânticas definidas no `:root` de cada arquivo HTML.
-
-| Variável | Descrição |
-| :--- | :--- |
-| `--accent-color` | Cor principal da marca do empreendimento (botões, destaques, ícones). |
-| `--bg-dark` | Cor de fundo predominante da página. |
-| `--font-display` | Fonte utilizada para títulos e chamadas. |
 
 ---
 
-## 🧩 Guia de Componentes (Como Usar)
+## Arquitetura dos blocos principais
 
-Abaixo, a lista dos blocos de construção disponíveis para montar novas páginas.
+### 1) Service de indexação (camada de domínio leve)
 
-### Hero Banner (`<hero-banner>`)
-A primeira dobra do site. Suporta imagem ou vídeo de fundo.
+`services/product-index.service.js` centraliza:
 
-* **Atributos:** `img-src` (caminho da imagem) ou `video-src` (caminho do vídeo).
-* **Slots:** `subtitle`, `title`, `text`.
+- Lista de páginas de produto indexáveis.
+- Parsing de metadados (`title`, `description`, `meta[name="product-category"]`, `product-vibe`, `product-tags`, `og:image`).
+- Normalização de caminho de imagem para contexto home/página interna.
+- Cache em memória por contexto.
+- API pública:
+  - `ProductIndexService.getProjectsByCategory(category)`
+  - `ProductIndexService.getHeroSlides()`
+  - `ProductIndexService.CATEGORY_DETAILS`
+
+### 2) Componentes consumidores do service
+
+- **`components/page-scanner.js`**
+  - Renderiza prateleira por categoria.
+  - Usa `project-card` para cada item.
+  - Suporta slots de cabeçalho (`kicker`, `title`, `description`).
+
+- **`components/hero-brand.js`**
+  - Hero/carrossel da home com dados reais indexados.
+  - CTA e navegação entre slides.
+
+- **`components/project-card.js`**
+  - Card de produto com slots: `price`, `vibe`, `title`, `tags`, `cta-text`.
+  - Fallback por atributos para compatibilidade.
+
+---
+
+## Convenções de tema (obrigatório)
+
+Definir no `:root` de cada página de produto:
+
+```css
+:root {
+  --color-accent-primary: #D4AF37;   /* cor principal */
+  --color-text-primary: #F5F5F7;     /* texto principal */
+  --color-text-secondary: #A1A1AA;   /* texto secundário */
+  --color-surface-base: #0a0a0a;     /* fundo base */
+  --color-surface-section: #141414;  /* fundo de seções */
+  --color-surface-trust: #261019;    /* fundo da seção trust */
+
+  /* compatibilidade legado */
+  --color-highlight: var(--color-accent-primary);
+  --bg-page-body: var(--color-surface-base);
+  --bg-section-main: var(--color-surface-section);
+}
+```
+
+> Regra: componentes **não devem** hardcodar cores da marca do empreendimento; devem consumir variáveis.
+
+---
+
+## Padrão de uso de slots
+
+Exemplo com `project-card`:
 
 ```html
-<hero-banner img-src="../media/quarten/hero.jpg">
-    <span slot="subtitle">Coleção Rara</span>
-    <h1 slot="title">VIVER <span style="color:var(--accent-color)">BEM</span></h1>
-    <p slot="text">Uma descrição envolvente sobre o empreendimento.</p>
-</hero-banner>
+<project-card
+  title="Quarten Ibirapuera"
+  vibe="Refúgio Urbano"
+  image="../media/Quarten_Ibirapuera/fachadas/detalhe_fachada.webp"
+  tags="Bosque Privativo, Wellness"
+  link="quarten.html"
+  price="Conhecer"
+>
+  <span slot="cta-text">Me mostre este apê</span>
+</project-card>
 ```
 
 ---
 
-### Resort Gallery ('<resort-gallery>')
-Galeria horizontal infinita com efeito de arrastar (drag-to-scroll). O componente lê automaticamente qualquer div com a classe slide.
+## Metadados mínimos por página de produto
 
-```html
-<resort-gallery title="Áreas Comuns" subtitle="Lazer">
-    <div class="slide" data-title="Piscina" data-desc="Raia de 25m">
-        <img src="../media/quarten/piscina.webp" loading="lazy">
-    </div>
-    <div class="slide" data-title="Salão" data-desc="Festas">
-        <img src="../media/quarten/salao.webp" loading="lazy">
-    </div>
-</resort-gallery>
+Cada arquivo em `projects/*.html` deve conter:
+
+- `<title>Nome do Projeto | ...</title>`
+- `<meta name="description" content="...">`
+- `<meta property="og:image" content="...">`
+- `<meta name="product-category" content="start|comfort|signature|invest">`
+- `<meta name="product-vibe" content="...">`
+- `<meta name="product-tags" content="tag1, tag2">`
+
+Sem esses metadados, indexação e vitrine podem falhar parcialmente.
+
+---
+
+## Como adicionar novo empreendimento
+
+1. Criar `projects/novoProjeto.html` baseado em um produto existente.
+2. Adicionar mídias em `media/Novo_Projeto/`.
+3. Configurar variáveis de tema no `:root` da página.
+4. Preencher metadados de indexação.
+5. Incluir `novoProjeto.html` em `PROJECT_FILES` no `product-index.service.js`.
+6. Validar localmente com servidor estático.
+
+---
+
+## Desenvolvimento local
+
+Subir servidor local na raiz do projeto:
+
+```bash
+python3 -m http.server 4173 --directory /workspace/meuapetem
+```
+
+Acessar:
+
+- Home: `http://127.0.0.1:4173/index.html`
+- Produto: `http://127.0.0.1:4173/projects/quarten.html`
+
+### Checks rápidos de sintaxe JS
+
+```bash
+node --check services/product-index.service.js
+node --check components/page-scanner.js
+node --check components/hero-brand.js
+node --check components/project-card.js
 ```
 
 ---
 
-### Floor Plans ('<floor-plans>)
-Seção de plantas com abas para troca de metragem e carrossel interno (Render vs Planta Técnica).
+## Diretrizes de manutenção contínua
 
-```html
-<floor-plans title="Plantas">
-    <div class="plan-group" data-id="100m" data-btn="100m²">
-        <div class="slide"><img src="..." loading="lazy"><span class="caption">Render</span></div>
-        <div class="slide"><img src="..." loading="lazy"><span class="caption">Planta</span></div>
-        
-        <div class="info">
-            <h3>Apartamento 100m²</h3>
-            <p>Descrição do apartamento...</p>
-            <ul>
-                <li><span>Área</span><strong>100m²</strong></li>
-            </ul>
-        </div>
-    </div>
-</floor-plans>
-```
+- Evitar `style="..."` inline em páginas/componentes.
+- Priorizar classes CSS e variáveis semânticas.
+- Ao refatorar componente, manter compatibilidade com atributos existentes.
+- Evitar duplicação de lógica entre componentes; mover regra de domínio para `services/`.
+- Garantir que alterações visuais em componentes críticos sejam validadas com screenshot.
 
 ---
 
-## 🚀 Workflow: Criando um Novo Produto
+## Observações de produção
 
-Para lançar um novo prédio (ex: "Gran Cipresso"), siga este passo a passo:
-
-1.  **Mídia:** Crie a pasta `media/gran-cipresso/` e faça upload das imagens otimizadas (preferencialmente `.webp`).
-2.  **Página:** Duplique o arquivo `projects/template.html` (ou um existente como `quarten.html`) e renomeie para `gran-cipresso.html`.
-3.  **Identidade:** No `<style>` do novo arquivo, altere as cores no `:root`:
-    ```css
-    :root {
-        --accent-color: #2E8B57; /* Verde Cipresso */
-        --bg-dark: #121212;
-    }
-    ```
-4.  **Conteúdo:** Atualize os caminhos das imagens (apontando para `../media/gran-cipresso/...`) e os textos dentro dos slots.
-5.  **Deploy:** Faça o commit e push para a branch `main`. O GitHub Pages atualizará o site automaticamente em poucos minutos.
-
----
-
-## 🆘 Suporte e Manutenção
-
-* **Imagens não carregam?** Verifique se o caminho no HTML está subindo um nível (`../`) para sair da pasta `projects` e entrar na pasta `media`.
-* **Estilo quebrado?** Verifique se o arquivo `css/global.css` está sendo importado corretamente no `<head>`.
-* **Bug no JavaScript?** Os componentes utilizam **Shadow DOM** para isolamento. Um erro dentro de um componente não deve quebrar o resto da página. Verifique o console do navegador (F12) para detalhes.
+- O projeto está em operação com tráfego real; mudanças devem priorizar **compatibilidade retroativa**.
+- Erros de asset ausente (ex.: imagem com path inválido) devem ser tratados como correção de conteúdo, sem acoplar workaround no componente.

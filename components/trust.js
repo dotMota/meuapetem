@@ -78,7 +78,7 @@ class TrustSection extends HTMLElement {
                 :host {
                     display: block;
                     /* Usa as variáveis globais ou o fallback vinho */
-                    background-color: var(--bg-color, #261019);
+                    background-color: var(--color-surface-trust, var(--bg-brand-dark, var(--bg-color, #261019)));
                     padding: 5rem 10%;
                     border-top: 1px solid rgba(255, 255, 255, 0.05);
                 }

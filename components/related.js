@@ -8,7 +8,7 @@ class RelatedProducts extends HTMLElement {
         // Verifica dependência
         if (!customElements.get('project-card')) {
             console.error('ERRO: O script "project-card.js" não foi importado nesta página. A vitrine não funcionará.');
-            this.shadowRoot.innerHTML = '<p style="color:red; padding: 2rem;">Erro: Importe o project-card.js no head.</p>';
+            this.shadowRoot.innerHTML = '<p class="error-text">Erro: Importe o project-card.js no head.</p>';
             return;
         }
 
@@ -86,6 +86,8 @@ class RelatedProducts extends HTMLElement {
                     font-size: 0.8rem; font-family: var(--font-text, sans-serif);
                     font-weight: 700; display: block; margin-bottom: 0.5rem;
                 }
+
+                .error-text { color: #ff6b6b; padding: 2rem; }
 
                 .grid {
                     display: grid;
