@@ -151,9 +151,36 @@
             border-color: var(--color-highlight);
             color: var(--color-highlight);
         }
+
+
+        .hero-cta {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: var(--color-accent-primary, var(--color-highlight));
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .hero-cta--dark {
+            color: var(--color-surface-base, #000);
+        }
+
+        .hero-cta--light {
+            color: var(--color-text-primary, #fff);
+        }
+
+        .manual-arrow {
+            margin-left: 5px;
+            font-size: 0.8em;
+        }
     </style>
 
     <script src="../components/preloader.js"></script>
+    <script src="../services/product-index.service.js" defer></script>
     <script src="../components/menu.js" defer></script>
     <script src="../components/hero.js" defer></script>
     <script src="../components/marquee.js" defer></script>
@@ -198,8 +225,7 @@
     <hero-section id="home" image="../media/Vila_Boulevard_Mooca/fachadas/vila_boulevard_mooca.webp"
         highlight="MeuApêTem Start" subtitle="Rua dos Trilhos" title="A Alma da Mooca" curator-badge="true"
         text="Aqui a rua não separa, ela conecta. Um Boulevard vivo e pulsante que une a tradição do bairro ao moderno viver.">
-        <a href="#schedule" slot="cta" id="hero-cta-btn"
-            style="display:inline-block; margin-top:20px; padding:15px 30px; background:var(--color-highlight); color:#fff; font-weight:bold; border-radius:50px; text-decoration:none; text-transform:uppercase; font-size:0.9rem;">
+        <a href="#schedule" slot="cta" id="hero-cta-btn" class="hero-cta hero-cta--light">
             Compre sem Entrada*
         </a>
     </hero-section>
@@ -215,8 +241,7 @@
                 <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
             </div>
         </div>
-        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right"
-                style="margin-left:5px; font-size:0.8em;"></i></a>
+        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right manual-arrow"></i></a>
     </div>
 
     <stats-section id="stats">
@@ -372,7 +397,7 @@
         button-text="Simular Agora" project="Vila Boulevard Mooca">
     </cta-section>
 
-    <trust-section style="--bg-color: var(--bg-brand-dark);">
+    <trust-section>
         <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
         <trust-item slot="items" title="Financiamento" img="../media/utils/caixa.svg" alt="Caixa"></trust-item>
         <trust-item slot="items" title="Realização" img="../media/utils/planoeplano.png" alt="Plano&Plano"></trust-item>

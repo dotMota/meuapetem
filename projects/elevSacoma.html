@@ -156,9 +156,36 @@
             border-color: var(--color-highlight);
             color: var(--color-highlight);
         }
+
+
+        .hero-cta {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: var(--color-accent-primary, var(--color-highlight));
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .hero-cta--dark {
+            color: var(--color-surface-base, #000);
+        }
+
+        .hero-cta--light {
+            color: var(--color-text-primary, #fff);
+        }
+
+        .manual-arrow {
+            margin-left: 5px;
+            font-size: 0.8em;
+        }
     </style>
 
     <script src="../components/preloader.js"></script>
+    <script src="../services/product-index.service.js" defer></script>
     <script src="../components/menu.js" defer></script>
     <script src="../components/hero.js" defer></script>
     <script src="../components/marquee.js" defer></script>
@@ -203,8 +230,7 @@
     <hero-section id="home" image="../media/Elev-Park-Sacom/area_comum/voo.webp" highlight="Minha Casa Minha Vida"
         subtitle="Elev Park Sacomã" title="Sua Vida Agora" curator-badge="true"
         text="Um projeto grandioso com parque privativo, a apenas 3 minutos a pé da Estação Sacomã.">
-        <a href="#schedule" slot="cta" id="hero-cta-btn"
-            style="display:inline-block; margin-top:20px; padding:15px 30px; background:var(--color-highlight); color:#000; font-weight:bold; border-radius:50px; text-decoration:none; text-transform:uppercase; font-size:0.9rem;">
+        <a href="#schedule" slot="cta" id="hero-cta-btn" class="hero-cta hero-cta--dark">
             Compre sem Entrada*
         </a>
     </hero-section>
@@ -221,8 +247,7 @@
                 <p>Juros, Obras e Regras do Jogo. Leia nosso Manual e blinde sua decisão.</p>
             </div>
         </div>
-        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right"
-                style="margin-left:5px; font-size:0.8em;"></i></a>
+        <a href="../manual-mcmv.html" class="manual-btn">Ler Guia da Conquista <i class="fas fa-arrow-right manual-arrow"></i></a>
     </div>
 
     <stats-section id="stats">
@@ -365,7 +390,7 @@
         project="Elev Park Sacomã II">
     </cta-section>
 
-    <trust-section style="--bg-color: var(--bg-brand-dark);">
+    <trust-section>
         <trust-item slot="items" title="Realização" img="../media/utils/trisul.svg" alt="Trisul"></trust-item>
         <trust-item slot="items" title="Financiamento" img="../media/utils/caixa.svg" alt="Caixa"></trust-item>
     </trust-section>

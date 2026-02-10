@@ -64,6 +64,7 @@ class RegionSection extends HTMLElement {
                 .custom-pin { background-color: var(--accent); border: 3px solid #fff; border-radius: 50%; width: 24px; height: 24px; box-shadow: 0 0 20px rgba(0,0,0,0.8); animation: pulse 2s infinite; }
                 .brand-pin { background-color: #666; border: 2px solid #fff; border-radius: 50%; width: 14px; height: 14px; opacity: 0.7; transition: 0.3s; }
                 .brand-pin:hover { transform: scale(1.5); background-color: #fff; opacity: 1; }
+                .poi-marker { text-align: center; }
                 .poi-label { background: #000; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 10px; text-transform: uppercase; white-space: nowrap; border: 1px solid #333; font-family: sans-serif; font-weight: bold; }
                 .poi-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; margin: 0 auto 5px auto; box-shadow: 0 0 10px #000; }
 
@@ -140,7 +141,7 @@ class RegionSection extends HTMLElement {
         pois.forEach(p => {
             const icon = L.divIcon({
                 className: 'poi-wrapper',
-                html: `<div style="text-align:center;"><div class="poi-dot"></div><div class="poi-label">${p.title}</div></div>`,
+                html: `<div class="poi-marker"><div class="poi-dot"></div><div class="poi-label">${p.title}</div></div>`,
                 iconSize: [100, 40]
             });
             L.marker(p.loc, { icon: icon }).addTo(map);

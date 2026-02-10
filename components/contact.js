@@ -96,6 +96,7 @@ class ContactPopup extends HTMLElement {
                 .close-btn:hover { color: #fff; transform: rotate(90deg); }
 
                 h3 { margin: 0 0 1.5rem 0; color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; }
+                .assistive-text { color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; }
                 .form-group { margin-bottom: 1.2rem; }
                 label { display: block; color: #777; font-size: 0.8rem; margin-bottom: 0.5rem; }
                 input { width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 6px; color: #fff; box-sizing: border-box; }
@@ -131,7 +132,7 @@ class ContactPopup extends HTMLElement {
                         <button class="close-btn" id="close">×</button>
                         
                         <h3>Consultar Valores</h3>
-                        <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">Preencha para receber atendimento exclusivo sobre as unidades disponíveis.</p>
+                        <p class="assistive-text">Preencha para receber atendimento exclusivo sobre as unidades disponíveis.</p>
                         
                         <form action="${this.formAction}" method="POST">
                             <input type="hidden" name="_next" value="${whatsappRedirect}">
