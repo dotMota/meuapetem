@@ -94,7 +94,7 @@ class HeroBrand extends HTMLElement {
         <div class="carousel-container">
             ${this.slides.map((slide, index) => `
                 <div class="slide ${index === 0 ? 'active' : ''}">
-                    <img class="bg-image" src="${slide.image}" alt="${slide.title}">
+                    <img class="bg-image" src="${slide.image}" alt="${slide.title}" loading="lazy" decoding="async">
                     <div class="overlay"></div>
                     <div class="content">
                         <span class="tag">${slide.tag}</span>

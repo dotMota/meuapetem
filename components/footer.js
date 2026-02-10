@@ -90,7 +90,7 @@ class FooterSection extends HTMLElement {
             <div>
                 <h4>Social</h4>
                 <ul>
-                    <li><a href="https://instagram.com/meuapetem" target="_blank">@meuapetem</a></li>
+                    <li><a href="https://instagram.com/meuapetem" target="_blank" rel="noopener noreferrer">@meuapetem</a></li>
                     <li><a href="#">LinkedIn</a></li>
                 </ul>
             </div>

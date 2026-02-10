@@ -2,6 +2,8 @@ class ShowcaseSection extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this.carouselInterval = null;
+        this.observer = null;
     }
 
     connectedCallback() {
@@ -14,6 +16,18 @@ class ShowcaseSection extends HTMLElement {
         this.render(highlight, title, text, btnText, btnLink);
         this.initCarousel();
         this.initScrollReveal();
+    }
+
+    disconnectedCallback() {
+        if (this.carouselInterval) {
+            clearInterval(this.carouselInterval);
+            this.carouselInterval = null;
+        }
+
+        if (this.observer) {
+            this.observer.disconnect();
+            this.observer = null;
+        }
     }
 
     render(hl, tt, txt, btnTxt, btnHref) {
@@ -125,14 +139,14 @@ class ShowcaseSection extends HTMLElement {
     }
 
     initScrollReveal() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     this.shadowRoot.getElementById('container').classList.add('visible');
                 }
             });
         }, { threshold: 0.2 });
-        observer.observe(this);
+        this.observer.observe(this);
     }
 
     initCarousel() {
@@ -144,8 +158,8 @@ class ShowcaseSection extends HTMLElement {
                 window.dispatchEvent(new CustomEvent('open-lightbox', {
                     detail: {
                         src: img.src,
-                        title: img.alt || this.getAttribute('title')
-                    }
+                        title: img.alt || this.getAttribute('title'),
+                    },
                 }));
             }
         });
@@ -154,11 +168,15 @@ class ShowcaseSection extends HTMLElement {
             const images = slot.assignedElements();
             if (images.length === 0) return;
 
+            if (this.carouselInterval) {
+                clearInterval(this.carouselInterval);
+            }
+
             const track = this.shadowRoot.getElementById('track');
             let currentIndex = 0;
 
-            setInterval(() => {
-                currentIndex++;
+            this.carouselInterval = setInterval(() => {
+                currentIndex += 1;
                 if (currentIndex >= images.length) currentIndex = 0;
                 track.style.transform = `translateX(-${currentIndex * 100}%)`;
             }, 4000);

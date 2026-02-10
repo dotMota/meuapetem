@@ -156,7 +156,7 @@ class ContactPopup extends HTMLElement {
                         </form>
 
                         <div class="alt-action">
-                            Prefere ligar? <a href="tel:${this.masterNumber}" target="_blank">Ligar Agora</a>
+                            Prefere ligar? <a href="tel:${this.masterNumber}" rel="noopener noreferrer">Ligar Agora</a>
                         </div>
                     </div>
                 </div>

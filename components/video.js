@@ -108,7 +108,7 @@ class VideoSection extends HTMLElement {
             </style>
 
             <div class="wrapper">
-                <img src="${cover}" class="poster" alt="Capa do Vídeo">
+                <img src="${cover}" class="poster" alt="Capa do Vídeo" loading="lazy" decoding="async">
 
                 <div class="play-btn" id="playBtn">
                     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
