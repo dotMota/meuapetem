@@ -33,6 +33,7 @@ a {
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
+  z-index: 2;
 }
 
 .nav-wrap {
@@ -64,6 +65,7 @@ nav {
   margin-top: 1.5rem;
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -89,7 +91,8 @@ nav {
 
 .feature,
 .card,
-.panel {
+.panel,
+.brand-block {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
@@ -104,6 +107,12 @@ nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 1rem;
+}
+
+.brand-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
 }
 
 table {

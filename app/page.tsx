@@ -7,35 +7,38 @@ export default function HomePage() {
       <Nav />
       <section className="hero container">
         <span className="tag">Next.js + Vercel Ready</span>
-        <h1>Transforme seu site em uma plataforma imobiliária SaaS multi-corretor.</h1>
+        <h1>Plataforma para imobiliárias venderem com marca própria.</h1>
         <p>
-          Esta nova base permite escalar sua operação com painel para assinantes,
-          dashboard para corretores e páginas públicas por corretor com URL própria.
+          Sua imobiliária cria páginas de produtos, personaliza identidade visual e organiza os
+          corretores em um único painel, com arquitetura pronta para escalar na Vercel.
         </p>
         <div className="actions">
-          <Link href="/assinante" className="btn primary">
-            Ver painel do assinante
+          <Link href="/dashboard" className="btn primary">
+            Ver painel da imobiliária
           </Link>
-          <Link href="/dashboard" className="btn">
-            Ver dashboard dos corretores
+          <Link href="/imobiliarias/urbaniza-imoveis" className="btn">
+            Ver exemplo de página pública
           </Link>
         </div>
       </section>
 
       <section className="container grid-3">
         <article className="feature">
-          <h2>Gestão centralizada</h2>
-          <p>Controle planos, assinatura e performance comercial em um único lugar.</p>
-        </article>
-        <article className="feature">
-          <h2>Páginas por corretor</h2>
+          <h2>Identidade visual por imobiliária</h2>
           <p>
-            Cada corretor pode ter uma página própria para captação e divulgação de imóveis.
+            Cada operação define logo, cores e slogan para publicar páginas alinhadas ao seu
+            posicionamento.
           </p>
         </article>
         <article className="feature">
-          <h2>Arquitetura pronta para Vercel</h2>
-          <p>Deploy contínuo, ótimo desempenho e escalabilidade para seu crescimento.</p>
+          <h2>Portfólio de produtos</h2>
+          <p>
+            Monte páginas com lançamentos, prontos e locação para gerar leads de forma organizada.
+          </p>
+        </article>
+        <article className="feature">
+          <h2>Gestão de equipe comercial</h2>
+          <p>Adicione corretores internos e distribua atendimento mantendo o padrão da imobiliária.</p>
         </article>
       </section>
     </main>

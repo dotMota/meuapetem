@@ -1,20 +1,35 @@
 export type Corretor = {
   id: string;
   nome: string;
-  slug: string;
-  cidade: string;
-  especialidade: string;
-  planosVendidos: number;
-  clientesAtivos: number;
-  descricao: string;
+  cargo: string;
   whatsapp: string;
+  email: string;
 };
 
-export type Assinante = {
+export type Produto = {
+  id: string;
+  titulo: string;
+  tipo: "Lançamento" | "Pronto" | "Locação";
+  cidade: string;
+  bairro: string;
+  preco: string;
+  destaque: string;
+};
+
+export type IdentidadeVisual = {
+  corPrimaria: string;
+  corSecundaria: string;
+  logoTexto: string;
+  slogan: string;
+};
+
+export type Imobiliaria = {
+  id: string;
   nome: string;
-  email: string;
-  plano: string;
-  status: "ativo" | "pendente";
-  renovacao: string;
-  leadsNoMes: number;
+  slug: string;
+  cidadeBase: string;
+  plano: "Starter" | "Pro" | "Enterprise";
+  identidade: IdentidadeVisual;
+  corretores: Corretor[];
+  produtos: Produto[];
 };

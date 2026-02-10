@@ -2,15 +2,14 @@ import Link from "next/link";
 
 const links = [
   { href: "/", label: "Plataforma" },
-  { href: "/assinante", label: "Painel do Assinante" },
-  { href: "/dashboard", label: "Dashboard Corretores" }
+  { href: "/dashboard", label: "Painel da Imobiliária" }
 ];
 
 export function Nav() {
   return (
     <header className="header">
       <div className="container nav-wrap">
-        <strong>Meu Apê Tem SaaS</strong>
+        <strong>Meu Apê Tem | Plataforma para Imobiliárias</strong>
         <nav>
           {links.map((link) => (
             <Link key={link.href} href={link.href}>
